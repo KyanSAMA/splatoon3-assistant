@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 
 from .config import Config, default_config
 from .http_client import HttpClient, AsyncHttpClient
+from .exceptions import SessionExpiredError, MembershipRequiredError, BulletTokenError
 
 
 # Constants
@@ -295,9 +296,9 @@ class NSOAuth:
             json=body,
         )
         id_response = resp.json()
-        
+
         if id_response.get("error") == "invalid_grant":
-            raise ValueError("invalid_grant: Session token expired")
+            raise SessionExpiredError("Session token 已过期或失效，请重新登录")
         
         id_access_token = id_response.get("access_token")
         id_token = id_response.get("id_token")
@@ -512,7 +513,7 @@ class NSOAuth:
             error_msg = web_service_resp.get("errorMessage", "Unknown error")
             nickname = self.user_nickname or ""
             if error_msg == "Membership required error.":
-                raise ValueError(f"Membership required|{nickname}")
+                raise MembershipRequiredError(nickname)
             raise ValueError(f"Failed to get g_token: {web_service_resp}")
     
     async def get_bullet(self, g_token: str) -> Optional[str]:
@@ -551,13 +552,13 @@ class NSOAuth:
         )
         
         if resp.status_code == 401:
-            raise ValueError("ERROR_INVALID_GAME_WEB_TOKEN")
+            raise BulletTokenError(401, "无效的 Game Web Token")
         elif resp.status_code == 403:
-            raise ValueError("ERROR_OBSOLETE_VERSION")
+            raise BulletTokenError(403, "应用版本过时")
         elif resp.status_code == 204:
-            raise ValueError("User not registered")
+            raise BulletTokenError(204, "用户未在 SplatNet3 注册")
         elif resp.status_code == 499:
-            raise ValueError("User has been banned")
+            raise BulletTokenError(499, "用户已被封禁")
         
         try:
             return resp.json().get("bulletToken")

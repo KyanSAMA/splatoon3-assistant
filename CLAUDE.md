@@ -1,4 +1,4 @@
-# Splatoon3 Assistant
+# Splatoon3 Assistant - 项目开发文档
 
 > **同步说明**: 本文件与 `GEMINI.md` 内容保持一致，修改任意一个时请同时更新另一个。
 
@@ -6,19 +6,12 @@
 
 Splatoon3 游戏助手 - 通过获取 Splatoon3 的战斗数据及其他辅助数据进行数据分析。
 
-## 参考项目
-
-主要参考 `../reference-project/splatoon3-nso`，其他 `../reference-project` 下的项目作为辅助参考。
-
-> **注意**: 不要直接引用 `../reference-project` 下的代码，如需引用则将代码复制到本项目中。
-
-### 重要说明：nxapi OAuth Client ID
-
-- `F_GEN_OAUTH_CLIENT_ID`（在 `src/nso_auth.py` 中）是每个作者在 nxapi 上注册的独立权限 ID
-- **不同项目有各自的 Client ID，无需与参考项目保持一致**
-- 本项目使用自己注册的 Client ID：`EJ5mqnRSwmWfOPmRDIRGwg`
-- 参考项目 splatoon3-nso 使用：`Orh4jxABP3D3jYaBFgL9Ug`
-- 在对比参考项目时，应忽略此字段的差异
+**核心特性**:
+- 完整的 NSO 认证流程（参照 splatoon3-nso）
+- Token 自动刷新机制（401 错误自动处理）
+- 并发安全（asyncio.Lock + 双重检查锁定）
+- 明确的异常类型系统
+- Token 持久化存储
 
 ---
 
@@ -27,107 +20,203 @@ Splatoon3 游戏助手 - 通过获取 Splatoon3 的战斗数据及其他辅助�
 ```
 splatoon3-assistant/
 ├── src/
-│   ├── __init__.py          # 包初始化
+│   ├── __init__.py          # 包初始化和导出
 │   ├── config.py            # 配置管理
 │   ├── http_client.py       # HTTP 客户端封装
 │   ├── nso_auth.py          # NSO 认证 (参照 S3S 类)
 │   ├── graphql_utils.py     # GraphQL 工具
-│   └── splatnet3_api.py     # SplatNet3 API (参照 Splatoon 类)
+│   ├── splatnet3_api.py     # SplatNet3 API (参照 Splatoon 类)
+│   ├── token_store.py       # Token 持久化存储
+│   └── exceptions.py        # 自定义异常类型
 ├── tests/
-│   └── test_full_flow.py    # 功能测试
+│   ├── test_full_flow.py    # 功能测试
+│   └── .token_cache.json    # Token 缓存（自动生成）
 ├── requirements.txt         # Python 依赖
-├── CLAUDE.md               # 项目文档
-└── GEMINI.md               # 项目文档 (与 CLAUDE.md 同步)
+├── README.md               # 用户文档
+├── TECHNICAL_ROADMAP.md    # 技术路线
+├── CLAUDE.md               # 开发文档（本文件）
+└── GEMINI.md               # 开发文档（同步）
 ```
 
 ---
 
-## 核心 API
+## 核心 API 使用
 
-### NSOAuth - 认证 (参照 splatoon3-nso 的 S3S 类)
+### NSOAuth - 认证
 
 ```python
 from src import NSOAuth
 
 auth = NSOAuth()
 
-# Step 1: 生成登录 URL
+# 认证流程
 url, verifier = await auth.login_in()
-
-# Step 2: 获取 session_token
 session_token = await auth.login_in_2(callback_url, verifier)
-
-# Step 3: 获取 g_token
 access_token, g_token, nickname, lang, country, user_info = await auth.get_gtoken(session_token)
-
-# Step 4: 获取 bullet_token
 bullet_token = await auth.get_bullet(g_token)
 ```
 
-### SplatNet3API - 数据查询 (参照 splatoon3-nso 的 Splatoon 类)
+### SplatNet3API - 数据查询
 
 ```python
-from src import SplatNet3API
+from src import SplatNet3API, TokenStore
 
-api = SplatNet3API(g_token, bullet_token)
+# 带自动刷新（推荐）
+api = SplatNet3API(
+    nso_auth=auth,
+    session_token="...",
+    g_token="...",
+    bullet_token="...",
+    on_tokens_updated=lambda t: TokenStore(".token_cache.json").save(t)
+)
 
-# 对战查询
-battles = await api.get_recent_battles()      # 最近对战
-bankara = await api.get_bankara_battles()     # 蛮颓对战
-x_battles = await api.get_x_battles()         # X 赛
-detail = await api.get_battle_detail(id)      # 对战详情
+# 简单模式
+api = SplatNet3API.simple(g_token="...", bullet_token="...")
 
-# 打工查询
-coops = await api.get_coops()                 # 打工历史
-coop_detail = await api.get_coop_detail(id)   # 打工详情
+# 使用
+battles = await api.get_recent_battles()
+```
 
-# 其他查询
-friends = await api.get_friends()             # 好友列表
-schedule = await api.get_schedule()           # 日程
+### 异常处理
+
+```python
+from src import SessionExpiredError, MembershipRequiredError, BulletTokenError, TokenRefreshError
+
+try:
+    result = await api.get_recent_battles()
+except SessionExpiredError:
+    # 需要重新登录
+except MembershipRequiredError:
+    # NSO 会员过期
+except BulletTokenError as e:
+    # Token 错误（版本过时/封禁）
+except TokenRefreshError:
+    # 刷新失败（网络等）
 ```
 
 ---
 
-## 快速开始
+## 开发注意事项
 
-```bash
-# 1. 创建虚拟环境
-cd splatoon3-assistant
-python3 -m venv .venv
-source .venv/bin/activate
+### Token 自动刷新机制
 
-# 2. 安装依赖
-pip install -r requirements.txt
+**核心流程**:
+```
+API 请求 → 401 错误 → 自动刷新 Token → 保存 → 重试请求
+```
 
-# 3. 运行功能测试
-python tests/test_full_flow.py
+**关键实现**:
+- `SplatNet3API.request()`: 检测 401，触发刷新
+- `_refresh_tokens()`: 加锁刷新，返回 `(success, token_data)`
+- 并发控制: `asyncio.Lock` + 双重检查锁定
+- 回调在锁外执行，避免死锁
+
+**并发安全**:
+```python
+async with self._refresh_lock:
+    if self._is_refreshing:
+        return (True, None)  # 复用其他协程的刷新结果
+
+    self._is_refreshing = True
+    # 执行刷新...
+    self._is_refreshing = False
+```
+
+### 异常类型设计
+
+| 异常 | 用途 | 处理方式 |
+|------|------|---------|
+| `SessionExpiredError` | session_token 过期 | 引导重新登录 |
+| `MembershipRequiredError` | NSO 会员过期 | 提示续费 |
+| `BulletTokenError` | Bullet token 错误 | 检查版本/状态 |
+| `TokenRefreshError` | 刷新失败 | 重试/检查网络 |
+
+### 最佳实践
+
+**1. 使用 TokenStore 管理持久化**
+```python
+store = TokenStore(".token_cache.json")
+api = SplatNet3API(on_tokens_updated=lambda t: store.save(t))
+```
+
+**2. 回调函数保持简单**
+```python
+# ✅ 推荐
+on_tokens_updated=lambda t: store.save(t)
+
+# ❌ 不推荐（会死锁）
+on_tokens_updated=lambda t: await api.get_home()
+```
+
+**3. 正确的异常处理**
+```python
+# ✅ 区分异常类型
+try:
+    result = await api.get_recent_battles()
+except SessionExpiredError:
+    handle_relogin()
+except MembershipRequiredError:
+    notify_membership_expired()
+
+# ❌ 捕获所有异常
+except Exception:
+    pass  # 丢失错误信息
 ```
 
 ---
 
 ## 开发日志
 
+### 2024-12-13: Token 自动刷新功能
+
+**实现功能**:
+- [x] 401 错误自动检测和刷新
+- [x] 并发刷新控制（asyncio.Lock + DCL）
+- [x] 明确的异常类型系统
+- [x] TokenStore 持久化（原子写入）
+- [x] 回调机制（锁外执行）
+
+**代码质量**:
+- 经过 3 轮 Codex review
+- 修复返回值类型不一致
+- 修复回调死锁问题
+- 完善异常传播机制
+
+**技术细节**: 详见 `TECHNICAL_ROADMAP.md`
+
 ### 2024-12-12: v4 API 加密支持
 
-**完成项目**:
-- [x] 升级到 v4 API (`/v4/Account/Login` 和 `/v4/Game/GetWebServiceToken`)
-- [x] 实现 nxapi 加密/解密功能（`encrypt_token_request` 和 `f_decrypt_response`）
-- [x] 移除 msgpack 依赖，使用 base64 处理加密载荷
-- [x] 增强错误处理（状态码校验、JSON 解析错误、加密载荷验证）
-- [x] OAuth scope 扩展：`ca:gf` → `ca:gf ca:er ca:dr`
+- [x] 升级到 v4 API
+- [x] nxapi 加密/解密功能
+- [x] OAuth scope: `ca:gf ca:er ca:dr`
 
 ### 2024-12-10: NSO API 集成完成
 
-**完成项目**:
-- [x] 完全参照 `splatoon3-nso` 项目实现认证模块
-- [x] 方法名与参考项目保持一致 (`login_in`, `login_in_2`, `get_bullet`)
-- [x] 使用全局变量管理版本号缓存
-- [x] 实现完整的 GraphQL API 封装
-- [x] 创建功能测试文件
-- [x] 所有 8 个 Python 模块语法检查通过
+- [x] 完整认证流程（参照 S3S 类）
+- [x] GraphQL API 封装（参照 Splatoon 类）
+- [x] 功能测试文件
+
+---
+
+## 常见问题
+
+### Session Token 过期
+**现象**: `SessionExpiredError`
+**原因**: 修改密码、长时间未用
+**解决**: 清除缓存，重新登录
+
+### NSO 会员过期
+**现象**: `MembershipRequiredError`
+**原因**: NSO 会员到期
+**解决**: 续费 NSO 会员
+
+### Bullet Token 错误
+**现象**: `BulletTokenError`（403/499）
+**原因**: 版本过时/账号封禁
+**解决**: 更新版本/检查账号状态
 
 ---
 
 ## 修改建议
 
-如果在思考过程中觉得需要修改该文件，请将修改建议补充到此处。
+如果在开发过程中有新的改进建议，请补充到此处。

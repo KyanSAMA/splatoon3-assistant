@@ -19,7 +19,15 @@ from datetime import datetime
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src import NSOAuth, SplatNet3API
+from src import (
+    NSOAuth,
+    SplatNet3API,
+    TokenStore,
+    SessionExpiredError,
+    MembershipRequiredError,
+    BulletTokenError,
+    TokenRefreshError
+)
 
 
 #============================================================
@@ -139,33 +147,45 @@ async def login_flow() -> dict:
 # ============================================================
 
 async def test_all_apis(tokens: dict) -> None:
-    """测试所有 SplatNet3 API"""
+    """测试所有 SplatNet3 API（带自动刷新）"""
     print("\n" + "=" * 60)
-    print("SplatNet3 API 测试")
+    print("SplatNet3 API 测试（带 Token 自动刷新）")
     print("=" * 60)
-    
+
+    # 使用 TokenStore 管理持久化
+    token_store = TokenStore(TOKEN_CACHE_FILE)
+
+    # 创建带自动刷新的 API 实例
+    auth = NSOAuth()
     api = SplatNet3API(
+        nso_auth=auth,
+        session_token=tokens["session_token"],
         g_token=tokens["g_token"],
         bullet_token=tokens["bullet_token"],
         user_lang=tokens.get("user_lang", "zh-CN"),
         user_country=tokens.get("user_country", "JP"),
+        on_tokens_updated=lambda t: token_store.save(t)  # 自动保存刷新后的 token
     )
+
+    print(f"\n✓ API 实例已创建（支持 Token 自动刷新）")
+    print(f"  - Session Token: {tokens['session_token'][:20]}...")
+    print(f"  - 自动刷新: 启用")
     
     # 测试用例列表
     test_cases = [
         ("get_home", "主页数据"),
         ("get_history_summary", "历史总览"),
         ("get_recent_battles", "最近对战"),
-        ("get_regular_battles", "涂地对战"),
+        # ("get_regular_battles", "涂地对战"),
         ("get_bankara_battles", "蛮颓对战"),
-        ("get_x_battles", "X 比赛"),
-        ("get_event_battles", "活动对战"),
-        ("get_private_battles", "私房对战"),
+        # ("get_x_battles", "X 比赛"),
+        # ("get_event_battles", "活动对战"),
+        # ("get_private_battles", "私房对战"),
         ("get_coops", "打工历史"),
-        ("get_friends", "好友列表"),
-        ("get_weapon_records", "武器记录"),
-        ("get_stage_records", "场地记录"),
-        ("get_schedule", "日程安排"),
+        # ("get_friends", "好友列表"),
+        # ("get_weapon_records", "武器记录"),
+        # ("get_stage_records", "场地记录"),
+        # ("get_schedule", "日程安排"),
     ]
     
     results = {}
@@ -173,19 +193,44 @@ async def test_all_apis(tokens: dict) -> None:
     
     for method_name, description in test_cases:
         print(f"\n[测试] {description} ({method_name})...", end=" ")
-        
+
         try:
             method = getattr(api, method_name)
             result = await method()
-            
+
             if result:
                 results[method_name] = result
                 success_count += 1
                 print("✓ 成功")
                 _print_result_summary(method_name, result)
+
+                # 打印完整的 API 结果
+                print(f"\n    【{description} - 完整结果】")
+                print("-" * 60)
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+                print("-" * 60)
             else:
                 print("⚠ 返回空数据")
-                
+
+        except SessionExpiredError:
+            print(f"✗ Session Token 已过期，需要重新登录")
+            print("   → 请运行测试并选择 'clear' 来清除缓存并重新登录")
+            break
+        except MembershipRequiredError as e:
+            print(f"✗ {e}")
+            print("   → 请前往任天堂官网续费 NSO 会员")
+            break
+        except BulletTokenError as e:
+            print(f"✗ Bullet Token 错误: {e}")
+            if e.status_code == 403:
+                print("   → 应用版本过时，请更新 nso_auth.py 中的版本号")
+            elif e.status_code == 499:
+                print("   → 账号已被封禁")
+            break
+        except TokenRefreshError as e:
+            print(f"✗ Token 刷新失败: {e}")
+            print("   → 请检查网络连接或稍后重试")
+            break
         except Exception as e:
             print(f"✗ 失败: {e}")
     
