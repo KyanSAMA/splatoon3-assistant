@@ -3,6 +3,7 @@
 """SplatNet3 GraphQL API wrapper with auto token refresh."""
 
 import asyncio
+import base64
 from typing import Optional, Dict, Any, Callable
 
 from .nso_auth import NSOAuth, APP_USER_AGENT
@@ -48,6 +49,7 @@ class SplatNet3API:
         self,
         nso_auth: Optional[NSOAuth] = None,
         session_token: Optional[str] = None,
+        access_token: Optional[str] = None,
         g_token: Optional[str] = None,
         bullet_token: Optional[str] = None,
         user_lang: str = "zh-CN",
@@ -61,6 +63,7 @@ class SplatNet3API:
         Args:
             nso_auth: NSOAuth 实例（用于刷新 token）
             session_token: Nintendo session token
+            access_token: Nintendo nso api token
             g_token: Game web token
             bullet_token: Bullet token
             user_lang: 用户语言
@@ -70,6 +73,7 @@ class SplatNet3API:
         """
         self.nso_auth = nso_auth
         self.session_token = session_token
+        self.access_token = access_token
         self.g_token = g_token
         self.bullet_token = bullet_token
         self.user_lang = user_lang
@@ -167,6 +171,7 @@ class SplatNet3API:
                     raise TokenRefreshError("Failed to get bullet_token")
 
                 # Step 3: 更新内存中的 token
+                self.access_token = access_token
                 self.g_token = g_token
                 self.bullet_token = bullet_token
                 self.user_lang = lang
@@ -263,6 +268,13 @@ class SplatNet3API:
                 headers=headers,
                 cookies=cookies,
             )
+            if resp.status_code == 200:
+                token_data = {
+                    "session_token": self.session_token,
+                    "g_token": self.g_token,
+                    "bullet_token": self.bullet_token,
+                    "access_token": self.access_token,
+                }
 
             # 检查 401（token 过期）
             if resp.status_code == 401:
@@ -275,18 +287,6 @@ class SplatNet3API:
 
                 # 刷新 token（可能抛出异常）
                 success, token_data = await self._refresh_tokens()
-
-                # 在锁外调用回调，避免死锁
-                if self.on_tokens_updated and token_data:
-                    try:
-                        # 支持同步和异步回调
-                        if asyncio.iscoroutinefunction(self.on_tokens_updated):
-                            await self.on_tokens_updated(token_data)
-                        else:
-                            self.on_tokens_updated(token_data)
-                    except Exception as e:
-                        print(f"[SplatNet3API] Token 回调失败: {e}")
-                        # 回调失败不影响刷新流程，继续
 
                 # 重试请求（只重试一次）
                 print(f"[SplatNet3API] Tokens 刷新完成，重试请求...")
@@ -303,6 +303,18 @@ class SplatNet3API:
                 if resp.status_code != 200:
                     print(f"[SplatNet3API] 重试后仍失败，状态码: {resp.status_code}")
                     return None
+
+            # 在锁外调用回调，避免死锁
+            if self.on_tokens_updated and token_data:
+                try:
+                    # 支持同步和异步回调
+                    if asyncio.iscoroutinefunction(self.on_tokens_updated):
+                        await self.on_tokens_updated(token_data)
+                    else:
+                        self.on_tokens_updated(token_data)
+                except Exception as e:
+                    print(f"[SplatNet3API] Token 回调失败: {e}")
+                    # 回调失败不影响刷新流程，继续
 
             elif resp.status_code != 200:
                 print(f"[SplatNet3API] 请求失败，状态码: {resp.status_code}")
@@ -336,6 +348,67 @@ class SplatNet3API:
             raise
         except Exception:
             return False
+
+    def head_access(self, app_access_token):
+        """为含有access_token的请求拼装header"""
+        coral_head = {
+            'User-Agent': f'com.nintendo.znca/{NSOAuth.get_nsoapp_version()} (Android/12)',
+            'Accept-Encoding': 'gzip',
+            'Connection': 'Keep-Alive',
+            'Host': 'api-lp1.znc.srv.nintendo.net',
+            'X-ProductVersion': NSOAuth.get_nsoapp_version(),
+            "Content-Type": "application/octet-stream",
+            "Accept": "application/octet-stream, application/json",
+            'Authorization': f"Bearer {app_access_token}",
+            'X-Platform': 'Android',
+            'Pragma': 'no-cache',
+            'Cache-Control': 'no-cache',
+        }
+        return coral_head
+
+    async def ns_request(
+        self,
+        url: str,
+    ) -> Optional[Dict[str, Any]]:
+        """
+        发送 nso层面操作请求（参照 Splatoon._ns_api_request()）
+
+        Args:
+            url: 接口地址
+
+        Returns:
+            API 响应 JSON 或 None
+        """
+        client = self._get_client()
+
+        # 首次尝试
+        try:
+            headers = self.head_access(self.access_token)
+            json_body = {'parameter': {}}
+            auth = NSOAuth()
+            encrypt_request = await auth.f_encrypt_request(api_url=url, body_data=json_body,
+                                                           access_token=self.access_token)
+            encrypt_json = encrypt_request.json()
+            encrypt_data = encrypt_json['data']
+            body_bytes = base64.b64decode(encrypt_data)
+
+            encrypt_resp = await client.post(
+                url,
+                data=body_bytes,
+                headers=headers,
+            )
+            # 解密响应
+            decrypt_resp = await auth.f_decrypt_response(encrypt_resp.content)
+            decrypt_json = decrypt_resp.json()
+
+            if decrypt_resp.status_code != 200:
+                print(f"[SplatNet3API] 请求失败，状态码: {decrypt_resp.status_code}")
+                return None
+
+            return decrypt_json['data']
+        except Exception as e:
+            print(f"[SplatNet3API] 请求错误: {e}")
+            return None
 
     # ============================================================
     # 对战查询方法 (参照 Splatoon class)
@@ -440,4 +513,18 @@ class SplatNet3API:
             await self._client.close()
             self._client = None
         if self.nso_auth:
-            await self.nso_auth.close()
+            await self.nso_auth.close() # TODO: 这里没有close方法
+
+    # ============================================================
+    # nso app查询
+    # ============================================================
+
+    async def get_app_ns_friend_list(self) -> Optional[Dict[str, Any]]:
+        """nso app 好友列表"""
+        url = "https://api-lp1.znc.srv.nintendo.net/v4/Friend/List"
+        return await self.ns_request(url)
+
+    async def get_app_ns_myself(self) -> Optional[Dict[str, Any]]:
+        """nso app 我的信息"""
+        url = "https://api-lp1.znc.srv.nintendo.net/v4/User/ShowSelf"
+        return await self.ns_request(url)

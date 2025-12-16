@@ -37,23 +37,28 @@ import asyncio
 from src import NSOAuth, SplatNet3API, TokenStore
 
 async def main():
-    # 1. 认证
+    token_store = TokenStore(".token_cache.json")
     auth = NSOAuth()
-    url, verifier = await auth.login_in()
-    print(f"请访问: {url}")
+    if not token_store.exists():
+        # 1. 认证
+        url, verifier = await auth.login_in()
+        print(f"请访问: {url}")
 
-    callback_url = input("粘贴回调 URL: ")
-    session_token = await auth.login_in_2(callback_url, verifier)
+        callback_url = input("粘贴回调 URL: ")
+        session_token = await auth.login_in_2(callback_url, verifier)
 
-    # 2. 获取 tokens
-    access_token, g_token, nickname, lang, country, _ = await auth.get_gtoken(session_token)
-    bullet_token = await auth.get_bullet(g_token)
+        # 2. 获取 tokens
+        access_token, g_token, nickname, lang, country, _ = await auth.get_gtoken(session_token)
+        bullet_token = await auth.get_bullet(g_token)
+    else:
+        print("已存在本地文件，将使用本地token")
+        session_token, access_token, g_token, bullet_token, user_lang, user_country = token_store.get_tokens_for_api()
 
     # 3. 创建 API 实例（支持自动刷新）
-    token_store = TokenStore(".token_cache.json")
     api = SplatNet3API(
         nso_auth=auth,
         session_token=session_token,
+        access_token=access_token,
         g_token=g_token,
         bullet_token=bullet_token,
         on_tokens_updated=lambda t: token_store.save(t)

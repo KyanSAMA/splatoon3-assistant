@@ -744,6 +744,71 @@ class NSOAuth:
 
         return resp
 
+    async def f_encrypt_request(self, api_url: str, access_token: str, body_data: dict) -> httpx.Response:
+
+        """
+        调用 nxapi /encrypt-request 加密请求，获取加密数据（参照 S3S.f_encrypt_token_request()）
+
+        Args:
+            api_url: 需要请求的路由地址
+            access_token: nso token
+            body_data: 参数body
+
+        Returns:
+            加密后的响应对象，其 .json() 返回 {"data": "..."}
+        """
+        if not self.oauth_token:
+            await self.f_api_client_auth2_register()
+
+        nsoapp_version = self.get_nsoapp_version()
+        znca_client_version = self.get_znca_client_version()
+
+        api_head = {
+            "User-Agent": F_USER_AGENT,
+            "Content-Type": "application/json; charset=utf-8",
+            "Accept": "application/json; charset=utf-8",
+            "X-znca-Platform": "Android",
+            "X-znca-Version": nsoapp_version,
+            "X-znca-Client-Version": znca_client_version,
+            "Authorization": f"Bearer {self.oauth_token}",
+        }
+
+        api_body = {
+            'url': api_url,
+            'token': access_token,
+            'data': json.dumps(body_data)
+        }
+
+        client = self._get_async_client()
+        decrypt_url = F_GEN_URL.replace("/f", "/encrypt-request")
+
+        resp = await client.post(decrypt_url, headers=api_head, json=api_body)
+
+        # Handle token expiration
+        if resp.status_code == 401:
+            data = resp.json()
+            if data.get("error") == "invalid_token":
+                await self.f_api_client_auth2_register()
+                api_head["Authorization"] = f"Bearer {self.oauth_token}"
+                api_head["X-znca-Client-Version"] = self.get_znca_client_version()
+                resp = await client.post(decrypt_url, headers=api_head, json=api_body)
+
+        # Check for errors
+        if resp.status_code != 200:
+            raise ValueError(f"Encrypt failed with status {resp.status_code}: {resp.text[:200]}")
+
+        try:
+            data = resp.json()
+            if "error" in data:
+                raise ValueError(f"Encrypt error: {data}")
+            if "data" not in data:
+                raise ValueError(f"Encrypt response missing 'data' field: {data}")
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Failed to parse encrypt response: {str(e)}, body: {resp.text[:200]}")
+
+        return resp
+
+
     async def close(self) -> None:
         """关闭 async client"""
         if self.async_client:

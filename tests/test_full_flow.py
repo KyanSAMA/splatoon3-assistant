@@ -15,6 +15,7 @@ import json
 import sys
 from pathlib import Path
 from datetime import datetime
+from typing import Optional
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -37,7 +38,7 @@ from src import (
 TOKEN_CACHE_FILE = Path(__file__).parent / ".token_cache.json"
 
 
-def load_cached_tokens() -> dict | None:
+def load_cached_tokens() -> Optional[dict]:
     """加载缓存的 tokens"""
     if TOKEN_CACHE_FILE.exists():
         try:
@@ -173,19 +174,21 @@ async def test_all_apis(tokens: dict) -> None:
     
     # 测试用例列表
     test_cases = [
-        ("get_home", "主页数据"),
-        ("get_history_summary", "历史总览"),
-        ("get_recent_battles", "最近对战"),
+        # ("get_home", "主页数据"),
+        # ("get_history_summary", "历史总览"),
+        # ("get_recent_battles", "最近对战"),
         # ("get_regular_battles", "涂地对战"),
-        ("get_bankara_battles", "蛮颓对战"),
+        # ("get_bankara_battles", "蛮颓对战"),
         # ("get_x_battles", "X 比赛"),
         # ("get_event_battles", "活动对战"),
         # ("get_private_battles", "私房对战"),
-        ("get_coops", "打工历史"),
+        # ("get_coops", "打工历史"),
         # ("get_friends", "好友列表"),
         # ("get_weapon_records", "武器记录"),
         # ("get_stage_records", "场地记录"),
         # ("get_schedule", "日程安排"),
+        # ("get_app_ns_friend_list", "ns好友列表"),
+        # ("get_app_ns_myself", "ns我的信息"),
     ]
     
     results = {}

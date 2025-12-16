@@ -45,6 +45,9 @@ class TokenStore:
         if not self.file_path.exists():
             self.file_path.parent.mkdir(parents=True, exist_ok=True)
             self.save({})
+    def exists(self):
+        """是否存在缓存文件"""
+        return self.file_path.exists()
 
     def load(self) -> Dict[str, Any]:
         """
@@ -141,8 +144,10 @@ class TokenStore:
         """
         data = self.load()
         return (
+            data.get("session_token"),
+            data.get("access_token"),
             data.get("g_token"),
             data.get("bullet_token"),
             data.get("user_lang", "zh-CN"),
-            data.get("user_country", "JP")
+            data.get("user_country", "JP"),
         )
