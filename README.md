@@ -105,6 +105,7 @@ api = SplatNet3API(...)
 battles = await api.get_recent_battles()      # 最近对战
 bankara = await api.get_bankara_battles()     # 蛮颓对战
 x_battles = await api.get_x_battles()         # X 对战
+battle_detail = await api.get_battle_detail(id)  # 对战详情
 
 # 打工数据
 coops = await api.get_coops()                 # 打工历史
@@ -114,6 +115,25 @@ coop_detail = await api.get_coop_detail(id)   # 打工详情
 friends = await api.get_friends()             # 好友列表
 schedule = await api.get_schedule()           # 日程表
 ```
+
+### 数据模型
+
+API 返回的数据可以解析为结构化的 dataclass 模型：
+
+```python
+from src import VsHistoryDetailFull, CoopHistoryDetailFull
+
+# 解析对战详情
+battle = VsHistoryDetailFull.from_dict(raw_data)
+print(f"玩家: {battle.player.name}")
+print(f"装备: {battle.player.head_gear.name} (品牌: {battle.player.head_gear.brand.name})")
+
+# 解析打工详情
+coop = CoopHistoryDetailFull.from_dict(raw_data)
+print(f"金蛋: {coop.my_result.golden_deliver_count}")
+```
+
+完整模型文档请查看 [docs/MODELS.md](docs/MODELS.md)
 
 ### Token 持久化
 
@@ -141,7 +161,10 @@ splatoon3-assistant/
 │   ├── nso_auth.py      # NSO 认证
 │   ├── splatnet3_api.py # SplatNet3 API
 │   ├── token_store.py   # Token 存储
+│   ├── models.py        # 数据模型
 │   └── exceptions.py    # 异常定义
+├── docs/                # 文档
+│   └── MODELS.md        # 数据模型文档
 ├── tests/               # 测试文件
 ├── README.md           # 项目说明（本文件）
 ├── TECHNICAL_ROADMAP.md # 技术路线
@@ -156,6 +179,7 @@ splatoon3-assistant/
 
 ## 📝 开发日志
 
+- **2024-12-19**: 数据模型系统完善（对战/打工详情、装备品牌等）
 - **2024-12-13**: Token 自动刷新功能
 - **2024-12-12**: v4 API 加密支持
 - **2024-12-10**: NSO API 集成完成

@@ -23,7 +23,7 @@ class Config:
             "accounts.nintendo.com",
             "api.accounts.nintendo.com",
             "api-lp1.znc.srv.nintendo.net",
-            "api.lp1.av5ja.srv.nintendo.net",
+            # "api.lp1.av5ja.srv.nintendo.net",
         ]
         
         self.user_agent = (

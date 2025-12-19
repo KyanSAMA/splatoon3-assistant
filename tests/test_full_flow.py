@@ -12,10 +12,15 @@ Splatoon3 Assistant - 功能测试
 
 import asyncio
 import json
+import os
 import sys
+from dataclasses import asdict, is_dataclass
 from pathlib import Path
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Any
+
+# 设置代理环境变量（需在导入 src 前设置）
+os.environ.setdefault("SPLATOON3_PROXY_ADDRESS", "127.0.0.1:7890")
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -27,7 +32,20 @@ from src import (
     SessionExpiredError,
     MembershipRequiredError,
     BulletTokenError,
-    TokenRefreshError
+    TokenRefreshError,
+    # Models
+    BattleHistories,
+    CoopResult,
+    FriendList,
+    HomeData,
+    DecodedId,
+    StageRecords,
+    WeaponRecords,
+    NSFriendList,
+    NSMyself,
+    HistorySummary,
+    VsHistoryDetailFull,
+    CoopHistoryDetailFull,
 )
 
 
@@ -36,6 +54,7 @@ from src import (
 # ============================================================
 
 TOKEN_CACHE_FILE = Path(__file__).parent / ".token_cache.json"
+TEST_OUTPUT_DIR = Path(__file__).parent / "json"
 
 
 def load_cached_tokens() -> Optional[dict]:
@@ -68,6 +87,69 @@ def clear_token_cache() -> None:
         print("✓ Token 缓存已清除")
 
 
+def dataclass_to_dict(obj: Any) -> Any:
+    """递归将 dataclass 转换为 dict"""
+    if is_dataclass(obj) and not isinstance(obj, type):
+        return {k: dataclass_to_dict(v) for k, v in asdict(obj).items()}
+    elif isinstance(obj, list):
+        return [dataclass_to_dict(item) for item in obj]
+    elif isinstance(obj, dict):
+        return {k: dataclass_to_dict(v) for k, v in obj.items()}
+    return obj
+
+
+def save_test_result(method_name: str, raw_result: dict, parsed_result: Any = None) -> None:
+    """保存测试结果（原始数据 + 解析后数据）"""
+    try:
+        TEST_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+        # 保存原始数据
+        raw_path = TEST_OUTPUT_DIR / f"{method_name}.json"
+        with open(raw_path, "w", encoding="utf-8") as f:
+            json.dump(raw_result, f, indent=2, ensure_ascii=False)
+        print(f"    → 原始数据: {raw_path}")
+
+        # 保存解析后数据
+        if parsed_result is not None:
+            parsed_path = TEST_OUTPUT_DIR / f"{method_name}_parsed.json"
+            parsed_dict = dataclass_to_dict(parsed_result)
+            with open(parsed_path, "w", encoding="utf-8") as f:
+                json.dump(parsed_dict, f, indent=2, ensure_ascii=False)
+            print(f"    → 解析数据: {parsed_path}")
+
+    except Exception as e:
+        print(f"⚠ 保存结果失败: {e}")
+
+
+def parse_result(method_name: str, result: Any) -> Any:
+    """根据方法名解析结果"""
+    parsers = {
+        "get_home": HomeData.from_dict,
+        "get_friends": FriendList.from_dict,
+        "get_recent_battles": lambda d: BattleHistories.from_dict(d, "latestBattleHistories"),
+        "get_regular_battles": lambda d: BattleHistories.from_dict(d, "regularBattleHistories"),
+        "get_bankara_battles": lambda d: BattleHistories.from_dict(d, "bankaraBattleHistories"),
+        "get_x_battles": lambda d: BattleHistories.from_dict(d, "xBattleHistories"),
+        "get_event_battles": lambda d: BattleHistories.from_dict(d, "eventBattleHistories"),
+        "get_private_battles": lambda d: BattleHistories.from_dict(d, "privateBattleHistories"),
+        "get_coops": CoopResult.from_dict,
+        "get_stage_records": StageRecords.from_dict,
+        "get_weapon_records": WeaponRecords.from_dict,
+        "get_history_summary": HistorySummary.from_dict,
+        "get_app_ns_friend_list": NSFriendList.from_dict,
+        "get_app_ns_myself": NSMyself.from_dict,
+        "get_battle_detail": VsHistoryDetailFull.from_dict,
+        "get_coop_detail": CoopHistoryDetailFull.from_dict,
+    }
+    parser = parsers.get(method_name)
+    if parser:
+        try:
+            return parser(result)
+        except Exception as e:
+            print(f"    ⚠ 解析失败: {e}")
+    return None
+
+
 # ============================================================
 # 登录流程（参照 splatoon3-nso/handle/login.py）
 # ============================================================
@@ -77,59 +159,60 @@ async def login_flow() -> dict:
     print("\n" + "=" * 60)
     print("NSO 登录流程")
     print("=" * 60)
-    
+
     # 重置缓存版本
     NSOAuth.reset_cached_versions()
-    
+
     auth = NSOAuth()
-    
+
     # Step 1: 生成登录 URL (对应 s3s.login_in())
     print("\n[Step 1] 生成 Nintendo 登录 URL...")
     url, verifier = await auth.login_in()
-    
+
     print("\n请在浏览器中打开以下链接并登录 Nintendo 账号:")
     print("-" * 60)
     print(url)
     print("-" * 60)
-    
+
     print("\n登录完成后，会跳转到一个以 'npf71b963c1b7b6d119://auth' 开头的页面。")
     print("请复制该页面的完整 URL（右键复制链接）。")
-    
+
     # Step 2: 获取 session_token (对应 s3s.login_in_2())
     callback_url = input("\n请粘贴回调 URL: ").strip()
-    
+
     if not callback_url:
         raise ValueError("未输入回调 URL")
-    
+
     print("\n[Step 2] 获取 session_token...")
     session_token = await auth.login_in_2(callback_url, verifier)
-    
+
     if not session_token:
         raise ValueError("获取 session_token 失败")
-    
+
     print(f"✓ session_token: {session_token[:20]}...")
-    
+
     # Step 3: 获取 g_token (对应 s3s.get_gtoken())
     print("\n[Step 3] 获取 g_token...")
     access_token, g_token, nickname, lang, country, user_info = await auth.get_gtoken(session_token)
-    
+
     print(f"✓ g_token: {g_token[:20]}...")
     print(f"  用户昵称: {nickname}")
     print(f"  语言: {lang}")
     print(f"  国家: {country}")
-    
+
     # Step 4: 获取 bullet_token (对应 s3s.get_bullet())
     print("\n[Step 4] 获取 bullet_token...")
     bullet_token = await auth.get_bullet(g_token)
-    
+
     if not bullet_token:
         raise ValueError("获取 bullet_token 失败")
-    
+
     print(f"✓ bullet_token: {bullet_token[:20]}...")
-    
+
     # 组装结果
     tokens = {
         "session_token": session_token,
+        "access_token": access_token,
         "g_token": g_token,
         "bullet_token": bullet_token,
         "user_lang": lang,
@@ -137,9 +220,9 @@ async def login_flow() -> dict:
         "user_nickname": nickname,
         "created_at": datetime.now().isoformat(),
     }
-    
+
     await auth.close()
-    
+
     return tokens
 
 
@@ -147,7 +230,7 @@ async def login_flow() -> dict:
 # API 测试（参照 splatoon3-nso/s3s/splatoon.py）
 # ============================================================
 
-async def test_all_apis(tokens: dict) -> None:
+async def test_all_apis(tokens: dict) -> dict:
     """测试所有 SplatNet3 API（带自动刷新）"""
     print("\n" + "=" * 60)
     print("SplatNet3 API 测试（带 Token 自动刷新）")
@@ -161,39 +244,42 @@ async def test_all_apis(tokens: dict) -> None:
     api = SplatNet3API(
         nso_auth=auth,
         session_token=tokens["session_token"],
+        access_token=tokens.get("access_token"),
         g_token=tokens["g_token"],
         bullet_token=tokens["bullet_token"],
         user_lang=tokens.get("user_lang", "zh-CN"),
         user_country=tokens.get("user_country", "JP"),
-        on_tokens_updated=lambda t: token_store.save(t)  # 自动保存刷新后的 token
+        on_tokens_updated=lambda t: token_store.save(t)
     )
 
     print(f"\n✓ API 实例已创建（支持 Token 自动刷新）")
     print(f"  - Session Token: {tokens['session_token'][:20]}...")
     print(f"  - 自动刷新: 启用")
-    
+
     # 测试用例列表
     test_cases = [
-        # ("get_home", "主页数据"),
-        # ("get_history_summary", "历史总览"),
-        # ("get_recent_battles", "最近对战"),
-        # ("get_regular_battles", "涂地对战"),
-        # ("get_bankara_battles", "蛮颓对战"),
-        # ("get_x_battles", "X 比赛"),
-        # ("get_event_battles", "活动对战"),
-        # ("get_private_battles", "私房对战"),
-        # ("get_coops", "打工历史"),
-        # ("get_friends", "好友列表"),
-        # ("get_weapon_records", "武器记录"),
-        # ("get_stage_records", "场地记录"),
-        # ("get_schedule", "日程安排"),
-        # ("get_app_ns_friend_list", "ns好友列表"),
-        # ("get_app_ns_myself", "ns我的信息"),
+        ("get_home", "主页数据"),
+        ("get_history_summary", "历史总览"),
+        ("get_recent_battles", "最近对战"),
+        ("get_regular_battles", "涂地对战"),
+        ("get_bankara_battles", "蛮颓对战"),
+        ("get_x_battles", "X 比赛"),
+        ("get_event_battles", "活动对战"),
+        ("get_private_battles", "私房对战"),
+        ("get_coops", "打工历史"),
+        ("get_friends", "好友列表"),
+        ("get_weapon_records", "武器记录"),
+        ("get_stage_records", "场地记录"),
+        ("get_schedule", "日程安排"),
+        ("get_last_one_battle", "最新一局对战ID"),
+        ("get_x_ranking", "X排行榜"),
+        ("get_app_ns_friend_list", "NSO好友列表"),
+        ("get_app_ns_myself", "NSO我的信息"),
     ]
-    
+
     results = {}
     success_count = 0
-    
+
     for method_name, description in test_cases:
         print(f"\n[测试] {description} ({method_name})...", end=" ")
 
@@ -201,19 +287,18 @@ async def test_all_apis(tokens: dict) -> None:
             method = getattr(api, method_name)
             result = await method()
 
-            if result:
-                results[method_name] = result
-                success_count += 1
-                print("✓ 成功")
-                _print_result_summary(method_name, result)
-
-                # 打印完整的 API 结果
-                print(f"\n    【{description} - 完整结果】")
-                print("-" * 60)
-                print(json.dumps(result, indent=2, ensure_ascii=False))
-                print("-" * 60)
-            else:
+            if result is None:
                 print("⚠ 返回空数据")
+                continue
+
+            results[method_name] = result
+            success_count += 1
+            print("✓ 成功")
+
+            # 解析并保存
+            parsed = parse_result(method_name, result)
+            save_test_result(method_name, result, parsed)
+            _print_result_summary(method_name, result, parsed)
 
         except SessionExpiredError:
             print(f"✗ Session Token 已过期，需要重新登录")
@@ -236,37 +321,149 @@ async def test_all_apis(tokens: dict) -> None:
             break
         except Exception as e:
             print(f"✗ 失败: {e}")
-    
+
+    # 测试详情接口
+    await test_detail_apis(api, results)
+
     await api.close()
-    
+
     # 汇总
     print("\n" + "=" * 60)
     print(f"测试完成: {success_count}/{len(test_cases)} 成功")
     print("=" * 60)
 
+    return results
 
-def _print_result_summary(method_name: str, result: dict) -> None:
+
+async def test_detail_apis(api: SplatNet3API, results: dict) -> None:
+    """测试详情接口（需要从列表接口获取 ID）"""
+    print("\n" + "-" * 60)
+    print("详情接口测试")
+    print("-" * 60)
+
+    # 测试对战详情
+    battle_id = extract_battle_id(results)
+    if battle_id:
+        print(f"\n[测试] 对战详情 (get_battle_detail)...", end=" ")
+        try:
+            result = await api.get_battle_detail(battle_id)
+            if result:
+                print("✓ 成功")
+                # 解码 ID 并添加到结果副本
+                decoded = DecodedId.decode(battle_id)
+                result_with_meta = dict(result) if isinstance(result, dict) else {"data": result}
+                result_with_meta["_decoded_id"] = {
+                    "raw": decoded.raw,
+                    "decoded": decoded.decoded,
+                    "type_prefix": decoded.type_prefix,
+                    "user_id": decoded.user_id,
+                    "timestamp": decoded.timestamp,
+                }
+                save_test_result("get_battle_detail", result_with_meta)
+                print(f"    → 对战ID: {decoded.decoded[:50]}...")
+            else:
+                print("⚠ 返回空数据")
+        except Exception as e:
+            print(f"✗ 失败: {e}")
+    else:
+        print("\n[跳过] 对战详情 - 无可用的对战ID")
+
+    # 测试打工详情
+    coop_id = extract_coop_id(results)
+    if coop_id:
+        print(f"\n[测试] 打工详情 (get_coop_detail)...", end=" ")
+        try:
+            result = await api.get_coop_detail(coop_id)
+            if result:
+                print("✓ 成功")
+                decoded = DecodedId.decode(coop_id)
+                result_with_meta = dict(result) if isinstance(result, dict) else {"data": result}
+                result_with_meta["_decoded_id"] = {
+                    "raw": decoded.raw,
+                    "decoded": decoded.decoded,
+                    "type_prefix": decoded.type_prefix,
+                    "user_id": decoded.user_id,
+                    "timestamp": decoded.timestamp,
+                }
+                save_test_result("get_coop_detail", result_with_meta)
+                print(f"    → 打工ID: {decoded.decoded[:50]}...")
+            else:
+                print("⚠ 返回空数据")
+        except Exception as e:
+            print(f"✗ 失败: {e}")
+    else:
+        print("\n[跳过] 打工详情 - 无可用的打工ID")
+
+
+def extract_battle_id(results: dict) -> Optional[str]:
+    """从对战列表中提取第一个对战 ID"""
+    for key in ["get_recent_battles", "get_bankara_battles", "get_regular_battles"]:
+        if key not in results:
+            continue
+        try:
+            # 根据 key 获取对应的 history key
+            history_keys = {
+                "get_recent_battles": "latestBattleHistories",
+                "get_bankara_battles": "bankaraBattleHistories",
+                "get_regular_battles": "regularBattleHistories",
+            }
+            history_key = history_keys.get(key, "latestBattleHistories")
+            groups = results[key].get("data", {}).get(history_key, {}).get("historyGroups", {}).get("nodes", [])
+            for group in groups:
+                details = group.get("historyDetails", {}).get("nodes", [])
+                if details:
+                    return details[0].get("id")
+        except Exception:
+            continue
+    return None
+
+
+def extract_coop_id(results: dict) -> Optional[str]:
+    """从打工列表中提取第一个打工 ID"""
+    if "get_coops" not in results:
+        return None
+    try:
+        groups = results["get_coops"].get("data", {}).get("coopResult", {}).get("historyGroups", {}).get("nodes", [])
+        for group in groups:
+            details = group.get("historyDetails", {}).get("nodes", [])
+            if details:
+                return details[0].get("id")
+    except Exception:
+        pass
+    return None
+
+
+def _print_result_summary(method_name: str, result: dict, parsed: Any = None) -> None:
     """打印结果摘要"""
     try:
-        if method_name == "get_recent_battles":
-            battles = result.get("data", {}).get("latestBattleHistories", {}).get("historyGroups", {}).get("nodes", [])
-            total = sum(len(g.get("historyDetails", {}).get("nodes", [])) for g in battles)
-            print(f"    → 共 {total} 场对战记录")
-            
-        elif method_name == "get_coops":
-            groups = result.get("data", {}).get("coopResult", {}).get("historyGroups", {}).get("nodes", [])
-            total = sum(len(g.get("historyDetails", {}).get("nodes", [])) for g in groups)
-            print(f"    → 共 {total} 场打工记录")
-            
-        elif method_name == "get_friends":
-            friends = result.get("data", {}).get("friends", {}).get("nodes", [])
-            print(f"    → 共 {len(friends)} 位好友")
-            
-        elif method_name == "get_history_summary":
+        if parsed:
+            # 使用解析后的数据打印摘要
+            if hasattr(parsed, 'summary') and parsed.summary:
+                s = parsed.summary
+                print(f"    → 战绩: {s.win}胜 {s.lose}负 (胜率 {s.win_rate:.1%})")
+            if hasattr(parsed, 'battles') and parsed.battles:
+                print(f"    → 共 {len(parsed.battles)} 场对战记录")
+            if hasattr(parsed, 'details') and parsed.details:
+                print(f"    → 共 {len(parsed.details)} 场打工记录")
+            if hasattr(parsed, 'friends') and parsed.friends:
+                online = len([f for f in parsed.friends if f.is_online])
+                print(f"    → 共 {len(parsed.friends)} 位好友 ({online} 在线)")
+            if hasattr(parsed, 'current_player') and parsed.current_player:
+                p = parsed.current_player
+                print(f"    → 玩家: {p.full_name}")
+            return
+
+        # 回退到原始数据解析
+        if method_name == "get_history_summary":
             history = result.get("data", {}).get("playHistory", {})
             if history:
                 rank = history.get("udemaeMax")
                 print(f"    → 最高段位: {rank}")
+        elif method_name == "get_schedule":
+            schedules = result.get("data", {})
+            if schedules:
+                print(f"    → 包含 {len(schedules)} 种日程类型")
+
     except Exception:
         pass
 
@@ -280,27 +477,27 @@ async def main():
     print("=" * 60)
     print("Splatoon3 Assistant - 功能测试")
     print("=" * 60)
-    
+
     # 检查缓存
     tokens = load_cached_tokens()
-    
+
     if tokens:
         print(f"\n已缓存的账号: {tokens.get('user_nickname', 'Unknown')}")
         print(f"创建时间: {tokens.get('created_at', 'Unknown')}")
-        
+
         choice = input("\n使用缓存的 tokens? [Y/n/clear]: ").strip().lower()
-        
+
         if choice == "clear":
             clear_token_cache()
             tokens = None
         elif choice == "n":
             tokens = None
-    
+
     # 登录
     if not tokens:
         tokens = await login_flow()
         save_tokens(tokens)
-    
+
     # 测试 API
     await test_all_apis(tokens)
 
