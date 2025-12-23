@@ -195,7 +195,9 @@ splatoon3-assistant/
 本项目的实现参考了以下开源项目：
 
 - [splatoon3-nso](https://github.com/Cypas/splatoon3-nso) - NSO 认证流程和 GraphQL API 封装的主要参考
-- [splatoon3-schedule](https://github.com/Cypas/splatoon3-schedule) - 数据处理和项目架构参考
+- [splatoon3-schedule](https://github.com/Cypas/splatoon3-schedule) - 数据处理和项目架构参考和武器别称数据维护
 - [nxapi](https://github.com/samuelthomas2774/nxapi) - NSO API v4 加密支持
+- [sendou.ink](https://github.com/sendou-ink/sendou.ink) - 武器数据解析和翻译
+- [splat3](https://github.com/Leanny/splat3) - 数据源
 
 感谢 Splatoon3 开源社区的贡献！

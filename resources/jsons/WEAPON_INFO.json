@@ -1,0 +1,807 @@
+[
+  {
+    "zh_name": ".52加仑",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": ".96加仑",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": ".96加仑 装饰",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "专业模型枪MG",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "专业模型枪RG",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "太空射击枪 联名",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "圆珠笔",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "14式竹筒枪·甲",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "宽滚筒",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "宽滚筒 联名",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "火热爆破枪",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "满溢泡澡泼桶",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "碳纤维滚筒",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "碳纤维滚筒 装饰",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "冲涂爆破枪",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "冲涂爆破枪 新型",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "鱿快洁α",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "双重清洁枪 改装",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "喷射清洁枪 改装",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "枫叶射击枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "溅镀枪",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "溅镀枪·新艺术",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "四重弹跳手枪 黑",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "双重清洁枪",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "电动马达滚筒",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "公升4K",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "4K准星枪",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "爆炸泼桶",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "可变式滚筒",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "顶尖射击枪 联名",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "开尔文525",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "高压油管枪",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "H3卷管枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "H3卷管枪D",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "桶装旋转枪",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "桶装旋转枪 装饰",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "英雄射击枪 复制",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "消防栓旋转枪",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "巴勃罗",
+    "zh_weapon_class": "笔刷",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "巴勃罗·新艺术",
+    "zh_weapon_class": "笔刷",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "喷射清洁枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "斯普拉滚筒 联名",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "L3卷管枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "L3卷管枪D",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "四重弹跳手枪 白",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "新星爆破枪",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "新星爆破枪 新型",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "斯普拉旋转枪",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "N-ZAP85",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "N-ZAP89",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "鹦鹉螺号47",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "窄域标记枪 新型",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "广域标记枪 新型",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "北斋",
+    "zh_weapon_class": "笔刷",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "文森",
+    "zh_weapon_class": "笔刷",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "远距爆破枪",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "快速爆破枪",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "快速爆破枪 装饰",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "快速爆破枪 精英",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "快速爆破枪 精英装饰",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "LACT-450",
+    "zh_weapon_class": "弓",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "S-BLAST92",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "飞溅泼桶",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "飞溅泼桶 装饰",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "回旋泼桶",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "R-PEN/5H",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "窄域标记枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "遮阳防空伞",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "斯普拉蓄力狙击枪",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "斯普拉机动枪",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "斯普拉滚筒",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "工作刮水刀",
+    "zh_weapon_class": "刮水刀",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "雨刷刮水刀",
+    "zh_weapon_class": "刮水刀",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "雨刷刮水刀 装饰",
+    "zh_weapon_class": "刮水刀",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "斯普拉准星枪",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "斯普拉射击枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "新叶射击枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "太空射击枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "顶尖射击枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "广域标记枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "开瓶喷泉枪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "露营防空伞",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "露营防空伞 姐妹",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "斯普拉射击枪 联名",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "洗笔桶",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "洗笔桶·新艺术",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "三发猎鱼弓",
+    "zh_weapon_class": "弓",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "特工配件",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "斯普拉蓄力狙击枪 联名",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "斯普拉准星枪 联名",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "斯普拉旋转枪 联名",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "圆珠笔·新艺术",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "满溢泡澡泼桶 装饰",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "高压油管枪 改装",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "墨瀑淋",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "电动马达滚筒 高磁波",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "审查者",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "三发猎鱼弓 联名",
+    "zh_weapon_class": "弓",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "北斋·新艺术",
+    "zh_weapon_class": "笔刷",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "回旋泼桶 新型",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "遮阳防空伞 姐妹",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "火热爆破枪 改装",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "斯普拉机动枪 联名",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "开瓶喷泉枪 金属箔",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "文森·新艺术",
+    "zh_weapon_class": "笔刷",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "LACT-450 装饰",
+    "zh_weapon_class": "弓",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "S-BLAST91",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "R-PEN/5B",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "特工配件 姐妹",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "工作刮水刀·新艺术",
+    "zh_weapon_class": "刮水刀",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": ".52加仑 装饰",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "公升4K 改装",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "4K准星枪 改装",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "爆炸泼桶 改装",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "灭熄FF",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "墨瀑淋D",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "可变式滚筒 金属箔",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "开尔文525 装饰",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "鹦鹉螺号79",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "鱿快洁β",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "24式可替换伞·甲",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "14式竹筒枪·乙",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "巨齿刮水刀 墨黑",
+    "zh_weapon_class": "刮水刀",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "灭熄FF 改装",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "消防栓旋转枪 改装",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "远距爆破枪 改装",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "邦普V 改装",
+    "zh_weapon_class": "弓",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "审查者·新艺术",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "巨齿刮水刀 薄荷",
+    "zh_weapon_class": "刮水刀",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "24式可替换伞·乙",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "邦普V",
+    "zh_weapon_class": "弓",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "窄域标记枪GECK",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "专业模型枪 彩",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "斯普拉射击枪 煌",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "顶尖射击枪FRZN",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": ".96加仑 爪",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "喷射清洁枪COBR",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "火热爆破枪 艳",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "快速爆破枪 精英WNTR",
+    "zh_weapon_class": "爆破枪",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "L3卷管枪 箔",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "H3卷管枪SNAK",
+    "zh_weapon_class": "射击枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "碳纤维滚筒ANGL",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "电动马达滚筒 冥",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "宽滚筒 惑",
+    "zh_weapon_class": "滚筒",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "北斋 彗",
+    "zh_weapon_class": "笔刷",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "文森BRNZ",
+    "zh_weapon_class": "笔刷",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "斯普拉蓄力狙击枪FRST",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "斯普拉准星枪FRST",
+    "zh_weapon_class": "狙击枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "洗笔桶ASH",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "墨瀑淋 角",
+    "zh_weapon_class": "泼桶",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "斯普拉旋转枪PYTN",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "消防栓旋转枪 压",
+    "zh_weapon_class": "旋转枪",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "溅镀枪OWL",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "斯普拉机动枪 耀",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "双重清洁枪 蹄",
+    "zh_weapon_class": "双枪",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "露营防空伞CREM",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "特工配件 缭",
+    "zh_weapon_class": "伞",
+    "zh_father_class": "近距离"
+  },
+  {
+    "zh_name": "三发猎鱼弓 灯",
+    "zh_weapon_class": "弓",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "LACT-450MILK",
+    "zh_weapon_class": "弓",
+    "zh_father_class": "长距离"
+  },
+  {
+    "zh_name": "工作刮水刀 封",
+    "zh_weapon_class": "刮水刀",
+    "zh_father_class": "中距离"
+  },
+  {
+    "zh_name": "雨刷刮水刀RUST",
+    "zh_weapon_class": "刮水刀",
+    "zh_father_class": "中距离"
+  }
+]
