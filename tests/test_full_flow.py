@@ -258,23 +258,23 @@ async def test_all_apis(tokens: dict) -> dict:
 
     # 测试用例列表
     test_cases = [
-        ("get_home", "主页数据"),
-        ("get_history_summary", "历史总览"),
-        ("get_recent_battles", "最近对战"),
-        ("get_regular_battles", "涂地对战"),
-        ("get_bankara_battles", "蛮颓对战"),
-        ("get_x_battles", "X 比赛"),
-        ("get_event_battles", "活动对战"),
-        ("get_private_battles", "私房对战"),
-        ("get_coops", "打工历史"),
-        ("get_friends", "好友列表"),
+        # ("get_home", "主页数据"),
+        # ("get_history_summary", "历史总览"),
+        # ("get_recent_battles", "最近对战"),
+        # ("get_regular_battles", "涂地对战"),
+        # ("get_bankara_battles", "蛮颓对战"),
+        # ("get_x_battles", "X 比赛"),
+        # ("get_event_battles", "活动对战"),
+        # ("get_private_battles", "私房对战"),
+        # ("get_coops", "打工历史"),
+        # ("get_friends", "好友列表"),
         ("get_weapon_records", "武器记录"),
         ("get_stage_records", "场地记录"),
-        ("get_schedule", "日程安排"),
-        ("get_last_one_battle", "最新一局对战ID"),
-        ("get_x_ranking", "X排行榜"),
-        ("get_app_ns_friend_list", "NSO好友列表"),
-        ("get_app_ns_myself", "NSO我的信息"),
+        # ("get_schedule", "日程安排"),
+        # ("get_last_one_battle", "最新一局对战ID"),
+        # ("get_x_ranking", "X排行榜"),
+        # ("get_app_ns_friend_list", "NSO好友列表"),
+        # ("get_app_ns_myself", "NSO我的信息"),
     ]
 
     results = {}
@@ -336,37 +336,70 @@ async def test_all_apis(tokens: dict) -> dict:
 
 
 async def test_detail_apis(api: SplatNet3API, results: dict) -> None:
-    """测试详情接口（需要从列表接口获取 ID）"""
+    """测试详情接口（需要从列表接口获取 ID）- 分别测试各类型对战"""
     print("\n" + "-" * 60)
-    print("详情接口测试")
+    print("详情接口测试 - 比较不同类型对战的 Detail 差异")
     print("-" * 60)
 
-    # 测试对战详情
-    battle_id = extract_battle_id(results)
-    if battle_id:
-        print(f"\n[测试] 对战详情 (get_battle_detail)...", end=" ")
+    # 定义各类型对战的映射
+    battle_types = [
+        ("get_recent_battles", "latestBattleHistories", "最近对战"),
+        ("get_regular_battles", "regularBattleHistories", "涂地对战"),
+        ("get_bankara_battles", "bankaraBattleHistories", "蛮颓对战"),
+        ("get_x_battles", "xBattleHistories", "X比赛"),
+        ("get_event_battles", "eventBattleHistories", "活动对战"),
+        ("get_private_battles", "privateBattleHistories", "私房对战"),
+    ]
+
+    detail_results = {}
+
+    for method_key, history_key, type_name in battle_types:
+        if method_key not in results:
+            print(f"\n[跳过] {type_name} - 无列表数据")
+            continue
+
+        battle_id = _extract_battle_id_from_result(results[method_key], history_key)
+        if not battle_id:
+            print(f"\n[跳过] {type_name} - 无可用对战ID")
+            continue
+
+        print(f"\n[测试] {type_name} 详情 (get_battle_detail)...", end=" ")
         try:
             result = await api.get_battle_detail(battle_id)
             if result:
                 print("✓ 成功")
-                # 解码 ID 并添加到结果副本
                 decoded = DecodedId.decode(battle_id)
+
+                # 保存结果
+                filename = f"battle_detail_{method_key.replace('get_', '').replace('_battles', '')}"
                 result_with_meta = dict(result) if isinstance(result, dict) else {"data": result}
-                result_with_meta["_decoded_id"] = {
-                    "raw": decoded.raw,
-                    "decoded": decoded.decoded,
-                    "type_prefix": decoded.type_prefix,
-                    "user_id": decoded.user_id,
-                    "timestamp": decoded.timestamp,
+                result_with_meta["_meta"] = {
+                    "battle_type": type_name,
+                    "source_api": method_key,
+                    "decoded_id": {
+                        "raw": decoded.raw,
+                        "decoded": decoded.decoded,
+                        "type_prefix": decoded.type_prefix,
+                        "user_id": decoded.user_id,
+                        "timestamp": decoded.timestamp,
+                    }
                 }
-                save_test_result("get_battle_detail", result_with_meta)
-                print(f"    → 对战ID: {decoded.decoded[:50]}...")
+                save_test_result(filename, result_with_meta)
+                detail_results[type_name] = result
+
+                # 打印关键字段
+                _print_detail_summary(type_name, result)
             else:
                 print("⚠ 返回空数据")
         except Exception as e:
             print(f"✗ 失败: {e}")
-    else:
-        print("\n[跳过] 对战详情 - 无可用的对战ID")
+
+    # 比较不同类型的差异
+    # if len(detail_results) > 1:
+    #     print("\n" + "-" * 60)
+    #     print("各类型对战 Detail 字段差异分析")
+    #     print("-" * 60)
+    #     _compare_battle_details(detail_results)
 
     # 测试打工详情
     coop_id = extract_coop_id(results)
@@ -395,9 +428,98 @@ async def test_detail_apis(api: SplatNet3API, results: dict) -> None:
         print("\n[跳过] 打工详情 - 无可用的打工ID")
 
 
+def _extract_battle_id_from_result(result: dict, history_key: str) -> Optional[str]:
+    """从单个对战结果中提取第一个对战 ID"""
+    try:
+        groups = result.get("data", {}).get(history_key, {}).get("historyGroups", {}).get("nodes", [])
+        for group in groups:
+            details = group.get("historyDetails", {}).get("nodes", [])
+            if details:
+                return details[0].get("id")
+    except Exception:
+        pass
+    return None
+
+
+def _print_detail_summary(type_name: str, result: dict) -> None:
+    """打印对战详情摘要"""
+    try:
+        detail = result.get("data", {}).get("vsHistoryDetail", {})
+        if not detail:
+            return
+
+        # 基本信息
+        vs_mode = detail.get("vsMode", {}).get("mode", "Unknown")
+        vs_rule = detail.get("vsRule", {}).get("name", "Unknown")
+        judgement = detail.get("judgement", "Unknown")
+        knockout = detail.get("knockout")
+
+        print(f"    → 模式: {vs_mode} | 规则: {vs_rule} | 结果: {judgement}", end="")
+        if knockout is not None:
+            print(f" | KO: {knockout}")
+        else:
+            print()
+
+        # 特有字段检测
+        special_fields = []
+        if detail.get("bankaraMatch"):
+            bm = detail["bankaraMatch"]
+            special_fields.append(f"bankaraMatch(mode={bm.get('mode')}, earnedUdemaePoint={bm.get('earnedUdemaePoint')})")
+        if detail.get("xMatch"):
+            xm = detail["xMatch"]
+            special_fields.append(f"xMatch(lastXPower={xm.get('lastXPower')})")
+        if detail.get("leagueMatch"):
+            special_fields.append("leagueMatch(活动)")
+        if detail.get("festMatch"):
+            fm = detail["festMatch"]
+            special_fields.append(f"festMatch(dragonMatchType={fm.get('dragonMatchType')})")
+
+        if special_fields:
+            print(f"    → 特有字段: {', '.join(special_fields)}")
+
+    except Exception as e:
+        print(f"    → 解析摘要失败: {e}")
+
+
+def _compare_battle_details(detail_results: dict) -> None:
+    """比较不同类型对战的字段差异"""
+    all_keys = {}
+
+    # 收集所有类型的顶层字段
+    for type_name, result in detail_results.items():
+        detail = result.get("data", {}).get("vsHistoryDetail", {})
+        if detail:
+            keys = set(detail.keys())
+            all_keys[type_name] = keys
+
+    if not all_keys:
+        print("  无法提取字段进行比较")
+        return
+
+    # 找出共同字段和差异字段
+    common_keys = set.intersection(*all_keys.values()) if all_keys else set()
+    all_unique = set.union(*all_keys.values()) if all_keys else set()
+
+    print(f"\n  共同字段 ({len(common_keys)}个):")
+    print(f"    {', '.join(sorted(common_keys)[:15])}...")
+
+    print(f"\n  各类型特有/差异字段:")
+    for type_name, keys in all_keys.items():
+        unique = keys - common_keys
+        if unique:
+            print(f"    [{type_name}] 特有: {', '.join(sorted(unique))}")
+        else:
+            print(f"    [{type_name}] 无特有字段")
+
+
 def extract_battle_id(results: dict) -> Optional[str]:
     """从对战列表中提取第一个对战 ID"""
-    for key in ["get_recent_battles", "get_bankara_battles", "get_regular_battles"]:
+    for key in ["get_recent_battles",
+                "get_bankara_battles",
+                "get_regular_battles",
+                "get_event_battles",
+                "get_private_battles",
+                "get_x_ranking"]:
         if key not in results:
             continue
         try:
@@ -406,6 +528,9 @@ def extract_battle_id(results: dict) -> Optional[str]:
                 "get_recent_battles": "latestBattleHistories",
                 "get_bankara_battles": "bankaraBattleHistories",
                 "get_regular_battles": "regularBattleHistories",
+                "get_event_battles": "eventBattleHistories",
+                "get_private_battles": "privateBattleHistories",
+                "get_x_ranking": "xBattleHistories",
             }
             history_key = history_keys.get(key, "latestBattleHistories")
             groups = results[key].get("data", {}).get(history_key, {}).get("historyGroups", {}).get("nodes", [])

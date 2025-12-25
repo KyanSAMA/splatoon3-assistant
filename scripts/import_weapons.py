@@ -169,7 +169,7 @@ def main() -> int:
 
         all_sqls.append("\nCOMMIT;")
 
-        output_path = Path(__file__).parent / "migrations" / "002_import_weapon_data.sql"
+        output_path = Path(__file__).parent / "migrations" / "002_import_data.sql"
         with open(output_path, "w", encoding="utf-8") as f:
             f.write("\n".join(all_sqls))
 

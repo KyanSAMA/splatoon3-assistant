@@ -1,0 +1,1901 @@
+{
+  "data": {
+    "vsHistoryDetail": {
+      "__typename": "VsHistoryDetail",
+      "id": "VnNIaXN0b3J5RGV0YWlsLXUtcXpnNmRpbzdkNXRuZmZyamFubW06TEVBR1VFOjIwMjUxMDE5VDEzNTk0N19kYjA5NjQxMi1iMWU3LTQzMzgtYjA2MS0yMDVlNmJmYWU1MmY=",
+      "vsRule": {
+        "name": "真格區域",
+        "id": "VnNSdWxlLTE=",
+        "rule": "AREA"
+      },
+      "vsMode": {
+        "mode": "LEAGUE",
+        "id": "VnNNb2RlLTQ="
+      },
+      "player": {
+        "__isPlayer": "VsPlayer",
+        "byname": "孤單一人的貓",
+        "name": "わくここね",
+        "nameId": "7357",
+        "nameplate": {
+          "badges": [
+            {
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/2b4091853cfb5bed3fe8da6c7ce3a216472a75bb5455d5f355533d509c22da1c_0.png?Expires=1768003200&Signature=RlLRllosRBxyWRQQ2c3jsGEUgcBHZFiroI6WTwrbQrXKf~KZr5zE~YTZ8YMKjpsZQeWp5ujsOKpoFKDsvl~634pqLIelSgkE0pEoX1llxr4MQUJrad53M~V2pPWLZLPsJ70azxifvUrm9TRl7yLXVHZtEW7mGLAoHwox9w2MCCjAuhR55r3~ixvdlGb89gQ4F8BSsn~rOF8kyAXWnRBFn3Wj9N5iUxmBSAz7lFjh2Dw~Rru~61UlLEqq~eCuTc3q5a3Q2tiQAGkk7rhvLF-X22WPVV00U454N5Xm5ifgsvAlu8Skr7EJh3OmHbvOAS96lpZrfshkD5U8VjAo6A-72A__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "id": "QmFkZ2UtMzAwMDAwMA=="
+            },
+            {
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/991dc4c33571254b65627fbf8669f10550ab612a9ae7eade56112b877fe48e2a_0.png?Expires=1768003200&Signature=fit0zEanjATDGR~ghfNnnv51enwUXVkGPX~TxpuN40tS9XhjtFKiAiFG8iR5MbNnwBwZ6HxJpKLBjRtSyVEWC9hCbhC5HO~St91RcCF7g5Mqpb5MEL6W0bEdRJJhUtlGuORwkXSV5jzyGEDzyDSaFgkRw-dxDe6TypeMn4W~UN79w-BqNqn3m72i-2RsqP99yyWLrHHJkKcbErQDZgfGt6vNVvfubBIHIFxV3gkEJBUuR6If2W0c5xCp~2fgXrcrOVk43lfKq22xsCvI6E7McWUEMriIUV7h2Jy1CrZi4qtdGKZ5i1Vm32-6QEbp5NpbF2BxJDEjQhzJzPseK16g1g__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "id": "QmFkZ2UtNjAwMDEwMg=="
+            },
+            {
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/5d2830d527f3380de9438cb75fd495bb12ea3cbb511da3e27ca89c13dcd1c59d_0.png?Expires=1768003200&Signature=m-hoaF-KUQiWHl1rUFTIybO0WTKLl-SegWUiGRB1ZUu3fbuCsuVFMBXKZqZ-06Fy0pFud6kMT4~ccfS0-E6jxAyI22eCrJUbrModU9PSoWmeKQxYNKvQffNkZ7YqOwCA6WgeCeU8KvTZfwa5DJOP8Qr-PecCPzWgOp2Mjv4xPq0CG511q7rn1-Le~e~xwfQW9Vf9Zb1RKok6lnQMdayL8jqbyAxBBHFy68fzuJQ2iwgoqO5Bdia8XkwkOw8zDQteJzXibnEOKCDnfPOZGps-f7r9hZy1zZn4IwPhedk~iMDvjGU33Np2uoyK851RSTL6E6LG3~CDz0vyXBd7bTqdDg__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "id": "QmFkZ2UtMjkwMDAwMA=="
+            }
+          ],
+          "background": {
+            "textColor": {
+              "a": 1.0,
+              "b": 0.0117647098,
+              "g": 0.0156862792,
+              "r": 0.0117647098
+            },
+            "image": {
+              "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/00bd39e9a9d919d5dff9f1666598d8bde6ed2507a17e33987a9b2afdefbb4461_0.png?Expires=1768003200&Signature=OrndErzdjcjnNXdskIaw2pxCI9BLv55bCjjsw6sP1vElyjfHxPRkLqOXh-5Y59hgg1u6a6PzuA0qvSXlN5w7Gkb6PpNW4KVbZLUann1NGLaxkFTHVRpOEVnbMNmnuuYMQ9JuMv4O3YPscTivxieEKZ-MMw5f6sxW1rEenf3WR8rYToVHc8kZUEc5uJ-~2oxuc436QtzZsvUcfqBGemDzRH64VskIkMahvLqJwT4uGPdXlFSIgVZ1up6j48ww-5dD27o-mKCAGnJH0JDuQvluT9cP3s~E8sE-oEp544REyvAL7UgSofW8cnH5~8pcza9Yeyv60MoUzvK~lxK9gKe0XQ__&Key-Pair-Id=KNBS2THMRC385"
+            },
+            "id": "TmFtZXBsYXRlQmFja2dyb3VuZC04NTM="
+          }
+        },
+        "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LXF6ZzZkaW83ZDV0bmZmcmphbm1t",
+        "headGear": {
+          "name": "指揮官帽 複製",
+          "image": {
+            "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/eb95b912a8f170ad78494807ec088346f04cfeb4a7da15d04a50e7cfec216a2b_1.png?Expires=1768003200&Signature=U3hEilXxTHqyB3gXJA75VVp0EuYzpV0X0hA7WQpq8cZ7qpOJsb4zwJu9sN9dvRf89C6E0W5erLYt4zMrqWkXSHFxJ6j5Ul5eVxGLSg5ixGPB8IOKGh2oNUDiV4CfVubOK6pnChgBd5j0FAKKAOkulUwEbUMktEXU9F1Ptoc8nLc5K8qyErY8GO8BKZIzZ~LVoJndlfTlOGGPpStyhCv~L~aGOglMdQS6VKE~ps1eknofd6NJN6UgbaUJzr~mlDSOsEeZI7ZS24WTTNH-n0lDFLFeQFenZPuhh3dijBwpTTF4XJTK9h3w6MzfZDtVHKB1drTv0P2ZdbpJ5wVoGMqlJg__&Key-Pair-Id=KNBS2THMRC385"
+          },
+          "__isGear": "HeadGear",
+          "primaryGearPower": {
+            "name": "減輕對手墨汁影響",
+            "image": {
+              "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/db36f7e89194ed642f53465abfa449669031a66d7538135c703d3f7d41f99c0d_0.png?Expires=1768003200&Signature=sqozX7oO1t6JR7q96iEKyAMRVKzSIxw7chPKNCOzy~g-pdiABselHPkWiCyRwtEquUtGHtE3fdzC~i8AkKu4t1OlHyJcCt5Y-OvTtScVu~QeAus52uKsj9MiJAAIujIkTSl4v45RCVUz8DyfQGutLf-cLvWf3SdpcopW8zaCka4p0wFgfD9ptcD92XekFYaPoUiBypvZn1kXTJVaQHRb1u7UEgAY5budiRQDlq0e~CoQ735Nv71DRBpFHC9BGm8S7or5Cvwvhf3alINoeqpVfM4kTTaMF04u-F1ezJNRN8F5Bp0Y-WGEXk4nnVX6Ex5R9mNDDyFY2WhcXoaE8rk1Dg__&Key-Pair-Id=KNBS2THMRC385"
+            }
+          },
+          "additionalGearPowers": [
+            {
+              "name": "問號",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+              }
+            }
+          ],
+          "originalImage": {
+            "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/eb95b912a8f170ad78494807ec088346f04cfeb4a7da15d04a50e7cfec216a2b_0.png?Expires=1768003200&Signature=qBUNYCrfUuvR3bo9x3x0eFL7ZDyvKDKgoccvxmUFk64Zx7jJgtFMIAyYk87rICvpp2gxqZ2S-gBv~AqNpju2vEJJ8Ppbri5sZd0GtozYugBMN9W8kEO05J5exj17OY1VuGey7NAwWQnqQBB7o5cuatHCVyTGnm2BQykc~W9T0SA6CcFwNkM0gLTyrmtjZhPv~WlIQ2Xpdldp4~Dl1EV2OvULbjGN5GiKkh1X4wckTZbt0jL0XA4JFTqN7nSZAUbpVcRt9PkzaeTZ4-ddNH7fiHANdnBlERZW7a4uYA1s8WLB-Y37JyIEV6o5VKhTgJYJe831af4cogRuBspnfSV6Nw__&Key-Pair-Id=KNBS2THMRC385"
+          },
+          "brand": {
+            "name": "魚乾製造",
+            "image": {
+              "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/112e21dbefee84b78c957fb7d520986a2a783a9b6656a45342aa86fb837de005_0.png?Expires=1768003200&Signature=KeDSRsLxWro4kKKvEBlp61yk~YFEoAoOPhQ3apnUTsH7bGQ8~n86qBY7TfaxMXTjaq1beRoa~ugPTG5Z6Pf0gqBelDtEF8qRYbmOQtSGt6Ys5Vm4Q6oMqRcowG5mMgg~cQ5pA6iY3JAZKrZyI~ITtYQP9jOYlPrNdMcFd7wiy~s9vc9wMOexN5QwjaMi0nPliY8QmY4jidUvcoxVP8B2d6LF7WsyjFw8DPa6D~eHx4UV9ZdAHXcoI~kBm1MJ7KLjsavd1ql07bwT4iUHjV0qNad7O~ZSc17cNmKlFgsr1nDBy9DFxiKTI03GzMtWaAsTPMzGnmVSyhRVKzs1y0pi1A__&Key-Pair-Id=KNBS2THMRC385"
+            },
+            "usualGearPower": {
+              "name": "問號",
+              "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "isEmptySlot": true
+            },
+            "id": "QnJhbmQtOTg="
+          }
+        },
+        "clothingGear": {
+          "name": "指揮官披風 複製",
+          "image": {
+            "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/bf2f3b8d338dba81e4260c3154d52b524346c6950278ae7fe574558335ae517d_1.png?Expires=1768003200&Signature=aUf215Ge1Okfz9lX70UxgXLovguFdIJ5EqKmzQ8KabDUET0PW-6dkoRftKD7yFB2xatQ5yj12ZJ62PUg7L5l3Cz6Ogl4BtD9eqFcUsJzdklirk3q7oIualAgpbetedwciHhL~vm0QuadJGgGx68bRZrzCBRqRCaVpf6fXRLLZHbGAzZmv69uwWX08sBSvAWsQQpmlkCMSTVvbInBOeIdy~zfzCspY05VbKrSeqZkZkZNPJP6d44b-Ws03a7lIsCrh~hFakZCxOIRxu9g2pk4VU3ErZJLXegTmLbwzAVWlZB-bvtud5ikOnMxDhhkZ4D~tXRphDI6EoBpUqc6OKobNw__&Key-Pair-Id=KNBS2THMRC385"
+          },
+          "__isGear": "ClothingGear",
+          "primaryGearPower": {
+            "name": "魷魚忍者",
+            "image": {
+              "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/2c0ef71abfb3efe0e67ab981fc9cd46efddcaf93e6e20da96980079f8509d05d_0.png?Expires=1768003200&Signature=nRdk-V1zm11yV6goiAvMFX1Ojfn4-JM4woDG3j-5ublSENBUTLh-4tEEtB2ptwYc6zO6nb-5GYItPVvsBG2o0UOw9WbHolPJN4UBTXYSMV8DlVCZlirGSilixD5aPO40~8Hix~0D7haG1FWeSnDhhh1n3ofk1c~-QRyJ0QDTCLCgt9bs9b~tHKiwrPYRaOSkTNw6L8wez-Tei71HgIURpAnRIPmwckGUiSkqxXDxzUx16gENvrlfATeC4Apfbuxc7NNcy-q0Jo0HxHT5ll47HZobY8MaI~Jg-KWt1Xav3vNkFzL0fUB5yPoS7wkGbQ1Mwl28hJNsgEcbgnvoraeuBw__&Key-Pair-Id=KNBS2THMRC385"
+            }
+          },
+          "additionalGearPowers": [
+            {
+              "name": "問號",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+              }
+            }
+          ],
+          "originalImage": {
+            "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/bf2f3b8d338dba81e4260c3154d52b524346c6950278ae7fe574558335ae517d_0.png?Expires=1768003200&Signature=gyE0UXajWPXK30XiY~WaY7q5C3lSzZGAnRs2QUEDGSceCTYkZl-dbMXDLywbl-O9OT2TZ6IH~zqfgqONVozgq5G8tRQUF4gSJrf~xUxnT12Tx2l5wlmUIB~p1h15B5Glu52kpz6j2wnwIQwhT3KawzbSbH1qnmye7PwFW~uK2mgJpOkmdgK27fB4panRhmwGK44aMWitVkb2odL86gYPFcZJzmY1nTp6HMuFBJY373IPhI6g4dORiVQFCy3oxF5ZIO8a3PF1unHsJVQPNaG0jAGjiAcV-iEw~j7pL~5XY1DeogErwtm84Nl-oAHrPvDKZ0xNtyMCFiLTdIPhJEzsWw__&Key-Pair-Id=KNBS2THMRC385"
+          },
+          "brand": {
+            "name": "魚乾製造",
+            "image": {
+              "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/112e21dbefee84b78c957fb7d520986a2a783a9b6656a45342aa86fb837de005_0.png?Expires=1768003200&Signature=KeDSRsLxWro4kKKvEBlp61yk~YFEoAoOPhQ3apnUTsH7bGQ8~n86qBY7TfaxMXTjaq1beRoa~ugPTG5Z6Pf0gqBelDtEF8qRYbmOQtSGt6Ys5Vm4Q6oMqRcowG5mMgg~cQ5pA6iY3JAZKrZyI~ITtYQP9jOYlPrNdMcFd7wiy~s9vc9wMOexN5QwjaMi0nPliY8QmY4jidUvcoxVP8B2d6LF7WsyjFw8DPa6D~eHx4UV9ZdAHXcoI~kBm1MJ7KLjsavd1ql07bwT4iUHjV0qNad7O~ZSc17cNmKlFgsr1nDBy9DFxiKTI03GzMtWaAsTPMzGnmVSyhRVKzs1y0pi1A__&Key-Pair-Id=KNBS2THMRC385"
+            },
+            "usualGearPower": {
+              "name": "問號",
+              "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "isEmptySlot": true
+            },
+            "id": "QnJhbmQtOTg="
+          }
+        },
+        "shoesGear": {
+          "name": "指揮官人字拖 複製",
+          "image": {
+            "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/b5084a9d24bf193c5c6a1288c707bc5fb687f056bad1e330cb0e01c41ba9a9b0_1.png?Expires=1768003200&Signature=SBZK0anCZji4HigkIwgj5FfAhtXWpQyi2IPrUAQimzGwGR5Iv84Log5v6dAr~ugBcOcIW0LrmcEsM9fQAZTTmyvGAb32oj6JYMbO0Z1grj5xt0woMc7ikv~ncUMZFPKyCMnV630DWxBpOSjOnmeQAupE0zny0iLzZTH8DaQB4qIXlRPwlJocoBipfsnb7T~FNttCknjnRAv61K3dMXpsdOGSd3DKsqvlkco4-W7oohQLpHyIFBmFWVaGVMZukWnGSYgGWdpaSv09WRsqHPCelGZVikg8Ec5VMj1leNkRu9EWT83FpLmwJbLr6kVXFs7sfwiGhyizrFSMDhlEK4b3Pw__&Key-Pair-Id=KNBS2THMRC385"
+          },
+          "__isGear": "ShoesGear",
+          "primaryGearPower": {
+            "name": "提升特殊武器性能",
+            "image": {
+              "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/fba267bd56f536253a6bcce1e919d8a48c2b793c1b554ac968af8d2068b22cab_0.png?Expires=1768003200&Signature=NYa2ocwBePcrJm0YpRVlGcbcqFrNzt1KP2Yovgh1AApWH4e9FlylV9-NzboJ4nIK3bfuSPnEjltNjPLnat0LRBU~PACh4gFiQWAIFqURKPymuPmZTFDAI2D0MnZxV92DsMj9m9shfDVtmW1hPj~pqKJnuBYPdnHR8fAIFNszltP0LbBDwS0fMmwE-MRzsu3bSh2uCSQnSBtFkRTUyLrFbw1CMlbZ-Qkiyu5m84PvUCu2-eAbB1yGdcrFZn0yzVpDN2K5ELtcsuwtoj7LzeiYbnNWWH4K7UNTaBrsY47feZrsyGn~7PWsUvqpZxwe1Pl1WZ8W1uvv9x9mRHrDlF7fzA__&Key-Pair-Id=KNBS2THMRC385"
+            }
+          },
+          "additionalGearPowers": [
+            {
+              "name": "問號",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+              }
+            }
+          ],
+          "originalImage": {
+            "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/b5084a9d24bf193c5c6a1288c707bc5fb687f056bad1e330cb0e01c41ba9a9b0_0.png?Expires=1768003200&Signature=rUEBmMHT~4Xs8lTUHN9ylT~~y4j9prpGVFFXbDY5Ihx68KBBF-Q1TIQetZh9T1WpqXkV1MxKI-v7qd4pwIgmbLYjrEiFyll8CrPP~71whTqVh2VM~IQz~2fStt9D6ttG~pAsW2LEHINZTY~R2DYrTNFNUZbwHXxg9~fUu62Z7O8Mw~ainWlTAS86rB1o8BQUJ~rYNwarlpGDENeW~MrqmDrE0svL~zEtWGQxkiyf1QcQnZpjP5iu9RtQmYvuHPw3x5kU4OYW9TJx6bySloalyTiFnqo59oRm2Wk~v3JhXxV2Mtz2vFEpzLtQ51VDlcIxzBqj8sc5J48KSjfDXAmzIQ__&Key-Pair-Id=KNBS2THMRC385"
+          },
+          "brand": {
+            "name": "魚乾製造",
+            "image": {
+              "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/112e21dbefee84b78c957fb7d520986a2a783a9b6656a45342aa86fb837de005_0.png?Expires=1768003200&Signature=KeDSRsLxWro4kKKvEBlp61yk~YFEoAoOPhQ3apnUTsH7bGQ8~n86qBY7TfaxMXTjaq1beRoa~ugPTG5Z6Pf0gqBelDtEF8qRYbmOQtSGt6Ys5Vm4Q6oMqRcowG5mMgg~cQ5pA6iY3JAZKrZyI~ITtYQP9jOYlPrNdMcFd7wiy~s9vc9wMOexN5QwjaMi0nPliY8QmY4jidUvcoxVP8B2d6LF7WsyjFw8DPa6D~eHx4UV9ZdAHXcoI~kBm1MJ7KLjsavd1ql07bwT4iUHjV0qNad7O~ZSc17cNmKlFgsr1nDBy9DFxiKTI03GzMtWaAsTPMzGnmVSyhRVKzs1y0pi1A__&Key-Pair-Id=KNBS2THMRC385"
+            },
+            "usualGearPower": {
+              "name": "問號",
+              "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "isEmptySlot": true
+            },
+            "id": "QnJhbmQtOTg="
+          }
+        },
+        "paint": 414
+      },
+      "judgement": "WIN",
+      "myTeam": {
+        "color": {
+          "a": 1.0,
+          "b": 0.2196078,
+          "g": 0.788235307,
+          "r": 0.627451003
+        },
+        "result": {
+          "paintRatio": null,
+          "score": 100,
+          "noroshi": null
+        },
+        "tricolorRole": null,
+        "festTeamName": null,
+        "festUniformBonusRate": null,
+        "judgement": "WIN",
+        "players": [
+          {
+            "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LXF6ZzZkaW83ZDV0bmZmcmphbm1t",
+            "name": "わくここね",
+            "callSign": null,
+            "isMyself": true,
+            "byname": "孤單一人的貓",
+            "weapon": {
+              "name": "碳纖維滾筒",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/29358fd25b6ad1ba9e99f5721f0248af8bde7f1f757d00cbbc7a8a6be02a880d_1.png?Expires=1768003200&Signature=IX6J3d6JMoO1Y1gbaQPIk9VmBLcVuPTGln7ZhOG9sL9Ozt7AEc2JRElRRFBFJVSHZwjlc4j-vVdTjiYkJAoPucQadCQSWl8dG7rFwAP4iikQm4KslYfGAt7ckt3JP7IUe7~KQn0K0ht44QtFXsuvwPYIsh5A6yHncvDocUu3aXRT-qOGOTOulvJchNYUgisEgi2TtN-0XvtfarT54aAiCMHZ2jveb0ZkRhsjUqMvlIhzqSf6GArq8X06WTZN8UNqnMRn0d2whuHBXEYd3xwvxL-4FiFycc9auCFHUJIrwtO607Y2cgNsWobrFFtyD6CsV8sB6h93IHnie67NsUSBtQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "specialWeapon": {
+                "maskingImage": {
+                  "width": 100,
+                  "height": 100,
+                  "maskImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/mask/6fcf9e641946c442b7426f3fef3977d580f69dca822a9a4d0428340663ea5050_4.png?Expires=1768003200&Signature=XC06HZLN~j06GEeTUjV7hCWr74RriKbV5Z9xZmpSK7G7kNcQDKQXamNPNh2dBWUcgFSuU42jkHP68cS6zvwv54~kj6WIigaebFaq7gHtu8uty0OrCcRuf9xUIpPsePV2Y042Q0X8uWe0gj6oPGSNcxOCIbbKF-E94zP4r1b7t~65QfeaZxdxB0cPGiTEo2k1PcEtRROJgcfjRdfNqbtwUdNDHYT~Tk7g7P8VxrUKdFVAxvW8C2F67Elx3Ws8wdHYojJ5SkHDqiTgtgLyI1UbV3-ORixnSvB4rXqTYXD32iRNWFM-CeVuXw95rubWd1wlkOJEo3SndOYimucPUba3aQ__&Key-Pair-Id=KNBS2THMRC385",
+                  "overlayImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/overlay/6fcf9e641946c442b7426f3fef3977d580f69dca822a9a4d0428340663ea5050_5.png?Expires=1768003200&Signature=px7M4FnZq5T56PokPTI9dnO4BLGciSLwPoHMVenf-JUDHP521uPxmQkTwASuzgCUumulzdIbrrprj--GUdWC28t4SpvKpRHRCUhkDPfz21cjQElVIh3ksHqV0BDdO60-m6uBYN5zStcMm9R3PikS0gWsTda1iVkWTiD-JvAHSjIAn8RYNhQ4iDavUoyQ1gzPwxkhiNP836Hv0yo2HPdejvpRMFWxS0GnANqfFAHW2gh0A2zBsp9ZZJgThDFGIQVTRRpUmdvVb5lQ0XlsrMslRcG1LJAd~RV15aEw-Url~~nhdMlI6m30xC3rmxsQ7YoPqbbVetsbhF~dnnCck~uT1w__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "U3BlY2lhbFdlYXBvbi0z",
+                "name": "觸手噴射",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/blue/6fcf9e641946c442b7426f3fef3977d580f69dca822a9a4d0428340663ea5050_0.png?Expires=1768003200&Signature=GN2rRr-l7dFLAihbvTQFJNOLGEsE0zB5SVRXdD~5QE840ZKx0AHJ6SEKPx9X3-smzSrhQgSIvSd8ke9urMSq5HMLFa-ozzL7oQEfKxzCr3VWMYp3Iuy8P3tLSaRjFDFCn6FWkV2Qg8FXk3uQ8HlQCL8k4XUCBgaPXpUgpqsgWbHdqeTaGH5vsetILLbdvmJXPBGs9LKf5jg0XWTmSbQA6GIzfHf43KAGmqXZiG~9M3zAZ~gLByI7YDdNfxRc8SxGnWW~IMjQBAwQsrQO~IICoTkayXw8MDhZVIKZTUjxLtXeexcYo6qPDJhImop4eAJobx5iomaK6zzvkEFpmWIPRw__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "id": "V2VhcG9uLTEwMDA=",
+              "image3d": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/29358fd25b6ad1ba9e99f5721f0248af8bde7f1f757d00cbbc7a8a6be02a880d_2.png?Expires=1768003200&Signature=BAQPUGkYshTvjfew5XteYX2BN5ae~Mbj-miMfMDU07s-1PRD03~xmoMUWkmgk7sdYkets2z65SCH0EUX79svMJ2rErRWbtDxfPoodkobqaJpRYMX9dd4k2jVSSqVBMM2Ke~Khvz3DXyA7uXEwbk5aZpR0jIaUu77wknDclK3Z9PDApNV8mtmqskr4tLWX5V7M2WJdQkn7Gcv4qrBiyYUqQwDNfp2Z0nAOY0oSzJOgSJu88CDBXswT52JHFgxjJoDX~ggUzvPW~Br9fYUuVuLlSLSbTpKyC-LFtzNCh-jdZSY~KGEX~MZ1hCjJbYWF96S9NbwZFVQ68Nfsqi90oBLRQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image2d": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/29358fd25b6ad1ba9e99f5721f0248af8bde7f1f757d00cbbc7a8a6be02a880d_0.png?Expires=1768003200&Signature=r-XCNqxS3zcOnOwXbeknpHySOEdR5j1tgABSj-4SnF0iXdYS3jZ3jOH3UJsSyK~7VXZ3UN2s-MH9Pq2UQDKxGawxy8lxbBwgTnMmqIHlhfHIurtmulJAe1XDJNpSSUSOlNdUT7V9iRMYjTp05qhnFSQ9QsHXwDqPIzku7QgX9BUn4cdvq2Q37esu40qswp5hbCosAKtrAO0h-GVYQu0QJzBq3tBkSWyRMkEtiQjj4YD-NVJvRrLLtROYstOlR19M1YoOhUS~8LW85LEvpLtFlPD1A4krFNskrJhCkn2RXzrsPsBMkkxqFb3h0YG4jqZAgbkK7~vdD4qybBW1SfTLGw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image3dThumbnail": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/29358fd25b6ad1ba9e99f5721f0248af8bde7f1f757d00cbbc7a8a6be02a880d_3.png?Expires=1768003200&Signature=M3jSRCTlQzBjjEIOdUJtzc84bjQfM-B1xl2pAzfIjnEhIMSQlVYjY7BzgbHXNQMuQ5~p1AEHELToHvaHtkVPcAES86aw7fCR9n32fRcACTpBTD8AHgjpVqtruAjMu0CVs78Gwno0cUM5V3b26Vm1wVLJ6BSPZh12hcxCNnjT~tYLTg8bCUBg8NbR991mmIQ2ilohPCJ~iggr29Izi1wAbf6bG9yd~Dm7o2ypbfT0SsRUpT4zvKk95T3C8wBYsxdyQyFXrMs53qyZaubrCvKVJuEOrb6be8FVKCCEj383DuurTi~FAL8R2D7V4wwYGeigqVO2Tpph2tqIyD6SoEHmWQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image2dThumbnail": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/29358fd25b6ad1ba9e99f5721f0248af8bde7f1f757d00cbbc7a8a6be02a880d_1.png?Expires=1768003200&Signature=IX6J3d6JMoO1Y1gbaQPIk9VmBLcVuPTGln7ZhOG9sL9Ozt7AEc2JRElRRFBFJVSHZwjlc4j-vVdTjiYkJAoPucQadCQSWl8dG7rFwAP4iikQm4KslYfGAt7ckt3JP7IUe7~KQn0K0ht44QtFXsuvwPYIsh5A6yHncvDocUu3aXRT-qOGOTOulvJchNYUgisEgi2TtN-0XvtfarT54aAiCMHZ2jveb0ZkRhsjUqMvlIhzqSf6GArq8X06WTZN8UNqnMRn0d2whuHBXEYd3xwvxL-4FiFycc9auCFHUJIrwtO607Y2cgNsWobrFFtyD6CsV8sB6h93IHnie67NsUSBtQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "subWeapon": {
+                "name": "機器人炸彈",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/sub_img/blue/f402a8f304d6a43c671914b53ebe646fd4e06c9c7ef91d87a7a42948da56ab55_0.png?Expires=1768003200&Signature=a~9S3qnfR6DFan5MoX6cuphuryD94TwDp7gmGEF4HRYiHe0XGuUvpWmJadCOZSv8o7pY15ZtCfFbQdGccnadQnkmbZTLRXZQs6-9yybaPdLuDreO0JDK0qq7Gpl~XBrsSXt7ElH1Iy~T2OD6vkWDSMHMgLbdDUR1HWtR3-PZi6hFXW6qUkkY5hbSKqyx3YyV34l69HcxNvbndUEb6HV39s~LvXuHq9hn3ZBbhYr6Euw2xLdH-IZDsMrAmRyISMK4iXzZa1MA2jRd58uvc24tfCT5xbjYQ-ud2Xwlr~CwJJFycpAF6SFtDM68V~UrwtkhkdFHeJRtFEVx8tLaVM2Amw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "U3ViV2VhcG9uLTc="
+              }
+            },
+            "species": "OCTOLING",
+            "__isPlayer": "VsPlayer",
+            "nameId": "7357",
+            "nameplate": {
+              "badges": [
+                {
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/2b4091853cfb5bed3fe8da6c7ce3a216472a75bb5455d5f355533d509c22da1c_0.png?Expires=1768003200&Signature=RlLRllosRBxyWRQQ2c3jsGEUgcBHZFiroI6WTwrbQrXKf~KZr5zE~YTZ8YMKjpsZQeWp5ujsOKpoFKDsvl~634pqLIelSgkE0pEoX1llxr4MQUJrad53M~V2pPWLZLPsJ70azxifvUrm9TRl7yLXVHZtEW7mGLAoHwox9w2MCCjAuhR55r3~ixvdlGb89gQ4F8BSsn~rOF8kyAXWnRBFn3Wj9N5iUxmBSAz7lFjh2Dw~Rru~61UlLEqq~eCuTc3q5a3Q2tiQAGkk7rhvLF-X22WPVV00U454N5Xm5ifgsvAlu8Skr7EJh3OmHbvOAS96lpZrfshkD5U8VjAo6A-72A__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "QmFkZ2UtMzAwMDAwMA=="
+                },
+                {
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/991dc4c33571254b65627fbf8669f10550ab612a9ae7eade56112b877fe48e2a_0.png?Expires=1768003200&Signature=fit0zEanjATDGR~ghfNnnv51enwUXVkGPX~TxpuN40tS9XhjtFKiAiFG8iR5MbNnwBwZ6HxJpKLBjRtSyVEWC9hCbhC5HO~St91RcCF7g5Mqpb5MEL6W0bEdRJJhUtlGuORwkXSV5jzyGEDzyDSaFgkRw-dxDe6TypeMn4W~UN79w-BqNqn3m72i-2RsqP99yyWLrHHJkKcbErQDZgfGt6vNVvfubBIHIFxV3gkEJBUuR6If2W0c5xCp~2fgXrcrOVk43lfKq22xsCvI6E7McWUEMriIUV7h2Jy1CrZi4qtdGKZ5i1Vm32-6QEbp5NpbF2BxJDEjQhzJzPseK16g1g__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "QmFkZ2UtNjAwMDEwMg=="
+                },
+                {
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/5d2830d527f3380de9438cb75fd495bb12ea3cbb511da3e27ca89c13dcd1c59d_0.png?Expires=1768003200&Signature=m-hoaF-KUQiWHl1rUFTIybO0WTKLl-SegWUiGRB1ZUu3fbuCsuVFMBXKZqZ-06Fy0pFud6kMT4~ccfS0-E6jxAyI22eCrJUbrModU9PSoWmeKQxYNKvQffNkZ7YqOwCA6WgeCeU8KvTZfwa5DJOP8Qr-PecCPzWgOp2Mjv4xPq0CG511q7rn1-Le~e~xwfQW9Vf9Zb1RKok6lnQMdayL8jqbyAxBBHFy68fzuJQ2iwgoqO5Bdia8XkwkOw8zDQteJzXibnEOKCDnfPOZGps-f7r9hZy1zZn4IwPhedk~iMDvjGU33Np2uoyK851RSTL6E6LG3~CDz0vyXBd7bTqdDg__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "QmFkZ2UtMjkwMDAwMA=="
+                }
+              ],
+              "background": {
+                "textColor": {
+                  "a": 1.0,
+                  "b": 0.0117647098,
+                  "g": 0.0156862792,
+                  "r": 0.0117647098
+                },
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/00bd39e9a9d919d5dff9f1666598d8bde6ed2507a17e33987a9b2afdefbb4461_0.png?Expires=1768003200&Signature=OrndErzdjcjnNXdskIaw2pxCI9BLv55bCjjsw6sP1vElyjfHxPRkLqOXh-5Y59hgg1u6a6PzuA0qvSXlN5w7Gkb6PpNW4KVbZLUann1NGLaxkFTHVRpOEVnbMNmnuuYMQ9JuMv4O3YPscTivxieEKZ-MMw5f6sxW1rEenf3WR8rYToVHc8kZUEc5uJ-~2oxuc436QtzZsvUcfqBGemDzRH64VskIkMahvLqJwT4uGPdXlFSIgVZ1up6j48ww-5dD27o-mKCAGnJH0JDuQvluT9cP3s~E8sE-oEp544REyvAL7UgSofW8cnH5~8pcza9Yeyv60MoUzvK~lxK9gKe0XQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "TmFtZXBsYXRlQmFja2dyb3VuZC04NTM="
+              }
+            },
+            "headGear": {
+              "name": "指揮官帽 複製",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/eb95b912a8f170ad78494807ec088346f04cfeb4a7da15d04a50e7cfec216a2b_1.png?Expires=1768003200&Signature=U3hEilXxTHqyB3gXJA75VVp0EuYzpV0X0hA7WQpq8cZ7qpOJsb4zwJu9sN9dvRf89C6E0W5erLYt4zMrqWkXSHFxJ6j5Ul5eVxGLSg5ixGPB8IOKGh2oNUDiV4CfVubOK6pnChgBd5j0FAKKAOkulUwEbUMktEXU9F1Ptoc8nLc5K8qyErY8GO8BKZIzZ~LVoJndlfTlOGGPpStyhCv~L~aGOglMdQS6VKE~ps1eknofd6NJN6UgbaUJzr~mlDSOsEeZI7ZS24WTTNH-n0lDFLFeQFenZPuhh3dijBwpTTF4XJTK9h3w6MzfZDtVHKB1drTv0P2ZdbpJ5wVoGMqlJg__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "HeadGear",
+              "primaryGearPower": {
+                "name": "減輕對手墨汁影響",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/db36f7e89194ed642f53465abfa449669031a66d7538135c703d3f7d41f99c0d_0.png?Expires=1768003200&Signature=sqozX7oO1t6JR7q96iEKyAMRVKzSIxw7chPKNCOzy~g-pdiABselHPkWiCyRwtEquUtGHtE3fdzC~i8AkKu4t1OlHyJcCt5Y-OvTtScVu~QeAus52uKsj9MiJAAIujIkTSl4v45RCVUz8DyfQGutLf-cLvWf3SdpcopW8zaCka4p0wFgfD9ptcD92XekFYaPoUiBypvZn1kXTJVaQHRb1u7UEgAY5budiRQDlq0e~CoQ735Nv71DRBpFHC9BGm8S7or5Cvwvhf3alINoeqpVfM4kTTaMF04u-F1ezJNRN8F5Bp0Y-WGEXk4nnVX6Ex5R9mNDDyFY2WhcXoaE8rk1Dg__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/eb95b912a8f170ad78494807ec088346f04cfeb4a7da15d04a50e7cfec216a2b_0.png?Expires=1768003200&Signature=qBUNYCrfUuvR3bo9x3x0eFL7ZDyvKDKgoccvxmUFk64Zx7jJgtFMIAyYk87rICvpp2gxqZ2S-gBv~AqNpju2vEJJ8Ppbri5sZd0GtozYugBMN9W8kEO05J5exj17OY1VuGey7NAwWQnqQBB7o5cuatHCVyTGnm2BQykc~W9T0SA6CcFwNkM0gLTyrmtjZhPv~WlIQ2Xpdldp4~Dl1EV2OvULbjGN5GiKkh1X4wckTZbt0jL0XA4JFTqN7nSZAUbpVcRt9PkzaeTZ4-ddNH7fiHANdnBlERZW7a4uYA1s8WLB-Y37JyIEV6o5VKhTgJYJe831af4cogRuBspnfSV6Nw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "魚乾製造",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/112e21dbefee84b78c957fb7d520986a2a783a9b6656a45342aa86fb837de005_0.png?Expires=1768003200&Signature=KeDSRsLxWro4kKKvEBlp61yk~YFEoAoOPhQ3apnUTsH7bGQ8~n86qBY7TfaxMXTjaq1beRoa~ugPTG5Z6Pf0gqBelDtEF8qRYbmOQtSGt6Ys5Vm4Q6oMqRcowG5mMgg~cQ5pA6iY3JAZKrZyI~ITtYQP9jOYlPrNdMcFd7wiy~s9vc9wMOexN5QwjaMi0nPliY8QmY4jidUvcoxVP8B2d6LF7WsyjFw8DPa6D~eHx4UV9ZdAHXcoI~kBm1MJ7KLjsavd1ql07bwT4iUHjV0qNad7O~ZSc17cNmKlFgsr1nDBy9DFxiKTI03GzMtWaAsTPMzGnmVSyhRVKzs1y0pi1A__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTg="
+              }
+            },
+            "clothingGear": {
+              "name": "指揮官披風 複製",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/bf2f3b8d338dba81e4260c3154d52b524346c6950278ae7fe574558335ae517d_1.png?Expires=1768003200&Signature=aUf215Ge1Okfz9lX70UxgXLovguFdIJ5EqKmzQ8KabDUET0PW-6dkoRftKD7yFB2xatQ5yj12ZJ62PUg7L5l3Cz6Ogl4BtD9eqFcUsJzdklirk3q7oIualAgpbetedwciHhL~vm0QuadJGgGx68bRZrzCBRqRCaVpf6fXRLLZHbGAzZmv69uwWX08sBSvAWsQQpmlkCMSTVvbInBOeIdy~zfzCspY05VbKrSeqZkZkZNPJP6d44b-Ws03a7lIsCrh~hFakZCxOIRxu9g2pk4VU3ErZJLXegTmLbwzAVWlZB-bvtud5ikOnMxDhhkZ4D~tXRphDI6EoBpUqc6OKobNw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "ClothingGear",
+              "primaryGearPower": {
+                "name": "魷魚忍者",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/2c0ef71abfb3efe0e67ab981fc9cd46efddcaf93e6e20da96980079f8509d05d_0.png?Expires=1768003200&Signature=nRdk-V1zm11yV6goiAvMFX1Ojfn4-JM4woDG3j-5ublSENBUTLh-4tEEtB2ptwYc6zO6nb-5GYItPVvsBG2o0UOw9WbHolPJN4UBTXYSMV8DlVCZlirGSilixD5aPO40~8Hix~0D7haG1FWeSnDhhh1n3ofk1c~-QRyJ0QDTCLCgt9bs9b~tHKiwrPYRaOSkTNw6L8wez-Tei71HgIURpAnRIPmwckGUiSkqxXDxzUx16gENvrlfATeC4Apfbuxc7NNcy-q0Jo0HxHT5ll47HZobY8MaI~Jg-KWt1Xav3vNkFzL0fUB5yPoS7wkGbQ1Mwl28hJNsgEcbgnvoraeuBw__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/bf2f3b8d338dba81e4260c3154d52b524346c6950278ae7fe574558335ae517d_0.png?Expires=1768003200&Signature=gyE0UXajWPXK30XiY~WaY7q5C3lSzZGAnRs2QUEDGSceCTYkZl-dbMXDLywbl-O9OT2TZ6IH~zqfgqONVozgq5G8tRQUF4gSJrf~xUxnT12Tx2l5wlmUIB~p1h15B5Glu52kpz6j2wnwIQwhT3KawzbSbH1qnmye7PwFW~uK2mgJpOkmdgK27fB4panRhmwGK44aMWitVkb2odL86gYPFcZJzmY1nTp6HMuFBJY373IPhI6g4dORiVQFCy3oxF5ZIO8a3PF1unHsJVQPNaG0jAGjiAcV-iEw~j7pL~5XY1DeogErwtm84Nl-oAHrPvDKZ0xNtyMCFiLTdIPhJEzsWw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "魚乾製造",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/112e21dbefee84b78c957fb7d520986a2a783a9b6656a45342aa86fb837de005_0.png?Expires=1768003200&Signature=KeDSRsLxWro4kKKvEBlp61yk~YFEoAoOPhQ3apnUTsH7bGQ8~n86qBY7TfaxMXTjaq1beRoa~ugPTG5Z6Pf0gqBelDtEF8qRYbmOQtSGt6Ys5Vm4Q6oMqRcowG5mMgg~cQ5pA6iY3JAZKrZyI~ITtYQP9jOYlPrNdMcFd7wiy~s9vc9wMOexN5QwjaMi0nPliY8QmY4jidUvcoxVP8B2d6LF7WsyjFw8DPa6D~eHx4UV9ZdAHXcoI~kBm1MJ7KLjsavd1ql07bwT4iUHjV0qNad7O~ZSc17cNmKlFgsr1nDBy9DFxiKTI03GzMtWaAsTPMzGnmVSyhRVKzs1y0pi1A__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTg="
+              }
+            },
+            "shoesGear": {
+              "name": "指揮官人字拖 複製",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/b5084a9d24bf193c5c6a1288c707bc5fb687f056bad1e330cb0e01c41ba9a9b0_1.png?Expires=1768003200&Signature=SBZK0anCZji4HigkIwgj5FfAhtXWpQyi2IPrUAQimzGwGR5Iv84Log5v6dAr~ugBcOcIW0LrmcEsM9fQAZTTmyvGAb32oj6JYMbO0Z1grj5xt0woMc7ikv~ncUMZFPKyCMnV630DWxBpOSjOnmeQAupE0zny0iLzZTH8DaQB4qIXlRPwlJocoBipfsnb7T~FNttCknjnRAv61K3dMXpsdOGSd3DKsqvlkco4-W7oohQLpHyIFBmFWVaGVMZukWnGSYgGWdpaSv09WRsqHPCelGZVikg8Ec5VMj1leNkRu9EWT83FpLmwJbLr6kVXFs7sfwiGhyizrFSMDhlEK4b3Pw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "ShoesGear",
+              "primaryGearPower": {
+                "name": "提升特殊武器性能",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/fba267bd56f536253a6bcce1e919d8a48c2b793c1b554ac968af8d2068b22cab_0.png?Expires=1768003200&Signature=NYa2ocwBePcrJm0YpRVlGcbcqFrNzt1KP2Yovgh1AApWH4e9FlylV9-NzboJ4nIK3bfuSPnEjltNjPLnat0LRBU~PACh4gFiQWAIFqURKPymuPmZTFDAI2D0MnZxV92DsMj9m9shfDVtmW1hPj~pqKJnuBYPdnHR8fAIFNszltP0LbBDwS0fMmwE-MRzsu3bSh2uCSQnSBtFkRTUyLrFbw1CMlbZ-Qkiyu5m84PvUCu2-eAbB1yGdcrFZn0yzVpDN2K5ELtcsuwtoj7LzeiYbnNWWH4K7UNTaBrsY47feZrsyGn~7PWsUvqpZxwe1Pl1WZ8W1uvv9x9mRHrDlF7fzA__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/b5084a9d24bf193c5c6a1288c707bc5fb687f056bad1e330cb0e01c41ba9a9b0_0.png?Expires=1768003200&Signature=rUEBmMHT~4Xs8lTUHN9ylT~~y4j9prpGVFFXbDY5Ihx68KBBF-Q1TIQetZh9T1WpqXkV1MxKI-v7qd4pwIgmbLYjrEiFyll8CrPP~71whTqVh2VM~IQz~2fStt9D6ttG~pAsW2LEHINZTY~R2DYrTNFNUZbwHXxg9~fUu62Z7O8Mw~ainWlTAS86rB1o8BQUJ~rYNwarlpGDENeW~MrqmDrE0svL~zEtWGQxkiyf1QcQnZpjP5iu9RtQmYvuHPw3x5kU4OYW9TJx6bySloalyTiFnqo59oRm2Wk~v3JhXxV2Mtz2vFEpzLtQ51VDlcIxzBqj8sc5J48KSjfDXAmzIQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "魚乾製造",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/112e21dbefee84b78c957fb7d520986a2a783a9b6656a45342aa86fb837de005_0.png?Expires=1768003200&Signature=KeDSRsLxWro4kKKvEBlp61yk~YFEoAoOPhQ3apnUTsH7bGQ8~n86qBY7TfaxMXTjaq1beRoa~ugPTG5Z6Pf0gqBelDtEF8qRYbmOQtSGt6Ys5Vm4Q6oMqRcowG5mMgg~cQ5pA6iY3JAZKrZyI~ITtYQP9jOYlPrNdMcFd7wiy~s9vc9wMOexN5QwjaMi0nPliY8QmY4jidUvcoxVP8B2d6LF7WsyjFw8DPa6D~eHx4UV9ZdAHXcoI~kBm1MJ7KLjsavd1ql07bwT4iUHjV0qNad7O~ZSc17cNmKlFgsr1nDBy9DFxiKTI03GzMtWaAsTPMzGnmVSyhRVKzs1y0pi1A__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTg="
+              }
+            },
+            "paint": 414,
+            "result": {
+              "kill": 9,
+              "death": 1,
+              "assist": 1,
+              "special": 1,
+              "noroshiTry": null
+            },
+            "crown": false,
+            "festDragonCert": "NONE"
+          },
+          {
+            "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LWFpZXNjNHFkdGhhZHYycG5hMnRt",
+            "name": "メロンパン",
+            "callSign": null,
+            "isMyself": false,
+            "byname": "十路通高架橋下的貓",
+            "weapon": {
+              "name": "濺鍍槍",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/f1c8fc32bd90fc9258dc17e9f9bcfd5e6498f6e283709bf1896b78193b8e39e9_1.png?Expires=1768003200&Signature=g1nTgBYzOhPv8nY2aIyHTUoWm2sIACLKSx1fpl~ktK7YaoOD1~WrAuppL189gPK80sLC-HVaJ~BqktkChqhFBhmu1yMarF7FSByAc7pocCOcHvedkUM2PDp506gFuOWJjA4hcWpFa5-YNtDoGphiwJNqFm689aA0yuxUoXNuKC3~HzgsDk3Yo4cj6ukWHh7tcjIni3P5iHRtZoaJbd6oLZgD1aFV8owHj-V8g1mSKMGr3JLgkA9JssPrxIz0PvHFuLEt74BLV9q1jwmpKTVZRy37e5Z5k2WzUlZUYtO8LKNXjRa7hK4EgGyUrbCIShJ6poNFkGgK3LikUamE~HUtRw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "specialWeapon": {
+                "maskingImage": {
+                  "width": 100,
+                  "height": 100,
+                  "maskImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/mask/6ab41101824b509b1ce193d453b89dd0a29beb62e2e8c1203caa6f89ba0975fa_4.png?Expires=1768003200&Signature=ZJ~Q3cC35a8vZhHLCRJft9CQUgb~00zVaVt60AGuvk49g0hReLNbpMScpKLBFRmeWo7NNfVcBqIc5G3snG4slKOSrMuJCNoH0~I1MU9JSfKo8Ih36iOMaRYenntsxK-24xHniXMcYcY~K6F8r5iaqALpZ2TdpPLCJ4b5GoNpAKr8U7zzyMGqLcgzFfWcrQmXDPPs5RhRKFKAnux7c22QzzilNzGKVHhpMuaP4fD4~nKMJ1YzuaiINVaXo0p2CS4~WLB0I5~-urbTiGLjrSOvIdixhXbEw74v7wN57vU1aQpjCsrf7NmI03VkI9Dg7kGJUhMQzfAGJbcrWgS~jLHOqQ__&Key-Pair-Id=KNBS2THMRC385",
+                  "overlayImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/overlay/6ab41101824b509b1ce193d453b89dd0a29beb62e2e8c1203caa6f89ba0975fa_5.png?Expires=1768003200&Signature=eIancV3XmFUeQAseb3rkFFaGI1NWibjGEA2A83Es02pVKAddseHK7ba0qZYK-fV15rDhWHH-~bsxSCgTtjGFNa5Xrd7zdjQnrR1QgpKS9KG9GJuTni0X-BwaE1z9LXgr~dZOE9UKZQQntee66CyzPyCeaHZ6scA7-hhX23-0-LN8VQOqBhYTeOC0TxA8618ODGJ04ubLvceVnpBvjXm0Y4yCw7Va0QJGlU7IpQhtLtLclsT5gNTcDhMpR3qm7boh3RlsFZ0vaKbY5Nmf5Wrvbe-FJ4VVeK9kNnAEr6ucqAQ~YMiMckXc5ofE94vtmuXpE4xsCW6z31hwKhrf7RMr7Q__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "U3BlY2lhbFdlYXBvbi0xNQ==",
+                "name": "能量站",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/blue/6ab41101824b509b1ce193d453b89dd0a29beb62e2e8c1203caa6f89ba0975fa_0.png?Expires=1768003200&Signature=u7k8QqPuPe~ttkJVJbxFsVA-UkKSK7CzjYkbvZu1Fa~atTWdHPFEZbUmGkLgn2GBokE~~nMEFrbjhqovbzEofuPNlmLW8c9YrR~KvKjiP6MAo8dNLXIW~4iIDJEUAW6Fm1FO2uOMidbAAUeUz9l3hEc9E36Qya6h3pPazdE~wqYnnoMKgGLF4XwNKiR8ebpkNgiKadXV4XncT2U36pyw3Q8q0nx9abIWMx8uQYhu13m~UxJ7a7sY-wW3b-~bono-Gf5D5UhLng-d60dS6D3ZgCXLLN1yIt8YYDLBhQUplv3qyYhvp9HJLdu2ikFMy5wz1N2bVztUe-Pj9KS1wULmUA__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "id": "V2VhcG9uLTUwMDA=",
+              "image3d": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/f1c8fc32bd90fc9258dc17e9f9bcfd5e6498f6e283709bf1896b78193b8e39e9_2.png?Expires=1768003200&Signature=JSnH2kNCFIJhv77B1Eh8-yDS2lzkajlULvBylXPr0c46qN4CLEg72hjHOnyFNxaHykxoRKOkUWDS9Z5w4RRpzT-b6qJlmxNtcm9vbdOPzRYW6DsrfEzX5wydmHv86cs6n-N9uf2vu3rXXsLlg4fMMie5AaxOws-7w27frxx42m7PcECV9qqWezFDmExf4MjJ4ejmIvjo3RMYFvjoOARc1QG21yODpIPbvSmhrf2YnUL6bj69pBTdgDuZd5MbpQ5V5pG83-kuoeK6EGG9Mpuas1i9-G01e0ul5sytt-hMKdNZi0qx3qHGqn3Vp6vZlg1cul4VxRsWRVnxYIRgcaGIjw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image2d": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/f1c8fc32bd90fc9258dc17e9f9bcfd5e6498f6e283709bf1896b78193b8e39e9_0.png?Expires=1768003200&Signature=CMuv2YcUKq5XuMbHOq9JmkhLqgxaPGO2JApWsWq2wiqx9Phb7zijSPyZByZ0c12IsYVkPNILmnp5nIcBZ~fUbVpdmDhS~cL18e9Zd4QpXnnT87lcXy1ZTYqMRBcdTdQXdPRJGBEvXtrQXqQLb7VhlNnBGxgLdjkC8~J3s3s4vVSxC0PkexIZEiuRh0CFGJZUFvA0kZIGnNu74ZFLk67pQDpkqdLEB6ZNIRHybB-OVe18HmW-sjtWZeQ5dvWKMUWy5ZBKzmbhy-7L55zu5tCDtovIVB4My4YrRC4z6i-XUjHTPB9wjhODSoKJEd3BRF-QUM5lRDoW58ICEvl-tvfcnQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image3dThumbnail": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/f1c8fc32bd90fc9258dc17e9f9bcfd5e6498f6e283709bf1896b78193b8e39e9_3.png?Expires=1768003200&Signature=NXbXlolbKD2uaWQazFPDsyuisOsiiNoirO-L1mGrY-NfDNpaxpibXownVZHdDiLku9Dp3MSbkjOmbiBbPHDsM8GW6PJA5OZf9pobm7GY8nw3oKbxn0y~BEKGRoTCEazOpzc1xBzaaYj-u-dOeg~H~uieExuU~G9aAOg~rj63J8Y3haxw-85PTLa36bBIGgsHku9A2i8brX~LWTuEvACCD~7miTaAlOBcpwxhddlvGPvMgKsDtec~fecFJkmrOsDLDmjl1vBVYik1ot-aTPIb0STfUdsRPoEotROYkclYyJt4LBdn4-V20AJJS43rXo-hPqulnGfVbS8ppIjIuNhQjQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image2dThumbnail": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/f1c8fc32bd90fc9258dc17e9f9bcfd5e6498f6e283709bf1896b78193b8e39e9_1.png?Expires=1768003200&Signature=g1nTgBYzOhPv8nY2aIyHTUoWm2sIACLKSx1fpl~ktK7YaoOD1~WrAuppL189gPK80sLC-HVaJ~BqktkChqhFBhmu1yMarF7FSByAc7pocCOcHvedkUM2PDp506gFuOWJjA4hcWpFa5-YNtDoGphiwJNqFm689aA0yuxUoXNuKC3~HzgsDk3Yo4cj6ukWHh7tcjIni3P5iHRtZoaJbd6oLZgD1aFV8owHj-V8g1mSKMGr3JLgkA9JssPrxIz0PvHFuLEt74BLV9q1jwmpKTVZRy37e5Z5k2WzUlZUYtO8LKNXjRa7hK4EgGyUrbCIShJ6poNFkGgK3LikUamE~HUtRw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "subWeapon": {
+                "name": "跳躍信標",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/sub_img/blue/c0973e9afb7dacf07ec29ee321072f4f8cdbec6aab6245ef6a37e3e381451d1e_0.png?Expires=1768003200&Signature=qz-GBYU20ouSjDetzuh4~AujOPvOTTz4Kw5CnWq8bX0W-eoq0kjGjKnyMqugfzCsoPhzyTXZM7COm8ozus9DKQRAqh2vjHxFXoRW1PZm1vI-SZpcqAKbFQux9k~TDZ1U-LzNYuqb~einmmZrSw0vOO2sC6stNPD1vmohslABjGwUbE2QpYdvp84DOTcx8f0yr5F8A1HczpdDw2iynRh9LMDAJ1tlHc9aTe7SI1M6-Ga~ksC-30nkUkOC1giGVGJoWheM8SBt2rR6lU8iXUVHT4lSz3FIHLnzO5szobZ4Eul0Y20WUD2mcgujallpWFOUBYqyTW3Jv8GNhfCXZpZpyA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "U3ViV2VhcG9uLTg="
+              }
+            },
+            "species": "INKLING",
+            "__isPlayer": "VsPlayer",
+            "nameId": "12952",
+            "nameplate": {
+              "badges": [
+                null,
+                null,
+                null
+              ],
+              "background": {
+                "textColor": {
+                  "a": 1.0,
+                  "b": 1.0,
+                  "g": 1.0,
+                  "r": 1.0
+                },
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/4a6fcee9ca6eb0a02067560966b3e508a68ff05cf8d724605ab558705eb3b0ac_0.png?Expires=1768003200&Signature=NByCjjVzBB3aZBq10GGSsdOvoucSNGBYRwMZO3z0WIN43LUOtupvN0UAzQ7sxqbZ038gXq1jPiGhPW-GbAMmrgza~8IvBSbbierPwwKhYK9D-DoGPYLQfzkKJKn19OwO2WcKXxYm6vz5Z7a9CsE7HSo78GlffvnZmgg4kBsDoOPKx5brIYlWc4shw1v9lHfOas6PtimY1ZrbPO-PVBeIEmvxghIByIuNemun6Vd3lqGGORBd0l-vzixNkMgabQAQCCbhGYl3mFwVfTHv6O-kMBH4F6Ii8Yc4QN~QoPCUXLBs3667pzg~RR5gkBNxY~Lyh7~aMfaWslOmcOIZu2NQSQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "TmFtZXBsYXRlQmFja2dyb3VuZC0xNTAxOQ=="
+              }
+            },
+            "headGear": {
+              "name": "世界級MC皇冠",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/82514be11d396401ca8a01e92e1a93ea23b2e3c28612d5c0621b54d9e5d9ce16_1.png?Expires=1768003200&Signature=m3H7SKJEpEGwHj1Ey9gyqNhwC~xUMRkqOOzOk8lRu5LqenGlQlzSI1nanLsX-EjYFZoaQmMGFMu1hPCI4aqpCupKHnxlaVxGlnprRPiORI2h24TkERz1sN3Nj7nKRrxWHl4tmJhJmHQ1wil2udJT9hYPmzGaEEqegZ5mgvQf5dAKomBjtgAoP0Zhn~WIU~SJ8tc2~5apK7YRe~wPkWqNVRv0wZxUaUD4aaTmiiCLif6fpaQcAtT~uhcl8L4BXnqmK95mAzHdk9WnLTt-EL~58PYNyIVSLecyk4VL8K8xE~j~XT86~mT1rW5LqfE~SY7KzGNSMHvPuqHGN31jtLLrlw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "HeadGear",
+              "primaryGearPower": {
+                "name": "提升墨汁回復力",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/29b845ea895b931bfaf895e0161aeb47166cbf05f94f04601769c885d019073b_0.png?Expires=1768003200&Signature=BT5mh7vBFewcuJL9klxgmCfHZtOsKS-W~P6zqP9RjMrkK5WukUHh9C4TvWZzR4kt3c3qVODBXbYABWX6wtYLDYFgiOuCOz1lX9DwkM50z4i~eva679oL3ZeF7YViSdfWZ3aClYQKC7QZS67vQaUH8p0lOw7YzsirXmYuc5M4xsrgrQrrnUNuae1L4zpq~oDlQmlalPR0gfO~a3inWw5CEYonhatVg8Gjnctw5aUp7he0xS8lgcX8LuaSXvnrDX1MRxkycHlxQI7uXgeILeIzcaWJzS01F4uDvPZ7TxqDGMheByu2MMJBKfrWNSVpSTq7pz4ETcPvzbFokU1AGMsi9A__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/82514be11d396401ca8a01e92e1a93ea23b2e3c28612d5c0621b54d9e5d9ce16_0.png?Expires=1768003200&Signature=THGt3Aj6MC41DqiRdEMvKXG3JU-HzvtQf1KXyQtLSZVV5365x1hCQMJHG9SI04FjLx57Cil1LlUX1bWO4IbkKJCtkqktTWP1UEmf1TFIEbnb5~oqNCEhpe2jCAF9yYWtsiH3Q4lf9BReLgYJYhyASqkevg8d7Dgzg7u7FvQJMrrgYyKdANIWx-Tqpb5GmVLfcDieHXkkVvnRKRwkEYsesu~hNcZXTiVbJ0s0BJuyDxWZYUql1yv8l2qk6HX~CmR9F6uIuGd6uH8z~ZcVl3aaIRLnudUvEqVzlJORv85NhkSdZGM~0IXXyA-ibQyc-5oPAYMwypT2-9LxOu6bSD394w__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "clothingGear": {
+              "name": "世界級MC羽絨衣",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/9575d16fe8e3f973e55ebbad41750cc4aeebc92e975b689d4d7f12f886b6bfba_1.png?Expires=1768003200&Signature=tC0TxMg8h7wgZAm01hfmToHnebyKyZ-o3t4~5vyMG0ouE0Uo1GsrNUR~LX6jYy3uVmrBg1ZVU9v7MwRsf6VOn2jIBRTCs-bniq~XEbwHYWBU7TZgcnlU0OU6Qsj1a5zBHlSbpJJBw~BVWFOBs9RIc07juAmjKBdaChbVHUesOqNopAtB7PP4qQ~Uao9ABbeGkx39u~hydTYvvD-j-VKp70qkODJMToaOUX31fy-FpoBzM1lGq6hZwe17Yu~rNKCaojgt9UD66EYJp6KH4YOk5kMGmYItybDPf5hTOaxbmZo9-v1yOni39X7-r~BbMoFLVi78XN~9RVEk7MP7NMX9ng__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "ClothingGear",
+              "primaryGearPower": {
+                "name": "提升次要武器性能",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/9df9825e470e00727aa1009c4418cf0ace58e1e529dab9a7c1787309bb25f327_0.png?Expires=1768003200&Signature=QOWTHOBAA2m4NLH~DOsLCKwAuKR5ubhPBHiow3ybeAJCj~phr-wK2p2q~UAMBV5ZuWgl4e8Sb98qX9EgllQQ3kYqOP83dhv10kPzCPrk-FsQ74nq8JHDmXO1hTcdmp-ysiCSr1TxJh7OuNhx~bCnpjw4vZO61ZPPBdqk-ve1ngivukBeDFtyXsXNE-nVmjKYAEE13EovPUV4kYNNzZ6GB361VvtwybrQ2mYZn5GBfwi-uEKc9Lr5917m5sMfIMLTuaKRNG8I5XLammoi4WEZn-AdVwwcAuf4eTHMuZ8j-Drs3OnKxl4L2W7JRgJVDRwZh44nVfUT6N9pHYKwi0xy1w__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/9575d16fe8e3f973e55ebbad41750cc4aeebc92e975b689d4d7f12f886b6bfba_0.png?Expires=1768003200&Signature=AmF1AFjWzjeJZ3-GGzHns2~uBU2r2octjd45hnNl2p~XBA9DR0UtZZmwLArycGLkvQangzX-lkBcwbGaygp-GmH3JsEhOGUDXzkvHUOJMyCqr6BzytTpLM86A1vR1pjq8FBb9m6cBbWuR1v2vnNlWyoolcT8YDTC9RNgUSjsAc7JAFID4zygtSG1gY3rLz3AUVgo8tj~gtt4KS8CEy53mOVIhffYWyMTonCelWfavH6hAIa6~W5tAki0Mvki6QOkyXqZrW0~J4KxApxux0SaQxGX5ttRE9utzYKhP~MpbKC-2WoFjKZsxfoRY-qhymNBUU3wuy-PHoMmVy~gwRzEaA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "shoesGear": {
+              "name": "世界級MC靴子",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/ddaca5d605e342b0ff2948c0a055cce4aef1af28636e809aa91356f3b7cc1fa3_1.png?Expires=1768003200&Signature=e5avm9rZ5MDICWHsUNPMkPF67bg1vIk~UvxJtGgtfj91DwWhX3FWDXN4v71P9XEY~6x09sju6C2xH8Nh0akTMvQW7Im2clhMHIm4pWxJWr2b06drAGDPQJDQ7DWx7RHYY6rKizcw9voq6xYdlJK5Hz4YAaYEJ0SGZU27mmuY7RkvYEon~LQ-3cfmJHxRDdjfXv0YovzXvzkIFWcDW0msJiqNXKRLMndt1CbtDJMXm4W2s0p~wpF7TSg~fWEi4djbh2~kiYTrpO5ax~d4RY5wTkZHCJfj6zhO~VEc1Z4U0i5oqZQyRKd4B~LloYjyY-Vg070uQW5HgU4v~wad0EJcoQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "ShoesGear",
+              "primaryGearPower": {
+                "name": "縮短超級跳躍時間",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/138820ed46d68bdf2d7a21fb3f74621d8fc8c2a7cb6abe8d7c1a3d7c465108a7_0.png?Expires=1768003200&Signature=Uq~vh4xmVtn1iDRBoy-YwpOYJaIyWAuxSHq6hWG7-yp~vdn1w1Ivv6pAg~1N5Zbk81Pqo7YNoHHMACLNokhF8I4GNPD-I~99yaJSATpilptqgD7tSSILRU1P7xywxl8Dt7dcnDbEuLVguKOhFgNaDou0JaexihwrDcSEoEE6HBGAtZ2wgtTdjSmv6x2d1WCp2aQ0lfk1BbYccjvgUazRSsmmeD6qRPbV2AeyJIQdCHgZuRZda81aM2bApH3DWfGJNLOkQzys9aqZEGMK8tdqq3lmnwlGRrbi95G67iLAXOZfdDtLcrIWaYYhaQyuxsZwibSbWUSh5LrkwkGbZJSqNA__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/ddaca5d605e342b0ff2948c0a055cce4aef1af28636e809aa91356f3b7cc1fa3_0.png?Expires=1768003200&Signature=IgMfLWRNYazw9x5DD1-H~PZRy8wlhh~ssuSiME7op64CPWYZXzov9kFe0xxxJD6Od0XHyghyKi0-MMzOQLp64R6Uy1DBFW3bQD3R5Sp83RH7coaEpqbSyIg7hc7pI2P7eDeSWGBt-YO3M6JozzpkxcGGNhvvfKcnQXroKLUWb5YsaNscnEJEsC7lzZJxHd1-dQ6n6dCwCcKyHmsk8ThUkROz3t8~x20nFKW6YsalVPTbtQhxTaZD3Hiz5lH6qMgyk4Aj-syGbDbCD1c9Wool9pHbGdsRcslJ63j-s0U0VEnj3qPEpodVbUsBhTCHk3yUz1rAgZMT2gpbFTBgRRkeAQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "paint": 415,
+            "result": {
+              "kill": 4,
+              "death": 0,
+              "assist": 0,
+              "special": 1,
+              "noroshiTry": null
+            },
+            "crown": false,
+            "festDragonCert": "NONE"
+          },
+          {
+            "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LWFsNGp2ZTV6ejNjNDJpd3hqYzNt",
+            "name": "ゆオ　ネф",
+            "callSign": null,
+            "isMyself": false,
+            "byname": "大大吉的幸運兒",
+            "weapon": {
+              "name": "窄域標記槍GECK",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/2d2a4691a846b34d0d951794f972b31f6f9b9d0be94afc0b4b59acd248e17fa9_1.png?Expires=1768003200&Signature=j45aaUjLPirjD-crVoIaNs-H-feNdcC8cyPMhw4MnCT0rhbE8mJmSki1wo9nN~aUtuR1f9slkaHbdgEmEnhaK703z9cBa5YjQ5Hlf9Aa3UM3lUE8sH9IniamuUBAl2RNLmHoiTAcTYIFFmv-AXGK7MLq9uYdgKpsxlIL6MutPDOUTCZVMQsedJZYDazertqnDZU~MgXvZ7jxngKfJMRyZA9I1XnmwBMb0b-sHzMStHlEdk0BB0pl-khE1Jw43gcvZ6pfHwKgeMa3j17opB785-hYTnPcG8SlEAsXLysYUbfsttA0r4TRrzp7U1tvCp2TyGMtC~8zdm~9Mx5ePEO3cQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "specialWeapon": {
+                "maskingImage": {
+                  "width": 100,
+                  "height": 100,
+                  "maskImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/mask/d9b126010b2533dff88a86f311e68cb6858f905ef4d52fae5ddbf757332c49a2_4.png?Expires=1768003200&Signature=XsXFVRE1Zt2j4-052rh0NxM540Iw3RGlHLscaAiHeHlVH81YH8ND2CgXO3xVKEiHCknUSa-dSqdRENR4OV5yJ6I~H46AIN201BdWe1dgX92ItU8ggTkQ~d89N6GIvO5w-5PJ~p7oU6GsCbG4G5LdMxIkyObKGlctJyYYLlGixiOUWLnySdIA8xNs5miQGcFYRdOdbye4dfecMlDpKk6yUrIkYMm9p~2xHoTqNSlYzzTr3uYSr5zdWnCq4G3zUmmzc1UhMB3qRL4fW8mgETgxOXn8wndEwqV7lUjn1vH8Fukc5kLzMy8Oj~sqUy-2xEy8OlbJ9B7kA4nm7Z-vHuGf4w__&Key-Pair-Id=KNBS2THMRC385",
+                  "overlayImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/overlay/d9b126010b2533dff88a86f311e68cb6858f905ef4d52fae5ddbf757332c49a2_5.png?Expires=1768003200&Signature=nxAoGAWDGlPPbiA9FzDkM6rLjgTaz902JAv~btYL3zSLCgOzBKTa9X1HJYcGrsENE5fAkkIsA7CZtvUepnxXKUexKDDe~~i4I0z5jQrX4Q9L6jEeLjAGZ6qkuRKLN1nDcZW7BoKBCNPMLv1efeKbMWu1arWxyJ5~3ZxZ1s4uDWCX2nMHBVgJcdVZP9EM-bwsaSl~8YE1J6gzOae1XSG0uMfHpQ8Cu8IAYndGEzNLB7Wx9yMy~tUbnC5ARXNVuHBDbyojXXyj2fBGLLNh0YTfGAVwwO181Iu1E3S-9ui-UpVabzfeu9sZ9ZliXVkB32qEduf~e54Z~GICQDQzyQbDvA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "U3BlY2lhbFdlYXBvbi01",
+                "name": "墨雨雲",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/blue/d9b126010b2533dff88a86f311e68cb6858f905ef4d52fae5ddbf757332c49a2_0.png?Expires=1768003200&Signature=E~uCVVBi0yG4ebfYHUSiRD6F5Q2E8B1yu-u-HlLf27dF1X4lbW547gkFv8NZZ76V-29pMfrCt7SL9h-4OdU-GgAme-uZY9MLrjZ4Ti2n8fBEjIFvdD9C1xjNLH18j6-9Hx67AHRftY-5R3MbtXlOHHTF7QT7W~QzWHSJIQVo~G0zm1dqDKs3iMdYsEN8OvDGWqQjdTPlK8gnj0k2ktSz2kbRvkDg9k2ukBZBP92d8YR3CY41VNH4qsBS-8tvaTuqhleDfxU5oBncfUEFK7FY5EDnIGywn9YTW6j21OTx5i9uHIYwfHXxA3FpMB3WyheN0CVJL-b7Pq4HF~I3HPjMTA__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "id": "V2VhcG9uLTIy",
+              "image3d": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/2d2a4691a846b34d0d951794f972b31f6f9b9d0be94afc0b4b59acd248e17fa9_2.png?Expires=1768003200&Signature=f~6Q2n2HSNi6J6WWPBm8CpmUFbon4MRyiqpqD0vv9xsLcIlhvhUj645DnFP6Zofw4ecHohkLHAj9jtWvwU50jerBl3X8CnPMETTxpaWmGCFcKs7OaG-7wuN3AsYzpFvk6ChOVr9uAVFn9JuBhK5Xl~29LEDpGDzMlTZ9zpoOz612OqsDCAmUBQRxAYW~EnNYVJcR7Id82W3FuqqJn3l8CyTKGD2YGjaVlsI6c3z~9~bnJptkCsn29a0g7CAoxfCyboR9CXIX1C95SZwO0Cxf0BfDA0uXFDwdlHcsDekLDMoUallwANY4FVS1w-wfMIcA8C7yTaADSBV~Skz3tGUPZw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image2d": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/2d2a4691a846b34d0d951794f972b31f6f9b9d0be94afc0b4b59acd248e17fa9_0.png?Expires=1768003200&Signature=XopgvaJXqDzRoXPtfsQ4mxgZAsfutVLpL~9~TfRDdOOKWd5POsICVqHm9U4pfBkL3HoRkGorqQveyxneJBfIo4IboWEna65Qirxjq6fIHLl6IOxicuOul164sZoyRgIdtt0pMjDhssxOGwn9weD7xVhu4j~-SAR3~6FzlE6RbRUrGHmYGLhS9JKbeTOlWbiko87PuDnZF~-VsDv5FZdJIoox8a395vLmhEmh1aK4N3eO7JhuenObfa8LObuReTnbIX0F-KxiZFCneAYwUYFSBULOi8dRt6YAXObQ0MmgrSTogCpReE3ibPE73HsN4TJHRlnJTZspJ8x4MlwJNJpVJQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image3dThumbnail": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/2d2a4691a846b34d0d951794f972b31f6f9b9d0be94afc0b4b59acd248e17fa9_3.png?Expires=1768003200&Signature=vsLwbC14sqIreXJph6N3e5bBmlK1YUr6m88skVSTPdIIdUHgaUE3R~Q2jhLbaEN8NIvQkgIxjwabDup9k4UkMpNxQ3r861-fCsiA37uvgxEyhmMUS28mjkO2lFphuPW2q9BMs4OJZ2taQO6dUT8395e3aTldJRJ-o2fC3rE9D0T5aysVZnsVRWFlEHjCzunhLHGKlwpnmJOfOwV0-dqL1aCXvtiVqqEv29TmoUPvyFbKiJWd2TL5uZoPqv7GDauMDUOljrX7BM35ykUtsylmU-jWMtgv4iZKrYW-~N5SVQ3CTbJo7uOmqkEFY7emu7p5u3k95uuffUIdlm44yX54Sw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image2dThumbnail": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/2d2a4691a846b34d0d951794f972b31f6f9b9d0be94afc0b4b59acd248e17fa9_1.png?Expires=1768003200&Signature=j45aaUjLPirjD-crVoIaNs-H-feNdcC8cyPMhw4MnCT0rhbE8mJmSki1wo9nN~aUtuR1f9slkaHbdgEmEnhaK703z9cBa5YjQ5Hlf9Aa3UM3lUE8sH9IniamuUBAl2RNLmHoiTAcTYIFFmv-AXGK7MLq9uYdgKpsxlIL6MutPDOUTCZVMQsedJZYDazertqnDZU~MgXvZ7jxngKfJMRyZA9I1XnmwBMb0b-sHzMStHlEdk0BB0pl-khE1Jw43gcvZ6pfHwKgeMa3j17opB785-hYTnPcG8SlEAsXLysYUbfsttA0r4TRrzp7U1tvCp2TyGMtC~8zdm~9Mx5ePEO3cQ__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "subWeapon": {
+                "name": "毒霧",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/sub_img/blue/bece19f4e32dc5a0d9099ab59691bf9a58ac8b7fbff7ea953827d95ca0fb1f90_0.png?Expires=1768003200&Signature=k-SFOI~NKyUsnwvwzvyyjGIs5DiKYPwtdR3F2WnY7uKWCEnciT-xLnblBUGXhy-M9hLU5wgmjbXEeUfEQadwUJ1DyWukZsmCo20ppA~iqid9i0cfJEqzgc3Km~ogVj0VmKHzeKg6d9zk7Fj71G7t0~rHc3YHgudni3ehkQZ8~HPJfolTjVqNkWTh8w~WXm-TLVRozPc-8mO7ZU2q0qe~IaLwzX0l09kYEnYrOD~GutHy-bVMwhrd77OQn7PoNoP4NrEdpsyl0szujG6ZWTQh6ybrpJYtZ0nC8uP1VZDSQp5ea6Rsj~U7VyZW3MiaepPOdAXCJ~EiX3D0SSnkJ4RHjA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "U3ViV2VhcG9uLTEx"
+              }
+            },
+            "species": "OCTOLING",
+            "__isPlayer": "VsPlayer",
+            "nameId": "8990",
+            "nameplate": {
+              "badges": [
+                null,
+                null,
+                null
+              ],
+              "background": {
+                "textColor": {
+                  "a": 1.0,
+                  "b": 0.0,
+                  "g": 0.0235300008,
+                  "r": 0.0588200018
+                },
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/15779330c03964fe31c21c111039b4146013be2fa9748c849e31dfae5c45c983_0.png?Expires=1768003200&Signature=sEqywxhX6wmtIgY9V1FkiyGd5iMAm81Ko8P7l4qZR11qyO7EtwlcfnxVQUjgBpZ3vqsNHoFYoJwHNjrusA0r3KZMp-7nU0CHJTQ9HuqKXMBbrOqUP60nlbHvpnIoGUBddMYZT7IY-E4zIwe6MEM6X0OLVJAhwisVKfJY9x~i139NrPS~Z-g9ObuH2-Cf3yzJyDsqgEEwKT9rUrx17gowTXlsL1Z6IzFbsmNu88N3LRAl7DtodO4hoyTQd-6inGQbAEriTCjFEt1JRyeeen3pIcPFpCNmuXnd5DhKu55MX28OKG6HrVEHFwqZUqnxSgAPGjTKQIQ4FfavTOSncjKC4w__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "TmFtZXBsYXRlQmFja2dyb3VuZC0xMDAwNg=="
+              }
+            },
+            "headGear": {
+              "name": "動力面罩",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/38b7b16aedd2c4bad86b8a2206e6c4e433d6bf083fb9671a4eef096e192a5ae3_1.png?Expires=1768003200&Signature=Fpjsl0YLi2gWd-1QR9dFXGwytuB6pbNCGu-x1B8tgPkaJO4-pXbuygLdzk7u1vMTU-D5B-E~urDQe4syrUcT5c9n2If5U86pFRoihPJMkNajAwmnMU8oAwnudYpHnNj6vxxTCmIrTT7wiZAwtbTtRrDKSRjEpGRNHhzyGrZJ307wU6yEFWxf6iDoMPYHplIOMOncHreBOXIpEf-l-jzyaWjNkO5B72EydLrCDxoKVRXi7bPBQPc6TXAUiUY4sua3Pba31chOMJ7-YDh4jJfbFT8GcpO5l1WPMXYIJ1ohn-VMIRAD~z1rFB-NxYwV7qnRp8CuiTrKfVR1HHfBkQtNXw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "HeadGear",
+              "primaryGearPower": {
+                "name": "減輕次要武器影響",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/664489b24e668ef1937bfc9a80a8cf9cf4927b1e16481fa48e7faee42122996d_0.png?Expires=1768003200&Signature=SbqlGfqfwvIiWOSDlR2RlHWSu5nJlL805oeMusNxwyI3EwK-P7IHa5emLYp~be6lzz9qFLingxTZvnyjE80T4c1A5wSf0rqAf-~hDbdsfyeE-hO1DESqAcOhca4ouC8-jPiG1-QZJYdCCqm-QeRl0QlqHwSY8k3OjTlY0jomJpDOw0bse8AoK7TPo97R38VafdP0g5LyjWOnh6SnuOmSgoac0p~P3KjaWu1pc0pHSDzZaYbmou-IKxge~0WFEyXniD8Ptna2V68GURTEm3sGDKOIwuFzUP~coIEWlMpowsBhPbJURLUDNa0paH~ILZIFVBl3Z8~3foyyZ9jlxXTAqA__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/38b7b16aedd2c4bad86b8a2206e6c4e433d6bf083fb9671a4eef096e192a5ae3_0.png?Expires=1768003200&Signature=loybajswQdpW~KNSluzZz90VFdeJbL5i5F-M7GJDIB8uNcQj5isBl8Y9ULMVGpVPKkJzUliQhCxs1ppGNk99umReyylpiTkZSh3~AMwR6PgM7wJJEAX1wtCRdc64VwPO5C22e42IpGQRFuAcFe8Po-fXY~hvNCcMFbau3lQJTDW1nTYJ5S020z0gr7iVa7ZqqUPdUuqb3I64~7lEjfJNGpR6JJOpLwElQB75IM7rgySIp5DU71lCOptZ6z48GGLcpHElos656jEWQhyLIE9eXC4DnJKvx180B-9QmLEU7TE2Ksj8R3A2fbjdQShcfOh4s6YSD8baq63m6JVxZ6Wzvw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "clothingGear": {
+              "name": "動力裝",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/53074eb0a77d3b6c45a928c28ca2c35934ccc1045283f5544f9299e2a2028c54_1.png?Expires=1768003200&Signature=F7tkxrtQ9jlgLipt~3xA-JlTJGQrlffPYelrmPPPBNjAYN1gfXR5zS8AnG~Ntlh8Yx8k28vP0GyYJQqzv6yoRXUziozkKGi0sa6def1qjQjxagO-tMfIHyueDJXbOmfN5tYFdkr0fbPEPGaHXU9tZJzyRmCFW~Kru0nKixwM3oSY2tfV3D4Y-KpI~eHo3rkAkW3JiJgi9c5uMhtU2Bf0TIzNTAIGpPEbulK-F~UXfd2OZxTZQfAzlJQfE6qEXcCR-TJAkUEhZ8DDyzux64WU3x66EJjLXnNgkAlyHEGlsWn4qLz3cLTvVl0W2-U8Ow5sZkMshclHGw0s3KN0c5zVWA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "ClothingGear",
+              "primaryGearPower": {
+                "name": "縮短復活時間",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/aaa9b7e95a61bfd869aaa9beb836c74f9b8d4e5d4186768a27d6e443c64f33ce_0.png?Expires=1768003200&Signature=enfxYCl0g1kBsULxZuYyJYKL7ZgIxW5MCACLO7J17ekwQtMvWlYT4KJBWWob70Dvm~jIe4cpxV7KvK8Mu0MMCyUqG6jPW67WskcLR7sGszs-mOhe8YRRub6jQHcChh~4t~xPDRAytNahv8k-xMh6hNGw9DxXE4Ev~H6P4h2YRWuomHG5Nwx6eI4TzI7~P45DmaafdA0xmkBjADrhZqfb-D7uOtgzP3GvluxHFYgRHvXt2tYq6mTsJ7oRQyKueHjAnQRPimELJEqNI6DIaA8EKVeMQMYW0lhcf8qNqadMwQwyeXnuVncA2k4JZwR8HUwPmXpePlsHNF94vNjFRIdNbg__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/53074eb0a77d3b6c45a928c28ca2c35934ccc1045283f5544f9299e2a2028c54_0.png?Expires=1768003200&Signature=Z2GngXsJFE~RJnh8znjwxZUspG8sXOk6gTTzNTKvTJc3CgwrqpdzFEIoG7~AFDGd4jNVFZQIGISGAkFh~NRT1m4i1tAo0z~tzwI45Nr-GEDiuuyDxnEuGMii3Fcxoaj6W878LNKNF2Zow1Qn0eDBXdrWzF11b7mCSGqf0XzBQ3vNYAiaz~6ujRO0FHWEd8bUrkwQuL46WR8WBcJtePAKLd1eUZOBMZVDOnxLxXT1JVTA8NSJ-a5cOLQHqBECNCah72ha6f5vN3KskRoNXYHgfvRkdU2zabtrGo5xCm5-RuU8DM4A2V~SDqOXzXo5JpuOKA4eyv4ww3NAY8a5KN1mHA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "shoesGear": {
+              "name": "動力靴",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/a079d3d7d9d451de195e5c8bd64a0562bec7cda1e01741d70c196b4b3d5c6279_1.png?Expires=1768003200&Signature=C~zgsKBqRMRpUIWfc-aJ8H3ke3YzhF7Q6j7LiVPQZut1Sqf22t2v~mbNFSAJpj1-c7qL1eLW6rgkeDK-6VeZGxlsLF7LzU4H5veZLgQ9PFIqkvDVBD40xCm3kbD-VTysfJSEEKcwVX48-iUzp9DNpOe14uOHADtsu49Z~ktdaHydxYYaQi6MVJnsxl7sdHoJA14~VcIjzUphQP2baJpwfP663Nl9Ufj5NKxtwgYxMCO0chabyz53JqFJBayxnKlKhXFY0mlhKMo5MkGdDaAAkw2fJ3xgdiXCvlpB4isbXtpknolTDRlQSdMYY0AG5wZne6hhLaHuANClne7n-vEZFw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "ShoesGear",
+              "primaryGearPower": {
+                "name": "提升墨汁效率（主要武器）",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png?Expires=1768003200&Signature=FhGZjzVdgE8lFDJ-we7E2kUn9tMINlvI5h0Fz2GD3OD0TDs2eaIgourRouuSRhvERhKX8pZNR~0A3MqCH9gwf-Jm7twDWKN0xmqsbPD0uWHVJ~HXJKPHqzsjSgyD5qNVSb-iLcRJiVTds5wuwgcesuR5RxtwoeuAJlTN-SSYQIKjiSBHXpkdaGx~WBliqqTAPh1E8mQk~gO-7BT7UYa2PpduLoUM2ROZtQ~qCicfFocBxo-ed5lo3cRMoMFzBDBOeX8rIqLn~ZWJn90hm46UbwBL9zlsIgZ5NWsiF7fHrz-T4q6BNlS9YRQq-h65xHn3LmgbcU0whWSDsasPSUqnxw__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/a079d3d7d9d451de195e5c8bd64a0562bec7cda1e01741d70c196b4b3d5c6279_0.png?Expires=1768003200&Signature=r1HLYyTOsizaEp1JMDxW7NdmicNJWYA~Qx255dVovYr7ys62Hd~cisAdUrIUFdf9UxqlRf~bcHZpV17kdLUlpeP0Bgm2nVHRuAEOwIbPDDkolt8cqelnxIODVbGM0B59mR9RShWeAq0xjovxY0ME5xVbmfbUzw8KqFeIfRALACZtkAjSuWiDTGeO1jRHokWeVgTw03rze5VeOH2xyOZRSN-4yobWvHsAbQVmOuub8upa3DD1r73VARjDaQZ6t~LWhhwEju-UhC6zQoJix~B12MqkTV8g9itZZ9vfk0~eYeBoAYlpaoS7Ke0RE0hzQeOQZSl9MkraXu88IWD2MHJ2eA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "paint": 290,
+            "result": {
+              "kill": 3,
+              "death": 1,
+              "assist": 3,
+              "special": 1,
+              "noroshiTry": null
+            },
+            "crown": false,
+            "festDragonCert": "NONE"
+          },
+          {
+            "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LWF4eTRlZXprano2bm5ha2M3NjRt",
+            "name": "rice",
+            "callSign": null,
+            "isMyself": false,
+            "byname": "好飯團",
+            "weapon": {
+              "name": "洗筆桶‧新藝術",
+              "image": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/b50d0cf2396ee9b57b872694e33459b79cd3c425a7612c4114c417d51c967421_1.png?Expires=1768003200&Signature=BXNhWGjICBqHZKdzoz2-KxvmGBPgwR3j6UfUGTSrdFB7JmnX1b3Zao4ghyvw1tbU9VOOdRm19-Pjkr5117~06u0MB7hxfuWvCyRRnOHqnfeflDbwFppNUScW7c6pZSTDHRewY~zzA48w0d~rjRYzFg5ZVTb~KkryvFrm-Umrzybn1BCjGpjxG-X9RQe61oILK6krRhAS1NpkSVihBhcOr6VExuO-FtTTRZsN2L5cm11kMRYFJIAoscquytDHp9hsWscuUtCJUkkZ-bzxyt3JfiYashNpsI7Dgw4tPPH1lddSDKXMY4JxSha9I47PTOreZliICMtlUh-aQvkqxZ-ytA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "specialWeapon": {
+                "maskingImage": {
+                  "width": 100,
+                  "height": 100,
+                  "maskImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/mask/6ab41101824b509b1ce193d453b89dd0a29beb62e2e8c1203caa6f89ba0975fa_4.png?Expires=1768003200&Signature=ZJ~Q3cC35a8vZhHLCRJft9CQUgb~00zVaVt60AGuvk49g0hReLNbpMScpKLBFRmeWo7NNfVcBqIc5G3snG4slKOSrMuJCNoH0~I1MU9JSfKo8Ih36iOMaRYenntsxK-24xHniXMcYcY~K6F8r5iaqALpZ2TdpPLCJ4b5GoNpAKr8U7zzyMGqLcgzFfWcrQmXDPPs5RhRKFKAnux7c22QzzilNzGKVHhpMuaP4fD4~nKMJ1YzuaiINVaXo0p2CS4~WLB0I5~-urbTiGLjrSOvIdixhXbEw74v7wN57vU1aQpjCsrf7NmI03VkI9Dg7kGJUhMQzfAGJbcrWgS~jLHOqQ__&Key-Pair-Id=KNBS2THMRC385",
+                  "overlayImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/overlay/6ab41101824b509b1ce193d453b89dd0a29beb62e2e8c1203caa6f89ba0975fa_5.png?Expires=1768003200&Signature=eIancV3XmFUeQAseb3rkFFaGI1NWibjGEA2A83Es02pVKAddseHK7ba0qZYK-fV15rDhWHH-~bsxSCgTtjGFNa5Xrd7zdjQnrR1QgpKS9KG9GJuTni0X-BwaE1z9LXgr~dZOE9UKZQQntee66CyzPyCeaHZ6scA7-hhX23-0-LN8VQOqBhYTeOC0TxA8618ODGJ04ubLvceVnpBvjXm0Y4yCw7Va0QJGlU7IpQhtLtLclsT5gNTcDhMpR3qm7boh3RlsFZ0vaKbY5Nmf5Wrvbe-FJ4VVeK9kNnAEr6ucqAQ~YMiMckXc5ofE94vtmuXpE4xsCW6z31hwKhrf7RMr7Q__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "U3BlY2lhbFdlYXBvbi0xNQ==",
+                "name": "能量站",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/blue/6ab41101824b509b1ce193d453b89dd0a29beb62e2e8c1203caa6f89ba0975fa_0.png?Expires=1768003200&Signature=u7k8QqPuPe~ttkJVJbxFsVA-UkKSK7CzjYkbvZu1Fa~atTWdHPFEZbUmGkLgn2GBokE~~nMEFrbjhqovbzEofuPNlmLW8c9YrR~KvKjiP6MAo8dNLXIW~4iIDJEUAW6Fm1FO2uOMidbAAUeUz9l3hEc9E36Qya6h3pPazdE~wqYnnoMKgGLF4XwNKiR8ebpkNgiKadXV4XncT2U36pyw3Q8q0nx9abIWMx8uQYhu13m~UxJ7a7sY-wW3b-~bono-Gf5D5UhLng-d60dS6D3ZgCXLLN1yIt8YYDLBhQUplv3qyYhvp9HJLdu2ikFMy5wz1N2bVztUe-Pj9KS1wULmUA__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "id": "V2VhcG9uLTMwMTE=",
+              "image3d": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/b50d0cf2396ee9b57b872694e33459b79cd3c425a7612c4114c417d51c967421_2.png?Expires=1768003200&Signature=C0GQk3gkfz-w8CzxuHcCpkjIhijgutUzl-ownawKMYNv-2futZ2g5-FLgAvcUTMglbkwonDX~ld42IfoAod2ZViQZykEF0r2nyTIIlUfkZahIGtJxBHgo6dPfxu6-gFb7RvfMX4WsKZus-fQtXpxxDxiu4b2BLgSTgD6ulWWr7jQIU5BO5awc0hizdb9wjX-mcf4G7L3WKS4arh2woOJ7nbCw5Dr7VTw2TFuxLTZaGlMIo41SIBnw2d19QDeskhDWqWTHNBZ~Pm7BG858V3PB0WOdTlctx2oGReodv1vp0QVjr5ebXkJjGxCywJm13etWMWdkA4jLc8EvIVQ0b-cPA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image2d": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/b50d0cf2396ee9b57b872694e33459b79cd3c425a7612c4114c417d51c967421_0.png?Expires=1768003200&Signature=XT9cPGgcDt2-wDeqMkgo1AcZzMc5ZiY7awfwpabXga7BGiuZBZXc-6GCs0eiEMAu1RvLY0yyFv2yFWX4clt4-Hj1pRzfmEGBWma-UtnVo1d97O~i7-EIJfZijqPF4rOdkOPqza-LHE-YjyIJOj6jWtY0a0aJFGvBgxW1us7u6rlQ~t6SzAd8tuYJrj7ksgePJvy~sXU2rXINmTJWHsDuLq-yoPSb2xLq6gS48sqVsvYSfJwTzh4t91VftOKRDSrqakJYiekkR-zfQCHNAP4PXgiunWyBDHbMQ1MzgharINRBUVr4IgcbbsgSJNHUguicuMMgdGWOzRNzzicJQoVTvA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image3dThumbnail": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/b50d0cf2396ee9b57b872694e33459b79cd3c425a7612c4114c417d51c967421_3.png?Expires=1768003200&Signature=cxWDadDieVeAoxEiE-EiE4i6o5j01WLVFKXVadIgLXlHqveW0IayPk70mNSPIa8ulVy5lgJwxYNiqMLYStUC-2iyHrRU88vOfcjRzShbc68G3x5ztyzo0XelpUIvIcy42LuvEV9qHus0z-B10ahA~HCV3gp5PDOoMGZQpEUcKZF1SWto27CNNCkbtQ79RFCwmAgqRt4ZMaXgs73N8s8V5D39mTobVC0~CJmDKEJ3IigdrRl5WETdPxoLXfBwDfSXNphkUOTYjNetrlEAISR~Bh3o1toouORykJlZF8g2z2ztWYQIzFH~wT8wF85a1bERdCeyU4xOnnfJNa3JQC9PxA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "image2dThumbnail": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/b50d0cf2396ee9b57b872694e33459b79cd3c425a7612c4114c417d51c967421_1.png?Expires=1768003200&Signature=BXNhWGjICBqHZKdzoz2-KxvmGBPgwR3j6UfUGTSrdFB7JmnX1b3Zao4ghyvw1tbU9VOOdRm19-Pjkr5117~06u0MB7hxfuWvCyRRnOHqnfeflDbwFppNUScW7c6pZSTDHRewY~zzA48w0d~rjRYzFg5ZVTb~KkryvFrm-Umrzybn1BCjGpjxG-X9RQe61oILK6krRhAS1NpkSVihBhcOr6VExuO-FtTTRZsN2L5cm11kMRYFJIAoscquytDHp9hsWscuUtCJUkkZ-bzxyt3JfiYashNpsI7Dgw4tPPH1lddSDKXMY4JxSha9I47PTOreZliICMtlUh-aQvkqxZ-ytA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "subWeapon": {
+                "name": "碳酸炸彈",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/sub_img/blue/7f4c10a805aed858940ef0f579c4ce798998d1fcb8ad53d8d9c11a8431f16f2b_0.png?Expires=1768003200&Signature=bUsLCS5HJsdCYwzpOKpOTP-FEMZVanJsvEMueJ83K~FPFZVih-BRi1MEaVZBv-1ClL8Zf2cb8kK9rQ6V2R85eDrByeOVmvBlBmUM8yEKUhWLzqNol6cqMWMXfjwuQVQ6BbOKU9k1ujRek~6A3yv3k898KfcK2wj49Bh5Z~glOsuumsnN~sm4OlBS0OX3Cd-4de1QLBAfuqGtVF5Iz-Un7sqRCeL8YE~Fi3jkRf55mlZbviEQ7zgInIPIpO6HyT1XwBTe-Cppbp~yjbykTCC-8LB90vnZGR~~7xbhIa9Ik5ToS8-HhFkyOE9SWDyJrAZkXhGlhN2LctpmwjBpTf2PkQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "U3ViV2VhcG9uLTU="
+              }
+            },
+            "species": "OCTOLING",
+            "__isPlayer": "VsPlayer",
+            "nameId": "2229",
+            "nameplate": {
+              "badges": [
+                null,
+                null,
+                null
+              ],
+              "background": {
+                "textColor": {
+                  "a": 1.0,
+                  "b": 0.0,
+                  "g": 0.0235300008,
+                  "r": 0.0588200018
+                },
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/1fbb6e0b870be1ad6af84a0078bd527be317b956c6f687933866f258725e85f5_0.png?Expires=1768003200&Signature=d~7qhYuQG9mIIz-3ZoRXuIQsWwh8Ai8XIkFfQaXNITxc5FCoA464TxdatJTSGZXcDca5vFhzlLgbHxkxzqRiWpu8OztWRFndNw7ypaarRfLJ-XUZLeokg7qdURwfyfrWsKaPNUkEZ9Kes1Ui0yIXzChglIiYOitcQ7BM8n4WdNLf7orvYI7Oyb8IMQnyY5UrwxDi8F4UNbu14WeTDq4XKsz9feMbGKaZwJdS312rcV2EMkINWQj-eKiW1X~Lj-w9B3SYHKeA2GX~sGUVKnKHH7T35ibsYsTPphzlViGJAXRqn~PjcHcqJCXkNJgH8rOjLruOan8sdeMIT7NNzWCrOg__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "id": "TmFtZXBsYXRlQmFja2dyb3VuZC0xMDAwNA=="
+              }
+            },
+            "headGear": {
+              "name": "翁長的面具",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/21e851a04a422a52e2ee4101b6973607650baa2fff7e08f85eaa797746812989_1.png?Expires=1768003200&Signature=qxubpOfZtK1QC~Zjr2nNgO28jgFLx5aWASns7wFCi7z0bw7MmCnfWYXpnAboFyzF5HWKkhcB0kOP97JSuCIZyzbTft0t096fTjAXzeGvoKagr9z0GK5pC3FlFhBQyCZpwchNWSQpPndrY05lUhp-pmLM9BscH7x2hWE9JnnXR7LwbX6866QSJ0-2RtMhYFgc5atvJH7ybSoRIaD3AseQpdNTiCqxlODxLknzzjJ3qJ8KYkqbdKomiBHBKlczGN2PMwMzRET3r5DBG9U5BVxQw9yPLpzm55FAy5cGahSbShBBloDlJjWd1wnOlqUx8ptmezC-MmHlUVBVPTdvAXDsIg__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "HeadGear",
+              "primaryGearPower": {
+                "name": "提升人類移動速度",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/3b6c56c57a6d8024f9c7d6e259ffa2e2be4bdf958653b834e524ffcbf1e6808e_0.png?Expires=1768003200&Signature=Db31m9Np5WoQCgiPVQrkchlZp4sjnzYjCcj2PXNxbrfFqHsOKJYELBLwrRnZCIL7k-PPwApbSznp75cX1yKL2J5RRHR7tNCOMSdan1ap1zKSB9auwrkTYf6WpJXy~Lek4sXYT8GovqJZsWHdtVVwTHZeiYxMoDMqxd-jrU63Eaoe659rKXN6k-NuH5g04bG6iw~MerZkdTbI~HMPOZOH-h7c2AcREZyPxoWH9JFutgJt6mdP5N-YlPxmMiqGogax94xlxHh1GTEXrQAXqx9Rd~xKz6ohnbaMiy9figTxg3XSZ8eu5Rng9b~6StDQQM0B8UJg2~9pxuvUlm0IZLyglQ__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/21e851a04a422a52e2ee4101b6973607650baa2fff7e08f85eaa797746812989_0.png?Expires=1768003200&Signature=e90vIcY95vMY3L2invshIxFFVhVZLYBdEQrp0CTFVS8gv9JmF~mx-VtigiobnD89wr2MPryvOEaq9ks5pidSWX4GhSOgRav8kiiXs0CC73cZSN7Wy2fyHT8Zg6thuyvK5JB~1Vueft027HDm3eF2Qff1CTqcxBcNPkB6FkU1FCwXc75chpZRCtVLc0yVbAQ5CYNgLAxFX8hvG6Tvqh9vub1YQJicBOVF6fQcLJpa18Gf1sIcP4Lj4Mlpi5CcyFjEjQeQORbdAdurj3S~Ks23qdxYuSFOPtyCOwYmCYoG-4cElcaSVXRSDyjQW5EO-j0HW5bKdNiJEg4pO6KGm-P3zw__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "clothingGear": {
+              "name": "翁長的羽衣",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/30faa981e64a7085cd0fb0fb81e22932911694633310fdf2dec5e126ddb9bdfb_1.png?Expires=1768003200&Signature=j~jxb7XzmXqtKq0bKQuE24IYtnjpExYH9fTBGsughfR9ZxsPy-HJyXG46yIQJ0XbFtkZ4tNwGcKU13sVMugjYTfNMk3Y1NtUGwHIkuKcKPS~rvsX~~IMLiX0ydcVknD~dmjXAZLVumqXGkYEPP54MHbSC5Y8g7TNVOI~SztiotAncekymXUwvMm6SMhd9oNv8XBoqkIYKOAHnUibheTZZMHaiDRVZa3mBtvJhb0bMk-qzO3Ck7tc0I-RVv-kK39lNQ0wwdiwUeyiNjGarB4RvdNdw2QKPJS2rOw1eUHhQiCnNLD6X4~41TLT0BtTIKBj~mgU0c1xYGhS7~Bqj7y0qg__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "ClothingGear",
+              "primaryGearPower": {
+                "name": "行動強化",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/1a0c78a1714c5abababd7ffcba258c723fefade1f92684aa5f0ff7784cc467d0_0.png?Expires=1768003200&Signature=dnlf6sJST9ih8sJGvI37CtGPpm8C3g0VsnpbtYov6qeTHaUrplwXWSB~mTBefQeJFwbSLTbeCtRQ4RS54MbfTuyOHGSVjEGqClqpOHiCRPgoXuceb08w25uI2mxZim1NfgortvFC0j7ux4oldVs4s7nfIWLZCwQJW~ZbcfMd81DCUberoCHlcZt21ViUuvZnpXqu3G1SJ7sleWO9611w8hzlLXofAZiPE0Z214-fB~d7ZyP86K8o9pbWT-b8dh7JzjMznjZ7~MNYtXJVPcW203EXwZbhj9u0Vd9HbnpFSte7p2jS9XX71INqe-XokHG5fMx1RzMylbVF620bAyilAg__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/30faa981e64a7085cd0fb0fb81e22932911694633310fdf2dec5e126ddb9bdfb_0.png?Expires=1768003200&Signature=X4FgRDt2chq6MmfFStJ3ARiMAY-7cPFyPmaTlMKDD6zPQ9tu7eQ2tyhsWsAtKVHX072d8f0WbWOLkIERqacpqw29rUkwvx5Txw8DLxd5UQqHAq~9joxSbXwaF9cNE4bzUyyMvmgcRJeH-wP0gfFQa1SiOcMQAwy-LT2MhmxTYi6POGd6HtR5ZT2LDjtFduF7SMWZGgU1AY7WozWob2anErhd3ITRWfE4mQGtPMEXtLZgvMbUL4O4k76UMrmeevFSh7VE~tKNhBooz5mSxgY8GQRxSkq2Aws1Zyzc0jcE8jnhBxFFkS7RNvjdPOIomPyeys-hfWrnvhGIP4FJeC3Kyg__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "shoesGear": {
+              "name": "翁長的足袋",
+              "thumbnailImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/b12608c3cff30152fba417bbb09936e65daabbab67becbf807ae06f4c729cb78_1.png?Expires=1768003200&Signature=h9bWe-Q4GtnYRW33VI5suL3DcMpepI2EqzhB6jKQq8oYx6VkxMhHo-VmVD0kfvobBkxEhcuJwcOpkmd~gLuZ8HU3OeYoGj33v4B0qdjYC02Sez4sO6dTg4PkSQKqGcg3wfcb~FoRONC0fEIBw~Tz973qRlEC3r5r8i6H5Y9is~MgC31pSej4aY0AAE4OIf3HycP~oVFTXx-uNHfugBTSJhsV7Cf678XV90YXc7CWZt1Q~ez0m8cfhlTISC7oYK5TPfHXKN3wK4f9AMErjdLl2MR4krEraafWMch9k5pWRTp3ivZ1qSlvF5Ksyo~i219PhQ3RD0NelBkhtg6ulUKy2w__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "__isGear": "ShoesGear",
+              "primaryGearPower": {
+                "name": "降低特殊武器減少量",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/e3154ab67494df2793b72eabf912104c21fbca71e540230597222e766756b3e4_0.png?Expires=1768003200&Signature=nIGdr6gchTCEHQEYfCWOosg4LiZZuhg68F05d3sRsuGxgj8ExfFdhaEymjH5xsuwTMA6eES3esZYS1nVB1rREFOhyvIktCtIL7f2~skvkhzzA9xL33xdiGDPnPI4sYHfPjxQREwjA1SHLNkBYitiYYwTAmg7p3MfTEHx4VLmuBQcsvDhIR7vAdcE-Z~4bm3jCNNAVJ5QlECpa0n4KDSSG06eSYpS1LA23-NaoybsAmSpKNfPSE4tRKcRspP1g0TjPtPP932dkiQLtjil9NS7Rw2i2mtlq934vv13qbcFIYFnvjQs88BTyzGtq7Z53Ebv8Fub3W2y6WGtAXy4Yoz41A__&Key-Pair-Id=KNBS2THMRC385"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "name": "問號",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                }
+              ],
+              "originalImage": {
+                "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/b12608c3cff30152fba417bbb09936e65daabbab67becbf807ae06f4c729cb78_0.png?Expires=1768003200&Signature=Ma0f8nVgpQiG~DXsLb9ysRhRZWnmzDCkVnQeE9A3BDfz0Kg4i9~ra5iciZ1~02xr1KWXsPPkuF~Ikyy7x4tdxW3HS9gRrQutSD4d-QqmR7MzqZuc-pi9gfjJB54tkHZWaC1NdPJ1YFGT3jgFi0ONafhYxASFyO1g-d5RrE2uvUGgkwbHdXZ3SpzF0PPka5g2NDKwCEUxpx5jyoozae3Jn7bRZ9nGQD-P97moA2H2woc2XCJTz7oxMfOUHGFm01hKT6xZK98XWqU6rK463QeSZHCWhIidaVadovlP3Ijx16FuqlP2CgeEQGoWKteMLDu939vsqkJ3ATf6KDlCKlKzjA__&Key-Pair-Id=KNBS2THMRC385"
+              },
+              "brand": {
+                "name": "amiibo",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "usualGearPower": {
+                  "name": "問號",
+                  "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "isEmptySlot": true
+                },
+                "id": "QnJhbmQtOTk="
+              }
+            },
+            "paint": 324,
+            "result": {
+              "kill": 0,
+              "death": 0,
+              "assist": 0,
+              "special": 1,
+              "noroshiTry": null
+            },
+            "crown": false,
+            "festDragonCert": "NONE"
+          }
+        ],
+        "order": 1,
+        "festStreakWinCount": null,
+        "festUniformName": null
+      },
+      "vsStage": {
+        "name": "煙管魚市場",
+        "image": {
+          "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/stage_img/banner/low_resolution/8dc2f16d39c630bab40cead5b2485ca3559e829d0d3de0c2232c7a62fefb5fa9_3.png?Expires=1768003200&Signature=Il8Aj6hAo5jul7uSz6mqkmYTtiNPeecR87vKWtw04kNsLgOl57RWJLztoAyun4nUUFLaMt~BceZtubRTr40l9bTYjOSx-vGD4H59lEl2sM79C3f2dPYjq26gkptgZoxeIGI9i8mtuchld68a2T1bevew-OvB-n7ZgQQ1tr0qm0nfe2vMdSb9x~Xg4XcTx97vJKO5zgEGxk6xcPoYQYZhMb1DN96a5HUhuChshxjchFDTuojX19pD9b2QMWZadRYlY0Yk9ozdpURQPJ93HDhA8MWm-OYfjBHDBwP0pq5U~fYBig2g2WRfX3JJZTkq3H~C0lvhy9juTncf5Kgb7~1d7g__&Key-Pair-Id=KNBS2THMRC385"
+        },
+        "id": "VnNTdGFnZS0z"
+      },
+      "festMatch": null,
+      "knockout": "WIN",
+      "otherTeams": [
+        {
+          "color": {
+            "a": 1.0,
+            "b": 0.690196097,
+            "g": 0.188235298,
+            "r": 0.729411781
+          },
+          "result": {
+            "paintRatio": null,
+            "score": 0,
+            "noroshi": null
+          },
+          "tricolorRole": null,
+          "judgement": "LOSE",
+          "players": [
+            {
+              "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LXFxbHlleG5zbXV3c2VxNHdhbm1t",
+              "name": "ぐんしん",
+              "callSign": null,
+              "isMyself": false,
+              "byname": "有智慧的實力派",
+              "weapon": {
+                "name": "斯普拉機動槍",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/b43978029ea582de3aca34549cafd810df20082b94104634093392e11e30d9bd_1.png?Expires=1768003200&Signature=wuJKdffCaB6Uo02uRMvJUDImExsGtyDOCGpX6WyhCAA~lCmCFcEwDnq1ZWnDvTCaHHQ~snhy0r~Jvq06cssQAepHxVYnT7zSFzsDjB9fzzB1M7ChZzv0YoqGroQl45VAWWhA7pVr29BZTKrkEdEPjQqdg~xVPj11gw8MfWqf2DHNQXmQR6J-P6E7SrXtCm~T6vXXl8i6~6dm5z04mQJ4e2-ylU68t6sf3vURxryki3d3xV~k4Zk5HxKbXbgEeuknfMe9Rj1IOkJFX-5rqzZepprXn0uCZ1cHSjinUzgt5OGiXW7DBk~6kTgynPoJjonelnVMb0T64oamngdV30HmDw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "specialWeapon": {
+                  "maskingImage": {
+                    "width": 100,
+                    "height": 100,
+                    "maskImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/mask/680379f8b83e5f9e033b828360827bc2f0e08c34df1abcc23de3d059fe2ac435_4.png?Expires=1768003200&Signature=SBFKZF2Nc7BcDEErIht9EdLr1jlJ15L1juW4nZL-4rlWZglT0GmjcP3-3~UjARfEpxdSvZYZqc7aURL8~hbCB6crjWuXsEN-x9O-mNB~1OvTLWIqSMxQ74G4bej9ix1nS4HkDjS8C4tziVrF5nCEt22v4IMDIo1NEyKAw-fnZBvkuWKw5OVB86ivqGezjIOsplyEQbNVeMXFGn0DntR2i1GPtkVpFa6pT-iDNz9heUshMu8i~l0D3IjKevqPAKjncydpY6xYnG0mXEHruGj5LN7x6I9tIpD8OsKfrvMyzuPQtzqN~O2uEqgxJFGR3S4HZr0RxWlDZH1e~2~GS~R-pg__&Key-Pair-Id=KNBS2THMRC385",
+                    "overlayImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/overlay/680379f8b83e5f9e033b828360827bc2f0e08c34df1abcc23de3d059fe2ac435_5.png?Expires=1768003200&Signature=VUQTjRL5pVNmareKGwhA8Y1ZRXzMMVq8U5MYCnU1ARJE6HUvUmDhbf8pP0hNVcJzb1oLij6WiVnKFeGnfkUDU-ohV25m74JOHzhdPwTzKdlzX~o6dOMuREek7dc~Jd8D4Spw0VQ~v8w0wQy~smrCeF5AagaEJ27NUladHh4E~lnxB-FznEPpdQCEEtKz6M4NWUWz9y1~wVJSqkGeoYszZ19CFysm6oPbyNBkVKsvePXw7bYsbeOs~kqwRF9afKXs14J4GxULqs6dOR13HH0YWYACAZryi2TpHtoWKoL2-SNSH1WrCbQkpHQH1c9nku3-s-73hJV6i8PGDl9na7l17g__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "U3BlY2lhbFdlYXBvbi0xMg==",
+                  "name": "螃蟹坦克",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/blue/680379f8b83e5f9e033b828360827bc2f0e08c34df1abcc23de3d059fe2ac435_0.png?Expires=1768003200&Signature=fppFMNURGd3I4U4bbxQM7ZhxGODe49ocW1mFaPfvmCciGNEP3s8IoLWbHzLIDKLpMB1IJMxORF0Vfs8u9RHgfzLeVh6cUib49yfMj3i9dlLp2JOrS9MvVBmMvxmUkuynnVG5m4FEjmIqWK08xU4y-GDcA2z2fkL9Z64a38s-9pvoDjeFuJr8f5wQVSey07mIAJsv8VMQBjIRQzpR9vXRR1SK0Ox0VHZU20-910KNFZNcJ0ypexTh75jyMhumJIfBezoSqNTUIJLMhHMmJYDQurAqmETLvgtValgxDBQDayIfmmnLjrG3wE8~E-xqYjwJM00mr-BU17e~oHhPPQID8Q__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "id": "V2VhcG9uLTUwMTA=",
+                "image3d": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/b43978029ea582de3aca34549cafd810df20082b94104634093392e11e30d9bd_2.png?Expires=1768003200&Signature=OlpEZ1vtAwquMGyNICfHde0vBn4nPLLElBfcw-WXOl03~Xv0mcTXao5LO4Mh7hPtXQlPeOAcRx5A-zU7~QnEQEmTLocVpNkKlDntzTdZ2E0fQTFb7QnS32vM9jLX5GqhzJkDt0K9lV6HeGwj8AW0wT9BgDRMdYyRGvO3RDyNcECDLyLQ2gxLwmW5VixbHVwTXXn2pL3OGidyvCWjtPahKTXOk4Of8TYOI71HHGTdQ2OAqxikkueYWyOounfZ9eHKSJf4aWDk3MjHS~r2EGefgdyZUryYA4HA5HaSh1Txd21b-8Ayel7pfNKFnjFioWTcAzOjLQYFlxz-6r14vssJRQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image2d": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/b43978029ea582de3aca34549cafd810df20082b94104634093392e11e30d9bd_0.png?Expires=1768003200&Signature=SBpjfTgK7Rzbyp~wXHWK0YsM4cGgshRlSOepy3lGTMVdbDg9-XteErLqx7DhUGHif-RdJOrAhJjwNZ4OJODPrlYaEehuMBsjEzI04GiHPuisP9LLfTwZWIoTHWGKFzXZGK3fn4lqFL5v-zImZwt97lXYCUTfB7i7pP3~NaKm3BTpvElIpjc8CK94GLLct~YX--MXkJCgeyRyasFaemGJtEtPLVR6tfGG00MwuhaCRO9jVdSWOsygjofXw66ntC1LYSjKoMJN95NkHwCEv8qHki4kuNErKCUi2HR4N07rHrk7qmx7MbQaf2rSSfTf-p19Z4gmuCQTakYxQwashXCiSQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image3dThumbnail": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/b43978029ea582de3aca34549cafd810df20082b94104634093392e11e30d9bd_3.png?Expires=1768003200&Signature=KjxHQn3na70tQYS-FjbfdVV4E4Vm98RSq2iMrym0ouji1QOsPMz2zDHI-fnxBstoUWUjQJ5iq9JULyFS6hnwtHRIGAlqmBbK8XuaO4iAWJRwHwoDtNcXeKocCPOot5oLnYLLV0Q033Q29HRjsBjQbbzw00h2cNeUXMzwbozKbRls06ggNP4X0eKLHgBX1QsZZfKloJEspH1rM1hJv7-UPvZHOvmgTH27uDP3~aV70m8ZCbUnCJWeRgG0GNdizv~vgvQJfLhgWT8YMxIGxqQhL-2nBETFyCmWUnRvtnRZsdt3Bh-IEVgV-Qqm3Ug9A7paxUIraiQzZwDyFNbwyUWttA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image2dThumbnail": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/b43978029ea582de3aca34549cafd810df20082b94104634093392e11e30d9bd_1.png?Expires=1768003200&Signature=wuJKdffCaB6Uo02uRMvJUDImExsGtyDOCGpX6WyhCAA~lCmCFcEwDnq1ZWnDvTCaHHQ~snhy0r~Jvq06cssQAepHxVYnT7zSFzsDjB9fzzB1M7ChZzv0YoqGroQl45VAWWhA7pVr29BZTKrkEdEPjQqdg~xVPj11gw8MfWqf2DHNQXmQR6J-P6E7SrXtCm~T6vXXl8i6~6dm5z04mQJ4e2-ylU68t6sf3vURxryki3d3xV~k4Zk5HxKbXbgEeuknfMe9Rj1IOkJFX-5rqzZepprXn0uCZ1cHSjinUzgt5OGiXW7DBk~6kTgynPoJjonelnVMb0T64oamngdV30HmDw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "subWeapon": {
+                  "name": "吸盤炸彈",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/sub_img/blue/519ab1a9489d2002d96ad3c60880eb5393e994c859b21de1eb11536638f80056_0.png?Expires=1768003200&Signature=vMtDOQvg4F2bMfsehhz2-JO6eEI8tPCgVpgZdxgPkWSEFZw7O~zH2tpU1LrKDiAyiG2vBzaUUUibKtMfPF7jHRZYXA-AQZjRLv7CI3pmvf5mKW7xh3TR-0m~I409ITecCwZ~t9lyVkbJhkcOJebrQX0XuwAoUvcgvylQVFCFMkYWieTNUZXoTnNdu6C3TsfxBgcm-aGiuu5nSu2jPkmvnOMyKCpnbTiFT2eI5CYCsvIPfP2jW-ZRuZLyptsIeqxzheOdsH9E~7uUBVeexteuZ7lfZN-IeweKtdAoZPtmdBbo1CI4g6aCH6jmzRsZnaIkYTkuAawJVyaVvISEHjmd0Q__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "U3ViV2VhcG9uLTE="
+                }
+              },
+              "species": "OCTOLING",
+              "__isPlayer": "VsPlayer",
+              "nameId": "4423",
+              "nameplate": {
+                "badges": [
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/7dc177f2eec45bd961cfee0b242299684c0de3da3a0f784282b5922f91c1f952_0.png?Expires=1768003200&Signature=tfD0HrrcpAs4KKAeRzo2WHFDv2HPsBtTLpC-7h5fNQ4eXLbOO9PuyoTHg3eN--aU9d6z1W2TdtTcwO2i7P0JIugtx0N12csl2g8-Pxu30P0bR3VeSMDcax5M4bMHFoT2793PFwrQTzeFMn0sQouIF~2bCwzYPkjEqLgOh7cSbx60VR8aCr6am-p~137Sw4ZzgP2gx~jW7nMxCid5Bbx1ypUo1gcMNfMTbUHRBKI1BC3gxXUTBhT-Cjfn5HdhmKcA0-RVJGao~zPMzsDevsKWR4L2rcGddUSqpk2F~7iUpJhK3NSgInC4HSy5y~Df8PgS603mAhs1mpT-5Q8m8Fiu0w__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtNDEwMDYwMA=="
+                  },
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/7c57fc36ae9967507fe4f70c52945b1a5b779b9359d866f53c313e43680770cf_0.png?Expires=1768003200&Signature=KHyKbzcKaRVv7yKauuKmx7hCCGaOkwX-5PWbtSMcosbrfKDaWhMy-HmD3WQoGFCzlbEfpBtmsDMdD~qGMtMqvn2SWey0JVLxlnWy784GbjzZLR5BFOHST4RldnrBT5epjVMR5D0Mwqa-yC3f-Cf0jhnYF9Sd~EJux4T4y86xN9P9GchN7N7F1FxtbiO0WyYCYxWVt1Bp421pmmrNYjeSOYE8zn8OlZAyrTtAgzV5h0bacp50vWUN6M8FgagjOUapZRxasiFHRE9qtiL9d7rJZh7c5cwhgCVlTbpSSYpfHpWyA6uoFoaPwEm7jfSjopvjIc00CKogbzbXgpQRtyYsTQ__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtNDEwMDYwMQ=="
+                  },
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/02819bde152f2adbeda3ad128caf70f4228b34f843dae059652397a9f87cbc01_0.png?Expires=1768003200&Signature=L-voUHc4V-XuCnTTS0LSOWHCYY0mhpyLjpC6kyhKqhdr1yg3bOcv5UiYkjZPH3schRAaC08F7H6MjBOc8yDYNLJzescHwO8KFgU8YpIT6alYpx0kzw0PA-207JTxqAurzee~G1ACIm08tMMKpv0-bf~BoDLD3OK~OqFa8xzrxSxNAbTzYfjzWrRuw0aLmpPVI4p0UK4Nz~rRnAE-4WDSKGdK826Nj3-y0-e9CSRRcP~2V40qEtrPOIfuevxW81nvvjXu7n8CfnaJ0ZbmcXEEQVHQ5hI9LLhMrIL3MiTtVfi7gdJLgyFO02MpFMeEc8KiNjXhAVt05aeGXe1YJFyjQA__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMzEwMjAwMQ=="
+                  }
+                ],
+                "background": {
+                  "textColor": {
+                    "a": 1.0,
+                    "b": 0.00293231895,
+                    "g": 0.302125514,
+                    "r": 0.73720479
+                  },
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/d7b61473019f6ac56967bbd306f9d703302f411ff030976660cda56e6f967ea0_0.png?Expires=1768003200&Signature=cBDAJJV5deJ53GZNS8UdtJkWWe7Ke6wXsQnOIhhjxU32CAhUsbPD6FpRzfce2Yj-gALDKV6O4b3iZnbeK8tIbzjyDOT5omasdgVEx6Und4n-13gPaua9Fi-JdCOzWyIlSkvIJXMpbv2BCrM-ENOXpdVjKBxLem1YJRW8qKKBu1x3Mz01DyHEXaG4vGqsdnCxwPwYKld2l2Nnl1-WSdraScesnaKSP1WykwaPYXu6crnTBaiSc4vnSTbdF1Alm3SliadbT5C9BeP5h0RHZADR0NDI0-SMY-8GMRsWPSIqnhlLLxX7mebh6mXW9zt0rbH0dGvJrjvAy-KrKXYr-E5JHA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "TmFtZXBsYXRlQmFja2dyb3VuZC0xMTAwMw=="
+                }
+              },
+              "headGear": {
+                "name": "世界級DJ耳機",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/8224cd527b2c58e744ca30feecfd0536feea266f627fc435031cf83389b0b146_1.png?Expires=1768003200&Signature=cVRvfbzOWtyaYQ3uT8wptqgRcOWWuGEwea~lbwIf2mCGH5crjRtuyK1sPW3VjTMYuRfkYFQZ0h54h2v19XSYVIQKAmU8muXXRUiajKaYUQMWI0WvbJUcpLUp95iqsjsTuWImDqZusxL6kl6sXn4dmVEZdYJ2Ne2HkzUwZQaxxIgRBfKBWNsVghx6pN4dOBtC8fPS9NDU14-cNSG~XDl7qxj8kToxrmoALP2HjdOrDCDeao4FNdC87bFIIH2DADPQPwuFvL0HTovm0jgtOBMU-VJWG6is2HrrWHIw9NVg0JjX9kmVEYW0tq9chjY2CYncxlm0LjZ0Tam7dyiXIJAVSw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "HeadGear",
+                "primaryGearPower": {
+                  "name": "逆境強化",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/aa5b599075c3c1d27eff696aeded9f1e1ddf7ae3d720268e520b260db5600d60_0.png?Expires=1768003200&Signature=vPeuV2w3wuJ~r3Dre1W-8L0VKaqaoE5Uut-ttAdGlYNpEboJyCV6oAP1aymnFACEf3IkDl9q8bVZ4n1HeZAmVy9~QHRD~xtODwnSfyoHUkW4tPIcfxw08Le5V3CdyXrkCLhTe85yYYHTvwy2upoVBpzO6c~haJxWaOuDLvBGUG8p-kmSB54odRQ8yrgL4iqx3Goq-dAeexsvlEVN1I1w-iYBM-i7V1OFMznGfaFg47uuw35h-xfz4FAya5auzEEWk2G9Sy74mnIOfsMhx2ZC2ValsG2ZIsGFVJ96AOdl8s3d3UX37j0y5UAK6Rxf3SvaN3PcPP27mtWd9GBqu91ddg__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/8224cd527b2c58e744ca30feecfd0536feea266f627fc435031cf83389b0b146_0.png?Expires=1768003200&Signature=rRFbUBeKGm~zgaYz2t0Z6nm1cnuE3okJeH41DR5Ew5CYk5xjuC-D0Z6FdrGIkD4As05li2Xwvi88I9Zy5uzZesHvWar2gIDx9ouEGCOrDfXMmNEK8cFsenAHB3tUlxR9I9G8s0UXGpmM4b~eLZyPgpP5SzmkZIA5-zkMs0AS0PWrSVjYNqe-WNPgbtm~zKObIRSohswTnG-6yM3T2XXRHCU7BZFJXb08nfczUcsVsVgepj5sNXuk5Uh1fSAYjMLFgP3FjJc0WOhxl3gfmtJxHFcdLQxlzR5mywv79jGG8cMgNzUbdgZpcwZsZ6HYNLRMvwm0zbC3-3CPZjYZRAGIKw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "clothingGear": {
+                "name": "世界級DJ外套",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/87a6d6b50dad0ffa3041efcc4c91b2304b6a6ab2316c013580a226b100250fe8_1.png?Expires=1768003200&Signature=Uhb6nxkUZdLFsxZ3m~ZyGUrFVgCAlckclNUTk8l38T-KQ7CpXRcp-45LPHHySLEavCnWd3MlBAzkEQYfoej5vq7~xp1NnNer~DNCIwc9A4A~P~UuWsaxd6k0x-zhTiQN6-7aKFScyVXG7Jnz0QaMDjPMbD6zjTsNOrXGcgW1eqmA4j~bEDlxpXAFrWT1MvAB-pWYTim-pxkwbMcXpBl2MoNfw25UzYqtlLeUXDcokwtfF1sgyCYY~JLKOb2L-0VS9Ef8I1vpWJXVxW~Y~1MeFAeK491oIzU3cyfR~qYK7Y1Q3WqV-yPza7djRy2EXLyvTQyx1EbM1s4WBg7O-yVcPg__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "ClothingGear",
+                "primaryGearPower": {
+                  "name": "提升魷魚衝刺速度",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png?Expires=1768003200&Signature=qSaDD61t4cYxD1Pjfyc8larnIj-YUCJzAH9jmCumVmjeoznai50ZN0RB3RHncUB7vcYHnltf-tfSMDkXuWkKzTpVco2Yriyat5ZQNyJ0vbGjwgQG82IhYYY2OB2ICze26U6gD3EFUGDi1UQtidgKhg4-YC8LYYFfkaODEwfJZEfv0jnEAJl2anR2Jx1DE-buWKbOEfIymyoQTEfM29d6EBa9oT0orIC1cpubdxk6GllraWv3R5792hbV3v1qZTIYiqo5BUS-Kcn5-UIGhDW3sOX9iIb9pANCzYmi0LpAbcpR8nApDMW3~Oj3-AQT1tmn0osL~A571c~a~3v7zm6YVw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/87a6d6b50dad0ffa3041efcc4c91b2304b6a6ab2316c013580a226b100250fe8_0.png?Expires=1768003200&Signature=DuxWwuIulPope6lMsiJdmUJ5VbR3wpmxdPkvAxmmkZAeHTdx92zjl3dTbPAVCP6wLp0BSsh7G~l1ycB4E-GqqWFpJWxqJ3EdStXZTw~Vorb2PgY7wD8yMVPdTOrv2B3CHHylKomAZn2WeDSZan21VzBz2Eqs-SH2Wt9idfXICvkfBcg2kJnlF7bXaNXToW5a6cyL9VslARJ~1bPOfvwJp0Tsj8wd8-ztO12rAnF8VMKrMog8BfFna7HWBWs~LR5Pe6JUa-X-i9VEQgt8QbaqwfSkj90BcfcozwclL7D3JArUj2N1E~Ahu3KdTJjjPWlgbNtStw4B-2cR3YE6aFUaGA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "shoesGear": {
+                "name": "世界級DJ短靴",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/dd16afbe2fdbcc65f218fbf60771dc4f0441fe135458a8091c44e41783c6e3bf_1.png?Expires=1768003200&Signature=JsN8DOJ23GHX08FBwQmxIfF0PGakcpK0x~YIQYCjhUPWibzVbksmODMHefeC3pC-3EVgHpAbo4uNRc0cUfF06r1gkbBAQa2~-W5G1G6RSPxK5LWWFxck4R0-1f8D5Vak85sP3v~CJ0p5oyZ-GEoIh8TjFC3Y7wp~7dTkvBdhW0HG9QQO~PtvSqU7pYd0K6vJvIyfynHg6mVkqt0hciA15F3veTbEc4v5rx4-XZJkFbOWSfk6zZ-OXUBYXzfB-7gw9v-JbR5l5MTAY5rOUlGKxT54oj9gOq8Alsy0mEWheDjaAnWEt6u3LqDwzpaW8KMJo4jUOoVCx9nYSqPqnMjv3w__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "ShoesGear",
+                "primaryGearPower": {
+                  "name": "提升次要武器性能",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/9df9825e470e00727aa1009c4418cf0ace58e1e529dab9a7c1787309bb25f327_0.png?Expires=1768003200&Signature=QOWTHOBAA2m4NLH~DOsLCKwAuKR5ubhPBHiow3ybeAJCj~phr-wK2p2q~UAMBV5ZuWgl4e8Sb98qX9EgllQQ3kYqOP83dhv10kPzCPrk-FsQ74nq8JHDmXO1hTcdmp-ysiCSr1TxJh7OuNhx~bCnpjw4vZO61ZPPBdqk-ve1ngivukBeDFtyXsXNE-nVmjKYAEE13EovPUV4kYNNzZ6GB361VvtwybrQ2mYZn5GBfwi-uEKc9Lr5917m5sMfIMLTuaKRNG8I5XLammoi4WEZn-AdVwwcAuf4eTHMuZ8j-Drs3OnKxl4L2W7JRgJVDRwZh44nVfUT6N9pHYKwi0xy1w__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/dd16afbe2fdbcc65f218fbf60771dc4f0441fe135458a8091c44e41783c6e3bf_0.png?Expires=1768003200&Signature=DTNUx~WP43XKK5ZHzjTyKrMFMOa5VNciNhSSvt3bfsDth1bWPpjHcFZ-sWVpJniYmpHO6sXROkR8w5gw3qNupule1WUqUvh4JNzPk3IS23GjSumuNWsnnAPUlDCNQYtsOSY4VBHMjqN7EKiUMF58MTu-yHFuS5x41roxg6-G0Wq1WwkIq2uBA4Yf-DYIqvXkaXTS9H1kSE2JJS4DR04yAaR8nVDHJVE-XIuCFSSvuwOL~zRyi7cFyG6D-CdLGpPNerAWtri1-n8KhRkEZD4AUHomKC4BME0SqtMD5LgJ88hmv1HI4cN~NQQ3G53kUPI-TirnBdfa2MH-doeJQg7nIA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "paint": 356,
+              "result": {
+                "kill": 2,
+                "death": 3,
+                "assist": 1,
+                "special": 1,
+                "noroshiTry": null
+              },
+              "crown": false,
+              "festDragonCert": "NONE"
+            },
+            {
+              "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LXFscWtuM2plb3pubW9tZW1rcG1t",
+              "name": "アジアンてんま",
+              "callSign": null,
+              "isMyself": false,
+              "byname": "自稱為風暴",
+              "weapon": {
+                "name": "LACT-450 裝飾",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/72fc9fdc977b5150771ee77fbf9a7e17a92091abe6d7d6a8ded9afc8a4656944_1.png?Expires=1768003200&Signature=MmTKRSth63Xzr~9uE7vXKVX5oago9PR4SZR4myBR25AYXQDk8CtPVYjnXjxND3fjgUrtC5tPHeob7HE~zQAiF5hN4myH1oukFEDlxvGia8NkXdRytsb24vs2~j6xjRtQ54HfCKcpAJVb18haTUHyVQpyzl4byFg-A8XwA38kk5BudmYUCBZnhe3Tr0CLWRa2FcDTRpBeI2~iY8Jw1yiG5aSt9z4vXX1eQmUELtvSDLGy-AccKIUbwym7IANb2UT4z5KPLpRshhIneJa~MpuRrGKP1SBbqZxpPkvG3TCS1RdnkpWx2dRy4GRQoUevsqqtkMT4LEeToOUH1eOS~NuEfw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "specialWeapon": {
+                  "maskingImage": {
+                    "width": 100,
+                    "height": 100,
+                    "maskImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/mask/0785cb4979024a83aaa2196e287e232d5d7e4ac959895a650c30ed00fedbc714_4.png?Expires=1768003200&Signature=JofbXrtPgz1W-Xm~ecHr3YUymCP6bgObXsF~UqLv6V1sA-2S40WoJPoRJydYA2h9mWMD3U6H9S5pw1vSCKm8eBsYl46q1h3y07oM8trJ9WSyO6boqn4lcYHiRDcDFbgtadi342FwT3CzI5MFV59ghkewjhWjIYzqQ1WChWu2zdmCIEoBgonUk0ksZhAL8T-An6HdZjAXxu21zkGeoSTQ19ChjhVWEceLFpyWGINjO9BvYazn~k5NuDBhnsWvgbprm2q4Bv1tWJZGtL2kTrS1cWew~NR0osY-CHB014-Ywk4izm882TEreG~wFJvneeMhzixsGfL6-du5VCs03rvQsg__&Key-Pair-Id=KNBS2THMRC385",
+                    "overlayImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/overlay/0785cb4979024a83aaa2196e287e232d5d7e4ac959895a650c30ed00fedbc714_5.png?Expires=1768003200&Signature=Ib-T~fBKguHb0Ai-OG-W6hzWDBh6eQaH3uuzvUzxU378rU4LiNVEIhlNKMFaZVq4oBnevvTUE2cfyrrUs5aG49FE~iCqUKg4SX0QBja3vhakwgUfjjY4wWk1VoixWfY~VUkGm-P1H2nTIExZMWCJJ-BJXLWbdPzd0vMV9AAH8hUXnnGdROL~1qeab30zJrnMZxSQIs~3OToOcLHRm0w21Ft~kvpLcPKu8iBNFHhRhyoyc8IbRCCsdZPMdveuz1vkT1Zquk6KSvKju2mymDU-N5sk~EzXCWL9o7itWt-TWWlC~r1TG-Xo2hrPe8JiSloQiSIaEyKQelm6gN7EmKSK3Q__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "U3BlY2lhbFdlYXBvbi0xMw==",
+                  "name": "鯊魚坐騎",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/blue/0785cb4979024a83aaa2196e287e232d5d7e4ac959895a650c30ed00fedbc714_0.png?Expires=1768003200&Signature=ehNKBo4aB8QmgS4AanWKUUiZIVd8HUnVHWwNf5vY5kRJNoRi4bL9jQXwHdnoHQArlhFq5KLYL-PpUhplRpkClIB-t0xgwoqopDAweK1pwAjgq8N8clFxSlaArQjqd3RLxMLf79fuVnArjM~Q1jGS0c4jqoXfFKFRKvj-AyZv5HC3FMvTfz88t-4t38lHAoi-~Y7Tlfecl8--hK1Kk0lo0PgU3zmht30drzOfQXXin8LQhsNPx2C5C30ezgYQD88IYk8aeWJmQkfdIN9tq-BV1g0tRZ3aw8BBD758pdQ7XsVcqyr1lHxoRuTj33MY0mL8Bm4uXxhk7KbLW~RMR7e5hQ__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "id": "V2VhcG9uLTcwMjE=",
+                "image3d": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/72fc9fdc977b5150771ee77fbf9a7e17a92091abe6d7d6a8ded9afc8a4656944_2.png?Expires=1768003200&Signature=Bbq~Ld4cU790vUdDv3ymTOY74QKblgpwK9tsuQ2heBrehrZ9LWP-4Dgbf9ixWNwWfGCLBseMBXYLE6LDVmpUiSmZ0tXEP0Kj8kdybVVe3vM8koWJbAfoO1DTuB4ogHYelA280Afye70iUsW60cE94Igu2~aHT~oAnxxmUfUXsmN6~BvvCD-NXqmzzybkMAgC8rsCXq-uCTDQqw5kqdC8j5ZaB-kwqr46LicC-WORfo9qbSjIr8kK5MqDhPrQfLPcipa73clyVpW5qteaYbTJ1xJsNIXJZMyeN3zByf9v8B7L0UhQ3~HJW10zY84V~lkThIsefDxvAhbKtD49ASV55Q__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image2d": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/72fc9fdc977b5150771ee77fbf9a7e17a92091abe6d7d6a8ded9afc8a4656944_0.png?Expires=1768003200&Signature=MjE3x1cxQxe8S0xOOYk04u5HW6alqXPMFtIRSmTfBcTX3UCMRU3eChREYrhGqKx5knVYSRRTW3d4tND6h4GGQlk0bjbZLgXo8Vhx-L3L8o49VQxXfG54WEn-esl~MqKiTr2Az3YYUV8drhiDBvGQKszILLixL36BTELqfcFfJgAd0BCseXQvCT5-n70~xuk57VlDvDUdDrKQQFFpFvgbPM8SkFjE9JwKEq9llfNGfNc2uvaZ9SnPh3R0phYk90WlR9ufWOgzTrxNztEoDi5gCdAe2FrgiXSLFK~V1N5IWSVw4PV30RCKbRNBhSnu8DpQl2bwD8wcRS6C5oiAMIZ2PA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image3dThumbnail": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/72fc9fdc977b5150771ee77fbf9a7e17a92091abe6d7d6a8ded9afc8a4656944_3.png?Expires=1768003200&Signature=kMqC2hJ6zyjlYeZHciDNvUkRaZCDGl~vy9U2uqhN9hJr39vhpHOyQQo5Q6NJjg2t1MZO1IxfR1QymNXKY-20sUEYheH-LxjedfzqOpLoQrjLwIf8xzr2WJJgVlGaEaDR8Yur2kYojA-2l-MaEIXs0Z~6n4bypIYP6bUHGx4MgVWITVzZZiHCmd8uaBdUSYeDWP0QZPHCFryqr9Y5ZvFZivVz8BbCUSsyhqwCB6niBe-MZwwLP4YVArsaNh1DW9BWqOA~FexVqUNC86wqBcayqPKNwISTFslK7hVDbDuVqxMNgCPd-mGhCx2z70bm54DSKZebdejoNlLsLYmKPawXhg__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image2dThumbnail": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/72fc9fdc977b5150771ee77fbf9a7e17a92091abe6d7d6a8ded9afc8a4656944_1.png?Expires=1768003200&Signature=MmTKRSth63Xzr~9uE7vXKVX5oago9PR4SZR4myBR25AYXQDk8CtPVYjnXjxND3fjgUrtC5tPHeob7HE~zQAiF5hN4myH1oukFEDlxvGia8NkXdRytsb24vs2~j6xjRtQ54HfCKcpAJVb18haTUHyVQpyzl4byFg-A8XwA38kk5BudmYUCBZnhe3Tr0CLWRa2FcDTRpBeI2~iY8Jw1yiG5aSt9z4vXX1eQmUELtvSDLGy-AccKIUbwym7IANb2UT4z5KPLpRshhIneJa~MpuRrGKP1SBbqZxpPkvG3TCS1RdnkpWx2dRy4GRQoUevsqqtkMT4LEeToOUH1eOS~NuEfw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "subWeapon": {
+                  "name": "斯普拉防護牆",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/sub_img/blue/480d4be7d61fe52bc31768ffaaffea7ad5db66ba8b699d30623c4726704cc646_0.png?Expires=1768003200&Signature=Udcr4FqZB6wsYXTHvb4q-D4ObTjM-V0~tPrw6SihQqhiSonJCCQDNyMYiOO~8mWBbDmmN-l0nObLaKmaHT~Q168~qahwYOcGmxjAy0x5-uiUSfB7f5kkpKKajvOoN~BkWeeRGoQYljov7tRoupV8~SFa9eODjo3S0POHXslCrHlNDVvsuI0zgAhsQTtUWcOrLKIGdGslTbODjBykYTSakAPMvvajCMyg-GURptjplnyZiNplEfmg7dhSvaUE24JQtJt4iIT0YfZO2WHYsJGcLeHf0ZflwFbGClC4sA65sHbuHjmrpOY2K~ZH9K~mnSYTIGTQ~m3rENJwlTGzXcGF5Q__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "U3ViV2VhcG9uLTQ="
+                }
+              },
+              "species": "INKLING",
+              "__isPlayer": "VsPlayer",
+              "nameId": "5758",
+              "nameplate": {
+                "badges": [
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/707e451eefc41287a474182e7a474b6c7694e29fea407ee4cd573d61a70ab635_0.png?Expires=1768003200&Signature=qLCloZP1qsNeIkOfb877lMqjw4QWPOJpZk44d8utG1uY7dkjewPQ6hBnLoPHxmQzwJxvirsAyHgTZNWmDRSCo9ocFSDU7tSL5McLgupL4bTm5alHiqxERdsQj29rAMeTZxg8R~EllnpLs4PPgYuQD5MQ9LT2KMOVTwnJIqmPdj2jCLTnVmxvVUu4l~cUMq9FWeKVVNNTZ4aoDvTG8aQR7hkeILE-Nn29FHshDbTEWILaSD9XLT2m5tpG~201OVADDJHAigBRKFlh17S0bxvdbJ64zt9zk~AezRsRB0le26YIwURMwif~6JmUiAYKT4-0Dk-M7I~d~PDKy5h-b~cspA__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMTAwMDEwNQ=="
+                  },
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/bb3350947d2e5f8bdfcb78c9e28e858a364bfaf87ff9137278d1bf40e7078541_0.png?Expires=1768003200&Signature=YFwheVRY68pO8c0K0r1MEKlmobfWrd4wTZXDeeeJMhzqfsqeskrSeR3QmyJnHIWKy743mk5LD0Hr-JxNZXURaoOb8i4NNd0hyQ~d9v53B12qLo9AT2gU2D64m8wZKkQUyqVS6E9A7IZdUxp-8iF~q2M7NpCldN-LV5nsZ0FNJkjIe2AyfDQGArNk7wz~vHzIv~8A8xirxM6gW4vNciXivaNhLxvYDOfY8JsgHKJdWRw3beXJoA2V6zcqJasZz2ET-7xyzmSNtfLhmmNY3RH2~FqjlGYhiK3dwN7cz3QiXY7UmA7x0YzCID6IpV8ZqriIWGySMpJd6k~zdLjRUvkdzQ__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMjAwMDAyMg=="
+                  },
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/03fb0e7ef1031a5c0ee0302a7d88a550a88bb4c33902baca95c2b63fe3b3f0bc_0.png?Expires=1768003200&Signature=v-kI5VtS6p5HQfGMjKq2zeTFZzLst1k~u9KjBD68FlbeR1xpHgnIJWbdX6QiI4tipxSNxwbfSu5N9OPVNj7Nps0s-yfpOjMCpziVmYy9FDI41FeQZ9N568ibWcCircimEXHHOnbRg~akHk47sCddNSuzO-4JZy-zLqqWDf9QNGbw1vFC4GBhjKaJrajfoZJsaDzR1Uynncs0tABgxrsvjAeBQZkqjDJZFoYPyimEJNr8Sy-D78XMJ-H3eopI~BWqgtYQNKBLg1T9bhG1p4mt~Hj3ChFC6hEc8C8Y8HSgH3CtoXiE7Ky1d13fLvBv4jarFVg-FmOlKwYUaBD1NlrzSA__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMzAwMzEwMg=="
+                  }
+                ],
+                "background": {
+                  "textColor": {
+                    "a": 1.0,
+                    "b": 0.173438996,
+                    "g": 0.0638148785,
+                    "r": 0.560499191
+                  },
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/4944de43d46fb4e0514c287791171a9a44753a69229d04d53d9c1f4c2c9e5f23_0.png?Expires=1768003200&Signature=FUegYA~AL7XYl7pCWzozko~pnw~W7ZnOs7iPsuVQ7-KCiD8VmzZabtqGrYldy0GBdUwA055s~acSHp7BMGeU98lLGXov6ky15miSvczJJ6tZvGNKXq07BaInMVKGRTSXb1vx5P6-Ilm8lo2cRAKUIFf3R1pTDc5Jwn~dgS2apOaRdd2XTJOWQQasDEuAvw1ANjPkTueY1LII3OE-OMIz~S7TNsTR5cZ-CAyLltixaZUrfSJsyWuh21vhpkL~uT~ze2kq-j3rvLTLjsKlf9KlghTAVgq32N0gutHhfopP-19Bt6QAgbtQX6WBIYvABiG80LanDKTKQ8QBdqbMnct7MA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "TmFtZXBsYXRlQmFja2dyb3VuZC0xMTAwMg=="
+                }
+              },
+              "headGear": {
+                "name": "武士頭盔",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/09e36863c4b1ecd7f0c04be923c5eac657705a4566f1604d4f17df6813532f74_1.png?Expires=1768003200&Signature=WJX50l1o1y5DhMmk6NItmigFtTXbuqiZrKLT9RIpjNdTIGkMxV5q1XxR1VLjDlmIh91HrJQslx6vzhc2ETIaT0bnlAaDFeUGa2JDkD7BJhbW~NFjV75c7wNCcPjCFV1sKBe3f8GV1-YDqrgWZPPm6BY2Q-qLMsgmVMK-uXRyrrkeZYYL2cZZyd8hw9xM4TpucArE-WwEv37ID5b6doh2GQtmPYGA2PWMwh-q33QVDiJlhjUaT3~0-d9z7YCvm87M93z1MHfrep~cQ3Aly4b8G11G6nBNjnbmP1ckyJTWZA7QtifF3zLGpCkLwX1bIbSDFWAmIYJZ8jToqDBNxCY6oQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "HeadGear",
+                "primaryGearPower": {
+                  "name": "縮短超級跳躍時間",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/138820ed46d68bdf2d7a21fb3f74621d8fc8c2a7cb6abe8d7c1a3d7c465108a7_0.png?Expires=1768003200&Signature=Uq~vh4xmVtn1iDRBoy-YwpOYJaIyWAuxSHq6hWG7-yp~vdn1w1Ivv6pAg~1N5Zbk81Pqo7YNoHHMACLNokhF8I4GNPD-I~99yaJSATpilptqgD7tSSILRU1P7xywxl8Dt7dcnDbEuLVguKOhFgNaDou0JaexihwrDcSEoEE6HBGAtZ2wgtTdjSmv6x2d1WCp2aQ0lfk1BbYccjvgUazRSsmmeD6qRPbV2AeyJIQdCHgZuRZda81aM2bApH3DWfGJNLOkQzys9aqZEGMK8tdqq3lmnwlGRrbi95G67iLAXOZfdDtLcrIWaYYhaQyuxsZwibSbWUSh5LrkwkGbZJSqNA__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/09e36863c4b1ecd7f0c04be923c5eac657705a4566f1604d4f17df6813532f74_0.png?Expires=1768003200&Signature=ZeE6tKkHKqfY66FFpTCZkeVHU~I~CWpsu7mcWZno4~ipFPHhetGR2GDC9Hi-EZCmCVM2aYZO5eBVhvl2VLVpaDUSjoJw5FEvoYq0unQm208QTdBIsLdIQfZ6Bq~Ru6EuW1p-JtQaJxFdaJAjlHMf2w51psdEdRODe5XpxlWGmen21pshyJpHYgCjj24u68Pr7Ff2OS6mHhJMSNc70SaTgLBHOyIJwQPrxw9FCflkity3JS0X8HNDiQts09QFZQovCf-89XoZTB9l-LDBYDQbyiDe9LGMIUkbSto6EeJeV9nJufOwsJwyzJyXIYM-vZnY3DfohvQ88vnFtS3pkvqqiw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "clothingGear": {
+                "name": "武士外套",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/96e31e8c3c16548bfa55e357c18d885e13b8dc737a0cb8d3870bca917b183139_1.png?Expires=1768003200&Signature=HRYJOvv7ivKPTRLauuMe6FRVsFFs779v81oft4parzVuVraLN0AID-FiVG1HuMwez-f-QPOtn2tSVHpZmVgNCsGgplG9pgNJs1iT2PZk-IQdV8BYct~YSAv35GcxVmgdgIhVagKB4TyW2cmDbAf05GBnsXCcIKEdNglCeqLdxJkzrUYbjK7hjw~e-9sIGo-iHiXrDklNxkOKV7Y7XQOLeoUMrIGHDjw1GUC4co6SBN8mUwagAUYaPCiiWJSTPtZFd3MI6cL5Ebs5DlTte~m6fUQ3Ft6shPleGbNro-g4j9P0RHf3SRgsUhh-XZ07bbcSluhfxIogSI5ipfonu4VxgQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "ClothingGear",
+                "primaryGearPower": {
+                  "name": "提升特殊武器增加量",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/e8668a2af7259be74814a9e453528a3e9773435a34177617a45bbf79ad0feb17_0.png?Expires=1768003200&Signature=F2VnPlYWz5K8DIvQGUkY4a2M1IjbgzG9fqgSGchOkxVz~B7zP0ZqWnscR0MC~HN13Fm4a958vZo4clqPDzi0qYPCdG1xqIcAcyyO8qpRvrEg7E99KJawiXV~FBjmmV6EYlD0fEsrjv9KdhsLvHDJNgaAgK3hWq~W8nIN916XSrYkZOKyWxBARz0fFEeqSkQKpFW3nTJy9ImnbfZz3dtJGIaLJN5OqaCQ9ycwASK9tqQE1XAF3X26JbhnQg6~Tanjyb-lS~iWFD-Qb6QrCDYBaTAy~BwfmKhKwlAUnrT5shufCJc9Z7jLyoxsipPTVSDari9zeVEcQMGVyVBrqIsidQ__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/96e31e8c3c16548bfa55e357c18d885e13b8dc737a0cb8d3870bca917b183139_0.png?Expires=1768003200&Signature=rLjrilwmulGnRQ0YcautTuWohaogH1ggTlf44Qw9OiU3WO8JWugsNahaW2xnaLHZdDHEchxdcDhDCoXQLl0c9ur81xptDaR5htW2DBwguaR1e~ywAsNkqbzifWP7aTXKz2wC4yKX~yKqBnkPQVtvI1KE89HAaeaIrmQ-Al4Nud9IEho9WF7zqsCOSvwlHRaRpc7SUeNgX0JZo3VglPe-P1HwV84phpHglzKw4BXVPtVnbLLStYR87XgbUEmHFoSYzsQjvPQ8Shf~3svZYcItOGhM5g23kYqQDRy4nxnH2IfooC3oMNJXjv5eqsGEaxwjtU1BhKEJQ~G5Hr5zLLoCBQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "shoesGear": {
+                "name": "武士鞋",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/4713fd6e4157736c383c0ffa199e5eebd45eb89a20fa0bf1462819c9b06bbc63_1.png?Expires=1768003200&Signature=Z~m9JCyzlXVi~l5CKdG-XvyJXSdXFTDRANDQxGrcIXLdHdVlMfN9odbhK-qUegfzt5FrezhCGPRTTy2KvGzkfh22iyQhKt07c2IppqlAsXSYtdBmG0XR4kmY-x8BxjuZZvTxvl2C5la-tu93A5lpCNbsktmIkU241C1~02Dd6wIB3s~BPQsIiMT2RN~zl9tY0VI9GW0tKvwJ~2eSelZgdWjinQOMUc76lhkqqltm3PZ796LAzoRmMJujxSmyaITSyOG771~Cg6rybFhtIKDFsr24nK~B1AqtwgfMSHDduRZZ~RgL13VWsDgBxK2zy2bdOi1xEerhewEDyGzR8ulmwg__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "ShoesGear",
+                "primaryGearPower": {
+                  "name": "提升特殊武器性能",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/fba267bd56f536253a6bcce1e919d8a48c2b793c1b554ac968af8d2068b22cab_0.png?Expires=1768003200&Signature=NYa2ocwBePcrJm0YpRVlGcbcqFrNzt1KP2Yovgh1AApWH4e9FlylV9-NzboJ4nIK3bfuSPnEjltNjPLnat0LRBU~PACh4gFiQWAIFqURKPymuPmZTFDAI2D0MnZxV92DsMj9m9shfDVtmW1hPj~pqKJnuBYPdnHR8fAIFNszltP0LbBDwS0fMmwE-MRzsu3bSh2uCSQnSBtFkRTUyLrFbw1CMlbZ-Qkiyu5m84PvUCu2-eAbB1yGdcrFZn0yzVpDN2K5ELtcsuwtoj7LzeiYbnNWWH4K7UNTaBrsY47feZrsyGn~7PWsUvqpZxwe1Pl1WZ8W1uvv9x9mRHrDlF7fzA__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/4713fd6e4157736c383c0ffa199e5eebd45eb89a20fa0bf1462819c9b06bbc63_0.png?Expires=1768003200&Signature=UJwxFmUHYrr1ZYGsC6rxBlSAf-oegg-nZ0pDgp0nXQO~IYb4IC~HFmM0FMEAA1-2XUAAIeQ0zSI5X-fOtfZGSgxdskThuNpI3Aq1cm81UfKX1nnYb-4Lt3GY4ic65SVsUdQqkWoim-vXXAQUaZWuQ6FLrht1d4n~SDjc3SziGtcgJlFAm61SToy1kWPDIAPkrooXIWx3YCFWtP7wdO8jjvT3mIAIoQ~RxydJ53BMNz~mjNd6EIndQm5-N76NVhLylibcDlWIf6GoWm1mLfSnIrlu76ufY-g3lM52WaR2LxE3oxmR1sawifE~-p~HSy99Q4XtCqMCbvMHnW3n~bUy3w__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "paint": 478,
+              "result": {
+                "kill": 2,
+                "death": 3,
+                "assist": 1,
+                "special": 2,
+                "noroshiTry": null
+              },
+              "crown": false,
+              "festDragonCert": "NONE"
+            },
+            {
+              "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LWFjdzNsenZ3dmMyN2l0Ynp2cG1t",
+              "name": "ならけんこうランド",
+              "callSign": null,
+              "isMyself": false,
+              "byname": "超出想像的番茄醬",
+              "weapon": {
+                "name": "寬滾筒 聯名",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/17041310ce8e9f27080bd9a2fc1d854a03f21d9b43baebeb4975f2d8373c45d9_1.png?Expires=1768003200&Signature=ZbggEoTpyyASUj6OmJKpPreYBBjUObhb~~YR2RYYs-YPSSDDxn0ThoTxQUYBSQ6lJ9Yq6kXm7CO9LpP~QbWuT7K8a6Ul0B~SEw2NWdHP7pdNbpC2AXMyDQZKiZWGI1d9lBMMYEijVVg-q-HEIQDlCOSYI2JT5RjnqL4cJSp0Lzf3zWGrYvPdD-THMBWPC9yrPdmxxqSHkULxXZIjFs9B5TTnOC7N7m7rDvpz3MSU9VASi7y8ZYknveUss7vvJc12C~NOnhI7rhSBUb-Qpk~RWsp9V4K3drOt3rafwwnFdRYpc46wrfFPSJ8sCvm5P8TtxvSjVfmUMBmvQzB4DbI7Ew__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "specialWeapon": {
+                  "maskingImage": {
+                    "width": 100,
+                    "height": 100,
+                    "maskImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/mask/d9b126010b2533dff88a86f311e68cb6858f905ef4d52fae5ddbf757332c49a2_4.png?Expires=1768003200&Signature=XsXFVRE1Zt2j4-052rh0NxM540Iw3RGlHLscaAiHeHlVH81YH8ND2CgXO3xVKEiHCknUSa-dSqdRENR4OV5yJ6I~H46AIN201BdWe1dgX92ItU8ggTkQ~d89N6GIvO5w-5PJ~p7oU6GsCbG4G5LdMxIkyObKGlctJyYYLlGixiOUWLnySdIA8xNs5miQGcFYRdOdbye4dfecMlDpKk6yUrIkYMm9p~2xHoTqNSlYzzTr3uYSr5zdWnCq4G3zUmmzc1UhMB3qRL4fW8mgETgxOXn8wndEwqV7lUjn1vH8Fukc5kLzMy8Oj~sqUy-2xEy8OlbJ9B7kA4nm7Z-vHuGf4w__&Key-Pair-Id=KNBS2THMRC385",
+                    "overlayImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/overlay/d9b126010b2533dff88a86f311e68cb6858f905ef4d52fae5ddbf757332c49a2_5.png?Expires=1768003200&Signature=nxAoGAWDGlPPbiA9FzDkM6rLjgTaz902JAv~btYL3zSLCgOzBKTa9X1HJYcGrsENE5fAkkIsA7CZtvUepnxXKUexKDDe~~i4I0z5jQrX4Q9L6jEeLjAGZ6qkuRKLN1nDcZW7BoKBCNPMLv1efeKbMWu1arWxyJ5~3ZxZ1s4uDWCX2nMHBVgJcdVZP9EM-bwsaSl~8YE1J6gzOae1XSG0uMfHpQ8Cu8IAYndGEzNLB7Wx9yMy~tUbnC5ARXNVuHBDbyojXXyj2fBGLLNh0YTfGAVwwO181Iu1E3S-9ui-UpVabzfeu9sZ9ZliXVkB32qEduf~e54Z~GICQDQzyQbDvA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "U3BlY2lhbFdlYXBvbi01",
+                  "name": "墨雨雲",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/blue/d9b126010b2533dff88a86f311e68cb6858f905ef4d52fae5ddbf757332c49a2_0.png?Expires=1768003200&Signature=E~uCVVBi0yG4ebfYHUSiRD6F5Q2E8B1yu-u-HlLf27dF1X4lbW547gkFv8NZZ76V-29pMfrCt7SL9h-4OdU-GgAme-uZY9MLrjZ4Ti2n8fBEjIFvdD9C1xjNLH18j6-9Hx67AHRftY-5R3MbtXlOHHTF7QT7W~QzWHSJIQVo~G0zm1dqDKs3iMdYsEN8OvDGWqQjdTPlK8gnj0k2ktSz2kbRvkDg9k2ukBZBP92d8YR3CY41VNH4qsBS-8tvaTuqhleDfxU5oBncfUEFK7FY5EDnIGywn9YTW6j21OTx5i9uHIYwfHXxA3FpMB3WyheN0CVJL-b7Pq4HF~I3HPjMTA__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "id": "V2VhcG9uLTEwNDE=",
+                "image3d": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/17041310ce8e9f27080bd9a2fc1d854a03f21d9b43baebeb4975f2d8373c45d9_2.png?Expires=1768003200&Signature=NEH29A91NFA3ilHHecZVMYw~I~6uFSCpZ9p60P6ApI7Lt8JKwz91l4UCOi1Q7WtxjQdHkkFakK7093fTerxNTYoqId7RtI6H6L7yowQqUgED-2ZrWhaDC~lKTXCatyptfiqUw9WZjjaBjafBcHcK64iB9AG8AWv~LcAXhNkk7TfTQo83c1bcxcnt~Gdq6z7CqEuXypoZSMtTeRxaK-7aQUn9KR~XyN37jCcFokNWsnWm~mSjAMWGbhg9rS-ohVId-f3P82IS9ktPuQUIyEReuTPxlEobfYBzP5VFg0bzYokzkL3Ei3xLlPO3i~Gp3APsIVr9-nzVQDgZl8CR-JbsoQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image2d": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/17041310ce8e9f27080bd9a2fc1d854a03f21d9b43baebeb4975f2d8373c45d9_0.png?Expires=1768003200&Signature=gx48t6LeyZGAZcRDjnQbSqGHBRMQ2wBX5PLhgnbS0xJVp49Tr7yW3eoKsBm~uInDcXA3jq1FcQIIQiuQ7mAXe5MrsJHoqgOHPo8zERqaXPBIch8iQbfmQAhQoMFUBr9DXurtq4JsC1E5CGEzyFcbNNu-sF2Y3tVr4HCjVYevx7Y3HCl7OX18U8hQ4Rg5litCLP0xAvAc6GBRE61R~XP3G6jcwjOF64TG8VCcwT~9Eruuj2~gVFxkcBlPXxH1JNa9ZZnVxuxyWM53tceavbM10RtWxcXPFvf5uSugTKNdl-tav9-mjx7u9WcoFAlB~wFQrvnFy9K1FRvjT~Y31AbPMg__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image3dThumbnail": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/17041310ce8e9f27080bd9a2fc1d854a03f21d9b43baebeb4975f2d8373c45d9_3.png?Expires=1768003200&Signature=u9JleNTjc6z0VkyouEvy732AmfqeHVd8dbeV8a2YUzpSSL2T7HjE~i0rZLCiV3x6-69Qc66B-L3o8alobSCp~Leek3C0F~WrHJHx4b~JRcH-ZP0oYdUq8fJMlqDTy8v8F2uGZFLePtMUqsvygxfE18HxHhsWiIkrsq3rBmSUtwewoXyRMCpqvXgdXY169A~jhR6sjaWOHu9-u0xn7V13onX6PKFRkbqu1ti-rvj-52ibWnwt0IwlyreeH7zjlI1Q1b0hbSICoEr9c-ed7lOY6gSvmmtzBQI4c9ARiWNp~jQv0dSD8PKeAxxUMNqi3E2ODka1XLL8jNZusFl6C1AsDQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image2dThumbnail": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/17041310ce8e9f27080bd9a2fc1d854a03f21d9b43baebeb4975f2d8373c45d9_1.png?Expires=1768003200&Signature=ZbggEoTpyyASUj6OmJKpPreYBBjUObhb~~YR2RYYs-YPSSDDxn0ThoTxQUYBSQ6lJ9Yq6kXm7CO9LpP~QbWuT7K8a6Ul0B~SEw2NWdHP7pdNbpC2AXMyDQZKiZWGI1d9lBMMYEijVVg-q-HEIQDlCOSYI2JT5RjnqL4cJSp0Lzf3zWGrYvPdD-THMBWPC9yrPdmxxqSHkULxXZIjFs9B5TTnOC7N7m7rDvpz3MSU9VASi7y8ZYknveUss7vvJc12C~NOnhI7rhSBUb-Qpk~RWsp9V4K3drOt3rafwwnFdRYpc46wrfFPSJ8sCvm5P8TtxvSjVfmUMBmvQzB4DbI7Ew__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "subWeapon": {
+                  "name": "標線器",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/sub_img/blue/b14d213e2077af0df4e393a5904692d7e648879871954420b14a7eb264e61da4_0.png?Expires=1768003200&Signature=Qx3i3depCwDDOKSkalAqfYTx0xTZQjUFbyvwPY28Gv6AT0e470EGcAckN487yqI1T0CrwGKQbr4SWNOBTdyySGiaguwGczsar4mXZrCx1hThdi2sD-je5rb-zM4NU~zBmhpNV9yZDRD691i8GkqgLnZDPbfh~kOzo00uO-Kon-pkeVpnqk5A29APlSWf9LDB612tpL~NPnjp1125dlBZBexH82unMfMsfLRhVnTrXg4VYnOwZRzBIOcqHGcSNsSNedwjnTcRrs2LiOsdLEvrdgURNCwTE21fh-RSCZ9JZR5HLcrwhAucT4VHjCtLew6-ZEWey7gCR3dAfSXuqbQq-A__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "U3ViV2VhcG9uLTEy"
+                }
+              },
+              "species": "INKLING",
+              "__isPlayer": "VsPlayer",
+              "nameId": "2373",
+              "nameplate": {
+                "badges": [
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/395d11006d5d02a99c27bddb06d17d8879fdb62e0e4f83c74474a89890acbdd6_0.png?Expires=1768003200&Signature=E9Wy46OrDBxPyYu6lCzikERJOB-knmvAKVY0wq~FUdlqet8UiIf3M7TFXISQRLykBnwVy7PV-5BH0Ulscccc80~sObpO~MzV1phemnxDzrmO1P1q-w4zzIHMvWANFzzvLnGjXOAIL7sbKf78w9t0T7Cl2KIVRnKSCrYa51N582cnmvnEKbNBxWayfvQ1kFIQ-R9xWte8UnGVrtCbutYg5lE0muIPe4j4~7epbYoBGcGWp28LZIGT8MMVuKaNue7xZ6DyWBXTqUpCv3NEu8A~SlO5sKAV1UBdmTZHYgli8Dj3RFy~4OFrmJ1r3sKuA-kYNGUvDQVmxENa9LM2FRSufQ__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMzAwMzEwMA=="
+                  },
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/de9c3229d68b28d5513c9c0b5dd03797f75ed1c33f12d6b3f8d3d30a7ea33432_0.png?Expires=1768003200&Signature=f0sZwhuo4W36dsraNApkgbJasHyRNB-i0Mm2w2KMFexcLvmOlhUnQ6ZCldi2ijP6xhfdKSn3UaOhZNbwDEQsumue~UrinTeSHYsqYzMdNZ13Xja4VLpPIJlG04ECDWhBDZlsqa5Uu9nSNVKA9zpsm~eirw8oKVEeQyH61zChS6lAqDOt9cH-M3d66AOyu0CuLBA7WRrkdcrsTgGRyEkanQM1GLKbazeDEft~eE1eg1zTMfVkbN19FpFvPKPVYBVXt90vmDHdJiEMrEuE8Lcz9FKflzXXg5fnNzU0PVyuCR0x36RyrbsZ7BxQ49JjVwwEpOuWc-AXb1~3~AtB2iuVog__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMzAwMzEwMQ=="
+                  },
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/03fb0e7ef1031a5c0ee0302a7d88a550a88bb4c33902baca95c2b63fe3b3f0bc_0.png?Expires=1768003200&Signature=v-kI5VtS6p5HQfGMjKq2zeTFZzLst1k~u9KjBD68FlbeR1xpHgnIJWbdX6QiI4tipxSNxwbfSu5N9OPVNj7Nps0s-yfpOjMCpziVmYy9FDI41FeQZ9N568ibWcCircimEXHHOnbRg~akHk47sCddNSuzO-4JZy-zLqqWDf9QNGbw1vFC4GBhjKaJrajfoZJsaDzR1Uynncs0tABgxrsvjAeBQZkqjDJZFoYPyimEJNr8Sy-D78XMJ-H3eopI~BWqgtYQNKBLg1T9bhG1p4mt~Hj3ChFC6hEc8C8Y8HSgH3CtoXiE7Ky1d13fLvBv4jarFVg-FmOlKwYUaBD1NlrzSA__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMzAwMzEwMg=="
+                  }
+                ],
+                "background": {
+                  "textColor": {
+                    "a": 1.0,
+                    "b": 1.0,
+                    "g": 1.0,
+                    "r": 1.0
+                  },
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/1b846d2a2d48a12b229c31f0c2fd39b84312d0c52277dcd27775ccf5166fcaea_0.png?Expires=1768003200&Signature=Pg~-7eY9Ly~ce3Fm-2JXmse3Q3m-3ddW9XhzbuyFTM6F86zYb4hlgrayW6t-Ju8Fs1N6hR8vUHx~Ig0nxEqkV0ro8P6pcUziRPuxHFCkyihkjUbIMjrbtkhsGzBOMUSrvoDzZ8Z5XRyO0j80YQGYHVnBTULKUPgCh2rp8OM5Egp-hBdK8KOM1sCwiOuWx8UaoOixsmI9ewJPFGgfiAMB04E8mE~7getMradeYEfCPossRc709ojCs8BUIbnknEHgn9AN4c3lzm0dy9MgNGCV1jR~3YN7K0wzTXI~htP0ZXF3ni39fVkilCekypMA-5r48QD2A~f1lEkkP8AwkOzErQ__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "TmFtZXBsYXRlQmFja2dyb3VuZC0yMDAz"
+                }
+              },
+              "headGear": {
+                "name": "魷魚影子面罩 甲",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/11c08d51a1a0e7346cee353ac01b3b1a21426258253cda10a3cd99679605928b_1.png?Expires=1768003200&Signature=rx6mqyS9yL1alX37X0T0E~mHltg5fVe-SeDglMEI7PnNwg2VtR5IaHSWR5YB9-FA0fceMKlWBsaf41OJ2JRo66G3fkpwXwpFGp-FZsjid~DUoamzJGK5UE6wQ6kk~mwbhBsSbjSh6GmW1Uv0wycgorkmOzoa2nG5D-WXAPEq-8UxC-XRQ6LcCtryMJOxhwPVPi~8pDDL8iXGLnKu3gouAo-AXcqOgTB614e7gAe-1zmv~Vr0qR4tkoTk8y2SQ4rb4eruDqWbSEsJR7EAdM36KuUhHMbw9rhjkgVo5cKCsPpONLndIlYN8p6xtTGsuyws8JggjwApAKb7mPYkquJIMg__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "HeadGear",
+                "primaryGearPower": {
+                  "name": "縮短復活時間",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/aaa9b7e95a61bfd869aaa9beb836c74f9b8d4e5d4186768a27d6e443c64f33ce_0.png?Expires=1768003200&Signature=enfxYCl0g1kBsULxZuYyJYKL7ZgIxW5MCACLO7J17ekwQtMvWlYT4KJBWWob70Dvm~jIe4cpxV7KvK8Mu0MMCyUqG6jPW67WskcLR7sGszs-mOhe8YRRub6jQHcChh~4t~xPDRAytNahv8k-xMh6hNGw9DxXE4Ev~H6P4h2YRWuomHG5Nwx6eI4TzI7~P45DmaafdA0xmkBjADrhZqfb-D7uOtgzP3GvluxHFYgRHvXt2tYq6mTsJ7oRQyKueHjAnQRPimELJEqNI6DIaA8EKVeMQMYW0lhcf8qNqadMwQwyeXnuVncA2k4JZwR8HUwPmXpePlsHNF94vNjFRIdNbg__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/11c08d51a1a0e7346cee353ac01b3b1a21426258253cda10a3cd99679605928b_0.png?Expires=1768003200&Signature=cbfn63DScalXs4jq~Orl2wfxgt1qBazVmtim1dEfxZkm7laDbTeiKn-mrhHhk-v9GDbmtLqRv6F-gypqY4TnzbjpKH2FPLH4Za0IILHL23ZVHQh3NJWd5iiUIUoQ2foaPhRAVtCy3R9uKZ6hiac4OIDk4QDgWFLGjG6K8-byeDXcZ53wT1ASnJjcUIzRz25hMcaBUB7b~vcPgcG8ggEVqS1bfvCM8JD5zhRnoyoMP7gEtHR9bSz-JyVTL7cuQrtrm5oHoHYj0BGuVR~9l3OBVwnrDtodXYvyKpAaqF6R4UC-8ztzEk5N-pWkK3-nIN5riztfHQHZtub26e~FPJHj6w__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "clothingGear": {
+                "name": "忍者裝",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/e2dadef47a7b566856402c49ad39726180bdf38a1d0aec7d5776680070470434_1.png?Expires=1768003200&Signature=UbXUP7u6LYDzkrgGwVv3eRGoc-ggpKc1~c1xavV4WBqCyeXCxjuCgoGzmPPr6VMUhoP4p3ECWvRywDJUmmo2Wu8EqNVgSeIgfcuj4~fND9kkByMWCLu1NmdtHYma67vkGbtaHl1oqhHvxIGmlqKWFq6gJxADANldFsIlISER8e9HRulGDQ274yB7qpLxSxsjKYCyBDu9PnOV89Y8dKQFG6KtnXKank2yJ80u9aKvnQ2bXECdkYVjUXEV8P0NwTUKMVMbKx-e0GPZsq49EGd1S9ldhH8hluPM5Fyg098x4GekU0cOHZnNCMzReKjmuKFXdQVMSFK3mvesfifbiYb82Q__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "ClothingGear",
+                "primaryGearPower": {
+                  "name": "降低特殊武器減少量",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/e3154ab67494df2793b72eabf912104c21fbca71e540230597222e766756b3e4_0.png?Expires=1768003200&Signature=nIGdr6gchTCEHQEYfCWOosg4LiZZuhg68F05d3sRsuGxgj8ExfFdhaEymjH5xsuwTMA6eES3esZYS1nVB1rREFOhyvIktCtIL7f2~skvkhzzA9xL33xdiGDPnPI4sYHfPjxQREwjA1SHLNkBYitiYYwTAmg7p3MfTEHx4VLmuBQcsvDhIR7vAdcE-Z~4bm3jCNNAVJ5QlECpa0n4KDSSG06eSYpS1LA23-NaoybsAmSpKNfPSE4tRKcRspP1g0TjPtPP932dkiQLtjil9NS7Rw2i2mtlq934vv13qbcFIYFnvjQs88BTyzGtq7Z53Ebv8Fub3W2y6WGtAXy4Yoz41A__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/e2dadef47a7b566856402c49ad39726180bdf38a1d0aec7d5776680070470434_0.png?Expires=1768003200&Signature=IE0fmvY0aw1aJp88dz7MGZEUDGPQQWyBIrAhz4EH01JWfzvdkwu7Z2RPMu7~2CpudDkt6AGFXxczQGUI~Z3gze8ocstG36SdzsA3GilvIvvH5VYzyLjSZKwQsknODf8rXcarVHH632fWAtx1A-Wz17SBmPEXjwsg9JDTZwSxGYhXdTHagOuTcK1FyP1gvQaS69JWcQQ4gHy6FiHLK7kivSztjGcGdCh9tr7KTDfrB6OAUGp4Wg-3lJn1gwuNwUdQlVoJGLXGdZ3YdLEFG4qQ2LlV1PcX94swAc-et32kv3ExxwCABspN8OVbv7RMuYbG4WmphkQt-ra2k9yBAVjBww__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "shoesGear": {
+                "name": "忍者鞋",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/43ad7037e7987489c48d4384df3dd29077981115424fbe004ab76d6dd1f3f9de_1.png?Expires=1768003200&Signature=GhZTX-kG1DNUdKDHEa6WLCCz0QDjUx-mvvNJs2JfwSm6JmE4E~ukF6n1bRSjHsg15Uyhm4AMFamVjnhgLFLFUcovuDsORR1gaYJO6hqGza~Z3uNa-SmzJGt9-FNCSXnJIEweCLhpKEMFNxb0THD6EHxq8cEkQLdXcg0htGxoQc0dTRYq8Fg3~D5ONNbmhVwh2BHmQuarRVXsu2Quc7rNDCTiJdb8iCkpHMv8dqFgmuLfBxZzV-3o2THeqYlZCpVwFI6-uZWkZuu1yYga6z3~~dnf7KUhpC89Q5XJXFJoyxX9NtGPUEcUIafKBpwg5Se76G9ul-E34WCJqFU6v2t~Iw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "ShoesGear",
+                "primaryGearPower": {
+                  "name": "提升魷魚衝刺速度",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png?Expires=1768003200&Signature=qSaDD61t4cYxD1Pjfyc8larnIj-YUCJzAH9jmCumVmjeoznai50ZN0RB3RHncUB7vcYHnltf-tfSMDkXuWkKzTpVco2Yriyat5ZQNyJ0vbGjwgQG82IhYYY2OB2ICze26U6gD3EFUGDi1UQtidgKhg4-YC8LYYFfkaODEwfJZEfv0jnEAJl2anR2Jx1DE-buWKbOEfIymyoQTEfM29d6EBa9oT0orIC1cpubdxk6GllraWv3R5792hbV3v1qZTIYiqo5BUS-Kcn5-UIGhDW3sOX9iIb9pANCzYmi0LpAbcpR8nApDMW3~Oj3-AQT1tmn0osL~A571c~a~3v7zm6YVw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/43ad7037e7987489c48d4384df3dd29077981115424fbe004ab76d6dd1f3f9de_0.png?Expires=1768003200&Signature=HtBdkG8ElyataRacFDwwRvQoYEfW2Mt6Z-ZFtT~w2VMQfpKDHoAwYRicqcRHd8jfQ9~zfiBq9nrQKoohqgXqZkzv8NoITxGQ8ozItqNao26njUS5ZAFQznOF~uPX3R49cxrLWb7QvajmVa-iXE9av6d7Nc8ziW~Ho0CWhNiOXYgU3EraOw~DPY1umY6b9DtPdpAF2A3oY4z9gpLnQg4FIVEYifFE0hJuKJWrYVqfk4at9zZVRXvp0bsm3mYQq9MqZdbXoMSvLFHSTmhZ3l8HN9oAp2lL1HLeKYmidui1aLRnYPni55dB9eXvTZq4RBM0tWTV2Rb7fCS8zorZiRQXzQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "paint": 377,
+              "result": {
+                "kill": 0,
+                "death": 3,
+                "assist": 0,
+                "special": 1,
+                "noroshiTry": null
+              },
+              "crown": false,
+              "festDragonCert": "NONE"
+            },
+            {
+              "id": "VnNQbGF5ZXItdS1xemc2ZGlvN2Q1dG5mZnJqYW5tbTpMRUFHVUU6MjAyNTEwMTlUMTM1OTQ3X2RiMDk2NDEyLWIxZTctNDMzOC1iMDYxLTIwNWU2YmZhZTUyZjp1LWF5dmhhNHBidng1bmFtZGZkbXFt",
+              "name": "とよ",
+              "callSign": null,
+              "isMyself": false,
+              "byname": "受推崇的戲劇演員",
+              "weapon": {
+                "name": "魷快潔β",
+                "image": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/af9c01ed2c1d8e914e6fb763e1e76b9ffc62aec8e90265bb60a78826389d5d7b_1.png?Expires=1768003200&Signature=vJyWrPWxwvWAXbMYtFZgaQ4X3wd~EjaSNkhF2hg~3CF7vCFFkllqZxasfDK~rl6TucKOJcjeIj-4WUKGnQ1iYgnSxGtrUlY9sEex85HMc757FdKVGmw8mnPblJjv8~-Tp7U~6utQv~kXrCXf9NF6cCrC4fRDgKtCiowNS5yEpafl9fslKFimdr84MJtJwySjkJ74aE30jB0DuPMoinsuA5YksoaPgYeAOnRPtZGZZm4sHgtDox1GgHz-gCODD39Ypff2F9-ksLshkHrX4Q-uuMo9TUP1ZMzoB1g1qhJNYrBt2ecljSCgWcQVr5EoWJBeXNop7WBQrGR8F-0yxQ6AbQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "specialWeapon": {
+                  "maskingImage": {
+                    "width": 100,
+                    "height": 100,
+                    "maskImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/mask/6fcf9e641946c442b7426f3fef3977d580f69dca822a9a4d0428340663ea5050_4.png?Expires=1768003200&Signature=XC06HZLN~j06GEeTUjV7hCWr74RriKbV5Z9xZmpSK7G7kNcQDKQXamNPNh2dBWUcgFSuU42jkHP68cS6zvwv54~kj6WIigaebFaq7gHtu8uty0OrCcRuf9xUIpPsePV2Y042Q0X8uWe0gj6oPGSNcxOCIbbKF-E94zP4r1b7t~65QfeaZxdxB0cPGiTEo2k1PcEtRROJgcfjRdfNqbtwUdNDHYT~Tk7g7P8VxrUKdFVAxvW8C2F67Elx3Ws8wdHYojJ5SkHDqiTgtgLyI1UbV3-ORixnSvB4rXqTYXD32iRNWFM-CeVuXw95rubWd1wlkOJEo3SndOYimucPUba3aQ__&Key-Pair-Id=KNBS2THMRC385",
+                    "overlayImageUrl": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/overlay/6fcf9e641946c442b7426f3fef3977d580f69dca822a9a4d0428340663ea5050_5.png?Expires=1768003200&Signature=px7M4FnZq5T56PokPTI9dnO4BLGciSLwPoHMVenf-JUDHP521uPxmQkTwASuzgCUumulzdIbrrprj--GUdWC28t4SpvKpRHRCUhkDPfz21cjQElVIh3ksHqV0BDdO60-m6uBYN5zStcMm9R3PikS0gWsTda1iVkWTiD-JvAHSjIAn8RYNhQ4iDavUoyQ1gzPwxkhiNP836Hv0yo2HPdejvpRMFWxS0GnANqfFAHW2gh0A2zBsp9ZZJgThDFGIQVTRRpUmdvVb5lQ0XlsrMslRcG1LJAd~RV15aEw-Url~~nhdMlI6m30xC3rmxsQ7YoPqbbVetsbhF~dnnCck~uT1w__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "U3BlY2lhbFdlYXBvbi0z",
+                  "name": "觸手噴射",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/special_img/blue/6fcf9e641946c442b7426f3fef3977d580f69dca822a9a4d0428340663ea5050_0.png?Expires=1768003200&Signature=GN2rRr-l7dFLAihbvTQFJNOLGEsE0zB5SVRXdD~5QE840ZKx0AHJ6SEKPx9X3-smzSrhQgSIvSd8ke9urMSq5HMLFa-ozzL7oQEfKxzCr3VWMYp3Iuy8P3tLSaRjFDFCn6FWkV2Qg8FXk3uQ8HlQCL8k4XUCBgaPXpUgpqsgWbHdqeTaGH5vsetILLbdvmJXPBGs9LKf5jg0XWTmSbQA6GIzfHf43KAGmqXZiG~9M3zAZ~gLByI7YDdNfxRc8SxGnWW~IMjQBAwQsrQO~IICoTkayXw8MDhZVIKZTUjxLtXeexcYo6qPDJhImop4eAJobx5iomaK6zzvkEFpmWIPRw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "id": "V2VhcG9uLTIwMDE=",
+                "image3d": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/af9c01ed2c1d8e914e6fb763e1e76b9ffc62aec8e90265bb60a78826389d5d7b_2.png?Expires=1768003200&Signature=newd6wxkFRVlKP9~Y6aP4pLGa-XuIa~0HXIGoxce1y2p3I2uAbvTzUEvsYQCSl9i0QUdsFmj7KmRBEeqofzzh0p8ElvOkJ9ytNqCuOfrwfcG~m0hRnNKeIjJiUU5lfv~1mV-YMt4vzckH-~FH-m-fLbx~m7a8ARC2IVGMpGU2LGCbrXjsk2v6kWrqcQ0LB8EGsXqUwTgoonNf2JWg544~JY0HnuJMIo9ZV17n1g3jh9h0auc3JDXgyl5P8UOV5bpjstDaekXaaWtoE6-kqEML~obshKn5Ys7kvf8-hlbzJ-KsMqHLDLmpeRRv9aLwA9Uyz5KJc7FCU1YUxhCsH0BYA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image2d": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/af9c01ed2c1d8e914e6fb763e1e76b9ffc62aec8e90265bb60a78826389d5d7b_0.png?Expires=1768003200&Signature=Da6CpJI3SRBg5-C2wU~Fb~NAfvFDM3yzjJuYlUXFRRmRldW5s85uDdvJhOGq3RdWLdQjvzDlBHi1SrZ2-RftyRVBAjQUVRPnBGiRfPLc7~EyCuVB6qhyiOJYN7uBIHTJba~mu~2wo53flgXUPpYSuyQRr-2QlEidAe5l3yby3z63P1eMQ6lftyjYdeFE-HpQDR6dawEGWROZp~rcXwI8Qv1Kv~YjieKU3kkE5rx3ARD1T9cIoN6gNTfX4Th4NtMRl91dgcAMehgmtrKZoLXQSWD4kWzPEhlU2RQvY7KhL3Wk9984qajiEIoqzZ~wYnMaCDBhEQg2Bi-onCLqZllqgQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image3dThumbnail": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_img/af9c01ed2c1d8e914e6fb763e1e76b9ffc62aec8e90265bb60a78826389d5d7b_3.png?Expires=1768003200&Signature=wmtkuqVnVibq7I~ZB6uJcnmyGSb-qsjd6g6YZUifCjRCnsWsnAfhhccAJIBvtwm1~ePWbOo715VBNMNdH21LItpS-50aMCXhmSDGsDNZ94IiiEQeiidWlzYascc5oq7QjdneQAMSzO-so~4a9sOPHYpBlfLaBnCJxU2g1nLAoFkWDen0ybfSfjAtrXluloSAAAPW9igZPtVcDfpkTkfweYXwQ0D7hvT0I0Fq73ljN5dIq396bs1QNsp6dml-KK~AKenNsY2htij0EOb7Rw7X9GWWaYz5q~rM14Yq~FXgLJmY0bYwshc6JL2LoVS6ToJ1yvyzLVh5czWOyG~vsozU9A__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "image2dThumbnail": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/weapon_illust/af9c01ed2c1d8e914e6fb763e1e76b9ffc62aec8e90265bb60a78826389d5d7b_1.png?Expires=1768003200&Signature=vJyWrPWxwvWAXbMYtFZgaQ4X3wd~EjaSNkhF2hg~3CF7vCFFkllqZxasfDK~rl6TucKOJcjeIj-4WUKGnQ1iYgnSxGtrUlY9sEex85HMc757FdKVGmw8mnPblJjv8~-Tp7U~6utQv~kXrCXf9NF6cCrC4fRDgKtCiowNS5yEpafl9fslKFimdr84MJtJwySjkJ74aE30jB0DuPMoinsuA5YksoaPgYeAOnRPtZGZZm4sHgtDox1GgHz-gCODD39Ypff2F9-ksLshkHrX4Q-uuMo9TUP1ZMzoB1g1qhJNYrBt2ecljSCgWcQVr5EoWJBeXNop7WBQrGR8F-0yxQ6AbQ__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "subWeapon": {
+                  "name": "機器人炸彈",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/sub_img/blue/f402a8f304d6a43c671914b53ebe646fd4e06c9c7ef91d87a7a42948da56ab55_0.png?Expires=1768003200&Signature=a~9S3qnfR6DFan5MoX6cuphuryD94TwDp7gmGEF4HRYiHe0XGuUvpWmJadCOZSv8o7pY15ZtCfFbQdGccnadQnkmbZTLRXZQs6-9yybaPdLuDreO0JDK0qq7Gpl~XBrsSXt7ElH1Iy~T2OD6vkWDSMHMgLbdDUR1HWtR3-PZi6hFXW6qUkkY5hbSKqyx3YyV34l69HcxNvbndUEb6HV39s~LvXuHq9hn3ZBbhYr6Euw2xLdH-IZDsMrAmRyISMK4iXzZa1MA2jRd58uvc24tfCT5xbjYQ-ud2Xwlr~CwJJFycpAF6SFtDM68V~UrwtkhkdFHeJRtFEVx8tLaVM2Amw__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "U3ViV2VhcG9uLTc="
+                }
+              },
+              "species": "OCTOLING",
+              "__isPlayer": "VsPlayer",
+              "nameId": "1671",
+              "nameplate": {
+                "badges": [
+                  null,
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/9f60f7b565769e24b2b9f8bad3f9b762a5e11226b13742baa98ca9178a570924_0.png?Expires=1768003200&Signature=iYXKNRd9H0nsdRISMvfaeo4Ix-Q-KIbztamjtO15PCOOOwvG-8JG~OeW3wKKVnLP9FVIhsKxEzQU-RKUo6C9E~abE5d1~ZCdUpbC9ggKcLYLj04-iV5R4NTGCo8TcH70Dvmoo3-yuGvPqRk9nISXdXP2SPHbS6vqifj4oyYfiq3p20dkJpGeDTXTUEZFKHpRoqygJ7bGwC~5anoovOR3LnCfJr77N~J~umN1y1NY52SRvJKB7SLPeGqDmboGHOJyQn1073D7xRpNmdJ4XsRgcbuByq6vndkTJ9FeYMO9pFcPwXCrjmQ9AR50pbGicipKwAwskIGSNJTD9RHTfTXn8w__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMTAwMDQwMQ=="
+                  },
+                  {
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/badge_img/9e734db71b95d987b3a0e63eafca337f8a874145a2a2beda215b592f943d995a_0.png?Expires=1768003200&Signature=I69tuVLCyK-scl9leg6jH1GXzcPhDvHyURZ~MSXCNy9Zs5NymptiCbpH9UE50-Pm5qRymYkioBy991z~sErtIHlvuOcrTZBA9i4yLaQPJY33hBUnCut2Ta2G6zqKhz~n0nnlcta3LFo0TCb6SzUKSdUoiNpQMpjNoQQMv8OWDpQDl~5no4Ar0LOtHawStLPPdFY~ugfp-9zokKSDVjoar3RBKw3kpbbfJzWf0A-veJIiSbgyX3T6P6kR8dyh-g8R2R5S4BT6~2RKqpvhRqjunQCQREnh-funl319YwsURsJFiqwWxlWRgP9oJq7Y4wNmXjQHlZAUzbsafUWpytXbng__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "id": "QmFkZ2UtMjAwMDAxMg=="
+                  }
+                ],
+                "background": {
+                  "textColor": {
+                    "a": 1.0,
+                    "b": 1.0,
+                    "g": 1.0,
+                    "r": 1.0
+                  },
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/npl_img/57b960cae052162298e7f12e746c33727a0cee5af6c47fb4bfbcf8e08572ad7a_0.png?Expires=1768003200&Signature=YjgW08v9CG7FF6-3x6jH6BRBtndOg1gR35zMaLGl6w3Kta~HZKzzdocseC7-uK7siAHcOSERxkeZzI~hUMvuArPhN5RIj5AlJzS3Wc3L7rdmbkmrThqLqptyybZkOUEQtA1QY~AldM9QGoyCGLiwYeQq-jVfO8YwlKd72E8KwjK~BStQRRMGjoG0Q1-9XO~mwB6KB7GedycJzKcHeLK2laZa0NrN7FKOXqIBH4gkyvVdpe99B7uo1-jo0H67Yr~9UiPaCPPz92Am5wKmDCJxJ5kcgOYfr-qKGsK9rI~4FJu3JcnhgnlJQEj5enAoB5NJD5KcvaRRwBkh1qc1vuBYcQ__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "id": "TmFtZXBsYXRlQmFja2dyb3VuZC05MjM="
+                }
+              },
+              "headGear": {
+                "name": "動力面罩",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/38b7b16aedd2c4bad86b8a2206e6c4e433d6bf083fb9671a4eef096e192a5ae3_1.png?Expires=1768003200&Signature=Fpjsl0YLi2gWd-1QR9dFXGwytuB6pbNCGu-x1B8tgPkaJO4-pXbuygLdzk7u1vMTU-D5B-E~urDQe4syrUcT5c9n2If5U86pFRoihPJMkNajAwmnMU8oAwnudYpHnNj6vxxTCmIrTT7wiZAwtbTtRrDKSRjEpGRNHhzyGrZJ307wU6yEFWxf6iDoMPYHplIOMOncHreBOXIpEf-l-jzyaWjNkO5B72EydLrCDxoKVRXi7bPBQPc6TXAUiUY4sua3Pba31chOMJ7-YDh4jJfbFT8GcpO5l1WPMXYIJ1ohn-VMIRAD~z1rFB-NxYwV7qnRp8CuiTrKfVR1HHfBkQtNXw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "HeadGear",
+                "primaryGearPower": {
+                  "name": "減輕次要武器影響",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/664489b24e668ef1937bfc9a80a8cf9cf4927b1e16481fa48e7faee42122996d_0.png?Expires=1768003200&Signature=SbqlGfqfwvIiWOSDlR2RlHWSu5nJlL805oeMusNxwyI3EwK-P7IHa5emLYp~be6lzz9qFLingxTZvnyjE80T4c1A5wSf0rqAf-~hDbdsfyeE-hO1DESqAcOhca4ouC8-jPiG1-QZJYdCCqm-QeRl0QlqHwSY8k3OjTlY0jomJpDOw0bse8AoK7TPo97R38VafdP0g5LyjWOnh6SnuOmSgoac0p~P3KjaWu1pc0pHSDzZaYbmou-IKxge~0WFEyXniD8Ptna2V68GURTEm3sGDKOIwuFzUP~coIEWlMpowsBhPbJURLUDNa0paH~ILZIFVBl3Z8~3foyyZ9jlxXTAqA__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/38b7b16aedd2c4bad86b8a2206e6c4e433d6bf083fb9671a4eef096e192a5ae3_0.png?Expires=1768003200&Signature=loybajswQdpW~KNSluzZz90VFdeJbL5i5F-M7GJDIB8uNcQj5isBl8Y9ULMVGpVPKkJzUliQhCxs1ppGNk99umReyylpiTkZSh3~AMwR6PgM7wJJEAX1wtCRdc64VwPO5C22e42IpGQRFuAcFe8Po-fXY~hvNCcMFbau3lQJTDW1nTYJ5S020z0gr7iVa7ZqqUPdUuqb3I64~7lEjfJNGpR6JJOpLwElQB75IM7rgySIp5DU71lCOptZ6z48GGLcpHElos656jEWQhyLIE9eXC4DnJKvx180B-9QmLEU7TE2Ksj8R3A2fbjdQShcfOh4s6YSD8baq63m6JVxZ6Wzvw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "clothingGear": {
+                "name": "動力裝",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/53074eb0a77d3b6c45a928c28ca2c35934ccc1045283f5544f9299e2a2028c54_1.png?Expires=1768003200&Signature=F7tkxrtQ9jlgLipt~3xA-JlTJGQrlffPYelrmPPPBNjAYN1gfXR5zS8AnG~Ntlh8Yx8k28vP0GyYJQqzv6yoRXUziozkKGi0sa6def1qjQjxagO-tMfIHyueDJXbOmfN5tYFdkr0fbPEPGaHXU9tZJzyRmCFW~Kru0nKixwM3oSY2tfV3D4Y-KpI~eHo3rkAkW3JiJgi9c5uMhtU2Bf0TIzNTAIGpPEbulK-F~UXfd2OZxTZQfAzlJQfE6qEXcCR-TJAkUEhZ8DDyzux64WU3x66EJjLXnNgkAlyHEGlsWn4qLz3cLTvVl0W2-U8Ow5sZkMshclHGw0s3KN0c5zVWA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "ClothingGear",
+                "primaryGearPower": {
+                  "name": "縮短復活時間",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/aaa9b7e95a61bfd869aaa9beb836c74f9b8d4e5d4186768a27d6e443c64f33ce_0.png?Expires=1768003200&Signature=enfxYCl0g1kBsULxZuYyJYKL7ZgIxW5MCACLO7J17ekwQtMvWlYT4KJBWWob70Dvm~jIe4cpxV7KvK8Mu0MMCyUqG6jPW67WskcLR7sGszs-mOhe8YRRub6jQHcChh~4t~xPDRAytNahv8k-xMh6hNGw9DxXE4Ev~H6P4h2YRWuomHG5Nwx6eI4TzI7~P45DmaafdA0xmkBjADrhZqfb-D7uOtgzP3GvluxHFYgRHvXt2tYq6mTsJ7oRQyKueHjAnQRPimELJEqNI6DIaA8EKVeMQMYW0lhcf8qNqadMwQwyeXnuVncA2k4JZwR8HUwPmXpePlsHNF94vNjFRIdNbg__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/53074eb0a77d3b6c45a928c28ca2c35934ccc1045283f5544f9299e2a2028c54_0.png?Expires=1768003200&Signature=Z2GngXsJFE~RJnh8znjwxZUspG8sXOk6gTTzNTKvTJc3CgwrqpdzFEIoG7~AFDGd4jNVFZQIGISGAkFh~NRT1m4i1tAo0z~tzwI45Nr-GEDiuuyDxnEuGMii3Fcxoaj6W878LNKNF2Zow1Qn0eDBXdrWzF11b7mCSGqf0XzBQ3vNYAiaz~6ujRO0FHWEd8bUrkwQuL46WR8WBcJtePAKLd1eUZOBMZVDOnxLxXT1JVTA8NSJ-a5cOLQHqBECNCah72ha6f5vN3KskRoNXYHgfvRkdU2zabtrGo5xCm5-RuU8DM4A2V~SDqOXzXo5JpuOKA4eyv4ww3NAY8a5KN1mHA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "shoesGear": {
+                "name": "動力靴",
+                "thumbnailImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/a079d3d7d9d451de195e5c8bd64a0562bec7cda1e01741d70c196b4b3d5c6279_1.png?Expires=1768003200&Signature=C~zgsKBqRMRpUIWfc-aJ8H3ke3YzhF7Q6j7LiVPQZut1Sqf22t2v~mbNFSAJpj1-c7qL1eLW6rgkeDK-6VeZGxlsLF7LzU4H5veZLgQ9PFIqkvDVBD40xCm3kbD-VTysfJSEEKcwVX48-iUzp9DNpOe14uOHADtsu49Z~ktdaHydxYYaQi6MVJnsxl7sdHoJA14~VcIjzUphQP2baJpwfP663Nl9Ufj5NKxtwgYxMCO0chabyz53JqFJBayxnKlKhXFY0mlhKMo5MkGdDaAAkw2fJ3xgdiXCvlpB4isbXtpknolTDRlQSdMYY0AG5wZne6hhLaHuANClne7n-vEZFw__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "__isGear": "ShoesGear",
+                "primaryGearPower": {
+                  "name": "提升墨汁效率（主要武器）",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png?Expires=1768003200&Signature=FhGZjzVdgE8lFDJ-we7E2kUn9tMINlvI5h0Fz2GD3OD0TDs2eaIgourRouuSRhvERhKX8pZNR~0A3MqCH9gwf-Jm7twDWKN0xmqsbPD0uWHVJ~HXJKPHqzsjSgyD5qNVSb-iLcRJiVTds5wuwgcesuR5RxtwoeuAJlTN-SSYQIKjiSBHXpkdaGx~WBliqqTAPh1E8mQk~gO-7BT7UYa2PpduLoUM2ROZtQ~qCicfFocBxo-ed5lo3cRMoMFzBDBOeX8rIqLn~ZWJn90hm46UbwBL9zlsIgZ5NWsiF7fHrz-T4q6BNlS9YRQq-h65xHn3LmgbcU0whWSDsasPSUqnxw__&Key-Pair-Id=KNBS2THMRC385"
+                  }
+                },
+                "additionalGearPowers": [
+                  {
+                    "name": "問號",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    }
+                  }
+                ],
+                "originalImage": {
+                  "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/gear_img/a079d3d7d9d451de195e5c8bd64a0562bec7cda1e01741d70c196b4b3d5c6279_0.png?Expires=1768003200&Signature=r1HLYyTOsizaEp1JMDxW7NdmicNJWYA~Qx255dVovYr7ys62Hd~cisAdUrIUFdf9UxqlRf~bcHZpV17kdLUlpeP0Bgm2nVHRuAEOwIbPDDkolt8cqelnxIODVbGM0B59mR9RShWeAq0xjovxY0ME5xVbmfbUzw8KqFeIfRALACZtkAjSuWiDTGeO1jRHokWeVgTw03rze5VeOH2xyOZRSN-4yobWvHsAbQVmOuub8upa3DD1r73VARjDaQZ6t~LWhhwEju-UhC6zQoJix~B12MqkTV8g9itZZ9vfk0~eYeBoAYlpaoS7Ke0RE0hzQeOQZSl9MkraXu88IWD2MHJ2eA__&Key-Pair-Id=KNBS2THMRC385"
+                },
+                "brand": {
+                  "name": "amiibo",
+                  "image": {
+                    "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/brand_img/bcc07bced93217618ee7bd556e6f0a2b306137bc6ec66a3f4a1b9f81279782b3_0.png?Expires=1768003200&Signature=C4zBjPGdxEK1G~Ri1iiIuccyPGNk0oIZvsdRscceMjVUaFzcBlKoyqBdZo61nz~EaKX4JCUKsGPelg5YFEnpLtsxt8tFvx820TRONOXgg9P6EOLGvyhaRumMYO6C9UiSxDa6n40GZUE3saEYjyV-FUpUxC5U28PNRgzYVTHpksMYEdBZD22YoSceNCvjSy2H9PGE8AlXX~sEH8AaLfFJoxTkr1~h5Ln0zaRXC9MFpVV-3qrvnltek~jPEDBLWynQcPEh30gjY4MICeSY1qm-uIvv2T8~Pp4UWHWj~M1IrQ0vDFHsJEnJbSRKsysPRzoOnMUPA95MTKkTDyUUKsAGMA__&Key-Pair-Id=KNBS2THMRC385"
+                  },
+                  "usualGearPower": {
+                    "name": "問號",
+                    "desc": "在對戰中使用裝備累積經驗值即可解鎖裝備能力。",
+                    "image": {
+                      "url": "https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png?Expires=1768003200&Signature=QofIoyT88DJe09JzkgsRfnRahuPdMAs0TUAnZjja31gr6Dz0uq4U87xP~myLLyWUO0vjnRnvSs1soIVQIF-EosHktM2i~EbleJ1Jc~N-h4LQsggCiRzon4f66CbmEXUqyHFVWq39i0wiDGZ0vhegyYnfrWAMArpkeQ2xszKpXbUtDkjIkDqFdMU1~95LcRrL-~uXJIJ25JoEU7EMUIukXDvsIvaT7RjzWqkn0Ir~hMKzQh18KH6BnIEoj1CyprtJYg3vn8f4mz4aM2~~qA~C1lqbh9-77OAMrxBysCJA5jBr41C6nYcJyRhKo7Fz41iCEwUpKgUIqkqGV50JGUREcw__&Key-Pair-Id=KNBS2THMRC385"
+                    },
+                    "isEmptySlot": true
+                  },
+                  "id": "QnJhbmQtOTk="
+                }
+              },
+              "paint": 263,
+              "result": {
+                "kill": 0,
+                "death": 3,
+                "assist": 0,
+                "special": 1,
+                "noroshiTry": null
+              },
+              "crown": false,
+              "festDragonCert": "NONE"
+            }
+          ],
+          "order": 2,
+          "festTeamName": null,
+          "festStreakWinCount": null,
+          "festUniformName": null
+        }
+      ],
+      "bankaraMatch": null,
+      "leagueMatch": {
+        "leagueMatchEvent": {
+          "name": "裝扮並愛惜使用武器的武器子盃",
+          "id": "TGVhZ3VlTWF0Y2hFdmVudC1Db3N0dW1lUGFydHk="
+        },
+        "myLeaguePower": 1438.6643480416037
+      },
+      "xMatch": null,
+      "duration": 80,
+      "playedTime": "2025-10-19T13:59:47Z",
+      "awards": [
+        {
+          "name": "對戰 No.1",
+          "rank": "GOLD"
+        },
+        {
+          "name": "真格區域前線把控 No.1",
+          "rank": "GOLD"
+        },
+        {
+          "name": "擊倒數 No.1",
+          "rank": "GOLD"
+        }
+      ],
+      "nextHistoryDetail": null,
+      "previousHistoryDetail": {
+        "id": "VnNIaXN0b3J5RGV0YWlsLXUtcXpnNmRpbzdkNXRuZmZyamFubW06TEVBR1VFOjIwMjUxMDE5VDEzNTY1MV81NWI4NjgxOC03ZDkwLTQ0NmItYjA5NS1kNWY3ZGY3YWY2M2Y="
+      }
+    }
+  },
+  "_meta": {
+    "battle_type": "活动对战",
+    "source_api": "get_event_battles",
+    "decoded_id": {
+      "raw": "VnNIaXN0b3J5RGV0YWlsLXUtcXpnNmRpbzdkNXRuZmZyamFubW06TEVBR1VFOjIwMjUxMDE5VDEzNTk0N19kYjA5NjQxMi1iMWU3LTQzMzgtYjA2MS0yMDVlNmJmYWU1MmY=",
+      "decoded": "VsHistoryDetail-u-qzg6dio7d5tnffrjanmm:LEAGUE:20251019T135947_db096412-b1e7-4338-b061-205e6bfae52f",
+      "type_prefix": "VsHistoryDetail",
+      "user_id": "u-qzg6dio7d5tnffrjanmm",
+      "timestamp": "20251019T135947"
+    }
+  }
+}
