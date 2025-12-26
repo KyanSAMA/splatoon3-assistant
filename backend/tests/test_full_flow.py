@@ -7,7 +7,7 @@ Splatoon3 Assistant - 功能测试
 使用方法:
     cd splatoon3-assistant
     source .venv/bin/activate
-    python tests/test_full_flow.py
+    python backend/tests/test_full_flow.py
 """
 
 import asyncio
@@ -25,7 +25,7 @@ os.environ.setdefault("SPLATOON3_PROXY_ADDRESS", "127.0.0.1:7890")
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src import (
+from backend.src import (
     NSOAuth,
     SplatNet3API,
     TokenStore,

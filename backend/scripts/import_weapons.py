@@ -82,7 +82,7 @@ def generate_main_weapons_sql(params: dict, weapons_lang: dict, weapon_info: lis
         params_json = json_to_sql(params_body)
 
         sql = (
-            f"INSERT INTO main_weapons (code, special_point, sub_weapon_code, special_weapon_code, "
+            f"INSERT INTO main_weapon (code, special_point, sub_weapon_code, special_weapon_code, "
             f"zh_name, weapon_class, distance_class, params) VALUES ("
             f"{escape_sql_string(code)}, "
             f"{sql_number(special_point)}, "
@@ -112,7 +112,7 @@ def generate_sub_weapons_sql(params: dict, weapons_lang: dict) -> list[str]:
         params_json = json_to_sql(params_body)
 
         sql = (
-            f"INSERT INTO sub_weapons (code, ink_consume, zh_name, params) VALUES ("
+            f"INSERT INTO sub_weapon (code, ink_consume, zh_name, params) VALUES ("
             f"{escape_sql_string(code)}, "
             f"{sql_number(ink_consume)}, "
             f"{escape_sql_string(zh_name)}, "
@@ -134,7 +134,7 @@ def generate_special_weapons_sql(params: dict, weapons_lang: dict) -> list[str]:
         params_json = json_to_sql(data)
 
         sql = (
-            f"INSERT INTO special_weapons (code, zh_name, params) VALUES ("
+            f"INSERT INTO special_weapon (code, zh_name, params) VALUES ("
             f"{escape_sql_string(code)}, "
             f"{escape_sql_string(zh_name)}, "
             f"{params_json}"
@@ -155,10 +155,14 @@ def main() -> int:
             "-- 武器数据导入 SQL",
             "-- 自动生成，请勿手动修改\n",
             "BEGIN;",
-            "SET CONSTRAINTS ALL DEFERRED;",
+            "PRAGMA foreign_keys=OFF;",
             "\n-- 清空现有数据",
-            "TRUNCATE TABLE main_weapons, sub_weapons, special_weapons RESTART IDENTITY;\n",
-            "-- 副武器数据 (先导入，被主武器引用)",
+            "DELETE FROM main_weapon;",
+            "DELETE FROM sub_weapon;",
+            "DELETE FROM special_weapon;",
+            "DELETE FROM sqlite_sequence WHERE name IN ('main_weapon','sub_weapon','special_weapon');",
+            "PRAGMA foreign_keys=ON;",
+            "\n-- 副武器数据 (先导入，被主武器引用)",
         ]
         all_sqls.extend(generate_sub_weapons_sql(params, weapons_lang))
 
@@ -170,7 +174,8 @@ def main() -> int:
 
         all_sqls.append("\nCOMMIT;")
 
-        output_path = Path(__file__).parent / "migrations" / "002_import_data.sql"
+        output_path = BACKEND_DIR / "database" / "migrations" / "002_import_data.sql"
+        output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
             f.write("\n".join(all_sqls))
 
