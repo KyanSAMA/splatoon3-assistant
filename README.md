@@ -12,6 +12,12 @@
 - 💾 安全的 Token 持久化存储
 - 🎯 清晰的错误类型和提示
 
+## 🧱 架构概览
+
+- **数据层 (`data/`)**：集中存放 JSON、图片与多语言文本，可直接供前端读取或由脚本写入 SQLite。
+- **后端 (`backend/`)**：Python + SQLite，负责 NSO 认证、API 拉取、数据解析与持久化。
+- **前端 (`frontend/`)**：预留 Vue/React 工程目录，通过 REST/GraphQL 或直接读取 JSON 构建交互式界面。
+
 ## 🚀 快速开始
 
 ### 安装
@@ -24,9 +30,11 @@ cd splatoon3-assistant
 python3 -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
-# 安装依赖
-pip install -r requirements.txt
+# 安装后端依赖
+pip install -r backend/requirements.txt
 ```
+
+> 提示：所有 Python 示例和脚本请在 `backend` 目录下运行，或手动执行 `export PYTHONPATH="$(pwd)/backend:$PYTHONPATH"` 以便正确导入 `src` 包。
 
 ### 基础使用
 
@@ -79,8 +87,12 @@ asyncio.run(main())
 #### 运行测试
 
 ```bash
-python tests/test_full_flow.py
+python backend/tests/test_full_flow.py
 ```
+
+## 🖥️ 前端开发
+
+前端目录位于 `frontend/`，如何基于 Vue 或 React 初始化、如何消费 `data/` 与后端 API 的示例说明请查看 [frontend/README.md](frontend/README.md)。
 
 ## 📚 API 文档
 
@@ -157,18 +169,24 @@ tokens = store.load()
 
 ```
 splatoon3-assistant/
-├── src/                  # 源代码
-│   ├── nso_auth.py      # NSO 认证
-│   ├── splatnet3_api.py # SplatNet3 API
-│   ├── token_store.py   # Token 存储
-│   ├── models.py        # 数据模型
-│   └── exceptions.py    # 异常定义
-├── docs/                # 文档
-│   └── MODELS.md        # 数据模型文档
-├── tests/               # 测试文件
-├── README.md           # 项目说明（本文件）
-├── TECHNICAL_ROADMAP.md # 技术路线
-└── CLAUDE.md           # 开发文档
+├── backend/                 # Python + SQLite 后端
+│   ├── src/                 # 核心代码（NSO、SplatNet3、数据模型等）
+│   ├── database/            # 连接封装与迁移脚本
+│   ├── scripts/             # 数据导入/生成脚本
+│   ├── tests/               # 功能/集成测试
+│   └── requirements.txt     # 后端依赖
+├── data/                    # 静态 JSON、图片、语言包与资料
+│   ├── json/
+│   ├── images/
+│   ├── langs/
+│   └── docs/
+├── frontend/                # 预留给 Vue/React 的界面工程
+│   └── README.md
+├── docs/                    # 额外的技术文档
+│   └── MODELS.md
+├── README.md                # 项目说明（本文件）
+├── CLAUDE.md / GEMINI.md    # AI 协作指南
+└── TECHNICAL_ROADMAP.md     # 技术路线
 ```
 
 ## 🔧 技术栈

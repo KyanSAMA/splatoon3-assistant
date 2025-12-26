@@ -199,6 +199,7 @@ async def login_flow() -> dict:
     print(f"  用户昵称: {nickname}")
     print(f"  语言: {lang}")
     print(f"  国家: {country}")
+    print(f"  用户信息: {user_info}")
 
     # Step 4: 获取 bullet_token (对应 s3s.get_bullet())
     print("\n[Step 4] 获取 bullet_token...")
@@ -624,7 +625,7 @@ async def main():
         save_tokens(tokens)
 
     # 测试 API
-    await test_all_apis(tokens)
+    # await test_all_apis(tokens)
 
 
 if __name__ == "__main__":

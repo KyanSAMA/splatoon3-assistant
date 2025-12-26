@@ -7,8 +7,9 @@ import json
 from pathlib import Path
 from typing import Any
 
-BASE_DIR = Path(__file__).parent.parent
-RESOURCES_DIR = BASE_DIR / "resources"
+BACKEND_DIR = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = BACKEND_DIR.parent
+DATA_DIR = PROJECT_ROOT / "data"
 
 
 def load_json(file_path: Path) -> dict:
@@ -146,9 +147,9 @@ def generate_special_weapons_sql(params: dict, weapons_lang: dict) -> list[str]:
 
 def main() -> int:
     try:
-        params = load_json(RESOURCES_DIR / "jsons" / "params.json")
-        weapons_lang = load_json(RESOURCES_DIR / "langs" / "zh-CN" / "weapons.json")
-        weapon_info = load_json(RESOURCES_DIR / "jsons" / "WEAPON_INFO.json")
+        params = load_json(DATA_DIR / "json" / "params.json")
+        weapons_lang = load_json(DATA_DIR / "langs" / "zh-CN" / "weapons.json")
+        weapon_info = load_json(DATA_DIR / "json" / "WEAPON_INFO.json")
 
         all_sqls = [
             "-- 武器数据导入 SQL",
