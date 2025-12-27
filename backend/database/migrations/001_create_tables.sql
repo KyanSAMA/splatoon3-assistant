@@ -66,3 +66,26 @@ CREATE TABLE IF NOT EXISTS stage (
 CREATE INDEX IF NOT EXISTS idx_stage_code ON stage(code);
 CREATE INDEX IF NOT EXISTS idx_stage_vs_stage_id ON stage(vs_stage_id);
 CREATE INDEX IF NOT EXISTS idx_stage_stage_type ON stage(stage_type);
+
+-- 用户表
+CREATE TABLE IF NOT EXISTS user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nsa_id TEXT NOT NULL UNIQUE,
+    splatoon_id TEXT,
+    session_token TEXT NOT NULL,
+    access_token TEXT NOT NULL,
+    g_token TEXT NOT NULL,
+    bullet_token TEXT NOT NULL,
+    user_lang TEXT NOT NULL DEFAULT 'zh-CN',
+    user_country TEXT NOT NULL DEFAULT 'JP',
+    user_nickname TEXT,
+    is_current INTEGER NOT NULL DEFAULT 0 CHECK (is_current IN (0, 1)),
+    last_login_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_user_current ON user(is_current) WHERE is_current = 1;
+CREATE INDEX IF NOT EXISTS idx_user_activity ON user(is_current DESC, last_login_at DESC);
+CREATE INDEX IF NOT EXISTS idx_user_nsa_id ON user(nsa_id);
+CREATE INDEX IF NOT EXISTS idx_user_splatoon_id ON user(splatoon_id);

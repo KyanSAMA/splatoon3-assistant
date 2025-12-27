@@ -6,11 +6,11 @@ import asyncio
 import base64
 from typing import Optional, Dict, Any, Callable
 
-from .nso_auth import NSOAuth, APP_USER_AGENT
+from ..auth.nso_auth import NSOAuth, APP_USER_AGENT
 from .graphql_utils import gen_graphql_body, GRAPHQL_URL
-from .config import Config, default_config
-from .http_client import AsyncHttpClient
-from .exceptions import (
+from ..core.config import Config, default_config
+from ..core.http_client import AsyncHttpClient
+from ..core.exceptions import (
     SessionExpiredError,
     MembershipRequiredError,
     BulletTokenError,

@@ -2,6 +2,7 @@
 
 import logging
 import os
+from pathlib import Path
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -9,11 +10,11 @@ import aiosqlite
 
 _logger = logging.getLogger(__name__)
 
-# 默认使用 database/data/splatoon3.db，便于集中存放数据文件
-DB_PATH = os.environ.get(
-    "DB_PATH",
-    os.path.join(os.path.dirname(__file__), "data", "splatoon3.db"),
-)
+# 默认指向项目 data 目录下的 SQLite 文件，可通过环境变量覆盖
+# connect.py 位于 backend/src/dao/，parents[3] 指向 splatoon3-assistant/
+_PROJECT_ROOT = Path(__file__).resolve().parents[3]
+_DEFAULT_DB = _PROJECT_ROOT / "data" / "splatoon3.db"
+DB_PATH = os.environ.get("DB_PATH", str(_DEFAULT_DB))
 
 
 def _dict_factory(cursor: aiosqlite.Cursor, row: tuple) -> dict:

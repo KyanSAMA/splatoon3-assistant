@@ -13,9 +13,9 @@ from typing import Optional, Tuple, Dict, Any
 import httpx
 from bs4 import BeautifulSoup
 
-from .config import Config, default_config
-from .http_client import HttpClient, AsyncHttpClient
-from .exceptions import SessionExpiredError, MembershipRequiredError, BulletTokenError
+from ..core.config import Config, default_config
+from ..core.http_client import HttpClient, AsyncHttpClient
+from ..core.exceptions import SessionExpiredError, MembershipRequiredError, BulletTokenError
 
 
 # Constants
@@ -302,7 +302,8 @@ class NSOAuth:
         
         id_access_token = id_response.get("access_token")
         id_token = id_response.get("id_token")
-        
+
+
         if not id_access_token:
             return None, None
         
@@ -322,7 +323,7 @@ class NSOAuth:
             headers=app_head,
         )
         user_info = resp.json()
-        
+
         return id_token, user_info
     
     async def _get_access_token(

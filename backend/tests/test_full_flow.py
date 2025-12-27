@@ -33,19 +33,6 @@ from backend.src import (
     MembershipRequiredError,
     BulletTokenError,
     TokenRefreshError,
-    # Models
-    BattleHistories,
-    CoopResult,
-    FriendList,
-    HomeData,
-    DecodedId,
-    StageRecords,
-    WeaponRecords,
-    NSFriendList,
-    NSMyself,
-    HistorySummary,
-    VsHistoryDetailFull,
-    CoopHistoryDetailFull,
 )
 
 
@@ -119,35 +106,6 @@ def save_test_result(method_name: str, raw_result: dict, parsed_result: Any = No
 
     except Exception as e:
         print(f"⚠ 保存结果失败: {e}")
-
-
-def parse_result(method_name: str, result: Any) -> Any:
-    """根据方法名解析结果"""
-    parsers = {
-        "get_home": HomeData.from_dict,
-        "get_friends": FriendList.from_dict,
-        "get_recent_battles": lambda d: BattleHistories.from_dict(d, "latestBattleHistories"),
-        "get_regular_battles": lambda d: BattleHistories.from_dict(d, "regularBattleHistories"),
-        "get_bankara_battles": lambda d: BattleHistories.from_dict(d, "bankaraBattleHistories"),
-        "get_x_battles": lambda d: BattleHistories.from_dict(d, "xBattleHistories"),
-        "get_event_battles": lambda d: BattleHistories.from_dict(d, "eventBattleHistories"),
-        "get_private_battles": lambda d: BattleHistories.from_dict(d, "privateBattleHistories"),
-        "get_coops": CoopResult.from_dict,
-        "get_stage_records": StageRecords.from_dict,
-        "get_weapon_records": WeaponRecords.from_dict,
-        "get_history_summary": HistorySummary.from_dict,
-        "get_app_ns_friend_list": NSFriendList.from_dict,
-        "get_app_ns_myself": NSMyself.from_dict,
-        "get_battle_detail": VsHistoryDetailFull.from_dict,
-        "get_coop_detail": CoopHistoryDetailFull.from_dict,
-    }
-    parser = parsers.get(method_name)
-    if parser:
-        try:
-            return parser(result)
-        except Exception as e:
-            print(f"    ⚠ 解析失败: {e}")
-    return None
 
 
 # ============================================================
@@ -296,11 +254,6 @@ async def test_all_apis(tokens: dict) -> dict:
             success_count += 1
             print("✓ 成功")
 
-            # 解析并保存
-            parsed = parse_result(method_name, result)
-            save_test_result(method_name, result, parsed)
-            _print_result_summary(method_name, result, parsed)
-
         except SessionExpiredError:
             print(f"✗ Session Token 已过期，需要重新登录")
             print("   → 请运行测试并选择 'clear' 来清除缓存并重新登录")
@@ -369,22 +322,10 @@ async def test_detail_apis(api: SplatNet3API, results: dict) -> None:
             result = await api.get_battle_detail(battle_id)
             if result:
                 print("✓ 成功")
-                decoded = DecodedId.decode(battle_id)
 
                 # 保存结果
                 filename = f"battle_detail_{method_key.replace('get_', '').replace('_battles', '')}"
                 result_with_meta = dict(result) if isinstance(result, dict) else {"data": result}
-                result_with_meta["_meta"] = {
-                    "battle_type": type_name,
-                    "source_api": method_key,
-                    "decoded_id": {
-                        "raw": decoded.raw,
-                        "decoded": decoded.decoded,
-                        "type_prefix": decoded.type_prefix,
-                        "user_id": decoded.user_id,
-                        "timestamp": decoded.timestamp,
-                    }
-                }
                 save_test_result(filename, result_with_meta)
                 detail_results[type_name] = result
 
@@ -410,17 +351,8 @@ async def test_detail_apis(api: SplatNet3API, results: dict) -> None:
             result = await api.get_coop_detail(coop_id)
             if result:
                 print("✓ 成功")
-                decoded = DecodedId.decode(coop_id)
                 result_with_meta = dict(result) if isinstance(result, dict) else {"data": result}
-                result_with_meta["_decoded_id"] = {
-                    "raw": decoded.raw,
-                    "decoded": decoded.decoded,
-                    "type_prefix": decoded.type_prefix,
-                    "user_id": decoded.user_id,
-                    "timestamp": decoded.timestamp,
-                }
                 save_test_result("get_coop_detail", result_with_meta)
-                print(f"    → 打工ID: {decoded.decoded[:50]}...")
             else:
                 print("⚠ 返回空数据")
         except Exception as e:

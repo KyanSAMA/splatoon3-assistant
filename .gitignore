@@ -1,6 +1,6 @@
 .token_cache.json
 .idea
-backend/tests/json/
+data/tests/json/
 node_modules/
 frontend/dist/
 

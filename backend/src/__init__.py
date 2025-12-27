@@ -3,93 +3,38 @@
 Splatoon3 游戏助手 - 通过获取 Splatoon3 的战斗数据及其他辅助数据进行数据分析
 """
 
-from .config import Config, default_config
-from .nso_auth import NSOAuth
-from .splatnet3_api import SplatNet3API
-from .token_store import TokenStore
-from .exceptions import (
+from .core import (
+    Config,
+    default_config,
+    HttpClient,
+    AsyncHttpClient,
     SplatoonError,
     SessionExpiredError,
     MembershipRequiredError,
     BulletTokenError,
     NetworkError,
-    TokenRefreshError
+    TokenRefreshError,
 )
-from .models import (
-    Image,
-    NamedEntity,
-    DecodedId,
-    Weapon,
-    SubWeapon,
-    SpecialWeapon,
-    Brand,
-    GearPower,
-    Gear,
-    GearDetail,
-    VsMode,
-    VsRule,
-    VsStage,
-    TeamResult,
-    BattlePlayer,
-    BankaraMatch,
-    BattleHistoryDetail,
-    BattleSummary,
-    BattleHistories,
-    CoopGrade,
-    CoopStage,
-    CoopScale,
-    CoopPointCard,
-    CoopHistoryDetail,
-    CoopResult,
-    Friend,
-    FriendList,
-    Badge,
-    Nameplate,
-    NameplateBackground,
-    CurrentPlayer,
-    Banner,
-    HomeData,
-    StageStats,
-    StageRecord,
-    StageRecords,
-    WeaponStats,
-    WeaponRecord,
-    WeaponRecords,
-    NSGame,
-    NSPresence,
-    NSFriend,
-    NSFriendList,
-    NSMyself,
-    XMatchMax,
-    MatchPlayHistory,
-    PlayHistory,
-    HistorySummary,
-    # Detail models
-    VsPlayerDetail,
-    CoopUniform,
-    CoopWeapon,
-    CoopSpecialWeapon,
-    CoopPlayerDetail,
-    CoopPlayerResult,
-    TeamColor,
-    VsTeamResult,
-    VsTeam,
-    VsHistoryDetailFull,
-    CoopEnemy,
-    CoopEnemyResult,
-    CoopBossResult,
-    CoopWave,
-    CoopHistoryDetailFull,
-)
+from .auth import NSOAuth, TokenStore
+from .api import SplatNet3API
+from .models import User
+from .services import auth_router
 
 __all__ = [
-    # Config
+    # Core
     "Config",
     "default_config",
-    # Auth & API
+    "HttpClient",
+    "AsyncHttpClient",
+    # Auth
     "NSOAuth",
-    "SplatNet3API",
     "TokenStore",
+    # API
+    "SplatNet3API",
+    # Models
+    "User",
+    # Services (FastAPI Routers)
+    "auth_router",
     # Exceptions
     "SplatoonError",
     "SessionExpiredError",
@@ -97,80 +42,4 @@ __all__ = [
     "BulletTokenError",
     "NetworkError",
     "TokenRefreshError",
-    # Models - Basic
-    "Image",
-    "NamedEntity",
-    "DecodedId",
-    # Models - Weapon
-    "Weapon",
-    "SubWeapon",
-    "SpecialWeapon",
-    # Models - Gear
-    "Brand",
-    "GearPower",
-    "Gear",
-    "GearDetail",
-    # Models - Battle
-    "VsMode",
-    "VsRule",
-    "VsStage",
-    "TeamResult",
-    "BattlePlayer",
-    "BankaraMatch",
-    "BattleHistoryDetail",
-    "BattleSummary",
-    "BattleHistories",
-    # Models - Coop
-    "CoopGrade",
-    "CoopStage",
-    "CoopScale",
-    "CoopPointCard",
-    "CoopHistoryDetail",
-    "CoopResult",
-    # Models - Friend
-    "Friend",
-    "FriendList",
-    # Models - Player
-    "Badge",
-    "Nameplate",
-    "NameplateBackground",
-    "CurrentPlayer",
-    # Models - Home
-    "Banner",
-    "HomeData",
-    # Models - Records
-    "StageStats",
-    "StageRecord",
-    "StageRecords",
-    "WeaponStats",
-    "WeaponRecord",
-    "WeaponRecords",
-    # Models - NS API
-    "NSGame",
-    "NSPresence",
-    "NSFriend",
-    "NSFriendList",
-    "NSMyself",
-    # Models - History
-    "XMatchMax",
-    "MatchPlayHistory",
-    "PlayHistory",
-    "HistorySummary",
-    # Models - Battle Detail
-    "VsPlayerDetail",
-    "TeamColor",
-    "VsTeamResult",
-    "VsTeam",
-    "VsHistoryDetailFull",
-    # Models - Coop Detail
-    "CoopUniform",
-    "CoopWeapon",
-    "CoopSpecialWeapon",
-    "CoopPlayerDetail",
-    "CoopPlayerResult",
-    "CoopEnemy",
-    "CoopEnemyResult",
-    "CoopBossResult",
-    "CoopWave",
-    "CoopHistoryDetailFull",
 ]

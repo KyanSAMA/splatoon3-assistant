@@ -220,3 +220,14 @@ except Exception:
 ## 修改建议
 
 如果在开发过程中有新的改进建议，请补充到此处。
+
+---
+
+## 前端 UI 规范
+
+### 品牌与版权
+
+- **禁止** 在 UI 中显示 "Nintendo"、"Nintendo Switch" 等任天堂相关文字
+- **禁止** 使用任天堂官方 Logo 或图标
+- **禁止** 显示 "Not affiliated with Nintendo" 等声明（此为个人项目，无需声明）
+- 项目名称统一使用 "Splatoon3 Assistant"
