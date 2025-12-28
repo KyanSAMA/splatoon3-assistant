@@ -39,6 +39,14 @@ from .stage_record_dao import (
     batch_upsert_stage_records,
     delete_user_stage_records,
 )
+from .weapon_record_dao import (
+    WeaponRecordData,
+    get_user_weapon_records,
+    get_user_weapon_record,
+    upsert_weapon_record,
+    batch_upsert_weapon_records,
+    delete_user_weapon_records,
+)
 
 __all__ = [
     "get_connection",
@@ -73,4 +81,10 @@ __all__ = [
     "upsert_stage_record",
     "batch_upsert_stage_records",
     "delete_user_stage_records",
+    "WeaponRecordData",
+    "get_user_weapon_records",
+    "get_user_weapon_record",
+    "upsert_weapon_record",
+    "batch_upsert_weapon_records",
+    "delete_user_weapon_records",
 ]

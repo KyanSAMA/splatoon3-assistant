@@ -9,10 +9,11 @@ from ..api.splatnet3_api import SplatNet3API
 from ..models import User
 from ..dao.stage_record_dao import StageRecordData, batch_upsert_stage_records
 from ..dao.stage_dao import get_stages_map_by_vs_stage_id
+from ..dao.weapon_record_dao import WeaponRecordData, batch_upsert_weapon_records
 from .auth_service import require_current_user, require_splatnet_api
 
 logger = logging.getLogger(__name__)
-router = APIRouter(prefix="/data", tags=["data"])
+router = APIRouter(prefix="/data/refresh", tags=["data"])
 
 
 async def _parse_stage_records(
@@ -65,7 +66,7 @@ async def _parse_stage_records(
     return records
 
 
-@router.post("/refresh/stages")
+@router.post("/stages_records")
 async def refresh_stage_records(
     user: User = Depends(require_current_user),
     api: SplatNet3API = Depends(require_splatnet_api),
@@ -85,3 +86,73 @@ async def refresh_stage_records(
     count = await batch_upsert_stage_records(records)
     logger.info(f"Refreshed {count} stage records for user {user.id}")
     return {"success": True, "message": f"Refreshed {count} stage records", "count": count}
+
+
+def _parse_weapon_records(user_id: int, data: dict) -> List[WeaponRecordData]:
+    """
+    解析 WeaponRecordQuery 响应数据
+
+    API 响应结构:
+    {
+        "weaponId": 0,
+        "name": "广域标记枪",
+        "stats": {
+            "lastUsedTime": "2024-04-13T08:33:12Z",
+            "level": 1,
+            "expToLevelUp": 1315,
+            "win": 9,
+            "vibes": 0.0,
+            "paint": 11877,
+            "currentWeaponPowerOrder": { "weaponPower": 1750.68, "id": "..." } | null,
+            "maxWeaponPower": 1750.68 | null
+        }
+    }
+    """
+    records = []
+    nodes = (data.get("data") or {}).get("weaponRecords") or {}
+    nodes = nodes.get("nodes") or []
+    for node in nodes:
+        try:
+            weapon_id = node.get("weaponId")
+            if weapon_id is None:
+                continue
+
+            stats = node.get("stats") or {}
+            power_order = stats.get("currentWeaponPowerOrder")
+            current_power = power_order.get("weaponPower") if power_order else None
+
+            records.append(WeaponRecordData(
+                user_id=user_id,
+                main_weapon_id=int(weapon_id),
+                main_weapon_name=node.get("name") or "",
+                last_used_time=stats.get("lastUsedTime"),
+                level=int(stats.get("level") or 0),
+                exp_to_level_up=int(stats.get("expToLevelUp") or 0),
+                win=int(stats.get("win") or 0),
+                vibes=float(stats.get("vibes") or 0.0),
+                paint=int(stats.get("paint") or 0),
+                current_weapon_power=current_power,
+                max_weapon_power=stats.get("maxWeaponPower"),
+            ))
+        except Exception as e:
+            logger.error(f"Failed to parse weapon record node: {e}")
+    return records
+
+
+@router.post("/weapon_records")
+async def refresh_weapon_records(
+    user: User = Depends(require_current_user),
+    api: SplatNet3API = Depends(require_splatnet_api),
+):
+    """刷新用户武器战绩数据"""
+    data = await api.get_weapon_records()
+    if not data:
+        return {"success": False, "message": "Failed to fetch weapon records", "count": 0}
+
+    records = _parse_weapon_records(user.id, data)
+    if not records:
+        return {"success": True, "message": "No weapon records found", "count": 0}
+
+    count = await batch_upsert_weapon_records(records)
+    logger.info(f"Refreshed {count} weapon records for user {user.id}")
+    return {"success": True, "message": f"Refreshed {count} weapon records", "count": count}

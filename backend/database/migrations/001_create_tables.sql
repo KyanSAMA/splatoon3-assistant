@@ -111,3 +111,25 @@ CREATE TABLE IF NOT EXISTS user_stage_record (
 
 CREATE INDEX IF NOT EXISTS idx_user_stage_record_user_id ON user_stage_record(user_id);
 CREATE INDEX IF NOT EXISTS idx_user_stage_record_vs_stage_id ON user_stage_record(vs_stage_id);
+
+-- 用户武器战绩表
+CREATE TABLE IF NOT EXISTS user_weapon_record (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    main_weapon_id INTEGER NOT NULL,
+    main_weapon_name TEXT NOT NULL,
+    last_used_time TEXT,
+    level INTEGER NOT NULL DEFAULT 0,
+    exp_to_level_up INTEGER NOT NULL DEFAULT 0,
+    win INTEGER NOT NULL DEFAULT 0,
+    vibes REAL NOT NULL DEFAULT 0.0,
+    paint INTEGER NOT NULL DEFAULT 0,
+    current_weapon_power REAL,
+    max_weapon_power REAL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, main_weapon_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_user_weapon_record_user_id ON user_weapon_record(user_id);
+CREATE INDEX IF NOT EXISTS idx_user_weapon_record_main_weapon_id ON user_weapon_record(main_weapon_id);
