@@ -89,3 +89,25 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_user_current ON user(is_current) WHERE is_
 CREATE INDEX IF NOT EXISTS idx_user_activity ON user(is_current DESC, last_login_at DESC);
 CREATE INDEX IF NOT EXISTS idx_user_nsa_id ON user(nsa_id);
 CREATE INDEX IF NOT EXISTS idx_user_splatoon_id ON user(splatoon_id);
+
+-- 用户地图胜率表
+CREATE TABLE IF NOT EXISTS user_stage_record (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    stage_id INTEGER,
+    vs_stage_id INTEGER NOT NULL,
+    stage_code TEXT,
+    name TEXT NOT NULL,
+    last_played_time TEXT,
+    win_rate_ar REAL,
+    win_rate_cl REAL,
+    win_rate_gl REAL,
+    win_rate_lf REAL,
+    win_rate_tw REAL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, vs_stage_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_user_stage_record_user_id ON user_stage_record(user_id);
+CREATE INDEX IF NOT EXISTS idx_user_stage_record_vs_stage_id ON user_stage_record(vs_stage_id);
