@@ -282,7 +282,7 @@ async def _parse_and_save_battle_detail(
         my_team_data = BattleTeamData(
             battle_id=battle_id,
             team_role="MY",
-            team_order=0,
+            team_order=my_team.get("order") or 99,
             paint_ratio=paint_ratio,
             score=score,
             noroshi=noroshi,
@@ -307,16 +307,14 @@ async def _parse_and_save_battle_detail(
 
         # 对方队伍
         other_teams = vs_detail.get("otherTeams") or []
-        for team_order, other_team in enumerate(other_teams):
+        for other_team in other_teams:
             other_result = other_team.get("result") or {}
             o_paint_ratio, o_score, o_noroshi = _parse_team_result(other_result)
 
-            team_role = "OTHER" if len(other_teams) > 1 and team_order > 0 else "OPPONENT"
-
             other_team_data = BattleTeamData(
                 battle_id=battle_id,
-                team_role=team_role,
-                team_order=team_order,
+                team_role="OTHER",
+                team_order=other_team.get("order") or 99,
                 paint_ratio=o_paint_ratio,
                 score=o_score,
                 noroshi=o_noroshi,
