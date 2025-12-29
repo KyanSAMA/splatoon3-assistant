@@ -268,13 +268,6 @@ class SplatNet3API:
                 headers=headers,
                 cookies=cookies,
             )
-            if resp.status_code == 200:
-                token_data = {
-                    "session_token": self.session_token,
-                    "g_token": self.g_token,
-                    "bullet_token": self.bullet_token,
-                    "access_token": self.access_token,
-                }
 
             # 检查 401（token 过期）
             if resp.status_code == 401:
@@ -287,6 +280,16 @@ class SplatNet3API:
 
                 # 刷新 token（可能抛出异常）
                 success, token_data = await self._refresh_tokens()
+
+                # 刷新成功后立即回调持久化，不依赖重试结果
+                if self.on_tokens_updated and token_data:
+                    try:
+                        if asyncio.iscoroutinefunction(self.on_tokens_updated):
+                            await self.on_tokens_updated(token_data)
+                        else:
+                            self.on_tokens_updated(token_data)
+                    except Exception as e:
+                        print(f"[SplatNet3API] Token 回调失败: {e}")
 
                 # 重试请求（只重试一次）
                 print(f"[SplatNet3API] Tokens 刷新完成，重试请求...")
@@ -303,18 +306,6 @@ class SplatNet3API:
                 if resp.status_code != 200:
                     print(f"[SplatNet3API] 重试后仍失败，状态码: {resp.status_code}")
                     return None
-
-            # 在锁外调用回调，避免死锁
-            if self.on_tokens_updated and token_data:
-                try:
-                    # 支持同步和异步回调
-                    if asyncio.iscoroutinefunction(self.on_tokens_updated):
-                        await self.on_tokens_updated(token_data)
-                    else:
-                        self.on_tokens_updated(token_data)
-                except Exception as e:
-                    print(f"[SplatNet3API] Token 回调失败: {e}")
-                    # 回调失败不影响刷新流程，继续
 
             elif resp.status_code != 200:
                 print(f"[SplatNet3API] 请求失败，状态码: {resp.status_code}")

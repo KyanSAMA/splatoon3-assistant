@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from src.services import auth_router, data_router, close_all_api_sessions
+from src.services import auth_router, data_router, battle_router, close_all_api_sessions
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -30,6 +30,7 @@ app = FastAPI(
 
 app.include_router(auth_router)
 app.include_router(data_router)
+app.include_router(battle_router)
 
 
 @app.get("/health")

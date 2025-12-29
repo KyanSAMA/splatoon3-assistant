@@ -47,6 +47,23 @@ from .weapon_record_dao import (
     batch_upsert_weapon_records,
     delete_user_weapon_records,
 )
+from .battle_detail_dao import (
+    BattleDetailData,
+    BattleTeamData,
+    BattlePlayerData,
+    BattleAwardData,
+    get_battle_detail_by_id,
+    get_battle_detail_by_decode_id,
+    get_battle_detail_by_played_time,
+    get_user_battle_details,
+    upsert_battle_detail,
+    get_battle_teams,
+    upsert_battle_team,
+    get_battle_players,
+    batch_upsert_battle_players,
+    batch_upsert_battle_awards,
+    delete_battle_detail,
+)
 
 __all__ = [
     "get_connection",
@@ -87,4 +104,19 @@ __all__ = [
     "upsert_weapon_record",
     "batch_upsert_weapon_records",
     "delete_user_weapon_records",
+    "BattleDetailData",
+    "BattleTeamData",
+    "BattlePlayerData",
+    "BattleAwardData",
+    "get_battle_detail_by_id",
+    "get_battle_detail_by_decode_id",
+    "get_battle_detail_by_played_time",
+    "get_user_battle_details",
+    "upsert_battle_detail",
+    "get_battle_teams",
+    "upsert_battle_team",
+    "get_battle_players",
+    "batch_upsert_battle_players",
+    "batch_upsert_battle_awards",
+    "delete_battle_detail",
 ]
