@@ -276,3 +276,133 @@ CREATE TABLE IF NOT EXISTS battle_award (
 
 CREATE INDEX IF NOT EXISTS idx_battle_award_user ON battle_award(user_id, award_name);
 CREATE INDEX IF NOT EXISTS idx_battle_award_battle ON battle_award(battle_id);
+
+-- ===========================================
+-- 打工详情主表
+-- ===========================================
+CREATE TABLE IF NOT EXISTS coop_detail (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,               -- 归属用户
+    splatoon_id TEXT NOT NULL,              -- 从base64解密的玩家ID (u-xxx)
+    played_time TEXT NOT NULL,              -- 游戏时间 (ISO8601)
+    rule TEXT NOT NULL,                     -- 规则 (REGULAR/BIG_RUN/TEAM_CONTEST)
+    danger_rate REAL,                       -- 危险度
+    result_wave INTEGER,                    -- 结果波次 (0=通关)
+    smell_meter INTEGER,                    -- 臭味计
+    stage_id TEXT,                          -- 场地ID (base64解密后)
+    stage_name TEXT,                        -- 场地名称
+    after_grade_id TEXT,                    -- 段位ID (base64解密后)
+    after_grade_name TEXT,                  -- 段位名称
+    after_grade_point INTEGER,              -- 段位点数
+    boss_id TEXT,                           -- Extra Wave Boss ID
+    boss_name TEXT,                         -- Extra Wave Boss 名称
+    boss_defeated INTEGER DEFAULT 0,        -- 是否击败Boss (0/1)
+    scale_gold INTEGER DEFAULT 0,           -- 金鳞片
+    scale_silver INTEGER DEFAULT 0,         -- 银鳞片
+    scale_bronze INTEGER DEFAULT 0,         -- 铜鳞片
+    job_point INTEGER,                      -- 打工点数
+    job_score INTEGER,                      -- 打工分数
+    job_rate REAL,                          -- 打工倍率
+    job_bonus INTEGER,                      -- 打工奖励
+    images JSON,                            -- 图片 {场地名:url, Boss名:url}
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, splatoon_id, played_time)
+);
+
+CREATE INDEX IF NOT EXISTS idx_coop_detail_user_time ON coop_detail(user_id, played_time DESC);
+CREATE INDEX IF NOT EXISTS idx_coop_detail_rule ON coop_detail(rule);
+CREATE INDEX IF NOT EXISTS idx_coop_detail_stage ON coop_detail(stage_id);
+CREATE INDEX IF NOT EXISTS idx_coop_detail_splatoon_id ON coop_detail(splatoon_id);
+
+-- ===========================================
+-- 打工玩家表
+-- ===========================================
+CREATE TABLE IF NOT EXISTS coop_player (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    coop_id INTEGER NOT NULL,               -- 关联 coop_detail.id
+    player_order INTEGER NOT NULL,          -- 玩家顺序 (0=自己)
+    is_myself INTEGER DEFAULT 0,            -- 是否是自己 (0/1)
+    player_id TEXT,                         -- 玩家ID (base64解密后)
+    name TEXT NOT NULL,                     -- 玩家名称
+    name_id TEXT,                           -- 玩家名称ID
+    byname TEXT,                            -- 称号
+    species TEXT,                           -- 种族 (INKLING/OCTOLING)
+    uniform_id TEXT,                        -- 工作服ID (base64解密后)
+    uniform_name TEXT,                      -- 工作服名称
+    special_weapon_id INTEGER,              -- 大招ID (weaponId字段)
+    special_weapon_name TEXT,               -- 大招名称
+    weapons JSON,                           -- 武器ID列表 (base64解密后)
+    weapon_names JSON,                      -- 武器名称列表
+    defeat_enemy_count INTEGER DEFAULT 0,   -- 击杀鲑鱼数
+    deliver_count INTEGER DEFAULT 0,        -- 运蛋数(红蛋)
+    golden_assist_count INTEGER DEFAULT 0,  -- 金蛋助攻数
+    golden_deliver_count INTEGER DEFAULT 0, -- 金蛋入筐数
+    rescue_count INTEGER DEFAULT 0,         -- 救人次数
+    rescued_count INTEGER DEFAULT 0,        -- 被救次数
+    images JSON,                            -- 图片 {武器名:url, 大招名:url, 工作服名:url}
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(coop_id, player_order)
+);
+
+CREATE INDEX IF NOT EXISTS idx_coop_player_coop ON coop_player(coop_id);
+CREATE INDEX IF NOT EXISTS idx_coop_player_myself ON coop_player(coop_id) WHERE is_myself = 1;
+
+-- ===========================================
+-- 打工波次表
+-- ===========================================
+CREATE TABLE IF NOT EXISTS coop_wave (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    coop_id INTEGER NOT NULL,               -- 关联 coop_detail.id
+    wave_number INTEGER NOT NULL,           -- 波次 (1-4, 4=Extra Wave)
+    water_level INTEGER,                    -- 水位 (0=低, 1=中, 2=高)
+    event_id TEXT,                          -- 特殊事件ID (base64解密后)
+    event_name TEXT,                        -- 特殊事件名称 (狂潮/走私鱼来袭/...)
+    deliver_norm INTEGER,                   -- 目标金蛋数
+    golden_pop_count INTEGER,               -- 金蛋出现数
+    team_deliver_count INTEGER,             -- 团队实际交付数
+    special_weapons JSON,                   -- 使用的大招ID列表
+    special_weapon_names JSON,              -- 使用的大招名称列表
+    images JSON,                            -- 图片 {事件名:url, 大招名:url}
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(coop_id, wave_number)
+);
+
+CREATE INDEX IF NOT EXISTS idx_coop_wave_coop ON coop_wave(coop_id);
+CREATE INDEX IF NOT EXISTS idx_coop_wave_event ON coop_wave(event_id);
+
+-- ===========================================
+-- 打工敌人统计表
+-- ===========================================
+CREATE TABLE IF NOT EXISTS coop_enemy (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    coop_id INTEGER NOT NULL,               -- 关联 coop_detail.id
+    enemy_id TEXT NOT NULL,                 -- 敌人ID (base64解密后)
+    enemy_name TEXT,                        -- 敌人名称
+    defeat_count INTEGER DEFAULT 0,         -- 我击杀数
+    team_defeat_count INTEGER DEFAULT 0,    -- 团队击杀数
+    pop_count INTEGER DEFAULT 0,            -- 出现数
+    images JSON,                            -- 图片 {敌人名:url}
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(coop_id, enemy_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_coop_enemy_coop ON coop_enemy(coop_id);
+CREATE INDEX IF NOT EXISTS idx_coop_enemy_enemy ON coop_enemy(enemy_id);
+
+-- ===========================================
+-- 打工Boss结果表
+-- ===========================================
+CREATE TABLE IF NOT EXISTS coop_boss (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    coop_id INTEGER NOT NULL,               -- 关联 coop_detail.id
+    boss_id TEXT NOT NULL,                  -- Boss ID (base64解密后)
+    boss_name TEXT,                         -- Boss名称 (横纲/辰龙/巨颚)
+    has_defeat_boss INTEGER DEFAULT 0,      -- 是否击败 (0/1)
+    images JSON,                            -- 图片 {Boss名:url}
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(coop_id, boss_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_coop_boss_coop ON coop_boss(coop_id);
+CREATE INDEX IF NOT EXISTS idx_coop_boss_boss ON coop_boss(boss_id);

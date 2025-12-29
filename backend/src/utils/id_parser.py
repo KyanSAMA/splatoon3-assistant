@@ -121,3 +121,105 @@ def parse_battle_id(b64_id: str) -> Tuple[str, Optional[str], Optional[str]]:
         pass
 
     return (decoded, None, None)
+
+
+# ===========================================
+# 打工 ID 解析
+# ===========================================
+
+def extract_splatoon_id_from_coop(b64_id: str) -> Optional[str]:
+    """
+    从 Base64 编码的打工 ID 中提取 splatoon_id
+
+    解码后格式: CoopHistoryDetail-{splatoon_id}:{timestamp}_{uuid}
+    示例:
+        CoopHistoryDetail-u-qzg6dio7d5tnffrjanmm:20251213T055224_4be89533-...
+        -> u-qzg6dio7d5tnffrjanmm
+    """
+    decoded = decode_splatnet_id(b64_id)
+    if not decoded.startswith("CoopHistoryDetail-"):
+        return None
+
+    rest = decoded[len("CoopHistoryDetail-"):]
+    if ":" in rest:
+        return rest.split(":")[0]
+    return rest
+
+
+def extract_coop_stage_id(b64_id: str) -> Optional[str]:
+    """
+    从 Base64 编码的打工场地 ID 中提取 ID
+
+    示例:
+        "Q29vcFN0YWdlLTEwNQ==" -> "CoopStage-105" -> "CoopStage-105"
+    """
+    return decode_splatnet_id(b64_id)
+
+
+def extract_coop_grade_id(b64_id: str) -> Optional[str]:
+    """
+    从 Base64 编码的段位 ID 中提取 ID
+
+    示例:
+        "Q29vcEdyYWRlLTg=" -> "CoopGrade-8"
+    """
+    return decode_splatnet_id(b64_id)
+
+
+def extract_coop_enemy_id(b64_id: str) -> Optional[str]:
+    """
+    从 Base64 编码的敌人 ID 中提取 ID
+
+    示例:
+        "Q29vcEVuZW15LTQ=" -> "CoopEnemy-4"
+    """
+    return decode_splatnet_id(b64_id)
+
+
+def extract_coop_event_id(b64_id: str) -> Optional[str]:
+    """
+    从 Base64 编码的事件 ID 中提取 ID
+
+    示例:
+        "Q29vcEV2ZW50V2F2ZS00" -> "CoopEventWave-4"
+    """
+    return decode_splatnet_id(b64_id)
+
+
+def extract_special_weapon_id(b64_id: str) -> Optional[str]:
+    """
+    从 Base64 编码的大招 ID 中提取 ID
+
+    示例:
+        "U3BlY2lhbFdlYXBvbi0yMDAxMg==" -> "SpecialWeapon-20012"
+    """
+    return decode_splatnet_id(b64_id)
+
+
+def extract_coop_uniform_id(b64_id: str) -> Optional[str]:
+    """
+    从 Base64 编码的工作服 ID 中提取 ID
+
+    示例:
+        "Q29vcFVuaWZvcm0tMTc=" -> "CoopUniform-17"
+    """
+    return decode_splatnet_id(b64_id)
+
+
+def extract_coop_player_id(b64_id: str) -> Optional[str]:
+    """
+    从 Base64 编码的打工玩家 ID 中提取 splatoon_id
+
+    解码后格式: CoopPlayer-{splatoon_id}:{timestamp}_{uuid}:{player_splatoon_id}
+    示例:
+        CoopPlayer-u-qzg6dio7d5tnffrjanmm:20251213T055224_uuid:u-anrhkem22amj23n7anmm
+        -> u-anrhkem22amj23n7anmm (最后一部分是该玩家的 splatoon_id)
+    """
+    decoded = decode_splatnet_id(b64_id)
+    if not decoded.startswith("CoopPlayer-"):
+        return None
+
+    parts = decoded.split(":")
+    if len(parts) >= 3:
+        return parts[-1]
+    return None
