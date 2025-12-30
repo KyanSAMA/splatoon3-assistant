@@ -116,3 +116,8 @@ async def get_all_weapons(limit: int = 100) -> List[Dict[str, Any]]:
 async def get_weapon_by_code(code: str) -> Optional[Dict[str, Any]]:
     sql = _WEAPON_FULL_SQL + "WHERE m.code = :code"
     return await _fetch_one(sql, {"code": code})
+
+
+async def get_weapon_by_id(weapon_id: int) -> Optional[Dict[str, Any]]:
+    sql = _WEAPON_FULL_SQL + "WHERE m.id = :id"
+    return await _fetch_one(sql, {"id": weapon_id})

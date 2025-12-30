@@ -8,6 +8,7 @@ from .weapon_dao import (
     get_weapons_by_special,
     get_all_weapons,
     get_weapon_by_code,
+    get_weapon_by_id,
 )
 from .user_dao import (
     TokenBundle,
@@ -84,6 +85,12 @@ from .coop_detail_dao import (
     batch_upsert_coop_bosses,
     delete_coop_detail,
 )
+from .stage_stats_dao import (
+    get_stages_with_vs_stage_id,
+    get_user_stage_stats,
+    get_user_stage_best_weapon,
+    get_user_all_stage_stats,
+)
 
 __all__ = [
     "get_session",
@@ -95,6 +102,7 @@ __all__ = [
     "get_weapons_by_special",
     "get_all_weapons",
     "get_weapon_by_code",
+    "get_weapon_by_id",
     "TokenBundle",
     "get_current_user",
     "get_user_by_id",
@@ -158,4 +166,8 @@ __all__ = [
     "get_coop_bosses",
     "batch_upsert_coop_bosses",
     "delete_coop_detail",
+    "get_stages_with_vs_stage_id",
+    "get_user_stage_stats",
+    "get_user_stage_best_weapon",
+    "get_user_all_stage_stats",
 ]

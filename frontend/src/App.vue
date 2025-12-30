@@ -226,11 +226,7 @@ onMounted(loadUsers)
       </header>
 
       <main class="main-content">
-        <div class="empty-state">
-          <div class="empty-icon">🦑</div>
-          <h2>欢迎回来！</h2>
-          <p>业务功能开发中...</p>
-        </div>
+        <router-view></router-view>
       </main>
 
       <div v-if="errorMsg" class="error-toast">{{ errorMsg }}</div>
