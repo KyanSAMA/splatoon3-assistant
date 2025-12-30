@@ -99,6 +99,28 @@ export const splatoonService = {
     } catch {
       return {}
     }
+  },
+
+  async refreshToken() {
+    const res = await fetch(`${API_BASE}/data/refresh/token`, { method: 'POST' })
+    if (!res.ok) throw new Error('Token 刷新失败')
+    return await res.json()
+  },
+
+  async refreshStageRecords() {
+    const res = await fetch(`${API_BASE}/data/refresh/stages_records`, { method: 'POST' })
+    if (!res.ok) throw new Error('地图数据刷新失败')
+    return await res.json()
+  },
+
+  async refreshBattleDetails() {
+    const res = await fetch(`${API_BASE}/data/refresh/battle_details?mode=ALL`, { method: 'POST' })
+    if (!res.ok) throw new Error('对战数据刷新失败')
+    return await res.json()
+  },
+
+  clearScheduleCache() {
+    localStorage.removeItem('s3_schedules')
   }
 }
 

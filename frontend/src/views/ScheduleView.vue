@@ -18,6 +18,8 @@ const userStats = ref({})
 const bestWeapons = ref({})
 const now = ref(new Date())
 const showBackToTop = ref(false)
+const refreshing = ref(false)
+const refreshStatus = ref('')
 let timer = null
 
 const TABS = [
@@ -130,6 +132,53 @@ const handleScroll = () => {
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const refreshData = async () => {
+  if (refreshing.value) return
+  refreshing.value = true
+  refreshStatus.value = ''
+
+  try {
+    // 1. 刷新 Token
+    refreshStatus.value = '刷新 Token...'
+    await splatoonService.refreshToken()
+
+    // 2. 刷新地图胜率
+    refreshStatus.value = '同步地图数据...'
+    await splatoonService.refreshStageRecords()
+
+    // 3. 刷新对战详情
+    refreshStatus.value = '同步对战记录...'
+    await splatoonService.refreshBattleDetails()
+
+    // 4. 重新加载胜率和武器数据
+    refreshStatus.value = '加载统计数据...'
+    const [stats, weapons] = await Promise.all([
+      splatoonService.getMyAllStageStats(),
+      splatoonService.getMyBestWeapons()
+    ])
+    if (Array.isArray(stats)) {
+      userStats.value = {}
+      stats.forEach(s => { userStats.value[s.vs_stage_id] = s })
+    }
+    bestWeapons.value = weapons
+
+    // 5. 清除日程缓存并重新加载
+    refreshStatus.value = '刷新日程表...'
+    splatoonService.clearScheduleCache()
+    const sched = await splatoonService.getSchedules()
+    rawSchedules.value = sched.data
+
+    refreshStatus.value = '刷新完成'
+    setTimeout(() => { refreshStatus.value = '' }, 2000)
+  } catch (e) {
+    console.error('Refresh failed:', e)
+    refreshStatus.value = '刷新失败: ' + (e.message || '未知错误')
+    setTimeout(() => { refreshStatus.value = '' }, 3000)
+  } finally {
+    refreshing.value = false
+  }
 }
 
 const currentSchedules = computed(() => {
@@ -273,7 +322,17 @@ onUnmounted(() => {
       <div class="nav-header">
         <button @click="router.push('/')" class="btn-back">← 返回</button>
         <h1>日程表</h1>
+        <button
+          class="btn-refresh"
+          :class="{ refreshing: refreshing }"
+          :disabled="refreshing"
+          @click="refreshData"
+        >
+          {{ refreshing ? '⟳' : '↻' }}
+        </button>
       </div>
+
+      <div v-if="refreshStatus" class="refresh-status">{{ refreshStatus }}</div>
 
       <div class="tabs-container">
         <div class="tabs">
@@ -476,6 +535,40 @@ onUnmounted(() => {
 
 .btn-back:hover {
   background: #e0e0e0;
+}
+
+.btn-refresh {
+  border: none;
+  background: #f0f0f0;
+  color: #666;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  line-height: 1;
+}
+
+.btn-refresh:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.btn-refresh:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn-refresh.refreshing {
+  animation: spin 1s linear infinite;
+}
+
+.refresh-status {
+  background: #fff3cd;
+  color: #856404;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  text-align: center;
 }
 
 .tabs-container {

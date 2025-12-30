@@ -66,6 +66,27 @@ async def _parse_stage_records(
     return records
 
 
+@router.post("/token")
+async def refresh_token(
+    api: SplatNet3API = Depends(require_splatnet_api),
+):
+    """
+    刷新 Token
+
+    通过调用简单 API 触发 Token 自动刷新机制。
+    如果 Token 需要刷新，会花费较长时间（约 5-10 秒）。
+    """
+    try:
+        # 调用简单接口触发 token 刷新
+        result = await api.get_last_one_battle()
+        if result is None:
+            return {"success": False, "message": "API 调用失败", "refreshed": False}
+        return {"success": True, "message": "Token 有效", "refreshed": True}
+    except Exception as e:
+        logger.error(f"Token refresh failed: {e}")
+        return {"success": False, "message": str(e), "refreshed": False}
+
+
 @router.post("/stages_records")
 async def refresh_stage_records(
     user: User = Depends(require_current_user),
