@@ -319,33 +319,37 @@ onUnmounted(() => {
   <div class="schedule-view">
     <!-- 固定头部 -->
     <div class="sticky-header">
-      <div class="nav-header">
-        <button @click="router.push('/')" class="btn-back">← 返回</button>
-        <h1>日程表</h1>
+      <h1 class="page-title">日程表</h1>
+      <div class="nav-row">
+        <button @click="router.push('/')" class="btn-back" aria-label="返回">←</button>
+        <div class="tabs-wrapper">
+          <div class="tabs">
+            <button
+              v-for="tab in TABS"
+              :key="tab.id"
+              class="tab-btn"
+              :class="[
+                { active: activeTab === tab.id },
+                `tab-${tab.id}`
+              ]"
+              @click="activeTab = tab.id"
+            >
+              {{ tab.name }}
+            </button>
+          </div>
+        </div>
         <button
           class="btn-refresh"
           :class="{ refreshing: refreshing }"
           :disabled="refreshing"
           @click="refreshData"
-        >
-          {{ refreshing ? '⟳' : '↻' }}
-        </button>
+          aria-label="刷新"
+        >↻</button>
       </div>
 
-      <div v-if="refreshStatus" class="refresh-status">{{ refreshStatus }}</div>
-
-      <div class="tabs-container">
-        <div class="tabs">
-          <button
-            v-for="tab in TABS"
-            :key="tab.id"
-            class="tab-btn"
-            :class="{ active: activeTab === tab.id }"
-            @click="activeTab = tab.id"
-          >
-            {{ tab.name }}
-          </button>
-        </div>
+      <div class="refresh-bar-wrapper" :class="{ show: !!refreshStatus }">
+        <div class="refresh-bar-progress" :class="{ indeterminate: refreshing }"></div>
+        <div class="refresh-bar-text">{{ refreshStatus }}</div>
       </div>
     </div>
 
@@ -443,7 +447,10 @@ onUnmounted(() => {
           v-for="(slot, index) in currentSchedules"
           :key="index"
           class="time-slot"
-          :class="{ current: isNow(slot.startTime, slot.endTime) }"
+          :class="[
+            { current: isNow(slot.startTime, slot.endTime) },
+            `mode-${activeTab}`
+          ]"
         >
           <div class="time-header">
             <span class="date">{{ formatDate(slot.startTime) }}</span>
@@ -506,50 +513,142 @@ onUnmounted(() => {
 
 /* 头部 */
 .sticky-header {
-  margin-bottom: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  padding: 12px 16px 16px;
+  margin-bottom: 8px;
 }
 
-.nav-header {
+.page-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #333;
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.nav-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 12px;
-}
-
-.nav-header h1 {
-  flex: 1;
-  font-size: 18px;
-  color: #333;
-  margin: 0;
 }
 
 .btn-back {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
   border: none;
-  background: #f0f0f0;
-  color: #666;
+  background: #1a1a1a;
+  color: #fff;
   cursor: pointer;
-  font-size: 14px;
-  padding: 8px 12px;
-  border-radius: 8px;
+  font-size: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
 }
 
-.btn-back:hover {
-  background: #e0e0e0;
+.btn-back:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.tabs-wrapper {
+  flex: 1;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tabs-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.tab-btn {
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  background: #f0f0f0;
+  color: #888;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background: #e8e8e8;
+  color: #555;
+}
+
+.tab-btn.active {
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Tab colors - 颜色调整 */
+.tab-btn.tab-regular.active {
+  background: #D1D100;
+  color: #333;
+}
+
+.tab-btn.tab-bankara_challenge.active {
+  background: #E60012;
+}
+
+.tab-btn.tab-bankara_open.active {
+  background: #603BFF;
+}
+
+.tab-btn.tab-x.active {
+  background: #0fdb9b;
+  color: #1a1a1a;
+}
+
+.tab-btn.tab-event.active {
+  background: #603BFF;
+}
+
+.tab-btn.tab-coop.active {
+  background: #F75B28;
 }
 
 .btn-refresh {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
   border: none;
-  background: #f0f0f0;
-  color: #666;
+  background: #85ea2d;
+  color: #1a1a1a;
   cursor: pointer;
-  font-size: 18px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  line-height: 1;
+  font-size: 20px;
+  font-weight: 900;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.2s;
 }
 
 .btn-refresh:hover:not(:disabled) {
-  background: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.btn-refresh:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: none;
 }
 
 .btn-refresh:disabled {
@@ -558,58 +657,69 @@ onUnmounted(() => {
 }
 
 .btn-refresh.refreshing {
+  background: #E60012;
+  color: white;
   animation: spin 1s linear infinite;
 }
 
-.refresh-status {
-  background: #fff3cd;
-  color: #856404;
-  padding: 8px 12px;
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.refresh-bar-wrapper {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
   border-radius: 6px;
-  font-size: 13px;
-  margin-bottom: 12px;
-  text-align: center;
+  margin-top: 12px;
+  position: relative;
+  background: linear-gradient(90deg, #E60012, #ff6b6b);
 }
 
-.tabs-container {
-  overflow-x: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.refresh-bar-wrapper.show {
+  height: 28px;
 }
 
-.tabs-container::-webkit-scrollbar {
-  display: none;
+.refresh-bar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
-.tabs {
+.refresh-bar-progress.indeterminate {
+  background: repeating-linear-gradient(
+    90deg,
+    #E60012 0%,
+    #ff6b6b 50%,
+    #E60012 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.refresh-bar-text {
+  position: relative;
+  width: 100%;
+  height: 28px;
   display: flex;
-  gap: 8px;
-}
-
-.tab-btn {
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: none;
-  background: #f0f0f0;
-  color: #666;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.tab-btn:hover {
-  background: #e0e0e0;
-}
-
-.tab-btn.active {
-  background: #E60012;
+  align-items: center;
+  justify-content: center;
   color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* 内容区域 */
 .content {
-  padding: 16px;
+  padding: 0 16px 16px;
 }
 
 .loading {
@@ -656,9 +766,25 @@ onUnmounted(() => {
 }
 
 .time-slot.current {
-  border-left-color: #E60012;
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 不同模式的边框颜色 - 与 Tab 颜色统一 */
+.time-slot.mode-regular.current {
+  border-left-color: #D1D100;
+}
+
+.time-slot.mode-bankara_challenge.current {
+  border-left-color: #E60012;
+}
+
+.time-slot.mode-bankara_open.current {
+  border-left-color: #603BFF;
+}
+
+.time-slot.mode-x.current {
+  border-left-color: #0fdb9b;
 }
 
 .time-header {
