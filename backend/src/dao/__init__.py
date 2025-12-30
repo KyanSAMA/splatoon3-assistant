@@ -1,6 +1,6 @@
-"""Database module for Splatoon3 Assistant"""
+"""Database module for Splatoon3 Assistant - SQLAlchemy 2.0"""
 
-from .connect import get_connection, get_cursor
+from .database import get_session, close_engine, Base
 from .weapon_dao import (
     get_weapon_by_name,
     search_weapons_by_name,
@@ -86,8 +86,9 @@ from .coop_detail_dao import (
 )
 
 __all__ = [
-    "get_connection",
-    "get_cursor",
+    "get_session",
+    "close_engine",
+    "Base",
     "get_weapon_by_name",
     "search_weapons_by_name",
     "get_weapons_by_sub",

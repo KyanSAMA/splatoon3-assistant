@@ -1,9 +1,11 @@
-"""武器数据访问层 (DAO)"""
+"""武器数据访问层 (DAO) - SQLAlchemy 2.0 (保留原 SQL)"""
 
 import json
 from typing import Optional, List, Dict, Any
 
-from .connect import get_cursor
+from sqlalchemy import text
+
+from .database import get_session
 
 _WEAPON_FULL_SQL = """
 SELECT
@@ -72,45 +74,45 @@ def _safe_limit(limit: int) -> int:
     return max(1, limit)
 
 
-async def _fetch_one(sql: str, params: tuple) -> Optional[Dict[str, Any]]:
-    async with get_cursor() as cursor:
-        await cursor.execute(sql, params)
-        row = await cursor.fetchone()
-    return _deserialize(row)
+async def _fetch_one(sql: str, params: dict) -> Optional[Dict[str, Any]]:
+    async with get_session() as session:
+        result = await session.execute(text(sql), params)
+        row = result.mappings().first()
+        return _deserialize(dict(row)) if row else None
 
 
-async def _fetch_all(sql: str, params: tuple) -> List[Dict[str, Any]]:
-    async with get_cursor() as cursor:
-        await cursor.execute(sql, params)
-        rows = await cursor.fetchall()
-    return [_deserialize(r) for r in rows]
+async def _fetch_all(sql: str, params: dict) -> List[Dict[str, Any]]:
+    async with get_session() as session:
+        result = await session.execute(text(sql), params)
+        rows = result.mappings().all()
+        return [_deserialize(dict(r)) for r in rows]
 
 
 async def get_weapon_by_name(weapon_name: str) -> Optional[Dict[str, Any]]:
-    sql = _WEAPON_FULL_SQL + "WHERE m.zh_name LIKE ? COLLATE NOCASE ORDER BY m.code LIMIT 1"
-    return await _fetch_one(sql, (_like_pattern(weapon_name),))
+    sql = _WEAPON_FULL_SQL + "WHERE m.zh_name LIKE :pattern COLLATE NOCASE ORDER BY m.code LIMIT 1"
+    return await _fetch_one(sql, {"pattern": _like_pattern(weapon_name)})
 
 
 async def search_weapons_by_name(weapon_name: str, limit: int = 10) -> List[Dict[str, Any]]:
-    sql = _WEAPON_FULL_SQL + "WHERE m.zh_name LIKE ? COLLATE NOCASE ORDER BY m.code LIMIT ?"
-    return await _fetch_all(sql, (_like_pattern(weapon_name), _safe_limit(limit)))
+    sql = _WEAPON_FULL_SQL + "WHERE m.zh_name LIKE :pattern COLLATE NOCASE ORDER BY m.code LIMIT :limit"
+    return await _fetch_all(sql, {"pattern": _like_pattern(weapon_name), "limit": _safe_limit(limit)})
 
 
 async def get_weapons_by_sub(sub_name: str) -> List[Dict[str, Any]]:
-    sql = _WEAPON_BRIEF_SQL + "WHERE s.zh_name LIKE ? COLLATE NOCASE ORDER BY m.code"
-    return await _fetch_all(sql, (_like_pattern(sub_name),))
+    sql = _WEAPON_BRIEF_SQL + "WHERE s.zh_name LIKE :pattern COLLATE NOCASE ORDER BY m.code"
+    return await _fetch_all(sql, {"pattern": _like_pattern(sub_name)})
 
 
 async def get_weapons_by_special(special_name: str) -> List[Dict[str, Any]]:
-    sql = _WEAPON_BRIEF_SQL + "WHERE sp.zh_name LIKE ? COLLATE NOCASE ORDER BY m.code"
-    return await _fetch_all(sql, (_like_pattern(special_name),))
+    sql = _WEAPON_BRIEF_SQL + "WHERE sp.zh_name LIKE :pattern COLLATE NOCASE ORDER BY m.code"
+    return await _fetch_all(sql, {"pattern": _like_pattern(special_name)})
 
 
 async def get_all_weapons(limit: int = 100) -> List[Dict[str, Any]]:
-    sql = _WEAPON_BRIEF_SQL + "ORDER BY m.code LIMIT ?"
-    return await _fetch_all(sql, (_safe_limit(limit),))
+    sql = _WEAPON_BRIEF_SQL + "ORDER BY m.code LIMIT :limit"
+    return await _fetch_all(sql, {"limit": _safe_limit(limit)})
 
 
 async def get_weapon_by_code(code: str) -> Optional[Dict[str, Any]]:
-    sql = _WEAPON_FULL_SQL + "WHERE m.code = ?"
-    return await _fetch_one(sql, (code,))
+    sql = _WEAPON_FULL_SQL + "WHERE m.code = :code"
+    return await _fetch_one(sql, {"code": code})
