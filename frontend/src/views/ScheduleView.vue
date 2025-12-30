@@ -313,28 +313,27 @@ onUnmounted(() => {
             <span v-if="isNow(slot.startTime, slot.endTime)" class="now-badge">进行中</span>
           </div>
 
-          <div class="coop-content">
-            <div class="coop-stage">
-              <img v-if="slot.stage?.thumbnailImage?.url" :src="slot.stage.thumbnailImage.url" :alt="slot.stage.name" class="coop-stage-img" />
-              <div class="coop-stage-info">
-                <div class="coop-stage-name">{{ getCoopStageName(slot.stage) }}</div>
-                <div v-if="slot.boss" class="coop-boss">
-                  <span class="coop-boss-label">BOSS</span>
-                  <span>{{ getBossName(slot.boss) }}</span>
-                </div>
-              </div>
+          <div class="coop-card">
+            <div class="coop-image-wrapper">
+              <img v-if="slot.stage?.thumbnailImage?.url" :src="slot.stage.thumbnailImage.url" :alt="slot.stage.name" />
             </div>
-
-            <div class="coop-weapons">
-              <template v-for="(weapon, wIdx) in slot.weapons" :key="wIdx">
-                <img
-                  v-if="weapon?.image?.url"
-                  :src="weapon.image.url"
-                  :alt="weapon?.name || '随机武器'"
-                  :title="getWeaponName(weapon) || '随机武器'"
-                  class="coop-weapon-img"
-                />
-              </template>
+            <div class="coop-info">
+              <div class="coop-stage-name">{{ getCoopStageName(slot.stage) }}</div>
+              <div v-if="slot.boss" class="coop-boss">
+                <span class="coop-boss-label">BOSS</span>
+                <span>{{ getBossName(slot.boss) }}</span>
+              </div>
+              <div class="coop-weapons">
+                <template v-for="(weapon, wIdx) in slot.weapons" :key="wIdx">
+                  <img
+                    v-if="weapon?.image?.url"
+                    :src="weapon.image.url"
+                    :alt="weapon?.name || '随机武器'"
+                    :title="getWeaponName(weapon) || '随机武器'"
+                    class="coop-weapon-img"
+                  />
+                </template>
+              </div>
             </div>
           </div>
         </div>
@@ -655,34 +654,37 @@ onUnmounted(() => {
   border-left-color: #F75B28;
 }
 
-.coop-content {
+.coop-card {
   background: #fff;
   border-radius: 12px;
-  padding: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.coop-stage {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
+.coop-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #2c2c2c;
+  overflow: hidden;
 }
 
-.coop-stage-img {
-  width: 120px;
-  height: 68px;
+.coop-image-wrapper img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 8px;
 }
 
-.coop-stage-info {
-  flex: 1;
+.coop-info {
+  padding: 12px;
 }
 
 .coop-stage-name {
   font-weight: 700;
-  color: #333;
-  font-size: 15px;
-  margin-bottom: 4px;
+  color: #1a1a1a;
+  font-size: 14px;
+  margin-bottom: 8px;
 }
 
 .coop-boss {
@@ -692,6 +694,7 @@ onUnmounted(() => {
   font-size: 12px;
   color: #F75B28;
   font-weight: 600;
+  margin-bottom: 8px;
 }
 
 .coop-boss-label {
@@ -706,6 +709,8 @@ onUnmounted(() => {
 .coop-weapons {
   display: flex;
   gap: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed #eee;
 }
 
 .coop-weapon-img {
@@ -805,10 +810,6 @@ onUnmounted(() => {
 @media (max-width: 500px) {
   .stages-grid {
     grid-template-columns: 1fr;
-  }
-  .coop-stage-img {
-    width: 100px;
-    height: 56px;
   }
   .coop-weapon-img {
     width: 32px;
