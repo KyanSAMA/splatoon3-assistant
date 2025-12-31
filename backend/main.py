@@ -41,6 +41,11 @@ stage_images_path = Path(__file__).parent.parent / "data" / "images" / "stage"
 if stage_images_path.exists():
     app.mount("/static/stage", StaticFiles(directory=str(stage_images_path)), name="stage_images")
 
+# 静态文件服务 - 地图横幅图片
+stage_banner_path = Path(__file__).parent.parent / "data" / "images" / "stage_banner"
+if stage_banner_path.exists():
+    app.mount("/static/stage_banner", StaticFiles(directory=str(stage_banner_path)), name="stage_banner_images")
+
 # 静态文件服务 - 武器图片
 weapon_images_path = Path(__file__).parent.parent / "data" / "images" / "main_weapon"
 if weapon_images_path.exists():
@@ -55,6 +60,16 @@ if vs_rule_images_path.exists():
 medal_images_path = Path(__file__).parent.parent / "data" / "images" / "medal"
 if medal_images_path.exists():
     app.mount("/static/medal", StaticFiles(directory=str(medal_images_path)), name="medal_images")
+
+# 静态文件服务 - 副武器图片
+sub_weapon_images_path = Path(__file__).parent.parent / "data" / "images" / "sub_weapon"
+if sub_weapon_images_path.exists():
+    app.mount("/static/sub_weapon", StaticFiles(directory=str(sub_weapon_images_path)), name="sub_weapon_images")
+
+# 静态文件服务 - 大招图片
+special_weapon_images_path = Path(__file__).parent.parent / "data" / "images" / "special_weapon"
+if special_weapon_images_path.exists():
+    app.mount("/static/special_weapon", StaticFiles(directory=str(special_weapon_images_path)), name="special_weapon_images")
 
 
 @app.get("/health")

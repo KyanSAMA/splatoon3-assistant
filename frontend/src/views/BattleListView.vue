@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   mockBattles, mockTotalStats, mockOpponentStatsWin, mockOpponentStatsLose,
-  mockWinRateRanking, mockLoseRateRanking, rgbaToCSS
+  mockWinRateRanking, mockLoseRateRanking, mockWeapons, rgbaToCSS
 } from '../mocks/battles.js'
 
 const router = useRouter()
@@ -16,16 +16,44 @@ const tabs = [
   { label: '蛮颓开放', value: 'BANKARA_OPEN', modeKey: 'BANKARA_OPEN' },
   { label: 'X比赛', value: 'X_MATCH', modeKey: 'X_MATCH' },
   { label: '活动', value: 'LEAGUE', modeKey: 'LEAGUE' },
-  { label: '祭典', value: 'FEST', modeKey: 'FEST' }
+  { label: '私房', value: 'PRIVATE', modeKey: 'PRIVATE' }
 ]
 
 const battles = ref(mockBattles)
 
+const selectedWeaponId = ref('ALL')
+const showWeaponDropdown = ref(false)
+
+const getMyPlayer = (battle) => {
+  const myTeam = battle.teams.find(t => t.team_role === 'MY')
+  return myTeam ? myTeam.players.find(p => p.is_myself) : null
+}
+
+const weaponOptions = computed(() => {
+  const used = new Set()
+  battles.value.forEach(b => {
+    const p = getMyPlayer(b)
+    if (p) used.add(p.weapon_id)
+  })
+  return Array.from(used).map(id => ({ id, ...mockWeapons[id] }))
+    .sort((a, b) => (a.code || 0) - (b.code || 0))
+})
+
 const getRuleIcon = (rule) => `/static/vs_rule/${rule}.svg`
 const getWeaponImg = (id) => `/static/weapon/${id}.png`
+const getSubWeaponImg = (code) => `/static/sub_weapon/${code}.png`
+const getSpecialWeaponImg = (code) => `/static/special_weapon/${code}.png`
+const getStageImg = (code) => `/static/stage_banner/${code}.png`
 const getAwardIcon = (rank) => rank === 'GOLD' ? '/static/medal/IconMedal_00.png' : '/static/medal/IconMedal_01.png'
 
 const currentStats = computed(() => {
+  if (selectedWeaponId.value !== 'ALL') {
+    const filtered = filteredBattles.value
+    const win = filtered.filter(b => b.judgement === 'WIN').length
+    const lose = filtered.filter(b => b.judgement === 'LOSE').length
+    const total = win + lose
+    return { win, lose, rate: total ? Math.round((win / total) * 100) : '-' }
+  }
   if (activeTab.value === 'ALL') {
     return { win: mockTotalStats.win, lose: mockTotalStats.lose, rate: mockTotalStats.winRate }
   }
@@ -36,6 +64,14 @@ const currentStats = computed(() => {
 
 const filteredBattles = computed(() => {
   let result = battles.value
+  // Filter by weapon first
+  if (selectedWeaponId.value !== 'ALL') {
+    result = result.filter(b => {
+      const p = getMyPlayer(b)
+      return p && p.weapon_id === selectedWeaponId.value
+    })
+  }
+  // Then filter by mode
   if (activeTab.value === 'REGULAR') {
     result = result.filter(b => b.vs_mode === 'REGULAR')
   } else if (activeTab.value === 'X_MATCH') {
@@ -46,8 +82,8 @@ const filteredBattles = computed(() => {
     result = result.filter(b => b.vs_mode === 'BANKARA' && b.bankara_mode === 'OPEN')
   } else if (activeTab.value === 'LEAGUE') {
     result = result.filter(b => b.vs_mode === 'LEAGUE')
-  } else if (activeTab.value === 'FEST') {
-    result = result.filter(b => b.vs_mode === 'FEST')
+  } else if (activeTab.value === 'PRIVATE') {
+    result = result.filter(b => b.vs_mode === 'PRIVATE')
   }
   return result
 })
@@ -83,10 +119,63 @@ const getConicGradient = (pieData) => {
   }).join(', ')})`
 }
 
-const winPieData = computed(() => getPieData(mockOpponentStatsWin))
-const losePieData = computed(() => getPieData(mockOpponentStatsLose))
-const winTotal = computed(() => mockOpponentStatsWin.reduce((a, b) => a + b.count, 0))
-const loseTotal = computed(() => mockOpponentStatsLose.reduce((a, b) => a + b.count, 0))
+const getDynamicOpponentStats = (targetJudgement) => {
+  const counts = {}
+  filteredBattles.value.forEach(b => {
+    if (b.judgement !== targetJudgement) return
+    const enemyTeam = b.teams.find(t => t.team_role === 'OTHER')
+    if (enemyTeam) {
+      enemyTeam.players.forEach(p => {
+        if (!p.weapon_id) return
+        if (!counts[p.weapon_id]) {
+          counts[p.weapon_id] = { weapon_id: p.weapon_id, name: mockWeapons[p.weapon_id]?.name || 'Unknown', count: 0 }
+        }
+        counts[p.weapon_id].count++
+      })
+    }
+  })
+  return Object.values(counts)
+}
+
+const getDynamicRanking = (targetJudgement) => {
+  const stats = {}
+  filteredBattles.value.forEach(b => {
+    const enemyTeam = b.teams.find(t => t.team_role === 'OTHER')
+    if (enemyTeam) {
+      enemyTeam.players.forEach(p => {
+        if (!p.weapon_id) return
+        if (!stats[p.weapon_id]) {
+          stats[p.weapon_id] = { weapon_id: p.weapon_id, name: mockWeapons[p.weapon_id]?.name || 'Unknown', win: 0, lose: 0, total: 0 }
+        }
+        stats[p.weapon_id].total++
+        if (b.judgement === 'WIN') stats[p.weapon_id].win++
+        else if (b.judgement === 'LOSE') stats[p.weapon_id].lose++
+      })
+    }
+  })
+  return Object.values(stats)
+    .filter(s => s.total >= 1)
+    .map(s => ({ ...s, rate: Math.round((s[targetJudgement === 'WIN' ? 'win' : 'lose'] / s.total) * 100) }))
+    .sort((a, b) => b.rate - a.rate)
+}
+
+const winPieData = computed(() => {
+  const source = selectedWeaponId.value !== 'ALL' ? getDynamicOpponentStats('WIN') : mockOpponentStatsWin
+  return getPieData(source)
+})
+const losePieData = computed(() => {
+  const source = selectedWeaponId.value !== 'ALL' ? getDynamicOpponentStats('LOSE') : mockOpponentStatsLose
+  return getPieData(source)
+})
+const winTotal = computed(() => winPieData.value.reduce((a, b) => a + b.count, 0))
+const loseTotal = computed(() => losePieData.value.reduce((a, b) => a + b.count, 0))
+
+const currentWinRanking = computed(() => {
+  return selectedWeaponId.value !== 'ALL' ? getDynamicRanking('WIN') : mockWinRateRanking
+})
+const currentLoseRanking = computed(() => {
+  return selectedWeaponId.value !== 'ALL' ? getDynamicRanking('LOSE') : mockLoseRateRanking
+})
 
 const formatDuration = (sec) => {
   const m = Math.floor(sec / 60)
@@ -107,7 +196,7 @@ const getModeLabel = (battle) => {
   if (battle.vs_mode === 'BANKARA') {
     return battle.bankara_mode === 'CHALLENGE' ? '挑战' : '开放'
   }
-  return { REGULAR: '涂地', X_MATCH: 'X赛', LEAGUE: '活动', FEST: '祭典' }[battle.vs_mode] || battle.vs_mode
+  return { REGULAR: '涂地', X_MATCH: 'X赛', LEAGUE: '活动', PRIVATE: '私房' }[battle.vs_mode] || battle.vs_mode
 }
 
 const getRuleLabel = (rule) => {
@@ -116,11 +205,6 @@ const getRuleLabel = (rule) => {
 
 const getTeamsSorted = (battle) => {
   return [...battle.teams].sort((a, b) => a.team_order - b.team_order)
-}
-
-const getMyPlayer = (battle) => {
-  const myTeam = battle.teams.find(t => t.team_role === 'MY')
-  return myTeam ? myTeam.players.find(p => p.is_myself) : null
 }
 
 const getColorBarStyle = (battle) => {
@@ -156,17 +240,19 @@ const goToDetail = (id) => {
           class="battle-card"
           @click="goToDetail(battle.id)"
         >
-          <div class="card-header">
-            <div class="mode-rule">
-              <span class="mode-badge" :class="[battle.vs_mode.toLowerCase(), battle.bankara_mode?.toLowerCase()]">
-                {{ getModeLabel(battle) }}
-              </span>
-              <img :src="getRuleIcon(battle.vs_rule)" class="rule-icon" />
-              <span class="rule-name">{{ getRuleLabel(battle.vs_rule) }}</span>
-            </div>
-            <div class="header-right">
-              <span class="stage-name">{{ battle.stage.name }}</span>
-              <span class="time">{{ formatTime(battle.played_time) }}</span>
+          <div class="card-header" :style="{ backgroundImage: `url(${getStageImg(battle.stage.code)})` }">
+            <div class="header-overlay">
+              <div class="mode-rule">
+                <span class="mode-badge" :class="[battle.vs_mode.toLowerCase(), battle.bankara_mode?.toLowerCase()]">
+                  {{ getModeLabel(battle) }}
+                </span>
+                <img :src="getRuleIcon(battle.vs_rule)" class="rule-icon" />
+                <span class="rule-name">{{ getRuleLabel(battle.vs_rule) }}</span>
+              </div>
+              <div class="header-right">
+                <span class="stage-name">{{ battle.stage.name }}</span>
+                <span class="time">{{ formatTime(battle.played_time) }}</span>
+              </div>
             </div>
           </div>
 
@@ -183,15 +269,23 @@ const goToDetail = (id) => {
             </div>
 
             <div class="card-footer">
-              <div class="player-stats" v-if="getMyPlayer(battle)">
-                <span class="kda">
-                  <span class="k">{{ getMyPlayer(battle).k }}</span>
-                  <span class="sep">/</span>
-                  <span class="d">{{ getMyPlayer(battle).d }}</span>
-                  <span class="sep">/</span>
-                  <span class="a">{{ getMyPlayer(battle).a }}</span>
-                </span>
-                <span class="sp-tag">SP {{ getMyPlayer(battle).sp }}</span>
+              <div class="footer-left" v-if="getMyPlayer(battle)">
+                <div class="weapon-set">
+                  <img :src="getWeaponImg(getMyPlayer(battle).weapon_id)" class="w-main" />
+                  <img :src="getSubWeaponImg(getMyPlayer(battle).sub_weapon_code)" class="w-sub" />
+                  <img :src="getSpecialWeaponImg(getMyPlayer(battle).special_weapon_code)" class="w-special" />
+                </div>
+                <div class="player-stats">
+                  <span class="kda">
+                    <span class="k">{{ getMyPlayer(battle).k }}</span>
+                    <span class="sep">/</span>
+                    <span class="d">{{ getMyPlayer(battle).d }}</span>
+                    <span class="sep">/</span>
+                    <span class="a">{{ getMyPlayer(battle).a }}</span>
+                  </span>
+                  <span class="paint-point">{{ getMyPlayer(battle).p }}p</span>
+                  <span class="sp-tag">SP{{ getMyPlayer(battle).sp }}</span>
+                </div>
               </div>
               <div class="footer-right">
                 <div v-if="battle.awards && battle.awards.length" class="list-awards">
@@ -237,6 +331,26 @@ const goToDetail = (id) => {
           <span class="value">{{ currentStats.lose }}</span>
         </div>
         <div class="stat-rate">{{ currentStats.rate }}%</div>
+      </div>
+
+      <!-- Weapon Filter -->
+      <div class="weapon-filter">
+        <div class="filter-trigger" @click="showWeaponDropdown = !showWeaponDropdown">
+          <img v-if="selectedWeaponId !== 'ALL'" :src="getWeaponImg(selectedWeaponId)" class="filter-weapon-icon" />
+          <span v-else class="filter-all-icon">ALL</span>
+          <span class="filter-label">{{ selectedWeaponId === 'ALL' ? '全部武器' : (mockWeapons[selectedWeaponId]?.name || '未知') }}</span>
+          <span class="filter-arrow">{{ showWeaponDropdown ? '▲' : '▼' }}</span>
+        </div>
+        <div v-if="showWeaponDropdown" class="filter-dropdown">
+          <div class="filter-option" :class="{ active: selectedWeaponId === 'ALL' }" @click="selectedWeaponId = 'ALL'; showWeaponDropdown = false">
+            <span class="option-all">ALL</span>
+            <span class="option-name">全部武器</span>
+          </div>
+          <div v-for="w in weaponOptions" :key="w.id" class="filter-option" :class="{ active: selectedWeaponId === w.id }" @click="selectedWeaponId = w.id; showWeaponDropdown = false">
+            <img :src="getWeaponImg(w.id)" class="option-icon" />
+            <span class="option-name">{{ w.name }}</span>
+          </div>
+        </div>
       </div>
 
       <!-- 3. Win Pie Chart -->
@@ -287,7 +401,7 @@ const goToDetail = (id) => {
       <div class="dashboard-card">
         <h3 class="card-title win">高胜率对手</h3>
         <div class="ranking-bars">
-          <div v-for="r in mockWinRateRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar win">
+          <div v-for="r in currentWinRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar win">
             <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
             <div class="rank-info">
               <span class="rank-name">{{ r.name }}</span>
@@ -302,7 +416,7 @@ const goToDetail = (id) => {
       <div class="dashboard-card">
         <h3 class="card-title lose">高败率对手</h3>
         <div class="ranking-bars">
-          <div v-for="r in mockLoseRateRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar lose">
+          <div v-for="r in currentLoseRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar lose">
             <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
             <div class="rank-info">
               <span class="rank-name">{{ r.name }}</span>
@@ -602,9 +716,9 @@ const goToDetail = (id) => {
 .mode-tab.BANKARA_OPEN .tab-ink { background: #603BFF; }
 .mode-tab.X_MATCH .tab-ink { background: #00EBA7; }
 .mode-tab.LEAGUE .tab-ink { background: #F54E93; }
-.mode-tab.FEST .tab-ink { background: #FFD000; }
+.mode-tab.PRIVATE .tab-ink { background: #888; }
 
-.mode-tab.X_MATCH.active, .mode-tab.FEST.active { color: #000; }
+.mode-tab.X_MATCH.active { color: #000; }
 
 /* Battle List */
 .battle-list {
@@ -634,11 +748,20 @@ const goToDetail = (id) => {
 }
 
 .card-header {
+  position: relative;
+  height: 56px;
+  background-size: cover;
+  background-position: center;
+}
+
+.header-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
-  background: #fafafa;
+  padding: 0 14px;
 }
 
 .mode-rule {
@@ -661,7 +784,7 @@ const goToDetail = (id) => {
 .mode-badge.x_match { background: #00EBA7; color: #000; }
 .mode-badge.regular { background: #19D719; }
 .mode-badge.league { background: #F54E93; }
-.mode-badge.fest { background: #FFD000; color: #000; }
+.mode-badge.private { background: #888; }
 
 .rule-icon {
   width: 20px;
@@ -670,7 +793,8 @@ const goToDetail = (id) => {
 
 .rule-name {
   font-size: 13px;
-  color: #555;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
   font-weight: 600;
 }
 
@@ -683,12 +807,13 @@ const goToDetail = (id) => {
 .stage-name {
   font-size: 12px;
   font-weight: 700;
-  color: #555;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
 .time {
   font-size: 11px;
-  color: #999;
+  color: rgba(255,255,255,0.9);
 }
 
 /* Card Body */
@@ -767,6 +892,25 @@ const goToDetail = (id) => {
   padding: 8px 14px;
 }
 
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weapon-set {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  background: #f5f5f5;
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.w-main { width: 28px; height: 28px; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)); }
+.w-sub { width: 16px; height: 16px; object-fit: contain; opacity: 0.85; }
+.w-special { width: 16px; height: 16px; object-fit: contain; opacity: 0.85; }
+
 .player-stats {
   display: flex;
   align-items: center;
@@ -785,6 +929,12 @@ const goToDetail = (id) => {
 .kda .d { color: #888; }
 .kda .a { color: #888; font-size: 0.9em; }
 .kda .sep { margin: 0 2px; color: #ccc; }
+
+.paint-point {
+  color: #19D719;
+  font-weight: 700;
+  font-size: 12px;
+}
 
 .sp-tag {
   font-size: 10px;
@@ -847,5 +997,114 @@ const goToDetail = (id) => {
   background: #f0f0f0;
   padding: 3px 8px;
   border-radius: 6px;
+}
+
+/* Weapon Filter */
+.weapon-filter {
+  position: relative;
+}
+
+.filter-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-trigger:hover {
+  border-color: #333;
+}
+
+.filter-weapon-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.filter-all-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  color: #EAFF3D;
+  font-size: 10px;
+  font-weight: 900;
+  border-radius: 6px;
+}
+
+.filter-label {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+}
+
+.filter-arrow {
+  font-size: 10px;
+  color: #888;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.filter-option:hover {
+  background: #f5f5f5;
+}
+
+.filter-option.active {
+  background: #EAFF3D;
+}
+
+.option-all {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  color: #EAFF3D;
+  font-size: 8px;
+  font-weight: 900;
+  border-radius: 4px;
+}
+
+.option-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.option-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
 }
 </style>
