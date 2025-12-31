@@ -51,6 +51,11 @@ vs_rule_images_path = Path(__file__).parent.parent / "data" / "images" / "vs_rul
 if vs_rule_images_path.exists():
     app.mount("/static/vs_rule", StaticFiles(directory=str(vs_rule_images_path)), name="vs_rule_images")
 
+# 静态文件服务 - 奖章图标
+medal_images_path = Path(__file__).parent.parent / "data" / "images" / "medal"
+if medal_images_path.exists():
+    app.mount("/static/medal", StaticFiles(directory=str(medal_images_path)), name="medal_images")
+
 
 @app.get("/health")
 async def health_check():

@@ -8,7 +8,17 @@ from ..database import Base
 
 
 class BattleDetail(Base):
-    """对战详情主表"""
+    """对战详情主表
+
+    字段说明:
+    - vs_stage_id: 关联 Stage.vs_stage_id，获取地图图片需查询 Stage 表获取 code
+      图片路径: /static/stage/{stage.code}.png
+    - vs_mode: BANKARA/REGULAR/X_MATCH/LEAGUE/FEST/PRIVATE
+    - vs_rule: AREA/LOFT/GOAL/CLAM/TURF_WAR
+    - judgement: WIN/LOSE/EXEMPTED_LOSE/DEEMED_LOSE/DRAW
+    - knockout: WIN/LOSE/NEITHER (KO状态)
+    - bankara_mode: OPEN/CHALLENGE (仅BANKARA模式有效)
+    """
     __tablename__ = "battle_detail"
     __table_args__ = (UniqueConstraint("user_id", "splatoon_id", "played_time"),)
 
@@ -63,7 +73,14 @@ class BattleTeam(Base):
 
 
 class BattlePlayer(Base):
-    """玩家表"""
+    """玩家表
+
+    字段说明:
+    - weapon_id: 直接对应 MainWeapon.code，图片路径: /static/weapon/{weapon_id}.png
+    - is_myself: 1=自己, 0=其他玩家
+    - species: INKLING/OCTOLING
+    - crown: X赛王冠 (1=有)
+    """
     __tablename__ = "battle_player"
     __table_args__ = (UniqueConstraint("battle_id", "team_id", "player_order"),)
 

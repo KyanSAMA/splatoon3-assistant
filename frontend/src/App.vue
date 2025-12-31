@@ -1,7 +1,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { authService } from './api/auth'
 import { onSessionExpired } from './api/session'
+
+const router = useRouter()
 
 // 视图状态：select（用户选择）、login（登录流程）、home（业务页面）
 const view = ref('loading')
@@ -230,13 +233,20 @@ onUnmounted(() => {
     <!-- 业务主页（空页面） -->
     <div v-else-if="view === 'home'" class="home-view">
       <header class="top-bar">
-        <div class="user-info">
-          <div class="avatar small">{{ (currentUser?.user_nickname || '?')[0] }}</div>
-          <span class="user-name">{{ currentUser?.user_nickname || '未知用户' }}</span>
+        <nav class="nav-links">
+          <a @click="router.push('/')" class="nav-link">首页</a>
+          <a @click="router.push('/schedule')" class="nav-link">日程</a>
+          <a @click="router.push('/battles')" class="nav-link">对战</a>
+        </nav>
+        <div class="user-section">
+          <div class="user-info">
+            <div class="avatar small">{{ (currentUser?.user_nickname || '?')[0] }}</div>
+            <span class="user-name">{{ currentUser?.user_nickname || '未知用户' }}</span>
+          </div>
+          <button @click="logout" class="btn btn-logout" :disabled="isLoading">
+            登出
+          </button>
         </div>
-        <button @click="logout" class="btn btn-logout" :disabled="isLoading">
-          登出
-        </button>
       </header>
 
       <main class="main-content">
@@ -517,9 +527,35 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
+  padding: 12px 24px;
   background: #fff;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link {
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: #666;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .user-info {

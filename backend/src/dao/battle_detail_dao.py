@@ -140,12 +140,18 @@ async def get_user_battle_details(
     vs_mode: Optional[str] = None,
     limit: int = 50,
     offset: int = 0,
+    vs_rule: Optional[str] = None,
+    bankara_mode: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """获取用户对战列表"""
     async with get_session() as session:
         stmt = select(BattleDetail).where(BattleDetail.user_id == user_id)
         if vs_mode:
             stmt = stmt.where(BattleDetail.vs_mode == vs_mode)
+        if vs_rule:
+            stmt = stmt.where(BattleDetail.vs_rule == vs_rule)
+        if bankara_mode:
+            stmt = stmt.where(BattleDetail.bankara_mode == bankara_mode)
         stmt = stmt.order_by(BattleDetail.played_time.desc()).limit(limit).offset(offset)
         result = await session.execute(stmt)
         battles = result.scalars().all()
