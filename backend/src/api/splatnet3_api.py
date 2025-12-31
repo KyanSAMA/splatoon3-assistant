@@ -4,7 +4,10 @@
 
 import asyncio
 import base64
+import logging
 from typing import Optional, Dict, Any, Callable
+
+logger = logging.getLogger(__name__)
 
 from ..auth.nso_auth import NSOAuth, APP_USER_AGENT
 from .graphql_utils import gen_graphql_body, GRAPHQL_URL
@@ -17,6 +20,15 @@ from ..core.exceptions import (
     TokenRefreshError,
     NetworkError
 )
+
+
+class _RefreshCycle:
+    """刷新周期对象，隔离每次刷新的状态"""
+    __slots__ = ('event', 'error')
+
+    def __init__(self):
+        self.event = asyncio.Event()
+        self.error: Optional[BaseException] = None
 
 
 class SplatNet3API:
@@ -83,6 +95,7 @@ class SplatNet3API:
 
         self._client: Optional[AsyncHttpClient] = None
         self._refresh_lock = asyncio.Lock()  # 防止并发刷新
+        self._current_cycle: Optional[_RefreshCycle] = None  # 当前刷新周期
         self._is_refreshing = False  # 标记是否正在刷新
 
     @classmethod
@@ -132,6 +145,11 @@ class SplatNet3API:
         """
         刷新 g_token 和 bullet_token（参照 splatoon3-nso 的 refresh_gtoken_and_bullettoken）
 
+        使用独立刷新周期对象实现并发控制：
+        - 每个刷新周期有独立的 event 和 error
+        - 等待者持有周期引用，不受新周期影响
+        - 避免竞态条件导致错误丢失
+
         Returns:
             (success, token_data) 元组：
             - success: 刷新是否成功
@@ -146,61 +164,84 @@ class SplatNet3API:
         if not self._can_auto_refresh():
             raise TokenRefreshError("无法自动刷新：缺少 NSOAuth 或 session_token")
 
-        # 双重检查锁定（Double-Checked Locking）
+        # 检查是否需要等待其他协程完成刷新
+        cycle_to_wait: Optional[_RefreshCycle] = None
+        logger.info("[TokenRefresh] 获取刷新锁...")
         async with self._refresh_lock:
-            # 如果已经有其他请求正在刷新，等待其完成后直接返回
-            # 返回 (True, None) 表示已有其他协程刷新完成，当前协程复用结果
             if self._is_refreshing:
-                return (True, None)
-
-            try:
+                # 已有协程在刷新，保存当前周期引用
+                cycle_to_wait = self._current_cycle
+                logger.info("[TokenRefresh] 检测到刷新进行中，将等待当前周期完成")
+            else:
+                # 获得刷新权，创建新周期
                 self._is_refreshing = True
-                print("[SplatNet3API] 开始刷新 tokens...")
+                self._current_cycle = _RefreshCycle()
+                logger.info("[TokenRefresh] 获得刷新权，开始新周期")
 
-                # Step 1: 刷新 g_token
-                access_token, g_token, nickname, lang, country, user_info = \
-                    await self.nso_auth.get_gtoken(self.session_token)
+        # 如果需要等待，则在锁外等待刷新完成
+        if cycle_to_wait:
+            logger.info("[TokenRefresh] 等待刷新周期完成...")
+            await cycle_to_wait.event.wait()
+            logger.info("[TokenRefresh] 刷新周期已完成，检查结果")
+            # 检查该周期的刷新是否成功（不受新周期影响）
+            if cycle_to_wait.error:
+                raise cycle_to_wait.error
+            return (True, None)  # 复用已刷新的 token
 
-                if not g_token:
-                    raise TokenRefreshError("Failed to get g_token")
+        # 执行刷新
+        my_cycle = self._current_cycle
+        try:
+            logger.info("[TokenRefresh] 开始刷新 tokens...")
 
-                # Step 2: 刷新 bullet_token（可能抛出 BulletTokenError）
-                bullet_token = await self.nso_auth.get_bullet(g_token)
+            # Step 1: 刷新 g_token
+            access_token, g_token, nickname, lang, country, user_info = \
+                await self.nso_auth.get_gtoken(self.session_token)
 
-                if not bullet_token:
-                    raise TokenRefreshError("Failed to get bullet_token")
+            if not g_token:
+                raise TokenRefreshError("Failed to get g_token")
 
-                # Step 3: 更新内存中的 token
-                self.access_token = access_token
-                self.g_token = g_token
-                self.bullet_token = bullet_token
-                self.user_lang = lang
-                self.user_country = country
+            # Step 2: 刷新 bullet_token（可能抛出 BulletTokenError）
+            bullet_token = await self.nso_auth.get_bullet(g_token)
 
-                print("[SplatNet3API] Tokens 刷新成功")
+            if not bullet_token:
+                raise TokenRefreshError("Failed to get bullet_token")
 
-                # Step 4: 返回 token 数据（回调将在锁外执行）
-                token_data = {
-                    "session_token": self.session_token,
-                    "g_token": g_token,
-                    "bullet_token": bullet_token,
-                    "access_token": access_token,
-                    "user_lang": lang,
-                    "user_country": country,
-                    "user_nickname": nickname,
-                    "user_info": user_info,
-                }
+            # Step 3: 更新内存中的 token
+            self.access_token = access_token
+            self.g_token = g_token
+            self.bullet_token = bullet_token
+            self.user_lang = lang
+            self.user_country = country
 
-                return (True, token_data)
+            logger.info("[TokenRefresh] Tokens 刷新成功")
 
-            except (SessionExpiredError, MembershipRequiredError, BulletTokenError):
-                # 明确的错误类型，直接向上抛出
-                raise
-            except Exception as e:
-                # 其他错误包装成 TokenRefreshError
-                raise TokenRefreshError(f"Token 刷新失败: {e}")
-            finally:
+            # Step 4: 返回 token 数据（回调将在锁外执行）
+            token_data = {
+                "session_token": self.session_token,
+                "g_token": g_token,
+                "bullet_token": bullet_token,
+                "access_token": access_token,
+                "user_lang": lang,
+                "user_country": country,
+                "user_nickname": nickname,
+                "user_info": user_info,
+            }
+
+            return (True, token_data)
+
+        except (SessionExpiredError, MembershipRequiredError, BulletTokenError) as e:
+            my_cycle.error = e
+            raise
+        except Exception as e:
+            error = TokenRefreshError(f"Token 刷新失败: {e}")
+            my_cycle.error = error
+            raise error
+        finally:
+            logger.info("[TokenRefresh] 获取锁以释放刷新状态...")
+            async with self._refresh_lock:
                 self._is_refreshing = False
+                my_cycle.event.set()  # 通知所有等待该周期的协程
+                logger.info("[TokenRefresh] 刷新周期结束，已通知等待者")
 
     def head_bullet(self, force_lang: Optional[str] = None, force_country: Optional[str] = None) -> Dict[str, str]:
         """构建请求 headers（参照 Splatoon.head_bullet()）"""
@@ -273,10 +314,10 @@ class SplatNet3API:
             if resp.status_code == 401:
                 # 如果不支持自动刷新，直接返回 None
                 if not self._can_auto_refresh():
-                    print(f"[SplatNet3API] 401 错误，但无法自动刷新（缺少认证信息）")
+                    logger.warning("401 错误，但无法自动刷新（缺少认证信息）")
                     return None
 
-                print(f"[SplatNet3API] 检测到 401 错误，开始刷新 tokens...")
+                logger.info("检测到 401 错误，开始刷新 tokens...")
 
                 # 刷新 token（可能抛出异常）
                 success, token_data = await self._refresh_tokens()
@@ -289,10 +330,10 @@ class SplatNet3API:
                         else:
                             self.on_tokens_updated(token_data)
                     except Exception as e:
-                        print(f"[SplatNet3API] Token 回调失败: {e}")
+                        logger.error(f"Token 回调失败: {e}")
 
                 # 重试请求（只重试一次）
-                print(f"[SplatNet3API] Tokens 刷新完成，重试请求...")
+                logger.info("Tokens 刷新完成，重试请求...")
                 headers = self.head_bullet(force_lang, force_country)
                 cookies = {"_gtoken": self.g_token}
 
@@ -304,11 +345,11 @@ class SplatNet3API:
                 )
 
                 if resp.status_code != 200:
-                    print(f"[SplatNet3API] 重试后仍失败，状态码: {resp.status_code}")
+                    logger.warning(f"重试后仍失败，状态码: {resp.status_code}")
                     return None
 
             elif resp.status_code != 200:
-                print(f"[SplatNet3API] 请求失败，状态码: {resp.status_code}")
+                logger.warning(f"请求失败，状态码: {resp.status_code}")
                 return None
 
             return resp.json()
@@ -318,10 +359,10 @@ class SplatNet3API:
             raise
         except TokenRefreshError as e:
             # Token 刷新失败，向上抛出以便调用者知道具体原因
-            print(f"[SplatNet3API] Token 刷新失败: {e}")
+            logger.error(f"Token 刷新失败: {e}")
             raise
         except Exception as e:
-            print(f"[SplatNet3API] 请求错误: {e}")
+            logger.error(f"请求错误: {e}")
             return None
 
     async def test_connection(self) -> bool:
@@ -393,12 +434,12 @@ class SplatNet3API:
             decrypt_json = decrypt_resp.json()
 
             if decrypt_resp.status_code != 200:
-                print(f"[SplatNet3API] 请求失败，状态码: {decrypt_resp.status_code}")
+                logger.warning(f"请求失败，状态码: {decrypt_resp.status_code}")
                 return None
 
             return decrypt_json['data']
         except Exception as e:
-            print(f"[SplatNet3API] 请求错误: {e}")
+            logger.error(f"请求错误: {e}")
             return None
 
     # ============================================================
