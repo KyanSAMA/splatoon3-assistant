@@ -842,13 +842,13 @@ onUnmounted(() => {
 }
 
 .mode-badge.challenge {
-  background: #603BFF;
+  background: #E60012;
   color: #fff;
 }
 
 .mode-badge.open {
-  background: #EAFF3D;
-  color: #333;
+  background: #603BFF;
+  color: #fff;
 }
 
 .rule-name {
