@@ -67,6 +67,7 @@ class SplatNet3API:
         user_lang: str = "zh-CN",
         user_country: str = "JP",
         on_tokens_updated: Optional[Callable[[Dict[str, Any]], None]] = None,
+        on_session_expired: Optional[Callable[[], None]] = None,
         config: Optional[Config] = None,
     ):
         """
@@ -81,6 +82,7 @@ class SplatNet3API:
             user_lang: 用户语言
             user_country: 用户国家
             on_tokens_updated: Token 更新回调函数，参数为包含新 token 的字典
+            on_session_expired: Session 过期回调函数（用于标记数据库）
             config: HTTP 配置
         """
         self.nso_auth = nso_auth
@@ -91,6 +93,7 @@ class SplatNet3API:
         self.user_lang = user_lang
         self.user_country = user_country
         self.on_tokens_updated = on_tokens_updated
+        self.on_session_expired = on_session_expired
         self.config = config or default_config
 
         self._client: Optional[AsyncHttpClient] = None
@@ -229,7 +232,19 @@ class SplatNet3API:
 
             return (True, token_data)
 
-        except (SessionExpiredError, MembershipRequiredError, BulletTokenError) as e:
+        except SessionExpiredError as e:
+            my_cycle.error = e
+            # 调用 session 过期回调（标记数据库）
+            if self.on_session_expired:
+                try:
+                    if asyncio.iscoroutinefunction(self.on_session_expired):
+                        await self.on_session_expired()
+                    else:
+                        self.on_session_expired()
+                except Exception as cb_err:
+                    logger.error(f"Session 过期回调失败: {cb_err}")
+            raise
+        except (MembershipRequiredError, BulletTokenError) as e:
             my_cycle.error = e
             raise
         except Exception as e:

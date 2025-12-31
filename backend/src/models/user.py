@@ -18,6 +18,7 @@ class User:
     user_country: str
     user_nickname: Optional[str]
     is_current: bool
+    session_expired: bool
     last_login_at: str
     created_at: str
     updated_at: str
@@ -39,6 +40,7 @@ class User:
             user_country=data.get("user_country", "JP"),
             user_nickname=data.get("user_nickname"),
             is_current=bool(data.get("is_current", 0)),
+            session_expired=bool(data.get("session_expired", 0)),
             last_login_at=data.get("last_login_at", ""),
             created_at=data.get("created_at", ""),
             updated_at=data.get("updated_at", ""),

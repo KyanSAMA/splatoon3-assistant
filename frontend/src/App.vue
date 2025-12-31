@@ -1,9 +1,11 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { authService } from './api/auth'
+import { onSessionExpired } from './api/session'
 
 // 视图状态：select（用户选择）、login（登录流程）、home（业务页面）
 const view = ref('loading')
+let unsubscribeSession = null
 const currentUser = ref(null)
 const users = ref([])
 const isLoading = ref(false)
@@ -123,7 +125,19 @@ const logout = async () => {
   }
 }
 
-onMounted(loadUsers)
+onMounted(() => {
+  loadUsers()
+  // 监听 session 过期事件，跳转登录
+  unsubscribeSession = onSessionExpired(() => {
+    currentUser.value = null
+    errorMsg.value = 'Session 已过期，请重新登录'
+    view.value = 'login'
+  })
+})
+
+onUnmounted(() => {
+  if (unsubscribeSession) unsubscribeSession()
+})
 </script>
 
 <template>

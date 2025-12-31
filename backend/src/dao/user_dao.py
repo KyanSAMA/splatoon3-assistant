@@ -98,6 +98,7 @@ async def create_or_update_user(bundle: TokenBundle, mark_current: bool = True) 
             user_country=bundle.user_country,
             user_nickname=bundle.user_nickname,
             is_current=1 if mark_current else 0,
+            session_expired=0,
             last_login_at=now,
             created_at=now,
             updated_at=now,
@@ -113,6 +114,7 @@ async def create_or_update_user(bundle: TokenBundle, mark_current: bool = True) 
                 "user_country": bundle.user_country,
                 "user_nickname": bundle.user_nickname,
                 "is_current": 1 if mark_current else 0,
+                "session_expired": 0,
                 "last_login_at": now,
                 "updated_at": now,
             },
@@ -195,5 +197,29 @@ async def clear_current_user() -> bool:
     """清除当前用户标志（登出）"""
     async with get_session() as session:
         stmt = update(User).where(User.is_current == 1).values(is_current=0)
+        result = await session.execute(stmt)
+        return result.rowcount > 0
+
+
+async def mark_session_expired(user_id: int) -> bool:
+    """标记用户 session 已过期"""
+    now = datetime.utcnow().isoformat()
+    async with get_session() as session:
+        stmt = update(User).where(User.id == user_id).values(
+            session_expired=1,
+            updated_at=now,
+        )
+        result = await session.execute(stmt)
+        return result.rowcount > 0
+
+
+async def clear_session_expired(user_id: int) -> bool:
+    """清除用户 session 过期标记（重新登录后调用）"""
+    now = datetime.utcnow().isoformat()
+    async with get_session() as session:
+        stmt = update(User).where(User.id == user_id).values(
+            session_expired=0,
+            updated_at=now,
+        )
         result = await session.execute(stmt)
         return result.rowcount > 0

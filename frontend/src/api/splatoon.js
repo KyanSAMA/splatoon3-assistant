@@ -1,3 +1,5 @@
+import { checkSessionExpired } from './session'
+
 const S3_INK_BASE = 'https://splatoon3.ink/data'
 const API_BASE = '/api'
 
@@ -19,6 +21,17 @@ const getCached = (key) => {
 const setCached = (key, value, ttlMinutes = 60) => {
   const expiry = Date.now() + ttlMinutes * 60 * 1000
   localStorage.setItem(key, JSON.stringify({ value, expiry }))
+}
+
+/**
+ * 封装 fetch，自动检查 session 过期
+ */
+const apiFetch = async (url, options = {}) => {
+  const res = await fetch(url, options)
+  if (await checkSessionExpired(res)) {
+    throw new Error('SESSION_EXPIRED')
+  }
+  return res
 }
 
 export const splatoonService = {
@@ -51,7 +64,7 @@ export const splatoonService = {
     const cached = getCached(cacheKey)
     if (cached) return cached
 
-    const res = await fetch(`${API_BASE}/stage/stages`)
+    const res = await apiFetch(`${API_BASE}/stage/stages`)
     if (!res.ok) return []
     const data = await res.json()
     setCached(cacheKey, data, 1440)
@@ -60,7 +73,7 @@ export const splatoonService = {
 
   async getStageStats(vsStageId) {
     try {
-      const res = await fetch(`${API_BASE}/stage/stages/${vsStageId}/stats`)
+      const res = await apiFetch(`${API_BASE}/stage/stages/${vsStageId}/stats`)
       if (!res.ok) return null
       return await res.json()
     } catch {
@@ -72,7 +85,7 @@ export const splatoonService = {
     try {
       let url = `${API_BASE}/stage/stages/${vsStageId}/best-weapon`
       if (vsRule) url += `?vs_rule=${vsRule}`
-      const res = await fetch(url)
+      const res = await apiFetch(url)
       if (!res.ok) return null
       return await res.json()
     } catch {
@@ -82,7 +95,7 @@ export const splatoonService = {
 
   async getMyAllStageStats() {
     try {
-      const res = await fetch(`${API_BASE}/stage/my-stats`)
+      const res = await apiFetch(`${API_BASE}/stage/my-stats`)
       if (!res.ok) return []
       return await res.json()
     } catch {
@@ -92,7 +105,7 @@ export const splatoonService = {
 
   async getMyBestWeapons() {
     try {
-      const res = await fetch(`${API_BASE}/stage/my-best-weapons`)
+      const res = await apiFetch(`${API_BASE}/stage/my-best-weapons`)
       if (!res.ok) return {}
       const result = await res.json()
       return result.data || {}
@@ -102,19 +115,19 @@ export const splatoonService = {
   },
 
   async refreshToken() {
-    const res = await fetch(`${API_BASE}/data/refresh/token`, { method: 'POST' })
+    const res = await apiFetch(`${API_BASE}/data/refresh/token`, { method: 'POST' })
     if (!res.ok) throw new Error('Token 刷新失败')
     return await res.json()
   },
 
   async refreshStageRecords() {
-    const res = await fetch(`${API_BASE}/data/refresh/stages_records`, { method: 'POST' })
+    const res = await apiFetch(`${API_BASE}/data/refresh/stages_records`, { method: 'POST' })
     if (!res.ok) throw new Error('地图数据刷新失败')
     return await res.json()
   },
 
   async refreshBattleDetails() {
-    const res = await fetch(`${API_BASE}/data/refresh/battle_details?mode=ALL`, { method: 'POST' })
+    const res = await apiFetch(`${API_BASE}/data/refresh/battle_details?mode=ALL`, { method: 'POST' })
     if (!res.ok) throw new Error('对战数据刷新失败')
     return await res.json()
   },

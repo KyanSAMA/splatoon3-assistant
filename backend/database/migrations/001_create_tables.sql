@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS user (
     user_country TEXT NOT NULL DEFAULT 'JP',
     user_nickname TEXT,
     is_current INTEGER NOT NULL DEFAULT 0 CHECK (is_current IN (0, 1)),
+    session_expired INTEGER NOT NULL DEFAULT 0 CHECK (session_expired IN (0, 1)),
     last_login_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP

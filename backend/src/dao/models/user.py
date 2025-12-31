@@ -22,6 +22,7 @@ class User(Base):
     user_country: Mapped[str] = mapped_column(String, nullable=False, default="JP")
     user_nickname: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     is_current: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    session_expired: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     last_login_at: Mapped[str] = mapped_column(String, nullable=False)
     created_at: Mapped[str] = mapped_column(String, nullable=False)
     updated_at: Mapped[str] = mapped_column(String, nullable=False)
@@ -39,6 +40,7 @@ class User(Base):
             "user_country": self.user_country,
             "user_nickname": self.user_nickname,
             "is_current": self.is_current,
+            "session_expired": self.session_expired,
             "last_login_at": self.last_login_at,
             "created_at": self.created_at,
             "updated_at": self.updated_at,

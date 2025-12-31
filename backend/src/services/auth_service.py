@@ -20,6 +20,7 @@ from ..dao.user_dao import (
     set_current_user,
     clear_current_user,
     update_tokens,
+    mark_session_expired,
 )
 
 logger = logging.getLogger(__name__)
@@ -54,6 +55,12 @@ async def require_current_user() -> User:
     user = User.from_dict(row)
     if not user:
         raise HTTPException(status_code=401, detail="未登录")
+    # 检查 session 是否已过期
+    if user.session_expired:
+        raise HTTPException(
+            status_code=401,
+            detail={"code": "SESSION_EXPIRED", "message": "Session 已过期，请重新登录"}
+        )
     return user
 
 
@@ -80,30 +87,41 @@ async def _cleanup_expired_api_sessions() -> None:
 def _make_token_update_callback(user_id: int):
     """创建 token 更新回调（用于 API 自动刷新后持久化）"""
 
-    def callback(tokens: Dict):
-        async def _save():
-            try:
-                bundle = TokenBundle(
-                    nsa_id=tokens.get("nsa_id", ""),
-                    session_token=tokens.get("session_token", ""),
-                    access_token=tokens.get("access_token", ""),
-                    g_token=tokens.get("g_token", ""),
-                    bullet_token=tokens.get("bullet_token", ""),
-                    user_lang=tokens.get("user_lang", "zh-CN"),
-                    user_country=tokens.get("user_country", "JP"),
-                    user_nickname=tokens.get("user_nickname", ""),
-                )
-                await update_tokens(user_id, bundle)
-                logger.info(f"Tokens refreshed and saved for user {user_id}")
-            except Exception as e:
-                logger.error(f"Failed to save refreshed tokens for user {user_id}: {e}")
-
+    async def callback(tokens: Dict):
         try:
-            loop = asyncio.get_running_loop()
-            loop.create_task(_save())
-        except RuntimeError:
-            logger.warning(f"No running event loop for user {user_id}, using asyncio.run")
-            asyncio.run(_save())
+            bundle = TokenBundle(
+                nsa_id=tokens.get("nsa_id", ""),
+                session_token=tokens.get("session_token", ""),
+                access_token=tokens.get("access_token", ""),
+                g_token=tokens.get("g_token", ""),
+                bullet_token=tokens.get("bullet_token", ""),
+                user_lang=tokens.get("user_lang", "zh-CN"),
+                user_country=tokens.get("user_country", "JP"),
+                user_nickname=tokens.get("user_nickname", ""),
+            )
+            await update_tokens(user_id, bundle)
+            logger.info(f"Tokens refreshed and saved for user {user_id}")
+        except Exception as e:
+            logger.error(f"Failed to save refreshed tokens for user {user_id}: {e}")
+
+    return callback
+
+
+def _make_session_expired_callback(user_id: int):
+    """创建 session 过期回调（用于标记数据库中用户 session 已过期）"""
+
+    async def callback():
+        try:
+            await mark_session_expired(user_id)
+            logger.warning(f"Session expired marked for user {user_id}")
+        except Exception as e:
+            logger.error(f"Failed to mark session expired for user {user_id}: {e}")
+        # 清理 API 缓存
+        try:
+            await close_user_api_session(user_id)
+            logger.debug(f"API session cleared after expiration for user {user_id}")
+        except Exception as e:
+            logger.error(f"Failed to close API session after expiration for user {user_id}: {e}")
 
     return callback
 
@@ -112,11 +130,21 @@ async def _get_or_create_api(user: User) -> SplatNet3API:
     """获取或创建用户的 API 实例（线程安全）"""
     await _cleanup_expired_api_sessions()
 
+    api_to_close: Optional[SplatNet3API] = None
+
     async with _sessions_lock:
-        if user.id in _user_api_sessions:
-            api, _ = _user_api_sessions[user.id]
-            _user_api_sessions[user.id] = (api, time.time())
-            return api
+        existing = _user_api_sessions.get(user.id)
+        if existing:
+            cached_api, _ = existing
+            # 检查 token 一致性
+            if (cached_api.session_token == user.session_token
+                    and cached_api.g_token == user.g_token
+                    and cached_api.bullet_token == user.bullet_token):
+                _user_api_sessions[user.id] = (cached_api, time.time())
+                return cached_api
+            # token 不一致，标记旧实例待关闭
+            api_to_close = cached_api
+            _user_api_sessions.pop(user.id, None)
 
         # 创建新的 API 实例
         nso_auth = NSOAuth()
@@ -129,10 +157,20 @@ async def _get_or_create_api(user: User) -> SplatNet3API:
             user_lang=user.user_lang,
             user_country=user.user_country,
             on_tokens_updated=_make_token_update_callback(user.id),
+            on_session_expired=_make_session_expired_callback(user.id),
         )
         _user_api_sessions[user.id] = (api, time.time())
         logger.debug(f"API session created for user {user.id}")
-        return api
+
+    # 在锁外关闭旧实例
+    if api_to_close:
+        try:
+            await api_to_close.close()
+            logger.debug(f"Stale API session closed for user {user.id}")
+        except Exception as e:
+            logger.error(f"Failed to close stale API session for user {user.id}: {e}")
+
+    return api
 
 
 async def close_user_api_session(user_id: int) -> None:
