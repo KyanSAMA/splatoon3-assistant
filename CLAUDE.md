@@ -19,114 +19,67 @@ Splatoon3 游戏助手 - 通过获取 Splatoon3 的战斗数据及其他辅助�
 
 ```
 splatoon3-assistant/
-├── src/
-│   ├── __init__.py          # 包初始化和导出
-│   ├── config.py            # 配置管理
-│   ├── http_client.py       # HTTP 客户端封装
-│   ├── nso_auth.py          # NSO 认证 (参照 S3S 类)
-│   ├── graphql_utils.py     # GraphQL 工具
-│   ├── splatnet3_api.py     # SplatNet3 API (参照 Splatoon 类)
-│   ├── token_store.py       # Token 持久化存储
-│   └── exceptions.py        # 自定义异常类型
-├── tests/
-│   ├── test_full_flow.py    # 功能测试
-│   └── .token_cache.json    # Token 缓存（自动生成）
-├── requirements.txt         # Python 依赖
-├── README.md               # 用户文档
-├── TECHNICAL_ROADMAP.md    # 技术路线
-├── CLAUDE.md               # 开发文档（本文件）
-└── GEMINI.md               # 开发文档（同步）
+├── backend/                      # 后端服务
+│   ├── main.py                   # 入口文件
+│   ├── requirements.txt          # Python 依赖
+│   ├── scripts/
+│   │   └── import_weapons.py     # 武器数据导入脚本
+│   └── src/
+│       ├── api/                  # API 层
+│       │   ├── graphql_utils.py  # GraphQL 工具
+│       │   └── splatnet3_api.py  # SplatNet3 API
+│       ├── auth/                 # 认证模块
+│       │   ├── nso_auth.py       # NSO 认证
+│       │   └── token_store.py    # Token 持久化
+│       ├── core/                 # 核心模块
+│       │   ├── config.py         # 配置管理
+│       │   ├── exceptions.py     # 异常类型
+│       │   └── http_client.py    # HTTP 客户端
+│       ├── dao/                  # 数据访问层
+│       │   ├── database.py       # 数据库连接
+│       │   ├── models/           # ORM 模型
+│       │   │   ├── battle.py
+│       │   │   ├── coop.py
+│       │   │   ├── stage.py
+│       │   │   ├── user.py
+│       │   │   └── weapon.py
+│       │   ├── battle_detail_dao.py
+│       │   ├── coop_detail_dao.py
+│       │   ├── stage_dao.py
+│       │   ├── stage_record_dao.py
+│       │   ├── stage_stats_dao.py
+│       │   ├── user_dao.py
+│       │   ├── weapon_dao.py
+│       │   └── weapon_record_dao.py
+│       ├── models/               # 业务模型
+│       │   ├── skill.py
+│       │   ├── stage.py
+│       │   ├── user.py
+│       │   └── weapon.py
+│       ├── services/             # 服务层
+│       │   ├── auth_service.py
+│       │   ├── battle_detail_refresh_service.py
+│       │   ├── coop_detail_refresh_service.py
+│       │   ├── splatoon3_data_refresh_service.py
+│       │   └── stage_service.py
+│       └── utils/                # 工具模块
+│           └── id_parser.py
+├── frontend/                     # 前端应用
+│   ├── dist/                     # 构建输出
+│   ├── index.html
+│   ├── package.json
+│   └── README.md
+├── data/                         # 数据文件
+│   ├── docs/                     # 游戏文档
+│   ├── json/                     # JSON 数据
+│   └── langs/zh-CN/              # 中文语言包
+├── CLAUDE.md                     # 开发文档（本文件）
+├── GEMINI.md                     # 开发文档（同步）
+├── README.md                     # 项目说明
+└── TECHNICAL_ROADMAP.md          # 技术路线
 ```
 
 ---
-
-## 核心 API 使用
-
-### NSOAuth - 认证
-
-```python
-from src import NSOAuth
-
-auth = NSOAuth()
-
-# 认证流程
-url, verifier = await auth.login_in()
-session_token = await auth.login_in_2(callback_url, verifier)
-access_token, g_token, nickname, lang, country, user_info = await auth.get_gtoken(session_token)
-bullet_token = await auth.get_bullet(g_token)
-```
-
-### SplatNet3API - 数据查询
-
-```python
-from src import SplatNet3API, TokenStore
-
-# 带自动刷新（推荐）
-api = SplatNet3API(
-    nso_auth=auth,
-    session_token="...",
-    g_token="...",
-    bullet_token="...",
-    on_tokens_updated=lambda t: TokenStore(".token_cache.json").save(t)
-)
-
-# 简单模式
-api = SplatNet3API.simple(g_token="...", bullet_token="...")
-
-# 使用
-battles = await api.get_recent_battles()
-```
-
-### 异常处理
-
-```python
-from src import SessionExpiredError, MembershipRequiredError, BulletTokenError, TokenRefreshError
-
-try:
-    result = await api.get_recent_battles()
-except SessionExpiredError:
-    # 需要重新登录
-except MembershipRequiredError:
-    # NSO 会员过期
-except BulletTokenError as e:
-    # Token 错误（版本过时/封禁）
-except TokenRefreshError:
-    # 刷新失败（网络等）
-```
-
----
-
-## 开发注意事项
-
-### 数据库规范
-
-- **不使用外键约束**: 本项目 SQLite 数据库不使用 `FOREIGN KEY` 约束，数据完整性由应用层保证
-- 使用 `UNIQUE` 约束实现复合主键判重
-- 关联数据删除需在 DAO 层显式处理
-
-### Token 自动刷新机制
-
-**核心流程**:
-```
-API 请求 → 401 错误 → 自动刷新 Token → 保存 → 重试请求
-```
-
-**关键实现**:
-- `SplatNet3API.request()`: 检测 401，触发刷新
-- `_refresh_tokens()`: 加锁刷新，返回 `(success, token_data)`
-- 并发控制: `asyncio.Lock` + 双重检查锁定
-- 回调在锁外执行，避免死锁
-
-**并发安全**:
-```python
-async with self._refresh_lock:
-    if self._is_refreshing:
-        return (True, None)  # 复用其他协程的刷新结果
-
-    self._is_refreshing = True
-    # 执行刷新...
-    self._is_refreshing = False
-```
 
 ### 异常类型设计
 
@@ -136,71 +89,6 @@ async with self._refresh_lock:
 | `MembershipRequiredError` | NSO 会员过期 | 提示续费 |
 | `BulletTokenError` | Bullet token 错误 | 检查版本/状态 |
 | `TokenRefreshError` | 刷新失败 | 重试/检查网络 |
-
-### 最佳实践
-
-**1. 使用 TokenStore 管理持久化**
-```python
-store = TokenStore(".token_cache.json")
-api = SplatNet3API(on_tokens_updated=lambda t: store.save(t))
-```
-
-**2. 回调函数保持简单**
-```python
-# ✅ 推荐
-on_tokens_updated=lambda t: store.save(t)
-
-# ❌ 不推荐（会死锁）
-on_tokens_updated=lambda t: await api.get_home()
-```
-
-**3. 正确的异常处理**
-```python
-# ✅ 区分异常类型
-try:
-    result = await api.get_recent_battles()
-except SessionExpiredError:
-    handle_relogin()
-except MembershipRequiredError:
-    notify_membership_expired()
-
-# ❌ 捕获所有异常
-except Exception:
-    pass  # 丢失错误信息
-```
-
----
-
-## 开发日志
-
-### 2024-12-13: Token 自动刷新功能
-
-**实现功能**:
-- [x] 401 错误自动检测和刷新
-- [x] 并发刷新控制（asyncio.Lock + DCL）
-- [x] 明确的异常类型系统
-- [x] TokenStore 持久化（原子写入）
-- [x] 回调机制（锁外执行）
-
-**代码质量**:
-- 经过 3 轮 Codex review
-- 修复返回值类型不一致
-- 修复回调死锁问题
-- 完善异常传播机制
-
-**技术细节**: 详见 `TECHNICAL_ROADMAP.md`
-
-### 2024-12-12: v4 API 加密支持
-
-- [x] 升级到 v4 API
-- [x] nxapi 加密/解密功能
-- [x] OAuth scope: `ca:gf ca:er ca:dr`
-
-### 2024-12-10: NSO API 集成完成
-
-- [x] 完整认证流程（参照 S3S 类）
-- [x] GraphQL API 封装（参照 Splatoon 类）
-- [x] 功能测试文件
 
 ---
 
