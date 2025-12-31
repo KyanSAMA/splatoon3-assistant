@@ -94,6 +94,7 @@ export const mockBattles = [
     knockout: 'LOSE',
     bankara_mode: 'CHALLENGE',
     udemae: 'S+',
+    weapon_power: 1750.68,
     duration: 204,
     stage: { code: 'Twist', name: '大比目鱼海运中心' },
     awards: [{ name: '擊倒敵方王牌 No.1', rank: 'GOLD' }],
@@ -229,6 +230,8 @@ export const mockBattles = [
     knockout: 'NEITHER',
     bankara_mode: null,
     udemae: null,
+    league_match_event_name: '裝扮並愛惜使用武器的武器子盃',
+    my_league_power: 1438.66,
     duration: 280,
     stage: { code: 'Factory', name: '鱼露遗迹' },
     awards: [],
@@ -314,10 +317,48 @@ export const mockBattles = [
         players: []
       }
     ]
+  },
+  {
+    id: 245,
+    played_time: '2025-04-12T11:09:53Z',
+    vs_mode: 'FEST',
+    vs_rule: 'TURF_WAR',
+    judgement: 'WIN',
+    knockout: 'NEITHER',
+    bankara_mode: null,
+    udemae: null,
+    fest_power: 1856.5,
+    duration: 180,
+    stage: { code: 'BigSlope', name: '臭鱼干温泉' },
+    awards: [{ name: '涂地面积 No.1', rank: 'GOLD' }],
+    teams: [
+      {
+        team_role: 'MY',
+        team_order: 1,
+        score: null,
+        paint_ratio: 0.534,
+        color: { r: 0.96, g: 0.73, b: 0.18, a: 1.0 },
+        players: [
+          { weapon_id: 100, sub_weapon_code: 9, special_weapon_code: 9, name: 'hoxin', k: 7, d: 1, a: 2, sp: 4, p: 1037, is_myself: 1, crown: 0 },
+          { weapon_id: 0, sub_weapon_code: 6, special_weapon_code: 11, name: 'かようKΦYΦくXミ', k: 2, d: 3, a: 0, sp: 3, p: 987, is_myself: 0, crown: 0 },
+          { weapon_id: 4020, sub_weapon_code: 7, special_weapon_code: 6, name: 'Atomsphere', k: 10, d: 4, a: 4, sp: 2, p: 826, is_myself: 0, crown: 0 },
+          { weapon_id: 1001, sub_weapon_code: 2, special_weapon_code: 1, name: 'Jay MinQQ', k: 8, d: 2, a: 0, sp: 4, p: 724, is_myself: 0, crown: 0 }
+        ]
+      },
+      {
+        team_role: 'OTHER',
+        team_order: 2,
+        score: null,
+        paint_ratio: 0.398,
+        color: { r: 0.45, g: 0.18, b: 0.72, a: 1.0 },
+        players: []
+      }
+    ]
   }
 ]
 
 export const mockWeapons = {
+  0: { code: 0, name: '斯普拉射击枪', class: '射击枪', sub_code: 6, special_code: 11 },
   7030: { code: 7030, name: '邦普V', class: '弓', sub_code: 7, special_code: 11 },
   7020: { code: 7020, name: 'LACT-450', class: '弓', sub_code: 6, special_code: 4 },
   7011: { code: 7011, name: '三发猎鱼弓 联名', class: '弓', sub_code: 3, special_code: 16 },
@@ -332,6 +373,7 @@ export const mockWeapons = {
   201: { code: 201, name: '新星爆破枪 新型', class: '爆破枪', sub_code: 5, special_code: 11 },
   50: { code: 50, name: '.52加仑', class: '射击枪', sub_code: 4, special_code: 9 },
   60: { code: 60, name: 'N-ZAP85', class: '射击枪', sub_code: 1, special_code: 15 },
+  1001: { code: 1001, name: '小绿', class: '射击枪', sub_code: 2, special_code: 1 },
   4020: { code: 4020, name: '消防栓旋转枪', class: '旋转枪', sub_code: 7, special_code: 6 },
   3030: { code: 3030, name: '满溢泡澡泼桶', class: '泼桶', sub_code: 3, special_code: 5 },
   3005: { code: 3005, name: '秩序泼桶 复制', class: '泼桶', sub_code: 0, special_code: 14 },
@@ -390,6 +432,7 @@ export const mockTotalStats = {
     BANKARA_OPEN: { total: 45, win: 24, lose: 20, draw: 1, winRate: 53 },
     BANKARA_CHALLENGE: { total: 38, win: 22, lose: 16, winRate: 58 },
     X_MATCH: { total: 25, win: 16, lose: 9, winRate: 64 },
+    FEST: { total: 8, win: 5, lose: 3, winRate: 63 },
     LEAGUE: { total: 12, win: 7, lose: 5, winRate: 58 },
     PRIVATE: { total: 4, win: 2, lose: 2, winRate: 50 }
   }

@@ -321,7 +321,6 @@ onUnmounted(() => {
     <div class="sticky-header">
       <h1 class="page-title">日程表</h1>
       <div class="nav-row">
-        <button @click="router.push('/')" class="btn-back" aria-label="返回">←</button>
         <div class="tabs-wrapper">
           <div class="tabs">
             <button

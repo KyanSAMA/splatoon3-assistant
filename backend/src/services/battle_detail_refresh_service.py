@@ -239,6 +239,14 @@ async def _parse_and_save_battle_detail(
         elif league_match:
             logger.warning(f"[DEBUG] leagueMatch is not dict: type={type(league_match)}, value={league_match}")
 
+        # 祭典信息
+        fest_power = None
+        fest_match = vs_detail.get("festMatch")
+        if isinstance(fest_match, dict):
+            fest_power = fest_match.get("myFestPower")
+        elif fest_match:
+            logger.warning(f"[DEBUG] festMatch is not dict: type={type(fest_match)}, value={fest_match}")
+
         # 徽章
         awards_data = []
         awards_raw = vs_detail.get("awards")
@@ -267,6 +275,7 @@ async def _parse_and_save_battle_detail(
             bankara_mode=bankara_mode,
             udemae=udemae,
             x_power=x_power,
+            fest_power=fest_power,
             weapon_power=weapon_power,
             my_league_power=my_league_power,
             league_match_event_name=league_match_event_name,

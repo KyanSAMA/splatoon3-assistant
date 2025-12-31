@@ -1,10 +1,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { authService } from './api/auth'
 import { onSessionExpired } from './api/session'
 
 const router = useRouter()
+const route = useRoute()
 
 // 视图状态：select（用户选择）、login（登录流程）、home（业务页面）
 const view = ref('loading')
@@ -233,10 +234,13 @@ onUnmounted(() => {
     <!-- 业务主页（空页面） -->
     <div v-else-if="view === 'home'" class="home-view">
       <header class="top-bar">
+        <div class="app-brand">
+          <div class="brand-icon">🦑</div>
+          <span class="brand-name">S3<span class="highlight">Assistant</span></span>
+        </div>
         <nav class="nav-links">
-          <a @click="router.push('/')" class="nav-link">首页</a>
-          <a @click="router.push('/schedule')" class="nav-link">日程</a>
-          <a @click="router.push('/battles')" class="nav-link">对战</a>
+          <a @click="router.push('/schedule')" class="nav-link" :class="{ active: route.path === '/schedule' }">日程</a>
+          <a @click="router.push('/battles')" class="nav-link" :class="{ active: route.path === '/battles' }">对战</a>
         </nav>
         <div class="user-section">
           <div class="user-info">
@@ -527,29 +531,50 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.brand-icon { font-size: 24px; filter: drop-shadow(0 2px 4px rgba(230,0,18,0.3)); }
+.brand-name { font-weight: 800; font-size: 18px; color: #2d2d2d; letter-spacing: -0.5px; }
+.brand-name .highlight { color: #E60012; }
 
 .nav-links {
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 30px;
 }
 
 .nav-link {
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 8px 24px;
+  border-radius: 24px;
   color: #666;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
+  border: 2px solid transparent;
 }
 
 .nav-link:hover {
-  background: #f0f0f0;
-  color: #333;
+  color: #E60012;
+  background: rgba(255,255,255,0.5);
+}
+
+.nav-link.active {
+  background: #fff;
+  color: #E60012;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .user-section {

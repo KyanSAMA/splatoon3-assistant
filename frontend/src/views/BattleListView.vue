@@ -15,6 +15,7 @@ const tabs = [
   { label: '蛮颓挑战', value: 'BANKARA_CHALLENGE', modeKey: 'BANKARA_CHALLENGE' },
   { label: '蛮颓开放', value: 'BANKARA_OPEN', modeKey: 'BANKARA_OPEN' },
   { label: 'X比赛', value: 'X_MATCH', modeKey: 'X_MATCH' },
+  { label: '祭典', value: 'FEST', modeKey: 'FEST' },
   { label: '活动', value: 'LEAGUE', modeKey: 'LEAGUE' },
   { label: '私房', value: 'PRIVATE', modeKey: 'PRIVATE' }
 ]
@@ -80,6 +81,8 @@ const filteredBattles = computed(() => {
     result = result.filter(b => b.vs_mode === 'BANKARA' && b.bankara_mode === 'CHALLENGE')
   } else if (activeTab.value === 'BANKARA_OPEN') {
     result = result.filter(b => b.vs_mode === 'BANKARA' && b.bankara_mode === 'OPEN')
+  } else if (activeTab.value === 'FEST') {
+    result = result.filter(b => b.vs_mode === 'FEST')
   } else if (activeTab.value === 'LEAGUE') {
     result = result.filter(b => b.vs_mode === 'LEAGUE')
   } else if (activeTab.value === 'PRIVATE') {
@@ -196,7 +199,16 @@ const getModeLabel = (battle) => {
   if (battle.vs_mode === 'BANKARA') {
     return battle.bankara_mode === 'CHALLENGE' ? '挑战' : '开放'
   }
-  return { REGULAR: '涂地', X_MATCH: 'X赛', LEAGUE: '活动', PRIVATE: '私房' }[battle.vs_mode] || battle.vs_mode
+  return { REGULAR: '涂地', X_MATCH: 'X赛', FEST: '祭典', LEAGUE: '活动', PRIVATE: '私房' }[battle.vs_mode] || battle.vs_mode
+}
+
+const getUdemaeColor = (udemae) => {
+  if (!udemae) return '#888'
+  if (udemae.includes('S+')) return '#F54E93'
+  if (udemae.startsWith('S')) return '#603BFF'
+  if (udemae.startsWith('A')) return '#00C2CB'
+  if (udemae.startsWith('B')) return '#FF9F2C'
+  return '#888'
 }
 
 const getRuleLabel = (rule) => {
@@ -287,6 +299,28 @@ const goToDetail = (id) => {
                   <span class="sp-tag">SP{{ getMyPlayer(battle).sp }}</span>
                 </div>
               </div>
+              <div class="footer-center">
+                <span v-if="battle.vs_mode === 'BANKARA' && battle.udemae" class="stat-badge udemae" :style="{ background: getUdemaeColor(battle.udemae) }">
+                  {{ battle.udemae }}
+                </span>
+                <div v-if="battle.vs_mode === 'BANKARA' && battle.bankara_mode === 'CHALLENGE' && battle.weapon_power && getMyPlayer(battle)" class="stat-badge power">
+                  <img :src="getWeaponImg(getMyPlayer(battle).weapon_id)" class="power-icon-sm" />
+                  <span class="power-val">{{ battle.weapon_power.toFixed(1) }}</span>
+                </div>
+                <div v-if="battle.vs_mode === 'X_MATCH' && battle.x_power" class="stat-badge power x-match">
+                  <span class="power-label">XP</span>
+                  <span class="power-val">{{ battle.x_power.toFixed(1) }}</span>
+                </div>
+                <div v-if="battle.vs_mode === 'FEST' && battle.fest_power" class="stat-badge power fest">
+                  <span class="power-label">FP</span>
+                  <span class="power-val">{{ battle.fest_power.toFixed(1) }}</span>
+                </div>
+                <div v-if="battle.vs_mode === 'LEAGUE'" class="stat-badge power league">
+                  <span class="power-label">LP</span>
+                  <span class="power-val" v-if="battle.my_league_power">{{ battle.my_league_power.toFixed(1) }}</span>
+                  <span class="power-val" v-else>-</span>
+                </div>
+              </div>
               <div class="footer-right">
                 <div v-if="battle.awards && battle.awards.length" class="list-awards">
                   <div v-for="(a, i) in battle.awards" :key="i" class="award-item">
@@ -315,6 +349,9 @@ const goToDetail = (id) => {
           >
             <span class="tab-ink"></span>
             <span class="tab-text">{{ tab.label }}</span>
+          </button>
+          <button class="mode-tab refresh-btn" @click="$emit('refresh')">
+            <span class="tab-text">↻</span>
           </button>
         </div>
       </div>
@@ -715,10 +752,25 @@ const goToDetail = (id) => {
 .mode-tab.BANKARA_CHALLENGE .tab-ink { background: #E60012; }
 .mode-tab.BANKARA_OPEN .tab-ink { background: #603BFF; }
 .mode-tab.X_MATCH .tab-ink { background: #00EBA7; }
+.mode-tab.FEST .tab-ink { background: linear-gradient(135deg, #EAFF3D 0%, #F54E93 50%, #603BFF 100%); }
 .mode-tab.LEAGUE .tab-ink { background: #F54E93; }
 .mode-tab.PRIVATE .tab-ink { background: #888; }
 
 .mode-tab.X_MATCH.active { color: #000; }
+.mode-tab.FEST.active { color: #000; }
+
+.mode-tab.refresh-btn {
+  background: #f0f0f0;
+  border-color: #ddd;
+  color: #666;
+  min-width: 40px;
+  padding: 8px 10px;
+}
+
+.mode-tab.refresh-btn:hover {
+  background: #e0e0e0;
+  color: #333;
+}
 
 /* Battle List */
 .battle-list {
@@ -783,6 +835,7 @@ const goToDetail = (id) => {
 .mode-badge.bankara.open { background: #603BFF; }
 .mode-badge.x_match { background: #00EBA7; color: #000; }
 .mode-badge.regular { background: #19D719; }
+.mode-badge.fest { background: linear-gradient(135deg, #EAFF3D, #F54E93); color: #000; }
 .mode-badge.league { background: #F54E93; }
 .mode-badge.private { background: #888; }
 
@@ -884,15 +937,79 @@ const goToDetail = (id) => {
   font-weight: 800;
 }
 
+/* Footer Center - Stats Display */
+.footer-center {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.stat-badge.udemae {
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.stat-badge.power {
+  background: #333;
+  color: #EAFF3D;
+  font-family: 'M PLUS Rounded 1c', monospace;
+}
+
+.stat-badge.power.x-match { color: #00EBA7; }
+.stat-badge.power.fest { color: #F54E93; }
+.stat-badge.power.league { color: #fff; }
+
+.power-icon-sm {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.power-label {
+  font-size: 9px;
+  opacity: 0.7;
+  margin-right: 2px;
+}
+
+.power-val {
+  font-weight: 800;
+}
+
 /* Card Footer */
 .card-footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 8px 14px;
+  position: relative;
 }
 
 .footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-right {
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -943,12 +1060,6 @@ const goToDetail = (id) => {
   padding: 2px 6px;
   border-radius: 4px;
   font-weight: 700;
-}
-
-.footer-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .list-awards {
