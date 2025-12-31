@@ -219,11 +219,25 @@ async def _parse_and_save_battle_detail(
 
         # 模式特有信息
         bankara_mode = None
+        weapon_power = None
         bankara_match = vs_detail.get("bankaraMatch")
         if isinstance(bankara_match, dict):
             bankara_mode = bankara_match.get("mode")
+            weapon_power = bankara_match.get("weaponPower")
         elif bankara_match:
             logger.warning(f"[DEBUG] bankaraMatch is not dict: type={type(bankara_match)}, value={bankara_match}")
+
+        # 活动赛信息
+        my_league_power = None
+        league_match_event_name = None
+        league_match = vs_detail.get("leagueMatch")
+        if isinstance(league_match, dict):
+            my_league_power = league_match.get("myLeaguePower")
+            league_event = league_match.get("leagueMatchEvent")
+            if isinstance(league_event, dict):
+                league_match_event_name = league_event.get("name")
+        elif league_match:
+            logger.warning(f"[DEBUG] leagueMatch is not dict: type={type(league_match)}, value={league_match}")
 
         # 徽章
         awards_data = []
@@ -253,6 +267,9 @@ async def _parse_and_save_battle_detail(
             bankara_mode=bankara_mode,
             udemae=udemae,
             x_power=x_power,
+            weapon_power=weapon_power,
+            my_league_power=my_league_power,
+            league_match_event_name=league_match_event_name,
             awards=awards_data if awards_data else None,
         )
         battle_id = await upsert_battle_detail(battle_data)

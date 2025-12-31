@@ -158,7 +158,9 @@ CREATE TABLE IF NOT EXISTS battle_detail (
     udemae TEXT,                            -- 段位 S+0, A-（从列表接口获取）
     x_power REAL,                           -- X赛战力（从列表接口获取）
     fest_power REAL,                        -- 祭典战力
-    league_match_event_id TEXT,             -- 联赛事件ID
+    weapon_power REAL,                      -- 武器力（来自 bankaraMatch.weaponPower）
+    my_league_power REAL,                   -- 活动赛力量（来自 leagueMatch.myLeaguePower）
+    league_match_event_name TEXT,           -- 活动赛事件名称（来自 leagueMatch.leagueMatchEvent.name）
 
     -- 扩展数据
     mode_extra JSON,

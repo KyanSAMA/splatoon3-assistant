@@ -29,7 +29,9 @@ class BattleDetailData:
     udemae: Optional[str] = None
     x_power: Optional[float] = None
     fest_power: Optional[float] = None
-    league_match_event_id: Optional[str] = None
+    weapon_power: Optional[float] = None
+    my_league_power: Optional[float] = None
+    league_match_event_name: Optional[str] = None
     mode_extra: Optional[Dict] = None
     awards: Optional[List[Dict]] = None
 
@@ -178,7 +180,9 @@ async def upsert_battle_detail(data: BattleDetailData) -> int:
             udemae=data.udemae,
             x_power=data.x_power,
             fest_power=data.fest_power,
-            league_match_event_id=data.league_match_event_id,
+            weapon_power=data.weapon_power,
+            my_league_power=data.my_league_power,
+            league_match_event_name=data.league_match_event_name,
             mode_extra=_json_dumps(data.mode_extra),
             awards=_json_dumps(data.awards),
             created_at=now,
@@ -197,7 +201,9 @@ async def upsert_battle_detail(data: BattleDetailData) -> int:
                 "udemae": data.udemae,
                 "x_power": data.x_power,
                 "fest_power": data.fest_power,
-                "league_match_event_id": data.league_match_event_id,
+                "weapon_power": data.weapon_power,
+                "my_league_power": data.my_league_power,
+                "league_match_event_name": data.league_match_event_name,
                 "mode_extra": _json_dumps(data.mode_extra),
                 "awards": _json_dumps(data.awards),
                 "updated_at": now,

@@ -37,7 +37,9 @@ class BattleDetail(Base):
     udemae: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     x_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     fest_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
-    league_match_event_id: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    weapon_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    my_league_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    league_match_event_name: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     mode_extra: Mapped[Optional[str]] = mapped_column(Text, nullable=True)  # JSON
     awards: Mapped[Optional[str]] = mapped_column(Text, nullable=True)  # JSON
     created_at: Mapped[Optional[str]] = mapped_column(String, nullable=True)
