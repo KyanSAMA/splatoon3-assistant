@@ -184,12 +184,15 @@ const getResultText = (judgement) => {
         <div class="header-content">
           <div class="header-top">
             <span class="mode-tag">{{ getModeLabel(battle) }}</span>
-            <span class="time">{{ formatTime(battle.played_time) }}</span>
+            <div class="header-right">
+              <span class="stage-name-sm">{{ battle.stage.zh_name }}</span>
+              <span class="time">{{ formatTime(battle.played_time) }}</span>
+            </div>
           </div>
           <div class="header-center">
             <img :src="getRuleIcon(battle.vs_rule)" class="rule-icon-lg" />
             <span class="rule-name">{{ getRuleLabel(battle.vs_rule) }}</span>
-            <h1 class="stage-name">{{ battle.stage.name }}</h1>
+            <h1 class="stage-name">{{ battle.stage.zh_name }}</h1>
           </div>
           <div class="header-bottom">
             <span class="duration-tag">{{ formatDuration(battle.duration) }}</span>
@@ -425,6 +428,19 @@ const getResultText = (judgement) => {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stage-name-sm {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
 .mode-tag {

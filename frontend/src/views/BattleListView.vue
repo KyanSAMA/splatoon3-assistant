@@ -214,6 +214,12 @@ const getStageCode = (vsStageId) => {
   return stage?.code || vsStageId
 }
 
+// 根据 vs_stage_id 获取地图名称
+const getStageName = (vsStageId) => {
+  const stage = stages.value.find(s => s.vs_stage_id === vsStageId)
+  return stage?.zh_name || ''
+}
+
 // 武器下拉选项（根据用户使用过的武器 ID 过滤）
 const weaponOptions = computed(() => {
   if (!userWeaponIds.value.length) return []
@@ -387,6 +393,7 @@ const getResultText = (judgement) => {
                 <span class="rule-name">{{ getRuleLabel(battle.vs_rule) }}</span>
               </div>
               <div class="header-right">
+                <span class="stage-name">{{ battle.stage?.zh_name }}</span>
                 <span class="time">{{ formatTime(battle.played_time) }}</span>
               </div>
             </div>
