@@ -38,6 +38,7 @@ class BattleDetail(Base):
     x_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     fest_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     weapon_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    bankara_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     my_league_power: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     league_match_event_name: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     mode_extra: Mapped[Optional[str]] = mapped_column(Text, nullable=True)  # JSON

@@ -213,11 +213,15 @@ const getResultText = (judgement) => {
       </div>
 
       <!-- Mode Stats -->
-      <div class="mode-stats" v-if="battle.udemae || battle.weapon_power || battle.x_power || battle.fest_power || battle.my_league_power">
+      <div class="mode-stats" v-if="battle.udemae || battle.weapon_power || battle.bankara_power || battle.x_power || battle.fest_power || battle.my_league_power">
         <span v-if="battle.udemae" class="stat-badge udemae" :style="{ background: getUdemaeColor(battle.udemae) }">{{ battle.udemae }}</span>
-        <div v-if="battle.weapon_power && getMyPlayer(battle)" class="stat-badge power">
+        <div v-if="battle.bankara_mode === 'CHALLENGE' && battle.weapon_power && getMyPlayer(battle)" class="stat-badge power">
           <img :src="getWeaponImg(getMyPlayer(battle).weapon_id)" class="power-icon" />
           <span>{{ battle.weapon_power.toFixed(1) }}</span>
+        </div>
+        <div v-if="battle.bankara_mode === 'OPEN' && battle.bankara_power" class="stat-badge power open">
+          <span class="power-label">BP</span>
+          <span>{{ battle.bankara_power.toFixed(1) }}</span>
         </div>
         <div v-if="battle.x_power" class="stat-badge power x-match">
           <span class="power-label">XP</span>
@@ -539,6 +543,7 @@ const getResultText = (judgement) => {
 .stat-badge.power.x-match { color: #00EBA7; }
 .stat-badge.power.fest { color: #F54E93; }
 .stat-badge.power.league { color: #fff; }
+.stat-badge.power.open { color: #BFA6FF; }
 .power-icon { width: 18px; height: 18px; }
 .power-label { font-size: 10px; opacity: 0.8; }
 .event-name { font-size: 12px; color: #666; font-weight: 600; }

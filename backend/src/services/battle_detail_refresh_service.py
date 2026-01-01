@@ -220,10 +220,14 @@ async def _parse_and_save_battle_detail(
         # 模式特有信息
         bankara_mode = None
         weapon_power = None
+        bankara_power = None
         bankara_match = vs_detail.get("bankaraMatch")
         if isinstance(bankara_match, dict):
             bankara_mode = bankara_match.get("mode")
             weapon_power = bankara_match.get("weaponPower")
+            bankara_power_obj = bankara_match.get("bankaraPower")
+            if isinstance(bankara_power_obj, dict):
+                bankara_power = bankara_power_obj.get("power")
         elif bankara_match:
             logger.warning(f"[DEBUG] bankaraMatch is not dict: type={type(bankara_match)}, value={bankara_match}")
 
@@ -277,6 +281,7 @@ async def _parse_and_save_battle_detail(
             x_power=x_power,
             fest_power=fest_power,
             weapon_power=weapon_power,
+            bankara_power=bankara_power,
             my_league_power=my_league_power,
             league_match_event_name=league_match_event_name,
             awards=awards_data if awards_data else None,
@@ -535,3 +540,39 @@ async def refresh_battle_details(
 
     logger.info(f"Refreshed {total_count} battle details for user {user.id}")
     return {"success": True, "message": f"Refreshed {total_count} battle details", "count": total_count}
+
+
+@router.get("/latest_battle_raw")
+async def get_latest_battle_raw(
+    api: SplatNet3API = Depends(require_splatnet_api),
+):
+    """
+    获取最新一场对战的原始数据（测试用）
+    直接返回 SplatNet API 的原始响应
+    """
+    # 获取最新对战 ID
+    last_battle = await api.get_last_one_battle()
+    if not last_battle:
+        return {"error": "Failed to get last battle info"}
+
+    # 提取对战 ID
+    vs_detail = (last_battle.get("data") or {}).get("vsResult") or {}
+    history_groups = (vs_detail.get("historyGroups") or {}).get("nodes") or []
+    if not history_groups:
+        return {"error": "No battle history found", "raw": last_battle}
+
+    first_group = history_groups[0]
+    history_details = (first_group.get("historyDetails") or {}).get("nodes") or []
+    if not history_details:
+        return {"error": "No battle details found", "raw": last_battle}
+
+    battle_id = history_details[0].get("id")
+    if not battle_id:
+        return {"error": "No battle id found", "raw": last_battle}
+
+    # 获取对战详情
+    detail = await api.get_battle_detail(battle_id)
+    if not detail:
+        return {"error": "Failed to get battle detail", "battle_id": battle_id}
+
+    return detail

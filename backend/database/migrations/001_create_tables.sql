@@ -159,6 +159,7 @@ CREATE TABLE IF NOT EXISTS battle_detail (
     x_power REAL,                           -- X赛战力（从列表接口获取）
     fest_power REAL,                        -- 祭典战力
     weapon_power REAL,                      -- 武器力（来自 bankaraMatch.weaponPower）
+    bankara_power REAL,                     -- 真格战力（来自 bankaraMatch.bankaraPower.power）
     my_league_power REAL,                   -- 活动赛力量（来自 leagueMatch.myLeaguePower）
     league_match_event_name TEXT,           -- 活动赛事件名称（来自 leagueMatch.leagueMatchEvent.name）
 

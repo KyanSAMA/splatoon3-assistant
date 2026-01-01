@@ -30,6 +30,7 @@ class BattleDetailData:
     x_power: Optional[float] = None
     fest_power: Optional[float] = None
     weapon_power: Optional[float] = None
+    bankara_power: Optional[float] = None
     my_league_power: Optional[float] = None
     league_match_event_name: Optional[str] = None
     mode_extra: Optional[Dict] = None
@@ -197,6 +198,7 @@ async def upsert_battle_detail(data: BattleDetailData) -> int:
             x_power=data.x_power,
             fest_power=data.fest_power,
             weapon_power=data.weapon_power,
+            bankara_power=data.bankara_power,
             my_league_power=data.my_league_power,
             league_match_event_name=data.league_match_event_name,
             mode_extra=_json_dumps(data.mode_extra),
@@ -218,6 +220,7 @@ async def upsert_battle_detail(data: BattleDetailData) -> int:
                 "x_power": data.x_power,
                 "fest_power": data.fest_power,
                 "weapon_power": data.weapon_power,
+                "bankara_power": data.bankara_power,
                 "my_league_power": data.my_league_power,
                 "league_match_event_name": data.league_match_event_name,
                 "mode_extra": _json_dumps(data.mode_extra),

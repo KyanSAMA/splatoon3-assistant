@@ -436,6 +436,10 @@ const getResultText = (judgement) => {
                   <img :src="getWeaponImg(getMyPlayer(battle).weapon_id)" class="power-icon-sm" />
                   <span class="power-val">{{ battle.weapon_power.toFixed(1) }}</span>
                 </div>
+                <div v-if="battle.vs_mode === 'BANKARA' && battle.bankara_mode === 'OPEN' && battle.bankara_power" class="stat-badge power open">
+                  <span class="power-label">BP</span>
+                  <span class="power-val">{{ battle.bankara_power.toFixed(1) }}</span>
+                </div>
                 <div v-if="battle.vs_mode === 'X_MATCH' && battle.x_power" class="stat-badge power x-match">
                   <span class="power-label">XP</span>
                   <span class="power-val">{{ battle.x_power.toFixed(1) }}</span>
@@ -1080,7 +1084,7 @@ const getResultText = (judgement) => {
 }
 
 .mode-badge.bankara.challenge { background: #E60012; }
-.mode-badge.bankara.open { background: #603BFF; }
+.mode-badge.bankara.open { background: #4820CC; }
 .mode-badge.x_match { background: #00EBA7; color: #000; }
 .mode-badge.regular { background: #19D719; }
 .mode-badge.fest { background: linear-gradient(135deg, #EAFF3D, #F54E93); color: #000; }
@@ -1216,6 +1220,7 @@ const getResultText = (judgement) => {
 .stat-badge.power.x-match { color: #00EBA7; }
 .stat-badge.power.fest { color: #F54E93; }
 .stat-badge.power.league { color: #fff; }
+.stat-badge.power.open { color: #BFA6FF; }
 
 .power-icon-sm {
   width: 16px;
