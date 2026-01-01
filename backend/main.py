@@ -7,7 +7,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from src.services import auth_router, data_router, battle_router, coop_router, stage_router, close_all_api_sessions
+from src.services import auth_router, data_router, battle_refresh_router, battle_query_router, coop_router, stage_router, close_all_api_sessions
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -32,7 +32,8 @@ app = FastAPI(
 
 app.include_router(auth_router)
 app.include_router(data_router)
-app.include_router(battle_router)
+app.include_router(battle_refresh_router)
+app.include_router(battle_query_router)
 app.include_router(coop_router)
 app.include_router(stage_router)
 
@@ -40,6 +41,11 @@ app.include_router(stage_router)
 stage_images_path = Path(__file__).parent.parent / "data" / "images" / "stage"
 if stage_images_path.exists():
     app.mount("/static/stage", StaticFiles(directory=str(stage_images_path)), name="stage_images")
+
+# 静态文件服务 - 地图大图
+stage_l_images_path = Path(__file__).parent.parent / "data" / "images" / "stage_l"
+if stage_l_images_path.exists():
+    app.mount("/static/stage_l", StaticFiles(directory=str(stage_l_images_path)), name="stage_l_images")
 
 # 静态文件服务 - 地图横幅图片
 stage_banner_path = Path(__file__).parent.parent / "data" / "images" / "stage_banner"
@@ -70,6 +76,11 @@ if sub_weapon_images_path.exists():
 special_weapon_images_path = Path(__file__).parent.parent / "data" / "images" / "special_weapon"
 if special_weapon_images_path.exists():
     app.mount("/static/special_weapon", StaticFiles(directory=str(special_weapon_images_path)), name="special_weapon_images")
+
+# 静态文件服务 - 技能图片
+skill_images_path = Path(__file__).parent.parent / "data" / "images" / "skill"
+if skill_images_path.exists():
+    app.mount("/static/skill", StaticFiles(directory=str(skill_images_path)), name="skill_images")
 
 
 @app.get("/health")

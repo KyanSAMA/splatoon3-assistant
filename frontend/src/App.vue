@@ -240,7 +240,7 @@ onUnmounted(() => {
         </div>
         <nav class="nav-links">
           <a @click="router.push('/schedule')" class="nav-link" :class="{ active: route.path === '/schedule' }">日程</a>
-          <a @click="router.push('/battles')" class="nav-link" :class="{ active: route.path === '/battles' }">对战</a>
+          <a @click="router.push('/battles')" class="nav-link" :class="{ active: route.path.startsWith('/battles') }">对战</a>
         </nav>
         <div class="user-section">
           <div class="user-info">
@@ -254,7 +254,11 @@ onUnmounted(() => {
       </header>
 
       <main class="main-content">
-        <router-view></router-view>
+        <router-view v-slot="{ Component }">
+          <keep-alive include="BattleListView">
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
       </main>
 
       <div v-if="errorMsg" class="error-toast">{{ errorMsg }}</div>

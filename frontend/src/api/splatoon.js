@@ -114,6 +114,69 @@ export const splatoonService = {
     }
   },
 
+  async getBattleList(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      if (params.vs_mode) query.set('vs_mode', params.vs_mode)
+      if (params.vs_rule) query.set('vs_rule', params.vs_rule)
+      if (params.weapon_id) query.set('weapon_id', params.weapon_id)
+      if (params.bankara_mode) query.set('bankara_mode', params.bankara_mode)
+      if (params.limit) query.set('limit', params.limit)
+      if (params.offset) query.set('offset', params.offset)
+      const qs = query.toString()
+      const url = qs ? `${API_BASE}/battle/battles?${qs}` : `${API_BASE}/battle/battles`
+      const res = await apiFetch(url)
+      if (!res.ok) return []
+      return await res.json()
+    } catch {
+      return []
+    }
+  },
+
+  async getBattleDetail(id) {
+    try {
+      const res = await apiFetch(`${API_BASE}/battle/battles/${id}`)
+      if (!res.ok) return null
+      return await res.json()
+    } catch {
+      return null
+    }
+  },
+
+  async getBattleStats(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      if (params.vs_mode) query.set('vs_mode', params.vs_mode)
+      if (params.vs_rule) query.set('vs_rule', params.vs_rule)
+      if (params.weapon_id) query.set('weapon_id', params.weapon_id)
+      if (params.bankara_mode) query.set('bankara_mode', params.bankara_mode)
+      const qs = query.toString()
+      const url = qs ? `${API_BASE}/battle/stats?${qs}` : `${API_BASE}/battle/stats`
+      const res = await apiFetch(url)
+      if (!res.ok) return null
+      return await res.json()
+    } catch {
+      return null
+    }
+  },
+
+  async getBattleDashboard(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      if (params.vs_mode) query.set('vs_mode', params.vs_mode)
+      if (params.vs_rule) query.set('vs_rule', params.vs_rule)
+      if (params.weapon_id) query.set('weapon_id', params.weapon_id)
+      if (params.bankara_mode) query.set('bankara_mode', params.bankara_mode)
+      const qs = query.toString()
+      const url = qs ? `${API_BASE}/battle/dashboard?${qs}` : `${API_BASE}/battle/dashboard`
+      const res = await apiFetch(url)
+      if (!res.ok) return null
+      return await res.json()
+    } catch {
+      return null
+    }
+  },
+
   async refreshToken() {
     const res = await apiFetch(`${API_BASE}/data/refresh/token`, { method: 'POST' })
     if (!res.ok) throw new Error('Token 刷新失败')
@@ -130,6 +193,70 @@ export const splatoonService = {
     const res = await apiFetch(`${API_BASE}/data/refresh/battle_details?mode=ALL`, { method: 'POST' })
     if (!res.ok) throw new Error('对战数据刷新失败')
     return await res.json()
+  },
+
+  async getMainWeapons() {
+    const cacheKey = 's3_main_weapons'
+    const cached = getCached(cacheKey)
+    if (cached) return cached
+
+    try {
+      const res = await apiFetch(`${API_BASE}/battle/main-weapons`)
+      if (!res.ok) return []
+      const data = await res.json()
+      setCached(cacheKey, data, 1440) // 缓存24小时
+      return data
+    } catch {
+      return []
+    }
+  },
+
+  async getUserWeapons(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      if (params.vs_mode) query.set('vs_mode', params.vs_mode)
+      if (params.vs_rule) query.set('vs_rule', params.vs_rule)
+      if (params.bankara_mode) query.set('bankara_mode', params.bankara_mode)
+      const qs = query.toString()
+      const url = qs ? `${API_BASE}/battle/weapons?${qs}` : `${API_BASE}/battle/weapons`
+      const res = await apiFetch(url)
+      if (!res.ok) return []
+      return await res.json()
+    } catch {
+      return []
+    }
+  },
+
+  async getSubWeapons() {
+    const cacheKey = 's3_sub_weapons'
+    const cached = getCached(cacheKey)
+    if (cached) return cached
+
+    try {
+      const res = await apiFetch(`${API_BASE}/battle/sub-weapons`)
+      if (!res.ok) return []
+      const data = await res.json()
+      setCached(cacheKey, data, 1440)
+      return data
+    } catch {
+      return []
+    }
+  },
+
+  async getSpecialWeapons() {
+    const cacheKey = 's3_special_weapons'
+    const cached = getCached(cacheKey)
+    if (cached) return cached
+
+    try {
+      const res = await apiFetch(`${API_BASE}/battle/special-weapons`)
+      if (!res.ok) return []
+      const data = await res.json()
+      setCached(cacheKey, data, 1440)
+      return data
+    } catch {
+      return []
+    }
   },
 
   clearScheduleCache() {

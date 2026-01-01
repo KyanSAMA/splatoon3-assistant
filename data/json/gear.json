@@ -1,0 +1,575 @@
+{
+  "data": {
+    "gesotown": {
+      "pickupBrand": {
+        "image": {
+          "url": "https://splatoon3.ink/assets/splatnet/v3/carousel_img/ee29b54b234f20ebb7c2934e453cd5c732cc1b5fd0fc3928147f9dd9f5a4fdb1_0.png"
+        },
+        "brand": {
+          "name": "Toni Kensa",
+          "usualGearPower": {
+            "__splatoon3ink_id": "351dbd2ad833da59",
+            "name": "Ink Saver (Main)",
+            "desc": "Decreases amount of ink consumed by your main weapon.",
+            "image": {
+              "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png"
+            },
+            "isEmptySlot": false
+          },
+          "id": "QnJhbmQtMTc="
+        },
+        "saleEndTime": "2026-01-02T00:00:00Z",
+        "brandGears": [
+          {
+            "id": "U2FsZUdlYXItMF8xNzY3MjI1NjAwXzA=",
+            "saleEndTime": "2026-01-02T00:00:00Z",
+            "price": 8000,
+            "gear": {
+              "__splatoon3ink_id": "fd4b717166d199f0",
+              "__typename": "HeadGear",
+              "name": "Squidbeak Shield",
+              "primaryGearPower": {
+                "__splatoon3ink_id": "ef78dc3c91f93dbd",
+                "name": "Quick Super Jump",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/138820ed46d68bdf2d7a21fb3f74621d8fc8c2a7cb6abe8d7c1a3d7c465108a7_0.png"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "__splatoon3ink_id": "668f5cf3759aa059",
+                  "name": "Unknown",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                  }
+                },
+                {
+                  "__splatoon3ink_id": "668f5cf3759aa059",
+                  "name": "Unknown",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                  }
+                }
+              ],
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/34d2b767400912f944b27736790e9b237b0106d49a814437b3b9493867194140_0.png"
+              },
+              "brand": {
+                "name": "Toni Kensa",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/ee29b54b234f20ebb7c2934e453cd5c732cc1b5fd0fc3928147f9dd9f5a4fdb1_0.png"
+                },
+                "id": "QnJhbmQtMTc=",
+                "usualGearPower": {
+                  "__splatoon3ink_id": "351dbd2ad833da59",
+                  "name": "Ink Saver (Main)",
+                  "desc": "Decreases amount of ink consumed by your main weapon.",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png"
+                  },
+                  "isEmptySlot": false
+                }
+              }
+            },
+            "isAlreadyOrdered": false,
+            "nextGear": {
+              "id": "U2FsZUdlYXItMF8xNzY3MjI1NjAwXzE="
+            },
+            "previousGear": null,
+            "ownedGear": null
+          },
+          {
+            "id": "U2FsZUdlYXItMF8xNzY3MjI1NjAwXzE=",
+            "saleEndTime": "2026-01-02T00:00:00Z",
+            "price": 14970,
+            "gear": {
+              "__splatoon3ink_id": "bc4b2d948ec1a680",
+              "__typename": "ClothingGear",
+              "name": "Orca Bolero",
+              "primaryGearPower": {
+                "__splatoon3ink_id": "7a177ddb3aeaed0b",
+                "name": "Ink Resistance Up",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/db36f7e89194ed642f53465abfa449669031a66d7538135c703d3f7d41f99c0d_0.png"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "__splatoon3ink_id": "668f5cf3759aa059",
+                  "name": "Unknown",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                  }
+                },
+                {
+                  "__splatoon3ink_id": "668f5cf3759aa059",
+                  "name": "Unknown",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                  }
+                },
+                {
+                  "__splatoon3ink_id": "668f5cf3759aa059",
+                  "name": "Unknown",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                  }
+                }
+              ],
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/35060ee180c37b38c326e2052f91c741142d5f7dfd007cca998e79110f982340_0.png"
+              },
+              "brand": {
+                "name": "Toni Kensa",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/ee29b54b234f20ebb7c2934e453cd5c732cc1b5fd0fc3928147f9dd9f5a4fdb1_0.png"
+                },
+                "id": "QnJhbmQtMTc=",
+                "usualGearPower": {
+                  "__splatoon3ink_id": "351dbd2ad833da59",
+                  "name": "Ink Saver (Main)",
+                  "desc": "Decreases amount of ink consumed by your main weapon.",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png"
+                  },
+                  "isEmptySlot": false
+                }
+              }
+            },
+            "isAlreadyOrdered": false,
+            "nextGear": {
+              "id": "U2FsZUdlYXItMF8xNzY3MjI1NjAwXzI="
+            },
+            "previousGear": {
+              "id": "U2FsZUdlYXItMF8xNzY3MjI1NjAwXzA="
+            },
+            "ownedGear": null
+          },
+          {
+            "id": "U2FsZUdlYXItMF8xNzY3MjI1NjAwXzI=",
+            "saleEndTime": "2026-01-02T00:00:00Z",
+            "price": 13200,
+            "gear": {
+              "__splatoon3ink_id": "1bb16ccccd8ab5be",
+              "__typename": "ShoesGear",
+              "name": "Pearl 01STERs",
+              "primaryGearPower": {
+                "__splatoon3ink_id": "4352d3f254655a4f",
+                "name": "Ink Recovery Up",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/29b845ea895b931bfaf895e0161aeb47166cbf05f94f04601769c885d019073b_0.png"
+                }
+              },
+              "additionalGearPowers": [
+                {
+                  "__splatoon3ink_id": "668f5cf3759aa059",
+                  "name": "Unknown",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                  }
+                },
+                {
+                  "__splatoon3ink_id": "668f5cf3759aa059",
+                  "name": "Unknown",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                  }
+                },
+                {
+                  "__splatoon3ink_id": "668f5cf3759aa059",
+                  "name": "Unknown",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                  }
+                }
+              ],
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/ee9e9ed2cacf97af7c24fda40ec01254588da9aaccc2ae19f29cb73e10135b40_0.png"
+              },
+              "brand": {
+                "name": "Toni Kensa",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/ee29b54b234f20ebb7c2934e453cd5c732cc1b5fd0fc3928147f9dd9f5a4fdb1_0.png"
+                },
+                "id": "QnJhbmQtMTc=",
+                "usualGearPower": {
+                  "__splatoon3ink_id": "351dbd2ad833da59",
+                  "name": "Ink Saver (Main)",
+                  "desc": "Decreases amount of ink consumed by your main weapon.",
+                  "image": {
+                    "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png"
+                  },
+                  "isEmptySlot": false
+                }
+              }
+            },
+            "isAlreadyOrdered": false,
+            "nextGear": null,
+            "previousGear": {
+              "id": "U2FsZUdlYXItMF8xNzY3MjI1NjAwXzE="
+            },
+            "ownedGear": null
+          }
+        ],
+        "nextBrand": {
+          "name": "Forge",
+          "image": {
+            "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/ec2cb38a3c7f3280d04e2da585c6ca37028cbd0135bada2a591ff4d564bd8aa5_0.png"
+          },
+          "id": "QnJhbmQtNQ=="
+        }
+      },
+      "limitedGears": [
+        {
+          "id": "U2FsZUdlYXItMV8xNzY3MTUzNjAwXzA=",
+          "saleEndTime": "2026-01-01T04:00:00Z",
+          "price": 1750,
+          "gear": {
+            "__splatoon3ink_id": "42b5402e9eb64e49",
+            "__typename": "HeadGear",
+            "name": "Two-Stripe Mesh",
+            "primaryGearPower": {
+              "__splatoon3ink_id": "75bb4b4b145f5f22",
+              "name": "Special Power Up",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/fba267bd56f536253a6bcce1e919d8a48c2b793c1b554ac968af8d2068b22cab_0.png"
+              }
+            },
+            "additionalGearPowers": [
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              }
+            ],
+            "image": {
+              "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/030874e0ff4fbc67697fbc908df6ec015444a658ea8d6477ab15a8cd0b32a525_0.png"
+            },
+            "brand": {
+              "name": "Krak-On",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/744d1ff06654007506d8600e9903c6be80cddadb03e174bd8d24c2075c66227e_0.png"
+              },
+              "id": "QnJhbmQtMg==",
+              "usualGearPower": {
+                "__splatoon3ink_id": "1e735ea69cb58677",
+                "name": "Swim Speed Up",
+                "desc": "Increases movement speed in swim form.",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png"
+                },
+                "isEmptySlot": false
+              }
+            }
+          },
+          "isAlreadyOrdered": false,
+          "nextGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MTY4MDAwXzA="
+          },
+          "previousGear": null,
+          "ownedGear": null
+        },
+        {
+          "id": "U2FsZUdlYXItMV8xNzY3MTY4MDAwXzA=",
+          "saleEndTime": "2026-01-01T08:00:00Z",
+          "price": 6400,
+          "gear": {
+            "__splatoon3ink_id": "b9a3223d252b2822",
+            "__typename": "HeadGear",
+            "name": "King Flip Mesh",
+            "primaryGearPower": {
+              "__splatoon3ink_id": "bf7742050e8638f9",
+              "name": "Special Charge Up",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/e8668a2af7259be74814a9e453528a3e9773435a34177617a45bbf79ad0feb17_0.png"
+              }
+            },
+            "additionalGearPowers": [
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              },
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              }
+            ],
+            "image": {
+              "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/99c4cfe827eb1409bf67d84188414cdfee4fcce9a99a30b46e6eddfa599da485_0.png"
+            },
+            "brand": {
+              "name": "Enperry",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/bc215963d1a424a5f9707d565f07a5bcf79e19cde17372a9a6a914cd986f7fc9_0.png"
+              },
+              "id": "QnJhbmQtMTY=",
+              "usualGearPower": {
+                "__splatoon3ink_id": "a3d44c0645fcc37a",
+                "name": "Sub Power Up",
+                "desc": "Upgrades your sub weapon.",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/9df9825e470e00727aa1009c4418cf0ace58e1e529dab9a7c1787309bb25f327_0.png"
+                },
+                "isEmptySlot": false
+              }
+            }
+          },
+          "isAlreadyOrdered": false,
+          "nextGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MTgyNDAwXzA="
+          },
+          "previousGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MTUzNjAwXzA="
+          },
+          "ownedGear": null
+        },
+        {
+          "id": "U2FsZUdlYXItMV8xNzY3MTgyNDAwXzA=",
+          "saleEndTime": "2026-01-01T12:00:00Z",
+          "price": 11000,
+          "gear": {
+            "__splatoon3ink_id": "85cd9f1ce488ef28",
+            "__typename": "HeadGear",
+            "name": "Pilot Goggles",
+            "primaryGearPower": {
+              "__splatoon3ink_id": "7f6d89f40eabc41d",
+              "name": "Quick Respawn",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/aaa9b7e95a61bfd869aaa9beb836c74f9b8d4e5d4186768a27d6e443c64f33ce_0.png"
+              }
+            },
+            "additionalGearPowers": [
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              },
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              }
+            ],
+            "image": {
+              "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/40be323caaaa4b23dbf5ab6587a75bbdd5f7c7f2ccc23fe851e972878c681b4a_0.png"
+            },
+            "brand": {
+              "name": "Forge",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/ec2cb38a3c7f3280d04e2da585c6ca37028cbd0135bada2a591ff4d564bd8aa5_0.png"
+              },
+              "id": "QnJhbmQtNQ==",
+              "usualGearPower": {
+                "__splatoon3ink_id": "75bb4b4b145f5f22",
+                "name": "Special Power Up",
+                "desc": "Upgrades your special weapon.",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/fba267bd56f536253a6bcce1e919d8a48c2b793c1b554ac968af8d2068b22cab_0.png"
+                },
+                "isEmptySlot": false
+              }
+            }
+          },
+          "isAlreadyOrdered": false,
+          "nextGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MTk2ODAwXzA="
+          },
+          "previousGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MTY4MDAwXzA="
+          },
+          "ownedGear": null
+        },
+        {
+          "id": "U2FsZUdlYXItMV8xNzY3MTk2ODAwXzA=",
+          "saleEndTime": "2026-01-01T16:00:00Z",
+          "price": 1750,
+          "gear": {
+            "__splatoon3ink_id": "07f0b1a126042377",
+            "__typename": "ClothingGear",
+            "name": "Varsity Baseball LS",
+            "primaryGearPower": {
+              "__splatoon3ink_id": "1f746cec210906af",
+              "name": "Intensify Action",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/1a0c78a1714c5abababd7ffcba258c723fefade1f92684aa5f0ff7784cc467d0_0.png"
+              }
+            },
+            "additionalGearPowers": [
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              }
+            ],
+            "image": {
+              "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/eaa6cc8e878e4fe02e60f9f93e2c710ae4997f8998ff12d4801b56d7ad251146_0.png"
+            },
+            "brand": {
+              "name": "Splash Mob",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/5bfe0fa5868f4aa0edc436c05ddc230d6d527e9405f070f9472945976928d1e5_0.png"
+              },
+              "id": "QnJhbmQtOA==",
+              "usualGearPower": {
+                "__splatoon3ink_id": "351dbd2ad833da59",
+                "name": "Ink Saver (Main)",
+                "desc": "Decreases amount of ink consumed by your main weapon.",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png"
+                },
+                "isEmptySlot": false
+              }
+            }
+          },
+          "isAlreadyOrdered": false,
+          "nextGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MjExMjAwXzA="
+          },
+          "previousGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MTgyNDAwXzA="
+          },
+          "ownedGear": null
+        },
+        {
+          "id": "U2FsZUdlYXItMV8xNzY3MjExMjAwXzA=",
+          "saleEndTime": "2026-01-01T20:00:00Z",
+          "price": 15000,
+          "gear": {
+            "__splatoon3ink_id": "52469e6a40ca387e",
+            "__typename": "HeadGear",
+            "name": "Paintball Mask",
+            "primaryGearPower": {
+              "__splatoon3ink_id": "79a401dc1b5a80b1",
+              "name": "Last-Ditch Effort",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/d514787f65831c5121f68b8d96338412a0d261e39e522638488b24895e97eb88_0.png"
+              }
+            },
+            "additionalGearPowers": [
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              },
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              },
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              }
+            ],
+            "image": {
+              "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/10839b0cd0f773148a10156a921d847cf97eb15f4d462b544b2a97fda6954932_0.png"
+            },
+            "brand": {
+              "name": "Forge",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/ec2cb38a3c7f3280d04e2da585c6ca37028cbd0135bada2a591ff4d564bd8aa5_0.png"
+              },
+              "id": "QnJhbmQtNQ==",
+              "usualGearPower": {
+                "__splatoon3ink_id": "75bb4b4b145f5f22",
+                "name": "Special Power Up",
+                "desc": "Upgrades your special weapon.",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/fba267bd56f536253a6bcce1e919d8a48c2b793c1b554ac968af8d2068b22cab_0.png"
+                },
+                "isEmptySlot": false
+              }
+            }
+          },
+          "isAlreadyOrdered": false,
+          "nextGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MjI1NjAwXzA="
+          },
+          "previousGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MTk2ODAwXzA="
+          },
+          "ownedGear": null
+        },
+        {
+          "id": "U2FsZUdlYXItMV8xNzY3MjI1NjAwXzA=",
+          "saleEndTime": "2026-01-02T00:00:00Z",
+          "price": 7800,
+          "gear": {
+            "__splatoon3ink_id": "d4c85d2d735e464d",
+            "__typename": "ShoesGear",
+            "name": "N-Pacer CaO",
+            "primaryGearPower": {
+              "__splatoon3ink_id": "2497992da827dbbf",
+              "name": "Ink Saver (Sub)",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/11293d8fe7cfb82d55629c058a447f67968fc449fd52e7dd53f7f162fa4672e3_0.png"
+              }
+            },
+            "additionalGearPowers": [
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              },
+              {
+                "__splatoon3ink_id": "668f5cf3759aa059",
+                "name": "Unknown",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91_0.png"
+                }
+              }
+            ],
+            "image": {
+              "url": "https://splatoon3.ink/assets/splatnet/v3/gear_img/f9db80dddcf588185642645579b47191f2b5068207e09e609f45adb4aee39500_0.png"
+            },
+            "brand": {
+              "name": "Enperry",
+              "image": {
+                "url": "https://splatoon3.ink/assets/splatnet/v3/brand_img/bc215963d1a424a5f9707d565f07a5bcf79e19cde17372a9a6a914cd986f7fc9_0.png"
+              },
+              "id": "QnJhbmQtMTY=",
+              "usualGearPower": {
+                "__splatoon3ink_id": "a3d44c0645fcc37a",
+                "name": "Sub Power Up",
+                "desc": "Upgrades your sub weapon.",
+                "image": {
+                  "url": "https://splatoon3.ink/assets/splatnet/v3/skill_img/9df9825e470e00727aa1009c4418cf0ace58e1e529dab9a7c1787309bb25f327_0.png"
+                },
+                "isEmptySlot": false
+              }
+            }
+          },
+          "isAlreadyOrdered": false,
+          "nextGear": null,
+          "previousGear": {
+            "id": "U2FsZUdlYXItMV8xNzY3MjExMjAwXzA="
+          },
+          "ownedGear": null
+        }
+      ]
+    }
+  }
+}

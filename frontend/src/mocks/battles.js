@@ -22,10 +22,54 @@ export const mockBattles = [
         score: 90,
         color: { r: 0.105882399, g: 0.749019623, b: 0.670588315, a: 1.0 },
         players: [
-          { weapon_id: 3030, sub_weapon_code: 3, special_weapon_code: 5, name: 'イカカモネ', k: 12, d: 7, a: 3, sp: 5, p: 1863, is_myself: 0, crown: 0 },
-          { weapon_id: 10, sub_weapon_code: 0, special_weapon_code: 2, name: 'キリギリス', k: 12, d: 8, a: 3, sp: 6, p: 1728, is_myself: 0, crown: 0 },
-          { weapon_id: 7012, sub_weapon_code: 12, special_weapon_code: 10, name: ':}～{:', k: 12, d: 3, a: 4, sp: 3, p: 1199, is_myself: 0, crown: 0 },
-          { weapon_id: 31, sub_weapon_code: 3, special_weapon_code: 6, name: 'ぶりぴー', k: 5, d: 9, a: 3, sp: 4, p: 1428, is_myself: 0, crown: 0 }
+          { weapon_id: 3030, sub_weapon_code: 3, special_weapon_code: 5, name: 'イカカモネ', byname: '墨染高手', name_id: '3142', k: 12, d: 7, a: 3, sp: 5, p: 1863, is_myself: 0, crown: 0,
+            head_gear: { main: '特殊武器性能提升', subs: ['游泳速度提升', '游泳速度提升', '游泳速度提升'] },
+            clothing_gear: { main: '特殊武器增加量提升', subs: ['游泳速度提升', '游泳速度提升', '特殊武器增加量提升'] },
+            shoes_gear: { main: '隐身跳跃', subs: ['快速复活', '快速复活', '快速复活'] },
+            skills_images: {
+              '特殊武器性能提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/fba267bd56f536253a6bcce1e919d8a48c2b793c1b554ac968af8d2068b22cab_0.png',
+              '游泳速度提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png',
+              '特殊武器增加量提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/e8668a2af7259be74814a9e453528a3e9773435a34177617a45bbf79ad0feb17_0.png',
+              '隐身跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/f9c21eacf6dbc1d06edbe498962f8ed766ab43cb1d63806f3731bf57411ae7b6_0.png',
+              '快速复活': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/aaa9b7e95a61bfd869aaa9beb836c74f9b8d4e5d4186768a27d6e443c64f33ce_0.png'
+            }
+          },
+          { weapon_id: 10, sub_weapon_code: 0, special_weapon_code: 2, name: 'キリギリス', byname: '夏日蝉鸣', name_id: '7821', k: 12, d: 8, a: 3, sp: 6, p: 1728, is_myself: 0, crown: 0,
+            head_gear: { main: '副武器效率提升', subs: ['副武器效率提升', '特殊武器增加量提升', '墨汁回复提升'] },
+            clothing_gear: { main: '墨汁回复提升', subs: ['副武器效率提升', '副武器效率提升', '墨汁回复提升'] },
+            shoes_gear: { main: '墨汁回复提升', subs: ['副武器效率提升', '主武器效率提升', '主武器效率提升'] },
+            skills_images: {
+              '副武器效率提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/11293d8fe7cfb82d55629c058a447f67968fc449fd52e7dd53f7f162fa4672e3_0.png',
+              '特殊武器增加量提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/e8668a2af7259be74814a9e453528a3e9773435a34177617a45bbf79ad0feb17_0.png',
+              '墨汁回复提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/29b845ea895b931bfaf895e0161aeb47166cbf05f94f04601769c885d019073b_0.png',
+              '主武器效率提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png'
+            }
+          },
+          { weapon_id: 7012, sub_weapon_code: 12, special_weapon_code: 10, name: ':}～{:', byname: '颜文字达人', name_id: '0001', k: 12, d: 3, a: 4, sp: 3, p: 1199, is_myself: 0, crown: 1,
+            head_gear: { main: '特殊武器减少量降低', subs: ['特殊武器增加量提升', '特殊武器增加量提升', '特殊武器增加量提升'] },
+            clothing_gear: { main: '特殊武器增加量提升', subs: ['特殊武器性能提升', '游泳速度提升', '特殊武器增加量提升'] },
+            shoes_gear: { main: '特殊武器增加量提升', subs: ['特殊武器性能提升', '特殊武器性能提升', '特殊武器性能提升'] },
+            skills_images: {
+              '特殊武器减少量降低': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/e3154ab67494df2793b72eabf912104c21fbca71e540230597222e766756b3e4_0.png',
+              '特殊武器增加量提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/e8668a2af7259be74814a9e453528a3e9773435a34177617a45bbf79ad0feb17_0.png',
+              '特殊武器性能提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/fba267bd56f536253a6bcce1e919d8a48c2b793c1b554ac968af8d2068b22cab_0.png',
+              '游泳速度提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png'
+            }
+          },
+          { weapon_id: 31, sub_weapon_code: 3, special_weapon_code: 6, name: 'ぶりぴー', byname: '涂地小能手', name_id: '5566', k: 5, d: 9, a: 3, sp: 4, p: 1428, is_myself: 0, crown: 0,
+            head_gear: { main: '副武器效率提升', subs: ['副武器效率提升', '游泳速度提升', '行动强化'] },
+            clothing_gear: { main: '游泳速度提升', subs: ['游泳速度提升', '游泳速度提升', '游泳速度提升'] },
+            shoes_gear: { main: '隐身跳跃', subs: ['快速超级跳跃', '墨汁抗性提升', '副武器抗性提升'] },
+            skills_images: {
+              '副武器效率提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/11293d8fe7cfb82d55629c058a447f67968fc449fd52e7dd53f7f162fa4672e3_0.png',
+              '游泳速度提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png',
+              '行动强化': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/1a0c78a1714c5abababd7ffcba258c723fefade1f92684aa5f0ff7784cc467d0_0.png',
+              '隐身跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/f9c21eacf6dbc1d06edbe498962f8ed766ab43cb1d63806f3731bf57411ae7b6_0.png',
+              '快速超级跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/138820ed46d68bdf2d7a21fb3f74621d8fc8c2a7cb6abe8d7c1a3d7c465108a7_0.png',
+              '墨汁抗性提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/db36f7e89194ed642f53465abfa449669031a66d7538135c703d3f7d41f99c0d_0.png',
+              '副武器抗性提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/664489b24e668ef1937bfc9a80a8cf9cf4927b1e16481fa48e7faee42122996d_0.png'
+            }
+          }
         ]
       },
       {
@@ -34,10 +78,59 @@ export const mockBattles = [
         score: 76,
         color: { r: 0.768627524, g: 0.227450997, b: 0.435294092, a: 1.0 },
         players: [
-          { weapon_id: 41, sub_weapon_code: 0, special_weapon_code: 14, name: 'ķìľľ', k: 16, d: 9, a: 2, sp: 5, p: 1494, is_myself: 0, crown: 0 },
-          { weapon_id: 31, sub_weapon_code: 3, special_weapon_code: 6, name: 'rice', k: 6, d: 6, a: 1, sp: 11, p: 2151, is_myself: 0, crown: 0 },
-          { weapon_id: 2030, sub_weapon_code: 10, special_weapon_code: 7, name: 'メロンパン', k: 7, d: 4, a: 1, sp: 5, p: 1086, is_myself: 0, crown: 0 },
-          { weapon_id: 7030, sub_weapon_code: 7, special_weapon_code: 11, name: 'わくここね', k: 3, d: 9, a: 1, sp: 7, p: 1512, is_myself: 1, crown: 0 }
+          { weapon_id: 41, sub_weapon_code: 0, special_weapon_code: 14, name: 'ķìľľ', byname: '狙击之王', name_id: '9999', k: 16, d: 9, a: 2, sp: 5, p: 1494, is_myself: 0, crown: 0,
+            head_gear: { main: '回归', subs: ['快速超级跳跃', '副武器抗性提升', '游泳速度提升'] },
+            clothing_gear: { main: '游泳速度提升', subs: ['行动强化', '副武器效率提升', '游泳速度提升'] },
+            shoes_gear: { main: '隐身跳跃', subs: ['快速超级跳跃', '游泳速度提升', '游泳速度提升'] },
+            skills_images: {
+              '回归': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/748c101d23261aee8404c573a947ffc7e116a8da588c7371c40c4f2af6a05a19_0.png',
+              '快速超级跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/138820ed46d68bdf2d7a21fb3f74621d8fc8c2a7cb6abe8d7c1a3d7c465108a7_0.png',
+              '副武器抗性提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/664489b24e668ef1937bfc9a80a8cf9cf4927b1e16481fa48e7faee42122996d_0.png',
+              '游泳速度提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png',
+              '行动强化': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/1a0c78a1714c5abababd7ffcba258c723fefade1f92684aa5f0ff7784cc467d0_0.png',
+              '副武器效率提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/11293d8fe7cfb82d55629c058a447f67968fc449fd52e7dd53f7f162fa4672e3_0.png',
+              '隐身跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/f9c21eacf6dbc1d06edbe498962f8ed766ab43cb1d63806f3731bf57411ae7b6_0.png'
+            }
+          },
+          { weapon_id: 31, sub_weapon_code: 3, special_weapon_code: 6, name: 'rice', byname: '米饭战士', name_id: '1234', k: 6, d: 6, a: 1, sp: 11, p: 2151, is_myself: 0, crown: 0,
+            head_gear: { main: '副武器效率提升', subs: ['副武器效率提升', '快速超级跳跃', '快速超级跳跃'] },
+            clothing_gear: { main: '副武器效率提升', subs: ['副武器效率提升', '副武器效率提升', '副武器效率提升'] },
+            shoes_gear: { main: '快速复活', subs: ['快速复活', '快速复活', '快速复活'] },
+            skills_images: {
+              '副武器效率提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/11293d8fe7cfb82d55629c058a447f67968fc449fd52e7dd53f7f162fa4672e3_0.png',
+              '快速超级跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/138820ed46d68bdf2d7a21fb3f74621d8fc8c2a7cb6abe8d7c1a3d7c465108a7_0.png',
+              '快速复活': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/aaa9b7e95a61bfd869aaa9beb836c74f9b8d4e5d4186768a27d6e443c64f33ce_0.png'
+            }
+          },
+          { weapon_id: 2030, sub_weapon_code: 10, special_weapon_code: 7, name: 'メロンパン', byname: '面包甜心', name_id: '4567', k: 7, d: 4, a: 1, sp: 5, p: 1086, is_myself: 0, crown: 0,
+            head_gear: { main: '副武器效率提升', subs: ['副武器效率提升', '游泳速度提升', '行动强化'] },
+            clothing_gear: { main: '游泳速度提升', subs: ['游泳速度提升', '游泳速度提升', '游泳速度提升'] },
+            shoes_gear: { main: '隐身跳跃', subs: ['快速超级跳跃', '墨汁抗性提升', '副武器抗性提升'] },
+            skills_images: {
+              '副武器效率提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/11293d8fe7cfb82d55629c058a447f67968fc449fd52e7dd53f7f162fa4672e3_0.png',
+              '游泳速度提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png',
+              '行动强化': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/1a0c78a1714c5abababd7ffcba258c723fefade1f92684aa5f0ff7784cc467d0_0.png',
+              '隐身跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/f9c21eacf6dbc1d06edbe498962f8ed766ab43cb1d63806f3731bf57411ae7b6_0.png',
+              '快速超级跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/138820ed46d68bdf2d7a21fb3f74621d8fc8c2a7cb6abe8d7c1a3d7c465108a7_0.png',
+              '墨汁抗性提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/db36f7e89194ed642f53465abfa449669031a66d7538135c703d3f7d41f99c0d_0.png',
+              '副武器抗性提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/664489b24e668ef1937bfc9a80a8cf9cf4927b1e16481fa48e7faee42122996d_0.png'
+            }
+          },
+          { weapon_id: 7030, sub_weapon_code: 7, special_weapon_code: 11, name: 'わくここね', byname: '油墨之心', name_id: '2847', k: 3, d: 9, a: 1, sp: 7, p: 1512, is_myself: 1, crown: 0,
+            head_gear: { main: '快速超级跳跃', subs: ['游泳速度提升', '快速超级跳跃', '游泳速度提升'] },
+            clothing_gear: { main: '快速复活', subs: ['快速复活', '快速复活', '主武器效率提升'] },
+            shoes_gear: { main: '隐身跳跃', subs: ['副武器抗性提升', '墨汁抗性提升', '副武器性能提升'] },
+            skills_images: {
+              '快速超级跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/138820ed46d68bdf2d7a21fb3f74621d8fc8c2a7cb6abe8d7c1a3d7c465108a7_0.png',
+              '游泳速度提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/087ffffe40c28a40a39dc4a577c235f4cc375540c79dfa8ede1d8b63a063f261_0.png',
+              '快速复活': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/aaa9b7e95a61bfd869aaa9beb836c74f9b8d4e5d4186768a27d6e443c64f33ce_0.png',
+              '主武器效率提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/5c98cc37d2ce56291a7e430459dc9c44d53ca98b8426c5192f4a53e6dd6e4293_0.png',
+              '隐身跳跃': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/f9c21eacf6dbc1d06edbe498962f8ed766ab43cb1d63806f3731bf57411ae7b6_0.png',
+              '副武器抗性提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/664489b24e668ef1937bfc9a80a8cf9cf4927b1e16481fa48e7faee42122996d_0.png',
+              '墨汁抗性提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/db36f7e89194ed642f53465abfa449669031a66d7538135c703d3f7d41f99c0d_0.png',
+              '副武器性能提升': 'https://api.lp1.av5ja.srv.nintendo.net/resources/prod/v3/skill_img/9df9825e470e00727aa1009c4418cf0ace58e1e529dab9a7c1787309bb25f327_0.png'
+            }
+          }
         ]
       }
     ]
@@ -65,10 +158,10 @@ export const mockBattles = [
         score: 72,
         color: { r: 0.117647097, g: 0.752941191, b: 0.678431392, a: 1.0 },
         players: [
-          { weapon_id: 41, sub_weapon_code: 0, special_weapon_code: 14, name: 'ķìľľ', k: 14, d: 11, a: 1, sp: 2, p: 1182, is_myself: 0, crown: 0 },
-          { weapon_id: 7030, sub_weapon_code: 7, special_weapon_code: 11, name: 'わくここね', k: 11, d: 8, a: 4, sp: 6, p: 1320, is_myself: 1, crown: 0 },
-          { weapon_id: 31, sub_weapon_code: 3, special_weapon_code: 6, name: 'rice', k: 10, d: 6, a: 2, sp: 11, p: 2073, is_myself: 0, crown: 0 },
-          { weapon_id: 2030, sub_weapon_code: 10, special_weapon_code: 7, name: 'メロンパン', k: 4, d: 4, a: 1, sp: 3, p: 848, is_myself: 0, crown: 0 }
+          { weapon_id: 41, sub_weapon_code: 0, special_weapon_code: 14, name: 'ķìľľ', byname: '狙击之王', name_id: '9999', k: 14, d: 11, a: 1, sp: 2, p: 1182, is_myself: 0, crown: 0 },
+          { weapon_id: 7030, sub_weapon_code: 7, special_weapon_code: 11, name: 'わくここね', byname: '油墨之心', name_id: '2847', k: 11, d: 8, a: 4, sp: 6, p: 1320, is_myself: 1, crown: 0 },
+          { weapon_id: 31, sub_weapon_code: 3, special_weapon_code: 6, name: 'rice', byname: '米饭战士', name_id: '1234', k: 10, d: 6, a: 2, sp: 11, p: 2073, is_myself: 0, crown: 0 },
+          { weapon_id: 2030, sub_weapon_code: 10, special_weapon_code: 7, name: 'メロンパン', byname: '面包甜心', name_id: '4567', k: 4, d: 4, a: 1, sp: 3, p: 848, is_myself: 0, crown: 0 }
         ]
       },
       {
@@ -77,10 +170,10 @@ export const mockBattles = [
         score: 68,
         color: { r: 0.847058773, g: 0.294117689, b: 0.196078405, a: 1.0 },
         players: [
-          { weapon_id: 3005, sub_weapon_code: 0, special_weapon_code: 14, name: 'おなすびプロシュート', k: 14, d: 11, a: 3, sp: 2, p: 1142, is_myself: 0, crown: 0 },
-          { weapon_id: 7020, sub_weapon_code: 6, special_weapon_code: 4, name: 'yu-uABXY', k: 9, d: 6, a: 1, sp: 4, p: 1188, is_myself: 0, crown: 0 },
-          { weapon_id: 100, sub_weapon_code: 9, special_weapon_code: 9, name: 'かがみもち', k: 6, d: 2, a: 1, sp: 8, p: 1905, is_myself: 0, crown: 0 },
-          { weapon_id: 1042, sub_weapon_code: 13, special_weapon_code: 18, name: '「なにもない」', k: 6, d: 12, a: 1, sp: 5, p: 1092, is_myself: 0, crown: 0 }
+          { weapon_id: 3005, sub_weapon_code: 0, special_weapon_code: 14, name: 'おなすびプロシュート', byname: '茄子火腿', name_id: '8520', k: 14, d: 11, a: 3, sp: 2, p: 1142, is_myself: 0, crown: 0 },
+          { weapon_id: 7020, sub_weapon_code: 6, special_weapon_code: 4, name: 'yu-uABXY', byname: '按键达人', name_id: '7410', k: 9, d: 6, a: 1, sp: 4, p: 1188, is_myself: 0, crown: 0 },
+          { weapon_id: 100, sub_weapon_code: 9, special_weapon_code: 9, name: 'かがみもち', byname: '镜饼武士', name_id: '1111', k: 6, d: 2, a: 1, sp: 8, p: 1905, is_myself: 0, crown: 0 },
+          { weapon_id: 1042, sub_weapon_code: 13, special_weapon_code: 18, name: '「なにもない」', byname: '虚无主义', name_id: '0000', k: 6, d: 12, a: 1, sp: 5, p: 1092, is_myself: 0, crown: 0 }
         ]
       }
     ]

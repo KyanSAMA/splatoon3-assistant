@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 
-from sqlalchemy import select, delete
+from sqlalchemy import select, delete, func, case, desc, and_, distinct
 from sqlalchemy.dialects.sqlite import insert
 
 from .database import get_session
@@ -97,6 +97,22 @@ class BattleAwardData:
 
 def _json_dumps(data: Any) -> Optional[str]:
     return json.dumps(data, ensure_ascii=False) if data is not None else None
+
+
+# 败场判定常量（包含所有失败类型）
+LOSE_JUDGEMENTS = ["LOSE", "DEEMED_LOSE", "EXEMPTED_LOSE"]
+
+
+def _apply_battle_filters(stmt, user_id: int, vs_mode: Optional[str], vs_rule: Optional[str], bankara_mode: Optional[str] = None):
+    """复用用户/模式/规则筛选条件"""
+    stmt = stmt.where(BattleDetail.user_id == user_id)
+    if vs_mode:
+        stmt = stmt.where(BattleDetail.vs_mode == vs_mode)
+    if vs_rule:
+        stmt = stmt.where(BattleDetail.vs_rule == vs_rule)
+    if bankara_mode:
+        stmt = stmt.where(BattleDetail.bankara_mode == bankara_mode)
+    return stmt
 
 
 # ===========================================
@@ -411,3 +427,524 @@ async def delete_battle_detail(battle_id: int) -> None:
         await session.execute(delete(BattleTeam).where(BattleTeam.battle_id == battle_id))
         await session.execute(delete(BattleAward).where(BattleAward.battle_id == battle_id))
         await session.execute(delete(BattleDetail).where(BattleDetail.id == battle_id))
+
+
+# ===========================================
+# Battle 统计查询
+# ===========================================
+
+
+async def get_user_used_weapons(
+    user_id: int, vs_mode: Optional[str] = None, vs_rule: Optional[str] = None, bankara_mode: Optional[str] = None
+) -> List[int]:
+    """获取用户自己使用过的武器列表（去重，按 weapon_id 排序）"""
+    async with get_session() as session:
+        stmt = (
+            select(distinct(BattlePlayer.weapon_id))
+            .select_from(BattleDetail)
+            .join(BattlePlayer, BattlePlayer.battle_id == BattleDetail.id)
+            .where(BattlePlayer.is_myself == 1, BattlePlayer.weapon_id.isnot(None))
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        stmt = stmt.order_by(BattlePlayer.weapon_id)
+        result = await session.execute(stmt)
+        return [row[0] for row in result.fetchall() if row[0] is not None]
+
+
+async def get_filtered_battle_list(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+    limit: int = 50,
+    offset: int = 0,
+) -> List[Dict[str, Any]]:
+    """
+    分页获取对战列表，支持武器筛选
+    采用两段查询：先取 battle_id 列表，再批量加载队伍/玩家，避免分页错乱
+    """
+    async with get_session() as session:
+        # 第一段：获取符合条件的 battle_id 列表
+        battle_id_stmt = select(BattleDetail.id).order_by(desc(BattleDetail.played_time))
+        battle_id_stmt = _apply_battle_filters(battle_id_stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            # 通过子查询筛选使用指定武器的对战，添加 user_id 限制提升性能
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            battle_id_stmt = battle_id_stmt.where(BattleDetail.id.in_(weapon_subq))
+        battle_id_stmt = battle_id_stmt.limit(limit).offset(offset)
+
+        battle_id_result = await session.execute(battle_id_stmt)
+        battle_ids = [row[0] for row in battle_id_result.fetchall()]
+        if not battle_ids:
+            return []
+
+        # 第二段：批量加载对战详情
+        battle_stmt = select(BattleDetail).where(BattleDetail.id.in_(battle_ids))
+        battle_result = await session.execute(battle_stmt)
+        battle_map = {b.id: b.to_dict() for b in battle_result.scalars().all()}
+
+        # 批量加载队伍
+        team_stmt = (
+            select(BattleTeam)
+            .where(BattleTeam.battle_id.in_(battle_ids))
+            .order_by(BattleTeam.battle_id, BattleTeam.team_role, BattleTeam.team_order)
+        )
+        team_result = await session.execute(team_stmt)
+        teams = team_result.scalars().all()
+
+        # 批量加载玩家
+        player_stmt = (
+            select(BattlePlayer)
+            .where(BattlePlayer.battle_id.in_(battle_ids))
+            .order_by(BattlePlayer.battle_id, BattlePlayer.team_id, BattlePlayer.player_order)
+        )
+        player_result = await session.execute(player_stmt)
+        players = player_result.scalars().all()
+
+        # 组装数据结构
+        teams_by_battle: Dict[int, List[Dict[str, Any]]] = {bid: [] for bid in battle_ids}
+        teams_map: Dict[int, Dict[str, Any]] = {}
+        for team in teams:
+            team_dict = team.to_dict()
+            teams_map[team.id] = team_dict
+            teams_by_battle.setdefault(team.battle_id, []).append(team_dict)
+
+        for player in players:
+            player_dict = player.to_dict()
+            team_dict = teams_map.get(player.team_id)
+            if team_dict is not None:
+                team_dict.setdefault("players", []).append(player_dict)
+
+        # 按原始顺序返回
+        ordered_battles: List[Dict[str, Any]] = []
+        for bid in battle_ids:
+            battle_dict = battle_map.get(bid)
+            if battle_dict is None:
+                continue
+            battle_dict["teams"] = teams_by_battle.get(bid, [])
+            ordered_battles.append(battle_dict)
+
+        return ordered_battles
+
+
+async def get_battle_stats(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+) -> Dict[str, int]:
+    """获取对战统计：总数/胜场/败场（败场包含 LOSE/DEEMED_LOSE/EXEMPTED_LOSE）"""
+    async with get_session() as session:
+        stmt = select(
+            func.count().label("total"),
+            func.sum(case((BattleDetail.judgement == "WIN", 1), else_=0)).label("win"),
+            func.sum(case((BattleDetail.judgement.in_(LOSE_JUDGEMENTS), 1), else_=0)).label("lose"),
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        row = result.one()
+        return {"total": row.total or 0, "win": row.win or 0, "lose": row.lose or 0}
+
+
+async def get_opponent_weapons_on_win(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+    limit: int = 6,
+) -> List[Dict[str, Any]]:
+    """统计获胜对局中对手武器出现次数，按次数降序"""
+    async with get_session() as session:
+        stmt = (
+            select(BattlePlayer.weapon_id, func.count().label("count"))
+            .select_from(BattleDetail)
+            .join(BattleTeam, BattleTeam.battle_id == BattleDetail.id)
+            .join(
+                BattlePlayer,
+                and_(BattlePlayer.team_id == BattleTeam.id, BattlePlayer.battle_id == BattleDetail.id),
+            )
+            .where(
+                BattleDetail.judgement == "WIN",
+                BattleTeam.team_role == "OTHER",
+                BattlePlayer.weapon_id.isnot(None),
+            )
+            .group_by(BattlePlayer.weapon_id)
+            .order_by(desc("count"))
+            .limit(limit)
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        return [{"weapon_id": row.weapon_id, "count": row.count} for row in result.fetchall()]
+
+
+async def get_opponent_weapons_count_on_win(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+) -> int:
+    """获胜对局中对手武器出现的总次数"""
+    async with get_session() as session:
+        stmt = (
+            select(func.count())
+            .select_from(BattleDetail)
+            .join(BattleTeam, BattleTeam.battle_id == BattleDetail.id)
+            .join(
+                BattlePlayer,
+                and_(BattlePlayer.team_id == BattleTeam.id, BattlePlayer.battle_id == BattleDetail.id),
+            )
+            .where(
+                BattleDetail.judgement == "WIN",
+                BattleTeam.team_role == "OTHER",
+                BattlePlayer.weapon_id.isnot(None),
+            )
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        return result.scalar_one() or 0
+
+
+async def get_opponent_weapons_on_lose(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+    limit: int = 6,
+) -> List[Dict[str, Any]]:
+    """统计失败对局中对手武器出现次数，按次数降序"""
+    async with get_session() as session:
+        stmt = (
+            select(BattlePlayer.weapon_id, func.count().label("count"))
+            .select_from(BattleDetail)
+            .join(BattleTeam, BattleTeam.battle_id == BattleDetail.id)
+            .join(
+                BattlePlayer,
+                and_(BattlePlayer.team_id == BattleTeam.id, BattlePlayer.battle_id == BattleDetail.id),
+            )
+            .where(
+                BattleDetail.judgement.in_(LOSE_JUDGEMENTS),
+                BattleTeam.team_role == "OTHER",
+                BattlePlayer.weapon_id.isnot(None),
+            )
+            .group_by(BattlePlayer.weapon_id)
+            .order_by(desc("count"))
+            .limit(limit)
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        return [{"weapon_id": row.weapon_id, "count": row.count} for row in result.fetchall()]
+
+
+async def get_opponent_weapons_count_on_lose(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+) -> int:
+    """失败对局中对手武器出现的总次数"""
+    async with get_session() as session:
+        stmt = (
+            select(func.count())
+            .select_from(BattleDetail)
+            .join(BattleTeam, BattleTeam.battle_id == BattleDetail.id)
+            .join(
+                BattlePlayer,
+                and_(BattlePlayer.team_id == BattleTeam.id, BattlePlayer.battle_id == BattleDetail.id),
+            )
+            .where(
+                BattleDetail.judgement.in_(LOSE_JUDGEMENTS),
+                BattleTeam.team_role == "OTHER",
+                BattlePlayer.weapon_id.isnot(None),
+            )
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        return result.scalar_one() or 0
+
+
+async def get_opponent_weapon_win_rates(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+    limit: int = 6,
+    min_battles: int = 5,
+) -> List[Dict[str, Any]]:
+    """统计对阵某对手武器时的我方胜率，按胜率降序（按对局去重统计，过滤样本不足的武器）"""
+    async with get_session() as session:
+        # 按对局去重：使用 distinct(BattleDetail.id) 计数
+        stmt = (
+            select(
+                BattlePlayer.weapon_id.label("weapon_id"),
+                # 胜利对局数：只在胜利时返回 battle_id，否则 NULL
+                func.count(distinct(case(
+                    (BattleDetail.judgement == "WIN", BattleDetail.id), else_=None
+                ))).label("win"),
+                # 总对局数
+                func.count(distinct(BattleDetail.id)).label("total"),
+            )
+            .select_from(BattleDetail)
+            .join(BattleTeam, BattleTeam.battle_id == BattleDetail.id)
+            .join(
+                BattlePlayer,
+                and_(BattlePlayer.team_id == BattleTeam.id, BattlePlayer.battle_id == BattleDetail.id),
+            )
+            .where(BattleTeam.team_role == "OTHER", BattlePlayer.weapon_id.isnot(None))
+            .group_by(BattlePlayer.weapon_id)
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        rows = result.fetchall()
+        # 在 Python 层计算胜率并排序（避免 SQL 除零），过滤样本不足的武器
+        data = [
+            {
+                "weapon_id": row.weapon_id,
+                "win": row.win or 0,
+                "total": row.total or 0,
+                "rate": (row.win / row.total) if row.total else 0,
+            }
+            for row in rows
+            if (row.total or 0) >= min_battles
+        ]
+        data.sort(key=lambda x: (-x["rate"], -x["total"]))
+        return data[:limit]
+
+
+async def get_opponent_weapon_lose_rates(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+    limit: int = 6,
+    min_battles: int = 5,
+) -> List[Dict[str, Any]]:
+    """统计对阵某对手武器时的我方败率，按败率降序（按对局去重统计，过滤样本不足的武器）"""
+    async with get_session() as session:
+        # 按对局去重统计
+        stmt = (
+            select(
+                BattlePlayer.weapon_id.label("weapon_id"),
+                # 失败对局数
+                func.count(distinct(case(
+                    (BattleDetail.judgement.in_(LOSE_JUDGEMENTS), BattleDetail.id), else_=None
+                ))).label("lose"),
+                # 总对局数
+                func.count(distinct(BattleDetail.id)).label("total"),
+            )
+            .select_from(BattleDetail)
+            .join(BattleTeam, BattleTeam.battle_id == BattleDetail.id)
+            .join(
+                BattlePlayer,
+                and_(BattlePlayer.team_id == BattleTeam.id, BattlePlayer.battle_id == BattleDetail.id),
+            )
+            .where(BattleTeam.team_role == "OTHER", BattlePlayer.weapon_id.isnot(None))
+            .group_by(BattlePlayer.weapon_id)
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        rows = result.fetchall()
+        data = [
+            {
+                "weapon_id": row.weapon_id,
+                "lose": row.lose or 0,
+                "total": row.total or 0,
+                "rate": (row.lose / row.total) if row.total else 0,
+            }
+            for row in rows
+            if (row.total or 0) >= min_battles
+        ]
+        data.sort(key=lambda x: (-x["rate"], -x["total"]))
+        return data[:limit]
+
+
+async def get_teammate_weapon_win_rates(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+    limit: int = 6,
+    min_battles: int = 5,
+) -> List[Dict[str, Any]]:
+    """统计与某队友武器配合时的胜率（排除自己），按胜率降序（按对局去重统计，过滤样本不足的武器）"""
+    async with get_session() as session:
+        stmt = (
+            select(
+                BattlePlayer.weapon_id.label("weapon_id"),
+                func.count(distinct(case(
+                    (BattleDetail.judgement == "WIN", BattleDetail.id), else_=None
+                ))).label("win"),
+                func.count(distinct(BattleDetail.id)).label("total"),
+            )
+            .select_from(BattleDetail)
+            .join(BattleTeam, BattleTeam.battle_id == BattleDetail.id)
+            .join(
+                BattlePlayer,
+                and_(BattlePlayer.team_id == BattleTeam.id, BattlePlayer.battle_id == BattleDetail.id),
+            )
+            .where(
+                BattleTeam.team_role == "MY",
+                BattlePlayer.is_myself == 0,  # 排除自己
+                BattlePlayer.weapon_id.isnot(None),
+            )
+            .group_by(BattlePlayer.weapon_id)
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        rows = result.fetchall()
+        data = [
+            {
+                "weapon_id": row.weapon_id,
+                "win": row.win or 0,
+                "total": row.total or 0,
+                "rate": (row.win / row.total) if row.total else 0,
+            }
+            for row in rows
+            if (row.total or 0) >= min_battles
+        ]
+        data.sort(key=lambda x: (-x["rate"], -x["total"]))
+        return data[:limit]
+
+
+async def get_teammate_weapon_lose_rates(
+    user_id: int,
+    vs_mode: Optional[str] = None,
+    vs_rule: Optional[str] = None,
+    weapon_id: Optional[int] = None,
+    bankara_mode: Optional[str] = None,
+    limit: int = 6,
+    min_battles: int = 5,
+) -> List[Dict[str, Any]]:
+    """统计与某队友武器配合时的败率（排除自己），按败率降序（按对局去重统计，过滤样本不足的武器）"""
+    async with get_session() as session:
+        stmt = (
+            select(
+                BattlePlayer.weapon_id.label("weapon_id"),
+                func.count(distinct(case(
+                    (BattleDetail.judgement.in_(LOSE_JUDGEMENTS), BattleDetail.id), else_=None
+                ))).label("lose"),
+                func.count(distinct(BattleDetail.id)).label("total"),
+            )
+            .select_from(BattleDetail)
+            .join(BattleTeam, BattleTeam.battle_id == BattleDetail.id)
+            .join(
+                BattlePlayer,
+                and_(BattlePlayer.team_id == BattleTeam.id, BattlePlayer.battle_id == BattleDetail.id),
+            )
+            .where(
+                BattleTeam.team_role == "MY",
+                BattlePlayer.is_myself == 0,  # 排除自己
+                BattlePlayer.weapon_id.isnot(None),
+            )
+            .group_by(BattlePlayer.weapon_id)
+        )
+        stmt = _apply_battle_filters(stmt, user_id, vs_mode, vs_rule, bankara_mode)
+        if weapon_id is not None:
+            weapon_subq = select(BattlePlayer.battle_id).join(
+                BattleDetail, BattleDetail.id == BattlePlayer.battle_id
+            ).where(
+                BattleDetail.user_id == user_id,
+                BattlePlayer.is_myself == 1,
+                BattlePlayer.weapon_id == weapon_id,
+            )
+            stmt = stmt.where(BattleDetail.id.in_(weapon_subq))
+        result = await session.execute(stmt)
+        rows = result.fetchall()
+        data = [
+            {
+                "weapon_id": row.weapon_id,
+                "lose": row.lose or 0,
+                "total": row.total or 0,
+                "rate": (row.lose / row.total) if row.total else 0,
+            }
+            for row in rows
+            if (row.total or 0) >= min_battles
+        ]
+        data.sort(key=lambda x: (-x["rate"], -x["total"]))
+        return data[:limit]

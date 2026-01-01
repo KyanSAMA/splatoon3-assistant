@@ -1,10 +1,11 @@
 <script setup>
-import { ref, computed } from 'vue'
+defineOptions({ name: 'BattleListView' })
+
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-  mockBattles, mockTotalStats, mockOpponentStatsWin, mockOpponentStatsLose,
-  mockWinRateRanking, mockLoseRateRanking, mockWeapons, rgbaToCSS
-} from '../mocks/battles.js'
+import { rgbaToCSS } from '../mocks/battles.js'
+import { splatoonService } from '../api/splatoon'
+import { formatDateTime } from '../utils/timezone'
 
 const router = useRouter()
 
@@ -20,81 +21,247 @@ const tabs = [
   { label: '私房', value: 'PRIVATE', modeKey: 'PRIVATE' }
 ]
 
-const battles = ref(mockBattles)
+const battles = ref([])
+const dashboard = ref(null)
+const loading = ref(false)
+const loadingMore = ref(false)
+const hasMore = ref(true)
+const refreshing = ref(false)
+const refreshStatus = ref('')
+const PAGE_SIZE = 20
 
 const selectedWeaponId = ref('ALL')
 const showWeaponDropdown = ref(false)
 
-const getMyPlayer = (battle) => {
-  const myTeam = battle.teams.find(t => t.team_role === 'MY')
-  return myTeam ? myTeam.players.find(p => p.is_myself) : null
+// 武器缓存（全量武器信息）
+const mainWeapons = ref([])
+
+// 用户使用过的武器 ID 列表（根据当前模式筛选）
+const userWeaponIds = ref([])
+
+// 地图缓存
+const stages = ref([])
+
+// 构建筛选参数
+const getFilterParams = () => {
+  const params = {}
+  if (activeTab.value === 'REGULAR') {
+    params.vs_mode = 'REGULAR'
+  } else if (activeTab.value === 'X_MATCH') {
+    params.vs_mode = 'X_MATCH'
+  } else if (activeTab.value === 'BANKARA_CHALLENGE') {
+    params.vs_mode = 'BANKARA'
+    params.bankara_mode = 'CHALLENGE'
+  } else if (activeTab.value === 'BANKARA_OPEN') {
+    params.vs_mode = 'BANKARA'
+    params.bankara_mode = 'OPEN'
+  } else if (activeTab.value === 'FEST') {
+    params.vs_mode = 'FEST'
+  } else if (activeTab.value === 'LEAGUE') {
+    params.vs_mode = 'LEAGUE'
+  } else if (activeTab.value === 'PRIVATE') {
+    params.vs_mode = 'PRIVATE'
+  }
+  if (selectedWeaponId.value !== 'ALL') {
+    params.weapon_id = selectedWeaponId.value
+  }
+  return params
 }
 
+// 加载对战列表（重置）
+const loadBattles = async () => {
+  loading.value = true
+  hasMore.value = true
+  try {
+    const params = { ...getFilterParams(), limit: PAGE_SIZE, offset: 0 }
+    const list = await splatoonService.getBattleList(params)
+    battles.value = list || []
+    hasMore.value = list.length >= PAGE_SIZE
+  } catch (e) {
+    console.error('Failed to load battles:', e)
+  } finally {
+    loading.value = false
+  }
+}
+
+// 加载更多（瀑布流）
+const loadMore = async () => {
+  if (loadingMore.value || !hasMore.value) return
+  loadingMore.value = true
+  try {
+    const params = { ...getFilterParams(), limit: PAGE_SIZE, offset: battles.value.length }
+    const list = await splatoonService.getBattleList(params)
+    if (list.length > 0) {
+      battles.value = [...battles.value, ...list]
+    }
+    hasMore.value = list.length >= PAGE_SIZE
+  } catch (e) {
+    console.error('Failed to load more:', e)
+  } finally {
+    loadingMore.value = false
+  }
+}
+
+// 加载 dashboard
+const loadDashboard = async () => {
+  try {
+    const params = getFilterParams()
+    dashboard.value = await splatoonService.getBattleDashboard(params)
+  } catch (e) {
+    console.error('Failed to load dashboard:', e)
+  }
+}
+
+// 加载武器列表（全量缓存）
+const loadWeapons = async () => {
+  mainWeapons.value = await splatoonService.getMainWeapons()
+}
+
+// 加载用户使用过的武器（根据当前模式筛选）
+const loadUserWeapons = async () => {
+  const params = getFilterParams()
+  // 不传 weapon_id，只传模式筛选参数
+  delete params.weapon_id
+  userWeaponIds.value = await splatoonService.getUserWeapons(params)
+}
+
+// 加载地图列表（缓存）
+const loadStages = async () => {
+  stages.value = await splatoonService.getStages()
+}
+
+// 初始加载
+const loadData = async () => {
+  await Promise.all([loadBattles(), loadDashboard(), loadWeapons(), loadStages(), loadUserWeapons()])
+}
+
+// 刷新数据
+const refreshData = async () => {
+  if (refreshing.value) return
+  refreshing.value = true
+  refreshStatus.value = ''
+
+  try {
+    refreshStatus.value = '刷新 Token...'
+    await splatoonService.refreshToken()
+
+    refreshStatus.value = '同步对战记录...'
+    await splatoonService.refreshBattleDetails()
+
+    refreshStatus.value = '加载数据...'
+    await loadData()
+
+    refreshStatus.value = '刷新完成'
+    setTimeout(() => { refreshStatus.value = '' }, 2000)
+  } catch (e) {
+    console.error('Refresh failed:', e)
+    refreshStatus.value = '刷新失败: ' + (e.message || '未知错误')
+    setTimeout(() => { refreshStatus.value = '' }, 3000)
+  } finally {
+    refreshing.value = false
+  }
+}
+
+// 监听模式变化 - 重新加载用户武器列表
+watch(activeTab, async () => {
+  // 重置武器选择
+  selectedWeaponId.value = 'ALL'
+  // 重新加载用户武器列表
+  await loadUserWeapons()
+  // 加载对战列表和仪表盘
+  loadBattles()
+  loadDashboard()
+})
+
+// 监听武器选择变化
+watch(selectedWeaponId, () => {
+  loadBattles()
+  loadDashboard()
+})
+
+// 滚动加载
+const battleListRef = ref(null)
+const handleScroll = (e) => {
+  const el = e.target
+  if (el.scrollTop + el.clientHeight >= el.scrollHeight - 100) {
+    loadMore()
+  }
+}
+
+onMounted(() => {
+  loadData()
+})
+
+const getMyPlayer = (battle) => {
+  const myTeam = battle.teams?.find(t => t.team_role === 'MY')
+  return myTeam ? myTeam.players?.find(p => p.is_myself === 1) : null
+}
+
+// 根据 weapon_id 获取武器信息（从缓存）
+const getWeaponInfo = (weaponId) => {
+  return mainWeapons.value.find(w => String(w.code) === String(weaponId))
+}
+
+// 根据 weapon_id 获取武器名称
+const getWeaponName = (weaponId) => {
+  const weapon = getWeaponInfo(weaponId)
+  return weapon?.zh_name || weaponId
+}
+
+// 根据 vs_stage_id 获取 stage code
+const getStageCode = (vsStageId) => {
+  const stage = stages.value.find(s => s.vs_stage_id === vsStageId)
+  return stage?.code || vsStageId
+}
+
+// 武器下拉选项（根据用户使用过的武器 ID 过滤）
 const weaponOptions = computed(() => {
-  const used = new Set()
-  battles.value.forEach(b => {
-    const p = getMyPlayer(b)
-    if (p) used.add(p.weapon_id)
-  })
-  return Array.from(used).map(id => ({ id, ...mockWeapons[id] }))
-    .sort((a, b) => (a.code || 0) - (b.code || 0))
+  if (!userWeaponIds.value.length) return []
+  return userWeaponIds.value
+    .map(id => {
+      const weapon = mainWeapons.value.find(w => Number(w.code) === Number(id))
+      return weapon ? { id: weapon.code, name: weapon.zh_name || weapon.code } : null
+    })
+    .filter(Boolean)
+})
+
+// 获取选中武器的名称
+const selectedWeaponName = computed(() => {
+  if (selectedWeaponId.value === 'ALL') return '全部武器'
+  const weapon = mainWeapons.value.find(w => String(w.code) === String(selectedWeaponId.value))
+  return weapon?.zh_name || selectedWeaponId.value
 })
 
 const getRuleIcon = (rule) => `/static/vs_rule/${rule}.svg`
-const getWeaponImg = (id) => `/static/weapon/${id}.png`
+const getWeaponImg = (code) => `/static/weapon/${code}.png`
 const getSubWeaponImg = (code) => `/static/sub_weapon/${code}.png`
 const getSpecialWeaponImg = (code) => `/static/special_weapon/${code}.png`
-const getStageImg = (code) => `/static/stage_banner/${code}.png`
+const getStageImg = (stageId) => `/static/stage_banner/${stageId}.png`
 const getAwardIcon = (rank) => rank === 'GOLD' ? '/static/medal/IconMedal_00.png' : '/static/medal/IconMedal_01.png'
 
-const currentStats = computed(() => {
-  if (selectedWeaponId.value !== 'ALL') {
-    const filtered = filteredBattles.value
-    const win = filtered.filter(b => b.judgement === 'WIN').length
-    const lose = filtered.filter(b => b.judgement === 'LOSE').length
-    const total = win + lose
-    return { win, lose, rate: total ? Math.round((win / total) * 100) : '-' }
-  }
-  if (activeTab.value === 'ALL') {
-    return { win: mockTotalStats.win, lose: mockTotalStats.lose, rate: mockTotalStats.winRate }
-  }
-  const key = tabs.find(t => t.value === activeTab.value)?.modeKey
-  const stats = mockTotalStats.byMode[key]
-  return stats ? { win: stats.win, lose: stats.lose, rate: stats.winRate } : { win: '-', lose: '-', rate: '-' }
-})
+// 解析 JSON 字段
+const parseJson = (val) => {
+  if (!val) return null
+  if (typeof val === 'object') return val
+  try { return JSON.parse(val) } catch { return null }
+}
 
-const filteredBattles = computed(() => {
-  let result = battles.value
-  // Filter by weapon first
-  if (selectedWeaponId.value !== 'ALL') {
-    result = result.filter(b => {
-      const p = getMyPlayer(b)
-      return p && p.weapon_id === selectedWeaponId.value
-    })
+const currentStats = computed(() => {
+  if (dashboard.value?.stats) {
+    return {
+      win: dashboard.value.stats.win,
+      lose: dashboard.value.stats.lose,
+      rate: dashboard.value.stats.winRate
+    }
   }
-  // Then filter by mode
-  if (activeTab.value === 'REGULAR') {
-    result = result.filter(b => b.vs_mode === 'REGULAR')
-  } else if (activeTab.value === 'X_MATCH') {
-    result = result.filter(b => b.vs_mode === 'X_MATCH')
-  } else if (activeTab.value === 'BANKARA_CHALLENGE') {
-    result = result.filter(b => b.vs_mode === 'BANKARA' && b.bankara_mode === 'CHALLENGE')
-  } else if (activeTab.value === 'BANKARA_OPEN') {
-    result = result.filter(b => b.vs_mode === 'BANKARA' && b.bankara_mode === 'OPEN')
-  } else if (activeTab.value === 'FEST') {
-    result = result.filter(b => b.vs_mode === 'FEST')
-  } else if (activeTab.value === 'LEAGUE') {
-    result = result.filter(b => b.vs_mode === 'LEAGUE')
-  } else if (activeTab.value === 'PRIVATE') {
-    result = result.filter(b => b.vs_mode === 'PRIVATE')
-  }
-  return result
+  return { win: 0, lose: 0, rate: '-' }
 })
 
 // Pie chart logic - sort by count, add Others
 const pieColors = ['#EAFF3D', '#603BFF', '#E60012', '#00EBA7', '#F54E93', '#19D719', '#888']
 
 const getPieData = (sourceData) => {
+  if (!sourceData?.length) return []
   const sorted = [...sourceData].sort((a, b) => b.count - a.count)
   const top6 = sorted.slice(0, 6)
   const others = sorted.slice(6)
@@ -122,63 +289,17 @@ const getConicGradient = (pieData) => {
   }).join(', ')})`
 }
 
-const getDynamicOpponentStats = (targetJudgement) => {
-  const counts = {}
-  filteredBattles.value.forEach(b => {
-    if (b.judgement !== targetJudgement) return
-    const enemyTeam = b.teams.find(t => t.team_role === 'OTHER')
-    if (enemyTeam) {
-      enemyTeam.players.forEach(p => {
-        if (!p.weapon_id) return
-        if (!counts[p.weapon_id]) {
-          counts[p.weapon_id] = { weapon_id: p.weapon_id, name: mockWeapons[p.weapon_id]?.name || 'Unknown', count: 0 }
-        }
-        counts[p.weapon_id].count++
-      })
-    }
-  })
-  return Object.values(counts)
-}
+const winPieData = computed(() => getPieData(dashboard.value?.opponentStatsWin))
+const losePieData = computed(() => getPieData(dashboard.value?.opponentStatsLose))
+const winTotal = computed(() => dashboard.value?.opponentWinTotal || 0)
+const loseTotal = computed(() => dashboard.value?.opponentLoseTotal || 0)
 
-const getDynamicRanking = (targetJudgement) => {
-  const stats = {}
-  filteredBattles.value.forEach(b => {
-    const enemyTeam = b.teams.find(t => t.team_role === 'OTHER')
-    if (enemyTeam) {
-      enemyTeam.players.forEach(p => {
-        if (!p.weapon_id) return
-        if (!stats[p.weapon_id]) {
-          stats[p.weapon_id] = { weapon_id: p.weapon_id, name: mockWeapons[p.weapon_id]?.name || 'Unknown', win: 0, lose: 0, total: 0 }
-        }
-        stats[p.weapon_id].total++
-        if (b.judgement === 'WIN') stats[p.weapon_id].win++
-        else if (b.judgement === 'LOSE') stats[p.weapon_id].lose++
-      })
-    }
-  })
-  return Object.values(stats)
-    .filter(s => s.total >= 1)
-    .map(s => ({ ...s, rate: Math.round((s[targetJudgement === 'WIN' ? 'win' : 'lose'] / s.total) * 100) }))
-    .sort((a, b) => b.rate - a.rate)
-}
+const currentWinRanking = computed(() => dashboard.value?.opponentWinRates || [])
+const currentLoseRanking = computed(() => dashboard.value?.opponentLoseRates || [])
 
-const winPieData = computed(() => {
-  const source = selectedWeaponId.value !== 'ALL' ? getDynamicOpponentStats('WIN') : mockOpponentStatsWin
-  return getPieData(source)
-})
-const losePieData = computed(() => {
-  const source = selectedWeaponId.value !== 'ALL' ? getDynamicOpponentStats('LOSE') : mockOpponentStatsLose
-  return getPieData(source)
-})
-const winTotal = computed(() => winPieData.value.reduce((a, b) => a + b.count, 0))
-const loseTotal = computed(() => losePieData.value.reduce((a, b) => a + b.count, 0))
-
-const currentWinRanking = computed(() => {
-  return selectedWeaponId.value !== 'ALL' ? getDynamicRanking('WIN') : mockWinRateRanking
-})
-const currentLoseRanking = computed(() => {
-  return selectedWeaponId.value !== 'ALL' ? getDynamicRanking('LOSE') : mockLoseRateRanking
-})
+// 队友统计（使用 dashboard 数据）
+const teammateWinRanking = computed(() => dashboard.value?.teammateWinRates || [])
+const teammateLoseRanking = computed(() => dashboard.value?.teammateLoseRates || [])
 
 const formatDuration = (sec) => {
   const m = Math.floor(sec / 60)
@@ -186,14 +307,7 @@ const formatDuration = (sec) => {
   return `${m}:${s.toString().padStart(2, '0')}`
 }
 
-const formatTime = (iso) => {
-  const d = new Date(iso)
-  const now = new Date()
-  const isCurrentYear = d.getFullYear() === now.getFullYear()
-  const datePart = `${(d.getMonth()+1)}/${d.getDate()}`
-  const timePart = `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`
-  return isCurrentYear ? `${datePart} ${timePart}` : `${d.getFullYear()}/${datePart}`
-}
+const formatTime = (iso) => formatDateTime(iso)
 
 const getModeLabel = (battle) => {
   if (battle.vs_mode === 'BANKARA') {
@@ -216,18 +330,19 @@ const getRuleLabel = (rule) => {
 }
 
 const getTeamsSorted = (battle) => {
-  return [...battle.teams].sort((a, b) => a.team_order - b.team_order)
+  const myTeam = battle.teams?.find(t => t.team_role === 'MY')
+  const otherTeam = battle.teams?.find(t => t.team_role === 'OTHER')
+  return [myTeam, otherTeam]
 }
 
 const getColorBarStyle = (battle) => {
-  const sorted = getTeamsSorted(battle)
-  if (sorted.length < 2) return {}
-  const t1 = sorted[0], t2 = sorted[1]
+  const [t1, t2] = getTeamsSorted(battle)
+  if (!t1 || !t2) return {}
   const s1 = t1.score ?? (t1.paint_ratio ? t1.paint_ratio * 100 : 50)
   const s2 = t2.score ?? (t2.paint_ratio ? t2.paint_ratio * 100 : 50)
   const total = s1 + s2 || 1
   const p1 = (s1 / total) * 100
-  return { background: `linear-gradient(to right, ${rgbaToCSS(t1.color)} ${p1}%, ${rgbaToCSS(t2.color)} ${p1}%)` }
+  return { background: `linear-gradient(to right, ${rgbaToCSS(parseJson(t1.color))} ${p1}%, ${rgbaToCSS(parseJson(t2.color))} ${p1}%)` }
 }
 
 const getScoreDisplay = (team) => {
@@ -239,20 +354,30 @@ const getScoreDisplay = (team) => {
 const goToDetail = (id) => {
   router.push({ name: 'battle-detail', params: { id } })
 }
+
+const isLose = (judgement) => ['LOSE', 'DEEMED_LOSE', 'EXEMPTED_LOSE'].includes(judgement)
+const getResultClass = (judgement) => judgement === 'WIN' ? 'WIN' : isLose(judgement) ? 'LOSE' : 'DRAW'
+const getResultText = (judgement) => {
+  if (judgement === 'WIN') return 'WIN!'
+  if (judgement === 'DEEMED_LOSE') return 'LOSE(DEEMED)'
+  if (judgement === 'EXEMPTED_LOSE') return 'LOSE(EXEMPTED)'
+  if (judgement === 'LOSE') return 'LOSE'
+  return 'DRAW'
+}
 </script>
 
 <template>
   <div class="battle-page">
     <!-- LEFT PANEL: Battle List -->
     <div class="left-panel">
-      <div class="battle-list">
+      <div class="battle-list" @scroll="handleScroll">
         <div
-          v-for="battle in filteredBattles"
+          v-for="battle in battles"
           :key="battle.id"
           class="battle-card"
           @click="goToDetail(battle.id)"
         >
-          <div class="card-header" :style="{ backgroundImage: `url(${getStageImg(battle.stage.code)})` }">
+          <div class="card-header" :style="{ backgroundImage: `url(${getStageImg(getStageCode(battle.vs_stage_id))})` }">
             <div class="header-overlay">
               <div class="mode-rule">
                 <span class="mode-badge" :class="[battle.vs_mode.toLowerCase(), battle.bankara_mode?.toLowerCase()]">
@@ -262,7 +387,6 @@ const goToDetail = (id) => {
                 <span class="rule-name">{{ getRuleLabel(battle.vs_rule) }}</span>
               </div>
               <div class="header-right">
-                <span class="stage-name">{{ battle.stage.name }}</span>
                 <span class="time">{{ formatTime(battle.played_time) }}</span>
               </div>
             </div>
@@ -272,8 +396,8 @@ const goToDetail = (id) => {
             <div class="color-bar" :style="getColorBarStyle(battle)">
               <div class="score-overlay">
                 <span class="score-val">{{ getScoreDisplay(getTeamsSorted(battle)[0]) }}</span>
-                <div class="result-badge" :class="battle.judgement">
-                  {{ battle.judgement === 'WIN' ? 'WIN!' : battle.judgement === 'LOSE' ? 'LOSE' : 'DRAW' }}
+                <div class="result-badge" :class="getResultClass(battle.judgement)">
+                  {{ getResultText(battle.judgement) }}
                   <span v-if="battle.knockout === 'WIN' || battle.knockout === 'LOSE'" class="ko-badge">KO!</span>
                 </div>
                 <span class="score-val">{{ getScoreDisplay(getTeamsSorted(battle)[1]) }}</span>
@@ -284,19 +408,17 @@ const goToDetail = (id) => {
               <div class="footer-left" v-if="getMyPlayer(battle)">
                 <div class="weapon-set">
                   <img :src="getWeaponImg(getMyPlayer(battle).weapon_id)" class="w-main" />
-                  <img :src="getSubWeaponImg(getMyPlayer(battle).sub_weapon_code)" class="w-sub" />
-                  <img :src="getSpecialWeaponImg(getMyPlayer(battle).special_weapon_code)" class="w-special" />
+                  <img v-if="getWeaponInfo(getMyPlayer(battle).weapon_id)" :src="getSubWeaponImg(getWeaponInfo(getMyPlayer(battle).weapon_id).sub_weapon_code)" class="w-sub" />
+                  <img v-if="getWeaponInfo(getMyPlayer(battle).weapon_id)" :src="getSpecialWeaponImg(getWeaponInfo(getMyPlayer(battle).weapon_id).special_weapon_code)" class="w-special" />
                 </div>
                 <div class="player-stats">
                   <span class="kda">
-                    <span class="k">{{ getMyPlayer(battle).k }}</span>
+                    <span class="k">{{ getMyPlayer(battle).kill_count }}<span class="a">&lt;{{ getMyPlayer(battle).assist_count }}&gt;</span></span>
                     <span class="sep">/</span>
-                    <span class="d">{{ getMyPlayer(battle).d }}</span>
-                    <span class="sep">/</span>
-                    <span class="a">{{ getMyPlayer(battle).a }}</span>
+                    <span class="d">{{ getMyPlayer(battle).death_count }}</span>
                   </span>
-                  <span class="paint-point">{{ getMyPlayer(battle).p }}p</span>
-                  <span class="sp-tag">SP{{ getMyPlayer(battle).sp }}</span>
+                  <span class="paint-point">{{ getMyPlayer(battle).paint }}p</span>
+                  <span class="sp-tag">SP{{ getMyPlayer(battle).special_count }}</span>
                 </div>
               </div>
               <div class="footer-center">
@@ -320,10 +442,11 @@ const goToDetail = (id) => {
                   <span class="power-val" v-if="battle.my_league_power">{{ battle.my_league_power.toFixed(1) }}</span>
                   <span class="power-val" v-else>-</span>
                 </div>
+                <span v-if="battle.vs_mode === 'LEAGUE' && battle.league_match_event_name" class="event-name">{{ battle.league_match_event_name }}</span>
               </div>
               <div class="footer-right">
-                <div v-if="battle.awards && battle.awards.length" class="list-awards">
-                  <div v-for="(a, i) in battle.awards" :key="i" class="award-item">
+                <div v-if="parseJson(battle.awards)?.length" class="list-awards">
+                  <div v-for="(a, i) in parseJson(battle.awards)" :key="i" class="award-item">
                     <img :src="getAwardIcon(a.rank)" class="award-icon" />
                     <div class="tooltip">{{ a.name }}</div>
                   </div>
@@ -333,30 +456,14 @@ const goToDetail = (id) => {
             </div>
           </div>
         </div>
+        <div v-if="loadingMore" class="loading-more">加载中...</div>
+        <div v-else-if="!hasMore && battles.length > 0" class="no-more">没有更多了</div>
       </div>
     </div>
 
     <!-- RIGHT PANEL: Stats & Controls -->
     <div class="right-panel">
-      <!-- 1. Mode Tabs -->
-      <div class="mode-tabs-scroll">
-        <div class="mode-tabs">
-          <button
-            v-for="tab in tabs"
-            :key="tab.value"
-            :class="['mode-tab', tab.value, { active: activeTab === tab.value }]"
-            @click="activeTab = tab.value"
-          >
-            <span class="tab-ink"></span>
-            <span class="tab-text">{{ tab.label }}</span>
-          </button>
-          <button class="mode-tab refresh-btn" @click="$emit('refresh')">
-            <span class="tab-text">↻</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 2. Overall Stats -->
+      <!-- 1. Overall Stats -->
       <div class="stats-badge">
         <div class="stat-group win">
           <span class="label">WIN</span>
@@ -370,12 +477,34 @@ const goToDetail = (id) => {
         <div class="stat-rate">{{ currentStats.rate }}%</div>
       </div>
 
+      <!-- 2. Mode Tabs -->
+      <div class="mode-tabs-scroll">
+        <div class="mode-tabs">
+          <button
+            v-for="tab in tabs"
+            :key="tab.value"
+            :class="['mode-tab', tab.value, { active: activeTab === tab.value }]"
+            @click="activeTab = tab.value"
+          >
+            <span class="tab-ink"></span>
+            <span class="tab-text">{{ tab.label }}</span>
+          </button>
+          <button class="mode-tab refresh-btn" :class="{ refreshing: refreshing }" @click="refreshData" :disabled="refreshing">
+            <span class="tab-text" :class="{ 'icon-spin': refreshing }">↻</span>
+          </button>
+        </div>
+        <div class="refresh-bar-wrapper" :class="{ show: !!refreshStatus }">
+          <div class="refresh-bar-progress" :class="{ indeterminate: refreshing }"></div>
+          <div class="refresh-bar-text">{{ refreshStatus }}</div>
+        </div>
+      </div>
+
       <!-- Weapon Filter -->
       <div class="weapon-filter">
         <div class="filter-trigger" @click="showWeaponDropdown = !showWeaponDropdown">
           <img v-if="selectedWeaponId !== 'ALL'" :src="getWeaponImg(selectedWeaponId)" class="filter-weapon-icon" />
           <span v-else class="filter-all-icon">ALL</span>
-          <span class="filter-label">{{ selectedWeaponId === 'ALL' ? '全部武器' : (mockWeapons[selectedWeaponId]?.name || '未知') }}</span>
+          <span class="filter-label">{{ selectedWeaponName }}</span>
           <span class="filter-arrow">{{ showWeaponDropdown ? '▲' : '▼' }}</span>
         </div>
         <div v-if="showWeaponDropdown" class="filter-dropdown">
@@ -405,7 +534,8 @@ const goToDetail = (id) => {
           <div class="chart-legend">
             <div v-for="item in winPieData" :key="item.weapon_id" class="legend-item">
               <span class="dot" :style="{ background: item.color }"></span>
-              <span class="name">{{ item.name }}</span>
+              <img v-if="item.weapon_id !== 'others'" :src="getWeaponImg(item.weapon_id)" class="legend-icon" />
+              <span class="name">{{ item.weapon_id === 'others' ? '其他' : getWeaponName(item.weapon_id) }}</span>
               <span class="count">x{{ item.count }}</span>
             </div>
           </div>
@@ -427,7 +557,8 @@ const goToDetail = (id) => {
           <div class="chart-legend">
             <div v-for="item in losePieData" :key="item.weapon_id" class="legend-item">
               <span class="dot" :style="{ background: item.color }"></span>
-              <span class="name">{{ item.name }}</span>
+              <img v-if="item.weapon_id !== 'others'" :src="getWeaponImg(item.weapon_id)" class="legend-icon" />
+              <span class="name">{{ item.weapon_id === 'others' ? '其他' : getWeaponName(item.weapon_id) }}</span>
               <span class="count">x{{ item.count }}</span>
             </div>
           </div>
@@ -441,7 +572,7 @@ const goToDetail = (id) => {
           <div v-for="r in currentWinRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar win">
             <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
             <div class="rank-info">
-              <span class="rank-name">{{ r.name }}</span>
+              <span class="rank-name">{{ getWeaponName(r.weapon_id) }}</span>
               <div class="progress-bg"><div class="progress-fill" :style="{ width: r.rate + '%' }"></div></div>
             </div>
             <span class="rank-val">{{ r.rate }}%</span>
@@ -456,13 +587,45 @@ const goToDetail = (id) => {
           <div v-for="r in currentLoseRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar lose">
             <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
             <div class="rank-info">
-              <span class="rank-name">{{ r.name }}</span>
+              <span class="rank-name">{{ getWeaponName(r.weapon_id) }}</span>
               <div class="progress-bg"><div class="progress-fill" :style="{ width: r.rate + '%' }"></div></div>
             </div>
             <span class="rank-val">{{ r.rate }}%</span>
           </div>
         </div>
       </div>
+
+      <!-- 7. Teammate Win Ranking -->
+      <div class="dashboard-card">
+        <h3 class="card-title win">高胜率队友</h3>
+        <div class="ranking-bars">
+          <div v-for="r in teammateWinRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar win">
+            <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
+            <div class="rank-info">
+              <span class="rank-name">{{ getWeaponName(r.weapon_id) }}</span>
+              <div class="progress-bg"><div class="progress-fill" :style="{ width: r.rate + '%' }"></div></div>
+            </div>
+            <span class="rank-val">{{ r.rate }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Teammate Lose Ranking -->
+      <div class="dashboard-card">
+        <h3 class="card-title lose">高败率队友</h3>
+        <div class="ranking-bars">
+          <div v-for="r in teammateLoseRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar lose">
+            <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
+            <div class="rank-info">
+              <span class="rank-name">{{ getWeaponName(r.weapon_id) }}</span>
+              <div class="progress-bg"><div class="progress-fill" :style="{ width: r.rate + '%' }"></div></div>
+            </div>
+            <span class="rank-val">{{ r.rate }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-note">* 胜率/败率数据仅统计遇到5次以上的数据</div>
     </div>
   </div>
 </template>
@@ -627,6 +790,13 @@ const goToDetail = (id) => {
   flex-shrink: 0;
 }
 
+.legend-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .legend-item .name {
   flex: 1;
   white-space: nowrap;
@@ -770,6 +940,77 @@ const goToDetail = (id) => {
 .mode-tab.refresh-btn:hover {
   background: #e0e0e0;
   color: #333;
+}
+
+.mode-tab.refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mode-tab.refresh-btn.refreshing {
+  background: #E60012;
+  border-color: #E60012;
+  color: #fff;
+}
+
+.icon-spin {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.refresh-bar-wrapper {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+  border-radius: 6px;
+  margin-top: 12px;
+  position: relative;
+  background: linear-gradient(90deg, #E60012, #ff6b6b);
+}
+
+.refresh-bar-wrapper.show {
+  height: 28px;
+}
+
+.refresh-bar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.refresh-bar-progress.indeterminate {
+  background: repeating-linear-gradient(
+    90deg,
+    #E60012 0%,
+    #ff6b6b 50%,
+    #E60012 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.refresh-bar-text {
+  position: relative;
+  width: 100%;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Battle List */
@@ -985,6 +1226,19 @@ const goToDetail = (id) => {
   font-weight: 800;
 }
 
+.event-name {
+  font-size: 10px;
+  font-weight: 600;
+  color: #F54E93;
+  background: rgba(245, 78, 147, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Card Footer */
 .card-footer {
   display: flex;
@@ -1043,8 +1297,8 @@ const goToDetail = (id) => {
 }
 
 .kda .k { color: #333; }
+.kda .k .a { font-size: 0.8em; color: #888; }
 .kda .d { color: #888; }
-.kda .a { color: #888; font-size: 0.9em; }
 .kda .sep { margin: 0 2px; color: #ccc; }
 
 .paint-point {
@@ -1217,5 +1471,27 @@ const goToDetail = (id) => {
   font-size: 12px;
   font-weight: 600;
   color: #333;
+}
+
+.loading-more, .no-more {
+  text-align: center;
+  padding: 16px;
+  color: #888;
+  font-size: 13px;
+}
+
+.loading-more {
+  color: #603BFF;
+  font-weight: 600;
+}
+
+.footer-note {
+  margin-top: 24px;
+  padding: 12px 16px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  font-size: 11px;
+  color: #888;
+  line-height: 1.6;
 }
 </style>

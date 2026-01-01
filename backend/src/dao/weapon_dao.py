@@ -121,3 +121,24 @@ async def get_weapon_by_code(code: str) -> Optional[Dict[str, Any]]:
 async def get_weapon_by_id(weapon_id: int) -> Optional[Dict[str, Any]]:
     sql = _WEAPON_FULL_SQL + "WHERE m.id = :id"
     return await _fetch_one(sql, {"id": weapon_id})
+
+
+async def get_all_main_weapons() -> List[Dict[str, Any]]:
+    """获取所有主武器"""
+    sql = """
+    SELECT id, code, zh_name, weapon_class, sub_weapon_code, special_weapon_code, special_point
+    FROM main_weapon ORDER BY code
+    """
+    return await _fetch_all(sql, {})
+
+
+async def get_all_sub_weapons() -> List[Dict[str, Any]]:
+    """获取所有副武器"""
+    sql = "SELECT id, code, zh_name FROM sub_weapon ORDER BY code"
+    return await _fetch_all(sql, {})
+
+
+async def get_all_special_weapons() -> List[Dict[str, Any]]:
+    """获取所有特殊武器"""
+    sql = "SELECT id, code, zh_name FROM special_weapon ORDER BY code"
+    return await _fetch_all(sql, {})

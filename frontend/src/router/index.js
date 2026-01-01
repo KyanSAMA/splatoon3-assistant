@@ -1,11 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import ScheduleView from '../views/ScheduleView.vue'
 import BattleListView from '../views/BattleListView.vue'
 import BattleDetailView from '../views/BattleDetailView.vue'
 
 const routes = [
-  { path: '/', name: 'home', component: HomeView },
+  { path: '/', redirect: '/schedule' },
   { path: '/schedule', name: 'schedule', component: ScheduleView },
   { path: '/battles', name: 'battles', component: BattleListView },
   { path: '/battles/:id', name: 'battle-detail', component: BattleDetailView },

@@ -343,7 +343,7 @@ onUnmounted(() => {
           :disabled="refreshing"
           @click="refreshData"
           aria-label="刷新"
-        >↻</button>
+        ><span :class="{ 'icon-spin': refreshing }">↻</span></button>
       </div>
 
       <div class="refresh-bar-wrapper" :class="{ show: !!refreshStatus }">
@@ -658,6 +658,10 @@ onUnmounted(() => {
 .btn-refresh.refreshing {
   background: #E60012;
   color: white;
+}
+
+.icon-spin {
+  display: inline-block;
   animation: spin 1s linear infinite;
 }
 

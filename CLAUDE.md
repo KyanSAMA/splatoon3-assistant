@@ -125,3 +125,38 @@ splatoon3-assistant/
 - **禁止** 使用任天堂官方 Logo 或图标
 - **禁止** 显示 "Not affiliated with Nintendo" 等声明（此为个人项目，无需声明）
 - 项目名称统一使用 "Splatoon3 Assistant"
+
+### 设计规范
+
+**图片本地化**:
+- Nintendo API 返回的图片 URL 需要认证，无法直接使用
+- 解决方案: 通过 URL 中的 hash 值映射到本地图片
+- 本地图片路径: `/static/{type}/{code}.png`
+- Hash 映射表定义在 `src/enums/{type}/`里
+
+**数据区固定宽度** (解决布局对齐问题):
+```css
+.stats-group { min-width: 130px; justify-content: flex-end; }
+.kda { min-width: 55px; font-family: monospace; }
+.sp-tag { min-width: 32px; text-align: center; }
+.paint { min-width: 40px; text-align: right; }
+```
+
+---
+
+## 静态资源服务
+
+后端通过 FastAPI StaticFiles 提供图片服务:
+
+| 路径 | 目录 | 用途 |
+|------|------|------|
+| `/static/stage` | `data/images/stage` | 地图缩略图 |
+| `/static/stage_l` | `data/images/stage_l` | 地图大图 |
+| `/static/weapon` | `data/images/main_weapon` | 主武器图片 |
+| `/static/sub_weapon` | `data/images/sub_weapon` | 副武器图片 |
+| `/static/special_weapon` | `data/images/special_weapon` | 大招图片 |
+| `/static/skill` | `data/images/skill` | 技能图片 |
+| `/static/vs_rule` | `data/images/vs_rule` | 规则图标 |
+| `/static/medal` | `data/images/medal` | 奖章图标 |
+
+前端通过 Vite 代理访问: `vite.config.js` 中 `/static` 代理到后端
