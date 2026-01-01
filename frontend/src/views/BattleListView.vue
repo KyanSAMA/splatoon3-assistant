@@ -532,7 +532,7 @@ const getResultText = (judgement) => {
 
       <!-- 3. Win Pie Chart -->
       <div class="dashboard-card">
-        <h3 class="card-title win">WIN 武器分布</h3>
+        <h3 class="card-title win">胜局中对手武器出场榜</h3>
         <div class="chart-layout">
           <div class="pie-chart-container">
             <div class="pie-chart" :style="{ background: getConicGradient(winPieData) }">
@@ -555,7 +555,7 @@ const getResultText = (judgement) => {
 
       <!-- 4. Lose Pie Chart -->
       <div class="dashboard-card">
-        <h3 class="card-title lose">LOSE 武器分布</h3>
+        <h3 class="card-title lose">败局中对手武器出场榜</h3>
         <div class="chart-layout">
           <div class="pie-chart-container">
             <div class="pie-chart" :style="{ background: getConicGradient(losePieData) }">
@@ -578,7 +578,7 @@ const getResultText = (judgement) => {
 
       <!-- 5. Win Ranking -->
       <div class="dashboard-card">
-        <h3 class="card-title win">高胜率对手</h3>
+        <h3 class="card-title win">对手武器克制榜</h3>
         <div class="ranking-bars">
           <div v-for="r in currentWinRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar win">
             <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
@@ -593,7 +593,7 @@ const getResultText = (judgement) => {
 
       <!-- 6. Lose Ranking -->
       <div class="dashboard-card">
-        <h3 class="card-title lose">高败率对手</h3>
+        <h3 class="card-title lose">对手武器苦手榜</h3>
         <div class="ranking-bars">
           <div v-for="r in currentLoseRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar lose">
             <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
@@ -608,7 +608,7 @@ const getResultText = (judgement) => {
 
       <!-- 7. Teammate Win Ranking -->
       <div class="dashboard-card">
-        <h3 class="card-title win">高胜率队友</h3>
+        <h3 class="card-title win">最佳队友武器拍档</h3>
         <div class="ranking-bars">
           <div v-for="r in teammateWinRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar win">
             <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
@@ -623,7 +623,7 @@ const getResultText = (judgement) => {
 
       <!-- 8. Teammate Lose Ranking -->
       <div class="dashboard-card">
-        <h3 class="card-title lose">高败率队友</h3>
+        <h3 class="card-title lose">最低契合度队友武器</h3>
         <div class="ranking-bars">
           <div v-for="r in teammateLoseRanking.slice(0, 5)" :key="r.weapon_id" class="rank-bar lose">
             <img :src="getWeaponImg(r.weapon_id)" class="rank-icon" />
