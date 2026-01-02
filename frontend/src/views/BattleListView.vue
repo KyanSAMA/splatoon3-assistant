@@ -586,7 +586,7 @@ const getResultText = (judgement) => {
               <span class="rank-name">{{ getWeaponName(r.weapon_id) }}</span>
               <div class="progress-bg"><div class="progress-fill" :style="{ width: r.rate + '%' }"></div></div>
             </div>
-            <span class="rank-val">{{ r.rate }}%</span>
+            <span class="rank-val">{{ r.rate }}%<div class="tooltip">{{ r.win }}/{{ r.total }}</div></span>
           </div>
         </div>
       </div>
@@ -601,7 +601,7 @@ const getResultText = (judgement) => {
               <span class="rank-name">{{ getWeaponName(r.weapon_id) }}</span>
               <div class="progress-bg"><div class="progress-fill" :style="{ width: r.rate + '%' }"></div></div>
             </div>
-            <span class="rank-val">{{ r.rate }}%</span>
+            <span class="rank-val">{{ r.rate }}%<div class="tooltip">{{ r.lose }}/{{ r.total }}</div></span>
           </div>
         </div>
       </div>
@@ -616,7 +616,7 @@ const getResultText = (judgement) => {
               <span class="rank-name">{{ getWeaponName(r.weapon_id) }}</span>
               <div class="progress-bg"><div class="progress-fill" :style="{ width: r.rate + '%' }"></div></div>
             </div>
-            <span class="rank-val">{{ r.rate }}%</span>
+            <span class="rank-val">{{ r.rate }}%<div class="tooltip">{{ r.win }}/{{ r.total }}</div></span>
           </div>
         </div>
       </div>
@@ -631,7 +631,7 @@ const getResultText = (judgement) => {
               <span class="rank-name">{{ getWeaponName(r.weapon_id) }}</span>
               <div class="progress-bg"><div class="progress-fill" :style="{ width: r.rate + '%' }"></div></div>
             </div>
-            <span class="rank-val">{{ r.rate }}%</span>
+            <span class="rank-val">{{ r.rate }}%<div class="tooltip">{{ r.lose }}/{{ r.total }}</div></span>
           </div>
         </div>
       </div>
@@ -873,6 +873,13 @@ const getResultText = (judgement) => {
   font-weight: 900;
   width: 28px;
   text-align: right;
+  position: relative;
+  cursor: pointer;
+}
+
+.rank-val:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Mode Tabs */
