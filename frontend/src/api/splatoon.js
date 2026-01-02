@@ -121,6 +121,8 @@ export const splatoonService = {
       if (params.vs_rule) query.set('vs_rule', params.vs_rule)
       if (params.weapon_id) query.set('weapon_id', params.weapon_id)
       if (params.bankara_mode) query.set('bankara_mode', params.bankara_mode)
+      if (params.start_time) query.set('start_time', params.start_time)
+      if (params.end_time) query.set('end_time', params.end_time)
       if (params.limit) query.set('limit', params.limit)
       if (params.offset) query.set('offset', params.offset)
       const qs = query.toString()
@@ -167,6 +169,8 @@ export const splatoonService = {
       if (params.vs_rule) query.set('vs_rule', params.vs_rule)
       if (params.weapon_id) query.set('weapon_id', params.weapon_id)
       if (params.bankara_mode) query.set('bankara_mode', params.bankara_mode)
+      if (params.start_time) query.set('start_time', params.start_time)
+      if (params.end_time) query.set('end_time', params.end_time)
       const qs = query.toString()
       const url = qs ? `${API_BASE}/battle/dashboard?${qs}` : `${API_BASE}/battle/dashboard`
       const res = await apiFetch(url)
@@ -217,6 +221,8 @@ export const splatoonService = {
       if (params.vs_mode) query.set('vs_mode', params.vs_mode)
       if (params.vs_rule) query.set('vs_rule', params.vs_rule)
       if (params.bankara_mode) query.set('bankara_mode', params.bankara_mode)
+      if (params.start_time) query.set('start_time', params.start_time)
+      if (params.end_time) query.set('end_time', params.end_time)
       const qs = query.toString()
       const url = qs ? `${API_BASE}/battle/weapons?${qs}` : `${API_BASE}/battle/weapons`
       const res = await apiFetch(url)

@@ -33,6 +33,11 @@ const PAGE_SIZE = 20
 const selectedWeaponId = ref('ALL')
 const showWeaponDropdown = ref(false)
 
+// 时间筛选
+const startTimeLocal = ref('')
+const endTimeLocal = ref('')
+const showTimeDropdown = ref(false)
+
 // 武器缓存（全量武器信息）
 const mainWeapons = ref([])
 
@@ -41,6 +46,21 @@ const userWeaponIds = ref([])
 
 // 地图缓存
 const stages = ref([])
+
+// 时间转换：本地时间 -> ISO8601（开始时间取分钟开始，结束时间取分钟结束）
+const toISO8601Start = (localDateTime) => {
+  if (!localDateTime) return null
+  const date = new Date(localDateTime)
+  date.setSeconds(0, 0)
+  return date.toISOString()
+}
+
+const toISO8601End = (localDateTime) => {
+  if (!localDateTime) return null
+  const date = new Date(localDateTime)
+  date.setSeconds(59, 999)
+  return date.toISOString()
+}
 
 // 构建筛选参数
 const getFilterParams = () => {
@@ -65,6 +85,10 @@ const getFilterParams = () => {
   if (selectedWeaponId.value !== 'ALL') {
     params.weapon_id = selectedWeaponId.value
   }
+  const startISO = toISO8601Start(startTimeLocal.value)
+  const endISO = toISO8601End(endTimeLocal.value)
+  if (startISO) params.start_time = startISO
+  if (endISO) params.end_time = endISO
   return params
 }
 
@@ -179,6 +203,65 @@ watch(selectedWeaponId, () => {
   loadDashboard()
 })
 
+// 监听时间筛选变化 - 仅在关闭下拉框时触发
+watch(showTimeDropdown, (newVal, oldVal) => {
+  if (oldVal === true && newVal === false) {
+    loadUserWeapons()
+    loadBattles()
+    loadDashboard()
+  }
+})
+
+// 清空时间筛选
+const clearTimeFilter = () => {
+  startTimeLocal.value = ''
+  endTimeLocal.value = ''
+  loadUserWeapons()
+  loadBattles()
+  loadDashboard()
+}
+
+// 时间筛选显示文本
+const timeFilterLabel = computed(() => {
+  if (!startTimeLocal.value && !endTimeLocal.value) return '时间筛选'
+  const formatLocal = (dt) => {
+    if (!dt) return ''
+    const d = new Date(dt)
+    const m = (d.getMonth() + 1).toString().padStart(2, '0')
+    const day = d.getDate().toString().padStart(2, '0')
+    const h = d.getHours().toString().padStart(2, '0')
+    const min = d.getMinutes().toString().padStart(2, '0')
+    return `${m}/${day} ${h}:${min}`
+  }
+  const s = formatLocal(startTimeLocal.value)
+  const e = formatLocal(endTimeLocal.value)
+  if (s && e) return `${s} ~ ${e}`
+  if (s) return `${s} ~`
+  return `~ ${e}`
+})
+
+// 点击外部关闭下拉框
+const weaponFilterRef = ref(null)
+const timeFilterRef = ref(null)
+
+const handleClickOutside = (e) => {
+  if (weaponFilterRef.value && !weaponFilterRef.value.contains(e.target)) {
+    showWeaponDropdown.value = false
+  }
+  if (timeFilterRef.value && !timeFilterRef.value.contains(e.target)) {
+    showTimeDropdown.value = false
+  }
+}
+
+onMounted(() => {
+  loadData()
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+
 // 滚动加载
 const battleListRef = ref(null)
 const handleScroll = (e) => {
@@ -187,10 +270,6 @@ const handleScroll = (e) => {
     loadMore()
   }
 }
-
-onMounted(() => {
-  loadData()
-})
 
 const getMyPlayer = (battle) => {
   const myTeam = battle.teams?.find(t => t.team_role === 'MY')
@@ -510,9 +589,29 @@ const getResultText = (judgement) => {
         </div>
       </div>
 
+      <!-- Time Filter -->
+      <div class="time-filter" ref="timeFilterRef">
+        <div class="filter-trigger" @click.stop="showTimeDropdown = !showTimeDropdown">
+          <span class="filter-time-icon">TIME</span>
+          <span class="filter-label">{{ timeFilterLabel }}</span>
+          <button v-if="startTimeLocal || endTimeLocal" class="clear-time-btn" @click.stop="clearTimeFilter">×</button>
+          <span v-else class="filter-arrow">{{ showTimeDropdown ? '▲' : '▼' }}</span>
+        </div>
+        <div v-if="showTimeDropdown" class="filter-dropdown time-dropdown">
+          <div class="time-input-group">
+            <label class="time-label">开始时间</label>
+            <input type="datetime-local" v-model="startTimeLocal" class="time-input" />
+          </div>
+          <div class="time-input-group">
+            <label class="time-label">结束时间</label>
+            <input type="datetime-local" v-model="endTimeLocal" class="time-input" />
+          </div>
+        </div>
+      </div>
+
       <!-- Weapon Filter -->
-      <div class="weapon-filter">
-        <div class="filter-trigger" @click="showWeaponDropdown = !showWeaponDropdown">
+      <div class="weapon-filter" ref="weaponFilterRef">
+        <div class="filter-trigger" @click.stop="showWeaponDropdown = !showWeaponDropdown">
           <img v-if="selectedWeaponId !== 'ALL'" :src="getWeaponImg(selectedWeaponId)" class="filter-weapon-icon" />
           <span v-else class="filter-all-icon">ALL</span>
           <span class="filter-label">{{ selectedWeaponName }}</span>
@@ -1512,5 +1611,102 @@ const getResultText = (judgement) => {
   font-size: 11px;
   color: #888;
   line-height: 1.6;
+}
+
+/* Time Filter */
+.time-filter {
+  position: relative;
+}
+
+.time-filter .filter-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.time-filter .filter-trigger:hover {
+  border-color: #333;
+}
+
+.filter-time-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  color: #EAFF3D;
+  font-size: 8px;
+  font-weight: 900;
+  border-radius: 6px;
+}
+
+.clear-time-btn {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  color: #EAFF3D;
+  border-radius: 50%;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.clear-time-btn:hover {
+  background: #E60012;
+}
+
+.time-dropdown {
+  width: 280px;
+  padding: 12px;
+}
+
+.time-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.time-input-group:last-child {
+  margin-bottom: 0;
+}
+
+.time-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #666;
+}
+
+.time-input {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.time-input:focus {
+  border-color: #333;
+}
+
+.time-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
 }
 </style>
