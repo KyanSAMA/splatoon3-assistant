@@ -4,8 +4,9 @@
 
 import asyncio
 import base64
+import functools
 import logging
-from typing import Optional, Dict, Any, Callable
+from typing import Optional, Dict, Any, Callable, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +30,67 @@ class _RefreshCycle:
     def __init__(self):
         self.event = asyncio.Event()
         self.error: Optional[BaseException] = None
+
+
+class _RequestCycle:
+    """请求周期对象，用于复用请求结果"""
+    __slots__ = ('event', 'result', 'error')
+
+    def __init__(self):
+        self.event = asyncio.Event()
+        self.result: Any = None
+        self.error: Optional[BaseException] = None
+
+
+def _request_lock(func):
+    """
+    请求去重装饰器
+
+    如果相同请求正在进行中，等待其完成并复用结果，避免重复执行。
+    """
+    @functools.wraps(func)
+    async def wrapper(self, *args, **kwargs):
+        key = (func.__name__, args, tuple(sorted(kwargs.items())))
+        # 生成可读的请求标识
+        if func.__name__ == "request" and args:
+            try:
+                import json
+                body = json.loads(args[0])
+                req_id = body.get("extensions", {}).get("persistedQuery", {}).get("sha256Hash", "")[:8] or "unknown"
+            except:
+                req_id = "parse_error"
+        elif func.__name__ == "ns_request" and args:
+            req_id = args[0].split("/")[-1] if args[0] else "unknown"
+        else:
+            req_id = str(args)[:50]
+
+        if key in self._request_cycles:
+            cycle = self._request_cycles[key]
+            logger.info(f"[RequestLock] 检测到相同请求，等待: {func.__name__}({req_id})")
+            await cycle.event.wait()
+            if cycle.error:
+                logger.info(f"[RequestLock] 等待完成，原请求失败: {func.__name__}({req_id})")
+                raise cycle.error
+            logger.info(f"[RequestLock] 等待完成，复用结果: {func.__name__}({req_id})")
+            return cycle.result
+
+        cycle = _RequestCycle()
+        self._request_cycles[key] = cycle
+        logger.info(f"[RequestLock] 获得执行权: {func.__name__}({req_id})")
+        try:
+            result = await func(self, *args, **kwargs)
+            cycle.result = result
+            logger.info(f"[RequestLock] 执行完成: {func.__name__}({req_id})")
+            return result
+        except BaseException as e:
+            cycle.error = e
+            logger.info(f"[RequestLock] 执行异常: {func.__name__}({req_id}) - {type(e).__name__}")
+            raise
+        finally:
+            cycle.event.set()
+            self._request_cycles.pop(key, None)
+
+    return wrapper
 
 
 class SplatNet3API:
@@ -100,6 +162,7 @@ class SplatNet3API:
         self._refresh_lock = asyncio.Lock()  # 防止并发刷新
         self._current_cycle: Optional[_RefreshCycle] = None  # 当前刷新周期
         self._is_refreshing = False  # 标记是否正在刷新
+        self._request_cycles: Dict[Tuple, _RequestCycle] = {}  # 请求去重
 
     @classmethod
     def simple(
@@ -283,6 +346,7 @@ class SplatNet3API:
         }
         return graphql_head
 
+    @_request_lock
     async def request(
         self,
         data: str,
@@ -413,6 +477,7 @@ class SplatNet3API:
         }
         return coral_head
 
+    @_request_lock
     async def ns_request(
         self,
         url: str,
