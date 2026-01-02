@@ -34,6 +34,8 @@ async def get_battles(
     vs_rule: Optional[str] = Query(None, description="规则: TURF_WAR/AREA/LOFT/GOAL/CLAM"),
     weapon_id: Optional[int] = Query(None, description="武器ID"),
     bankara_mode: Optional[str] = Query(None, description="蛮颓模式: OPEN/CHALLENGE"),
+    start_time: Optional[str] = Query(None, description="开始时间 (ISO8601)"),
+    end_time: Optional[str] = Query(None, description="结束时间 (ISO8601)"),
     limit: int = Query(20, ge=1, le=100),
     offset: int = Query(0, ge=0),
     user: User = Depends(require_current_user),
@@ -45,6 +47,8 @@ async def get_battles(
         vs_rule=vs_rule,
         weapon_id=weapon_id,
         bankara_mode=bankara_mode,
+        start_time=start_time,
+        end_time=end_time,
         limit=limit,
         offset=offset,
     )
@@ -106,6 +110,8 @@ async def get_stats(
     vs_rule: Optional[str] = Query(None),
     weapon_id: Optional[int] = Query(None),
     bankara_mode: Optional[str] = Query(None),
+    start_time: Optional[str] = Query(None, description="开始时间 (ISO8601)"),
+    end_time: Optional[str] = Query(None, description="结束时间 (ISO8601)"),
     user: User = Depends(require_current_user),
 ):
     """获取对战统计"""
@@ -115,6 +121,8 @@ async def get_stats(
         vs_rule=vs_rule,
         weapon_id=weapon_id,
         bankara_mode=bankara_mode,
+        start_time=start_time,
+        end_time=end_time,
     )
 
     total = stats.get("total", 0)
@@ -134,6 +142,8 @@ async def get_user_weapons(
     vs_mode: Optional[str] = Query(None),
     vs_rule: Optional[str] = Query(None),
     bankara_mode: Optional[str] = Query(None),
+    start_time: Optional[str] = Query(None, description="开始时间 (ISO8601)"),
+    end_time: Optional[str] = Query(None, description="结束时间 (ISO8601)"),
     user: User = Depends(require_current_user),
 ):
     """获取用户使用过的武器列表"""
@@ -142,6 +152,8 @@ async def get_user_weapons(
         vs_mode=vs_mode,
         vs_rule=vs_rule,
         bankara_mode=bankara_mode,
+        start_time=start_time,
+        end_time=end_time,
     )
     return weapons
 
@@ -152,6 +164,8 @@ async def get_dashboard(
     vs_rule: Optional[str] = Query(None),
     weapon_id: Optional[int] = Query(None),
     bankara_mode: Optional[str] = Query(None),
+    start_time: Optional[str] = Query(None, description="开始时间 (ISO8601)"),
+    end_time: Optional[str] = Query(None, description="结束时间 (ISO8601)"),
     user: User = Depends(require_current_user),
 ):
     """获取对战仪表盘统计数据"""
@@ -161,6 +175,8 @@ async def get_dashboard(
         "vs_rule": vs_rule,
         "weapon_id": weapon_id,
         "bankara_mode": bankara_mode,
+        "start_time": start_time,
+        "end_time": end_time,
     }
 
     # 基础统计
