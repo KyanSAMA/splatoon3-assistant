@@ -7,7 +7,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from src.services import auth_router, data_router, battle_refresh_router, battle_query_router, coop_router, stage_router, close_all_api_sessions
+from src.services import auth_router, data_router, battle_refresh_router, battle_query_router, coop_router, coop_query_router, stage_router, close_all_api_sessions
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -35,6 +35,7 @@ app.include_router(data_router)
 app.include_router(battle_refresh_router)
 app.include_router(battle_query_router)
 app.include_router(coop_router)
+app.include_router(coop_query_router)
 app.include_router(stage_router)
 
 # 静态文件服务 - 地图图片

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 
-from sqlalchemy import select, delete
+from sqlalchemy import select, delete, func
 from sqlalchemy.dialects.sqlite import insert
 
 from .database import get_session
@@ -108,6 +108,16 @@ def _json_dumps(data: Any) -> Optional[str]:
     return json.dumps(data, ensure_ascii=False) if data is not None else None
 
 
+def _apply_coop_filters(stmt, user_id: int, start_time: Optional[str] = None, end_time: Optional[str] = None):
+    """复用用户与时间筛选条件"""
+    stmt = stmt.where(CoopDetail.user_id == user_id)
+    if start_time:
+        stmt = stmt.where(CoopDetail.played_time >= start_time)
+    if end_time:
+        stmt = stmt.where(CoopDetail.played_time <= end_time)
+    return stmt
+
+
 # ===========================================
 # Coop Detail 操作
 # ===========================================
@@ -149,6 +159,80 @@ async def get_user_coop_details(
         result = await session.execute(stmt)
         coops = result.scalars().all()
         return [c.to_dict() for c in coops]
+
+
+async def get_filtered_coop_list(
+    user_id: int,
+    start_time: Optional[str] = None,
+    end_time: Optional[str] = None,
+    limit: int = 20,
+    offset: int = 0,
+) -> List[Dict[str, Any]]:
+    """分页获取打工列表，并附带自己玩家信息"""
+    async with get_session() as session:
+        coop_id_stmt = select(CoopDetail.id).order_by(CoopDetail.played_time.desc())
+        coop_id_stmt = _apply_coop_filters(coop_id_stmt, user_id, start_time, end_time)
+        coop_id_stmt = coop_id_stmt.limit(limit).offset(offset)
+
+        coop_id_result = await session.execute(coop_id_stmt)
+        coop_ids = [row[0] for row in coop_id_result.fetchall()]
+        if not coop_ids:
+            return []
+
+        coop_stmt = select(CoopDetail).where(CoopDetail.id.in_(coop_ids))
+        coop_result = await session.execute(coop_stmt)
+        coop_map = {c.id: c.to_dict() for c in coop_result.scalars().all()}
+
+        player_stmt = (
+            select(CoopPlayer)
+            .where(CoopPlayer.coop_id.in_(coop_ids), CoopPlayer.is_myself == 1)
+        )
+        player_result = await session.execute(player_stmt)
+        player_map: Dict[int, Dict[str, Any]] = {}
+        for player in player_result.scalars().all():
+            player_map[player.coop_id] = player.to_dict()
+
+        ordered: List[Dict[str, Any]] = []
+        for cid in coop_ids:
+            coop_dict = coop_map.get(cid)
+            if coop_dict is None:
+                continue
+            coop_dict["myself"] = player_map.get(cid)
+            ordered.append(coop_dict)
+
+        return ordered
+
+
+async def get_coop_detail_with_relations(coop_id: int, user_id: Optional[int] = None) -> Optional[Dict[str, Any]]:
+    """获取完整打工详情，包含玩家/波次/敌人/Boss"""
+    async with get_session() as session:
+        stmt = select(CoopDetail).where(CoopDetail.id == coop_id)
+        if user_id is not None:
+            stmt = stmt.where(CoopDetail.user_id == user_id)
+        result = await session.execute(stmt)
+        coop = result.scalar_one_or_none()
+        if not coop:
+            return None
+
+        coop_dict = coop.to_dict()
+
+        player_stmt = select(CoopPlayer).where(CoopPlayer.coop_id == coop_id).order_by(CoopPlayer.player_order)
+        player_result = await session.execute(player_stmt)
+        coop_dict["players"] = [p.to_dict() for p in player_result.scalars().all()]
+
+        wave_stmt = select(CoopWave).where(CoopWave.coop_id == coop_id).order_by(CoopWave.wave_number)
+        wave_result = await session.execute(wave_stmt)
+        coop_dict["waves"] = [w.to_dict() for w in wave_result.scalars().all()]
+
+        enemy_stmt = select(CoopEnemy).where(CoopEnemy.coop_id == coop_id).order_by(CoopEnemy.id)
+        enemy_result = await session.execute(enemy_stmt)
+        coop_dict["enemies"] = [e.to_dict() for e in enemy_result.scalars().all()]
+
+        boss_stmt = select(CoopBoss).where(CoopBoss.coop_id == coop_id).order_by(CoopBoss.id)
+        boss_result = await session.execute(boss_stmt)
+        coop_dict["bosses"] = [b.to_dict() for b in boss_result.scalars().all()]
+
+        return coop_dict
 
 
 async def upsert_coop_detail(data: CoopDetailData) -> int:
@@ -439,6 +523,92 @@ async def batch_upsert_coop_bosses(records: List[CoopBossData]) -> int:
             await session.execute(stmt)
 
         return len(records)
+
+
+# ===========================================
+# 统计查询
+# ===========================================
+
+async def get_coop_scale_stats(
+    user_id: int,
+    start_time: Optional[str] = None,
+    end_time: Optional[str] = None,
+) -> Dict[str, int]:
+    """统计鳞片累计数量"""
+    async with get_session() as session:
+        stmt = select(
+            func.sum(CoopDetail.scale_gold).label("scale_gold"),
+            func.sum(CoopDetail.scale_silver).label("scale_silver"),
+            func.sum(CoopDetail.scale_bronze).label("scale_bronze"),
+        )
+        stmt = _apply_coop_filters(stmt, user_id, start_time, end_time)
+        result = await session.execute(stmt)
+        row = result.one()
+        return {
+            "scale_gold": row.scale_gold or 0,
+            "scale_silver": row.scale_silver or 0,
+            "scale_bronze": row.scale_bronze or 0,
+        }
+
+
+async def get_coop_enemy_stats(
+    user_id: int,
+    start_time: Optional[str] = None,
+    end_time: Optional[str] = None,
+) -> List[Dict[str, Any]]:
+    """按敌人汇总击破数"""
+    async with get_session() as session:
+        stmt = (
+            select(
+                CoopEnemy.enemy_id,
+                func.max(CoopEnemy.enemy_name).label("enemy_name"),
+                func.sum(CoopEnemy.defeat_count).label("defeat_count"),
+            )
+            .select_from(CoopEnemy)
+            .join(CoopDetail, CoopDetail.id == CoopEnemy.coop_id)
+            .group_by(CoopEnemy.enemy_id)
+        )
+        stmt = _apply_coop_filters(stmt, user_id, start_time, end_time)
+        result = await session.execute(stmt)
+        return [
+            {
+                "enemy_id": row.enemy_id,
+                "enemy_name": row.enemy_name,
+                "defeat_count": row.defeat_count or 0,
+            }
+            for row in result.fetchall()
+        ]
+
+
+async def get_coop_boss_stats(
+    user_id: int,
+    start_time: Optional[str] = None,
+    end_time: Optional[str] = None,
+) -> List[Dict[str, Any]]:
+    """按Boss汇总击破次数"""
+    async with get_session() as session:
+        stmt = (
+            select(
+                CoopBoss.boss_id,
+                func.max(CoopBoss.boss_name).label("boss_name"),
+                func.count(CoopBoss.boss_id).label("encounter_count"),
+                func.sum(CoopBoss.has_defeat_boss).label("defeat_count"),
+            )
+            .select_from(CoopBoss)
+            .join(CoopDetail, CoopDetail.id == CoopBoss.coop_id)
+            .group_by(CoopBoss.boss_id)
+        )
+        stmt = _apply_coop_filters(stmt, user_id, start_time, end_time)
+        result = await session.execute(stmt)
+        return [
+            {
+                "boss_id": row.boss_id,
+                "boss_name": row.boss_name,
+                "encounter_count": row.encounter_count or 0,
+                "defeat_count": row.defeat_count or 0,
+            }
+            for row in result.fetchall()
+        ]
 
 
 # ===========================================
