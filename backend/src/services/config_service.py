@@ -133,7 +133,7 @@ async def check_connectivity():
     failed = [h for h, ok in results if not ok]
 
     if failed:
-        msg = "部分主机无法访问，请检查代理配置"
+        msg = "部分主机无法访问，请检查代理配置。代理配置入口位于右上角的“三横线（汉堡菜单）”下拉菜单中"
     else:
         msg = "所有主机均可访问"
 
