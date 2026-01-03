@@ -83,6 +83,16 @@ skill_images_path = Path(__file__).parent.parent / "data" / "images" / "skill"
 if skill_images_path.exists():
     app.mount("/static/skill", StaticFiles(directory=str(skill_images_path)), name="skill_images")
 
+# 静态文件服务 - Coop 敌人图片
+coop_enemy_images_path = Path(__file__).parent.parent / "data" / "images" / "coop_enemy"
+if coop_enemy_images_path.exists():
+    app.mount("/static/coop_enemy", StaticFiles(directory=str(coop_enemy_images_path)), name="coop_enemy_images")
+
+# 静态文件服务 - Coop 通用图片（鳞片、蛋等）
+coop_images_path = Path(__file__).parent.parent / "data" / "images" / "coop"
+if coop_images_path.exists():
+    app.mount("/static/coop", StaticFiles(directory=str(coop_images_path)), name="coop_images")
+
 
 @app.get("/health")
 async def health_check():

@@ -148,11 +148,7 @@ const refreshData = async () => {
     refreshStatus.value = '同步地图数据...'
     await splatoonService.refreshStageRecords()
 
-    // 3. 刷新对战详情
-    refreshStatus.value = '同步对战记录...'
-    await splatoonService.refreshBattleDetails()
-
-    // 4. 重新加载胜率和武器数据
+    // 3. 重新加载胜率和武器数据
     refreshStatus.value = '加载统计数据...'
     const [stats, weapons] = await Promise.all([
       splatoonService.getMyAllStageStats(),
@@ -164,7 +160,7 @@ const refreshData = async () => {
     }
     bestWeapons.value = weapons
 
-    // 5. 清除日程缓存并重新加载
+    // 4. 清除日程缓存并重新加载
     refreshStatus.value = '刷新日程表...'
     splatoonService.clearScheduleCache()
     const sched = await splatoonService.getSchedules()

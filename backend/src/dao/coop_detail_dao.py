@@ -192,12 +192,22 @@ async def get_filtered_coop_list(
         for player in player_result.scalars().all():
             player_map[player.coop_id] = player.to_dict()
 
+        # 波次金蛋总数
+        wave_stmt = (
+            select(CoopWave.coop_id, func.sum(CoopWave.team_deliver_count).label("total_deliver"))
+            .where(CoopWave.coop_id.in_(coop_ids))
+            .group_by(CoopWave.coop_id)
+        )
+        wave_result = await session.execute(wave_stmt)
+        deliver_map: Dict[int, int] = {row.coop_id: row.total_deliver or 0 for row in wave_result.fetchall()}
+
         ordered: List[Dict[str, Any]] = []
         for cid in coop_ids:
             coop_dict = coop_map.get(cid)
             if coop_dict is None:
                 continue
             coop_dict["myself"] = player_map.get(cid)
+            coop_dict["total_deliver_count"] = deliver_map.get(cid, 0)
             ordered.append(coop_dict)
 
         return ordered

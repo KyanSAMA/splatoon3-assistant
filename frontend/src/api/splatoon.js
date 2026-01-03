@@ -267,6 +267,87 @@ export const splatoonService = {
 
   clearScheduleCache() {
     localStorage.removeItem('s3_schedules')
+  },
+
+  // ========== Coop API ==========
+
+  async getCoopList(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      if (params.start_time) query.set('start_time', params.start_time)
+      if (params.end_time) query.set('end_time', params.end_time)
+      if (params.limit !== undefined) query.set('limit', params.limit)
+      if (params.offset !== undefined) query.set('offset', params.offset)
+      const qs = query.toString()
+      const url = qs ? `${API_BASE}/coop/coops?${qs}` : `${API_BASE}/coop/coops`
+      const res = await apiFetch(url)
+      if (!res.ok) return []
+      return await res.json()
+    } catch {
+      return []
+    }
+  },
+
+  async getCoopDetail(id) {
+    if (id === null || id === undefined) return null
+    try {
+      const res = await apiFetch(`${API_BASE}/coop/coops/${id}`)
+      if (!res.ok) return null
+      return await res.json()
+    } catch {
+      return null
+    }
+  },
+
+  async getCoopScales(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      if (params.start_time) query.set('start_time', params.start_time)
+      if (params.end_time) query.set('end_time', params.end_time)
+      const qs = query.toString()
+      const url = qs ? `${API_BASE}/coop/stats/scales?${qs}` : `${API_BASE}/coop/stats/scales`
+      const res = await apiFetch(url)
+      if (!res.ok) return null
+      return await res.json()
+    } catch {
+      return null
+    }
+  },
+
+  async getCoopEnemies(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      if (params.start_time) query.set('start_time', params.start_time)
+      if (params.end_time) query.set('end_time', params.end_time)
+      const qs = query.toString()
+      const url = qs ? `${API_BASE}/coop/stats/enemies?${qs}` : `${API_BASE}/coop/stats/enemies`
+      const res = await apiFetch(url)
+      if (!res.ok) return []
+      return await res.json()
+    } catch {
+      return []
+    }
+  },
+
+  async getCoopBosses(params = {}) {
+    try {
+      const query = new URLSearchParams()
+      if (params.start_time) query.set('start_time', params.start_time)
+      if (params.end_time) query.set('end_time', params.end_time)
+      const qs = query.toString()
+      const url = qs ? `${API_BASE}/coop/stats/bosses?${qs}` : `${API_BASE}/coop/stats/bosses`
+      const res = await apiFetch(url)
+      if (!res.ok) return []
+      return await res.json()
+    } catch {
+      return []
+    }
+  },
+
+  async refreshCoopDetails() {
+    const res = await apiFetch(`${API_BASE}/data/refresh/coop_details`, { method: 'POST' })
+    if (!res.ok) throw new Error('打工数据刷新失败')
+    return await res.json()
   }
 }
 

@@ -358,20 +358,24 @@ async def refresh_coop_details(
                 if not raw_id:
                     continue
 
-                # 提取去重字段
-                splatoon_id = extract_splatoon_id_from_coop(raw_id) or ""
-                played_time = node.get("playedTime", "")
-
-                # 检查是否已存在
-                existing = await get_coop_detail_by_played_time(user.id, splatoon_id, played_time)
-                if existing:
-                    logger.info(f"Found existing coop at {played_time}, stopping")
-                    break
-
                 # 获取详情
                 detail = await api.get_coop_detail(raw_id)
                 if not detail:
                     continue
+
+                # 从详情中提取去重字段
+                coop_detail = (detail.get("data") or {}).get("coopHistoryDetail")
+                if not coop_detail:
+                    continue
+
+                splatoon_id = extract_splatoon_id_from_coop(coop_detail.get("id", "")) or ""
+                played_time = coop_detail.get("playedTime", "")
+
+                # 检查是否已存在，API 按时间倒序返回，遇到已存在说明之后都是旧数据
+                existing = await get_coop_detail_by_played_time(user.id, splatoon_id, played_time)
+                if existing:
+                    logger.info(f"Found existing coop at {played_time}, stopping")
+                    break
 
                 # 解析并保存
                 saved_id = await _parse_and_save_coop_detail(user.id, detail)

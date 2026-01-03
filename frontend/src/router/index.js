@@ -2,12 +2,16 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import ScheduleView from '../views/ScheduleView.vue'
 import BattleListView from '../views/BattleListView.vue'
 import BattleDetailView from '../views/BattleDetailView.vue'
+import CoopListView from '../views/CoopListView.vue'
+import CoopDetailView from '../views/CoopDetailView.vue'
 
 const routes = [
   { path: '/', redirect: '/schedule' },
   { path: '/schedule', name: 'schedule', component: ScheduleView },
   { path: '/battles', name: 'battles', component: BattleListView },
   { path: '/battles/:id', name: 'battle-detail', component: BattleDetailView },
+  { path: '/coop', name: 'coop', component: CoopListView },
+  { path: '/coop/:id', name: 'coop-detail', component: CoopDetailView },
 ]
 
 const router = createRouter({

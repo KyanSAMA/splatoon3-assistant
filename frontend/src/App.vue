@@ -241,6 +241,7 @@ onUnmounted(() => {
         <nav class="nav-links">
           <a @click="router.push('/schedule')" class="nav-link" :class="{ active: route.path === '/schedule' }">日程</a>
           <a @click="router.push('/battles')" class="nav-link" :class="{ active: route.path.startsWith('/battles') }">对战</a>
+          <a @click="router.push('/coop')" class="nav-link" :class="{ active: route.path.startsWith('/coop') }">打工</a>
         </nav>
         <div class="user-section">
           <div class="user-info">
