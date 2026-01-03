@@ -29,6 +29,9 @@ hiddenimports = [
     # SQLAlchemy & aiosqlite
     'aiosqlite',
     'sqlalchemy.ext.asyncio',
+    'sqlalchemy.dialects.sqlite',
+    'sqlalchemy.orm',
+    'greenlet',
     # Uvicorn
     'uvicorn.logging',
     'uvicorn.loops',
@@ -59,11 +62,20 @@ hiddenimports = [
     'httpcore',
     'h2',
     'hpack',
+    # SSL & encoding
+    'certifi',
+    'idna',
+    'charset_normalizer',
     # Async support
     'anyio',
     'anyio._backends',
     'anyio._backends._asyncio',
     'sniffio',
+    # Form data
+    'multipart',
+    # HTML parsing
+    'bs4',
+    'soupsieve',
 ]
 
 a = Analysis(
