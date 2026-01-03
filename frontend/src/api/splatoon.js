@@ -364,6 +364,26 @@ export const splatoonService = {
       this.refreshCoopDetails(),
     ]
     return Promise.allSettled(tasks)
+  },
+
+  async refreshAllDataWithProgress(onProgress) {
+    const steps = [
+      { msg: '同步地图数据...', fn: () => this.refreshStageRecords() },
+      { msg: '同步武器数据...', fn: () => this.refreshWeaponRecords() },
+      { msg: '同步对战记录...', fn: () => this.refreshBattleDetails() },
+      { msg: '同步打工记录...', fn: () => this.refreshCoopDetails() },
+    ]
+    const errors = []
+    for (let i = 0; i < steps.length; i++) {
+      onProgress?.(i, steps[i].msg)
+      try {
+        await steps[i].fn()
+      } catch (e) {
+        errors.push(e)
+      }
+    }
+    onProgress?.(steps.length, errors.length ? '同步完成（部分失败）' : '同步完成')
+    if (errors.length > 0) throw new Error('部分数据同步失败')
   }
 }
 

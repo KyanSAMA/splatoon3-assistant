@@ -6,6 +6,8 @@ Splatoon3 Assistant 启动入口
 
 import os
 import sys
+import socket
+import random
 from pathlib import Path
 
 
@@ -58,24 +60,39 @@ def setup_paths():
     return base_path
 
 
+def find_available_port(start: int = 49152, end: int = 65535, max_attempts: int = 50) -> int:
+    """在指定范围内随机查找可用端口"""
+    for _ in range(max_attempts):
+        port = random.randint(start, end)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            try:
+                s.bind(("127.0.0.1", port))
+                return port
+            except OSError:
+                continue
+    raise RuntimeError(f"无法在 {start}-{end} 范围内找到可用端口")
+
+
 def main():
     """启动应用"""
     setup_paths()
 
-    # 启动提示
+    port = find_available_port()
+    url = f"http://127.0.0.1:{port}"
+    os.environ["APP_URL"] = url
+
     print("=" * 50)
     print("  Splatoon3 Assistant")
-    print("  访问地址: http://127.0.0.1:8000")
+    print(f"  访问地址: {url}")
     print("=" * 50)
 
-    # 直接导入 app 对象以避免 PyInstaller 环境下的模块发现问题
     from main import app
     import uvicorn
 
     uvicorn.run(
         app,
         host="127.0.0.1",
-        port=8000,
+        port=port,
         reload=False,
         log_level="info",
     )

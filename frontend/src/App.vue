@@ -5,6 +5,7 @@ import { authService } from './api/auth'
 import { splatoonService } from './api/splatoon'
 import { onSessionExpired } from './api/session'
 import AppHeader from './components/AppHeader.vue'
+import SyncProgress from './components/SyncProgress.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -16,6 +17,11 @@ const currentUser = ref(null)
 const users = ref([])
 const isLoading = ref(false)
 const errorMsg = ref('')
+
+// 数据同步状态
+const isSyncing = ref(false)
+const syncStep = ref(0)
+const syncMessage = ref('')
 
 // 连接状态
 const connectivityWarning = ref('')
@@ -132,8 +138,21 @@ const submitCallback = async () => {
     await authService.handleCallback(callbackInput.value.trim(), loginState.value)
     resetLogin()
     await loadUsers()
-    // 后台刷新所有数据（不阻塞UI）
-    splatoonService.refreshAllData().catch(e => console.error('后台刷新失败:', e))
+
+    // 显示同步进度
+    isSyncing.value = true
+    syncStep.value = 0
+    syncMessage.value = '准备同步...'
+    try {
+      await splatoonService.refreshAllDataWithProgress((step, msg) => {
+        syncStep.value = step
+        syncMessage.value = msg
+      })
+    } catch (e) {
+      console.error('数据同步失败:', e)
+    } finally {
+      setTimeout(() => { isSyncing.value = false }, 800)
+    }
   } catch (e) {
     errorMsg.value = e.message || '登录失败'
   } finally {
@@ -238,6 +257,7 @@ const saveProxySettings = async () => {
     settingsMsg.value = { text: '配置已保存', type: 'success' }
     setTimeout(() => {
       showSettings.value = false
+      checkConnectivity()
     }, 800)
   } catch (e) {
     settingsMsg.value = { text: '保存失败，请检查网络', type: 'error' }
@@ -539,6 +559,9 @@ onUnmounted(() => {
         </div>
       </div>
     </Teleport>
+
+    <!-- 数据同步进度 -->
+    <SyncProgress v-if="isSyncing" :step="syncStep" :message="syncMessage" />
   </div>
 </template>
 
