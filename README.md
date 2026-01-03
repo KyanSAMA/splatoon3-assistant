@@ -63,7 +63,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/your-repo/splatoon3-assistant.git
+git clone https://github.com/KyanSAMA/splatoon3-assistant.git
 cd splatoon3-assistant
 
 # 前端
