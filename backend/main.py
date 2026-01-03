@@ -6,6 +6,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from src.core.config_manager import ConfigManager
+from src.core.migration_manager import init_database
+from src.dao.database import DB_PATH
 from src.services import (
     auth_router,
     data_router,
@@ -27,6 +29,9 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     """应用生命周期管理"""
     logger.info("Application starting...")
+
+    # 初始化数据库（自动迁移）
+    await init_database(DB_PATH)
 
     # 初始化配置管理器
     mgr = ConfigManager.instance()

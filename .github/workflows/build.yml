@@ -1,0 +1,109 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.0.0)'
+        required: false
+        default: 'dev'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            artifact_name: S3Assistant-Windows
+            asset_name: S3Assistant-Windows.zip
+          - os: macos-13  # Intel Mac
+            artifact_name: S3Assistant-macOS-Intel
+            asset_name: S3Assistant-macOS-Intel.zip
+          - os: macos-14  # ARM Mac (M1/M2)
+            artifact_name: S3Assistant-macOS-ARM
+            asset_name: S3Assistant-macOS-ARM.zip
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: Verify frontend build
+        run: test -d frontend/dist || (echo "Frontend build failed" && exit 1)
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build with PyInstaller
+        working-directory: backend
+        run: pyinstaller build.spec --noconfirm
+
+      - name: Verify PyInstaller build
+        run: test -d backend/dist/S3Assistant || (echo "PyInstaller build failed" && exit 1)
+
+      - name: Package artifact (Windows)
+        if: runner.os == 'Windows'
+        working-directory: backend/dist
+        run: Compress-Archive -Path S3Assistant -DestinationPath ${{ matrix.asset_name }}
+
+      - name: Package artifact (macOS)
+        if: runner.os == 'macOS'
+        working-directory: backend/dist
+        run: zip -r ${{ matrix.asset_name }} S3Assistant
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: backend/dist/${{ matrix.asset_name }}
+          retention-days: 7
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: artifacts/**/*.zip
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

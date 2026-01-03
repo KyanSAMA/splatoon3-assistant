@@ -4,6 +4,11 @@ data/tests/json/
 node_modules/
 frontend/dist/
 
+# Database (user data, auto-generated)
+*.db
+*.db-shm
+*.db-wal
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -36,7 +41,8 @@ MANIFEST
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
-*.spec
+# Keep build.spec, ignore others
+!build.spec
 
 # Installer logs
 pip-log.txt
