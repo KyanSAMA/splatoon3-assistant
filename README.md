@@ -1,252 +1,217 @@
 # Splatoon3 Assistant
 
-> 🎮 Splatoon3 游戏助手 - 通过 Nintendo Switch Online API 获取游戏数据
+> Splatoon3 游戏数据分析助手 - 通过 Nintendo Switch Online API 获取并分析游戏数据
 
-**项目状态**: 🚧 开发中
+**项目状态**: ✅ MVP 完成
 
-## ✨ 特性
+---
 
-- 🔐 完整的 NSO 认证流程
-- 🔄 Token 自动刷新（无需手动处理过期）
-- 📊 完整的 SplatNet3 API 支持
-- 💾 安全的 Token 持久化存储
-- 🎯 清晰的错误类型和提示
+## 功能特性
 
-## 🧱 架构概览
+### 已完成
 
-- **数据层 (`data/`)**：集中存放 JSON、图片与多语言文本，可直接供前端读取或由脚本写入 SQLite。
-- **后端 (`backend/`)**：Python + SQLite，负责 NSO 认证、API 拉取、数据解析与持久化。
-- **前端 (`frontend/`)**：预留 Vue/React 工程目录，通过 REST/GraphQL 或直接读取 JSON 构建交互式界面。
+- **NSO 认证** - 完整的 Nintendo Switch Online 登录流程，Token 自动刷新
+- **对战记录** - 查看历史对战详情、队伍数据、个人表现
+- **打工记录** - Salmon Run 打工详情、波次信息、Boss 击杀统计
+- **日程查询** - 当前/upcoming 对战和打工日程
+- **数据备份** - 导出/导入个人数据，支持跨设备迁移
+- **多平台支持** - Windows / macOS (Intel & ARM) 独立运行
 
-## 🚀 快速开始
+### 开发中
 
-### 安装
+- **AI 助手** - 接入大语言模型，提供个性化游戏建议和数据分析
+
+---
+
+## 页面预览
+
+### 对战记录
+
+<!-- 截图位置: 对战列表页面 -->
+![对战记录](docs/screenshots/battles.png)
+
+### 对战详情
+
+<!-- 截图位置: 对战详情页面 -->
+![对战详情](docs/screenshots/battle-detail.png)
+
+### 打工记录
+
+<!-- 截图位置: 打工列表页面 -->
+![打工记录](docs/screenshots/coop.png)
+
+### 打工详情
+
+<!-- 截图位置: 打工详情页面 -->
+![打工详情](docs/screenshots/coop-detail-1.png)
+![打工详情](docs/screenshots/coop-detail-2.png)
+
+### 日程查询
+
+<!-- 截图位置: 日程页面 -->
+![日程查询](docs/screenshots/schedule.png)
+
+---
+
+## 快速开始
+
+### 下载运行
+
+从 [Releases](https://github.com/your-repo/splatoon3-assistant/releases) 下载对应平台的压缩包，解压后直接运行。
+
+### 从源码运行
 
 ```bash
 # 克隆项目
+git clone https://github.com/your-repo/splatoon3-assistant.git
 cd splatoon3-assistant
 
-# 创建虚拟环境
-python3 -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+# 前端
+cd frontend
+npm install
+npm run build
 
-# 安装后端依赖
-pip install -r backend/requirements.txt
+# 后端
+cd ../backend
+pip install -r requirements.txt
+python run.py
+
+# 访问 http://127.0.0.1:8000
 ```
 
-> 提示：所有 Python 示例和脚本请在 `backend` 目录下运行，或手动执行 `export PYTHONPATH="$(pwd)/backend:$PYTHONPATH"` 以便正确导入 `src` 包。
+---
 
-### 基础使用
-
-#### 完整示例
-
-```python
-import asyncio
-from src import NSOAuth, SplatNet3API, TokenStore
-
-async def main():
-    token_store = TokenStore(".token_cache.json")
-    auth = NSOAuth()
-    if not token_store.exists():
-        # 1. 认证
-        url, verifier = await auth.login_in()
-        print(f"请访问: {url}")
-
-        callback_url = input("粘贴回调 URL: ")
-        session_token = await auth.login_in_2(callback_url, verifier)
-
-        # 2. 获取 tokens
-        access_token, g_token, nickname, lang, country, _ = await auth.get_gtoken(session_token)
-        bullet_token = await auth.get_bullet(g_token)
-    else:
-        print("已存在本地文件，将使用本地token")
-        session_token, access_token, g_token, bullet_token, user_lang, user_country = token_store.get_tokens_for_api()
-
-    # 3. 创建 API 实例（支持自动刷新）
-    api = SplatNet3API(
-        nso_auth=auth,
-        session_token=session_token,
-        access_token=access_token,
-        g_token=g_token,
-        bullet_token=bullet_token,
-        on_tokens_updated=lambda t: token_store.save(t)
-    )
-
-    # 4. 使用 API
-    try:
-        battles = await api.get_recent_battles()
-        print(f"✓ 获取到 {len(battles)} 场对战记录")
-    except Exception as e:
-        print(f"✗ 错误: {e}")
-    finally:
-        await api.close()
-
-asyncio.run(main())
-```
-
-#### 运行测试
-
-```bash
-python backend/tests/test_full_flow.py
-```
-
-## 🖥️ 前端开发
-
-前端目录位于 `frontend/`，如何基于 Vue 或 React 初始化、如何消费 `data/` 与后端 API 的示例说明请查看 [frontend/README.md](frontend/README.md)。
-
-## 📚 API 文档
-
-### 认证
-
-```python
-from src import NSOAuth
-
-auth = NSOAuth()
-url, verifier = await auth.login_in()
-session_token = await auth.login_in_2(callback_url, verifier)
-```
-
-### 数据查询
-
-```python
-from src import SplatNet3API
-
-api = SplatNet3API(...)
-
-# 对战数据
-battles = await api.get_recent_battles()      # 最近对战
-bankara = await api.get_bankara_battles()     # 蛮颓对战
-x_battles = await api.get_x_battles()         # X 对战
-battle_detail = await api.get_battle_detail(id)  # 对战详情
-
-# 打工数据
-coops = await api.get_coops()                 # 打工历史
-coop_detail = await api.get_coop_detail(id)   # 打工详情
-
-# 其他
-friends = await api.get_friends()             # 好友列表
-schedule = await api.get_schedule()           # 日程表
-```
-
-### 数据模型
-
-API 返回的数据可以解析为结构化的 dataclass 模型：
-
-```python
-from src import VsHistoryDetailFull, CoopHistoryDetailFull
-
-# 解析对战详情
-battle = VsHistoryDetailFull.from_dict(raw_data)
-print(f"玩家: {battle.player.name}")
-print(f"装备: {battle.player.head_gear.name} (品牌: {battle.player.head_gear.brand.name})")
-
-# 解析打工详情
-coop = CoopHistoryDetailFull.from_dict(raw_data)
-print(f"金蛋: {coop.my_result.golden_deliver_count}")
-```
-
-完整模型文档请查看 [docs/MODELS.md](docs/MODELS.md)
-
-### Token 持久化
-
-```python
-from src import TokenStore
-
-store = TokenStore(".token_cache.json")
-store.save({"session_token": "...", "g_token": "...", "bullet_token": "..."})
-tokens = store.load()
-```
-
-## ⚠️ 常见问题
-
-| 错误 | 原因 | 解决方法 |
-|------|------|---------|
-| `SessionExpiredError` | session_token 过期 | 重新登录（扫码） |
-| `MembershipRequiredError` | NSO 会员过期 | 续费 NSO 会员 |
-| `BulletTokenError` | Token 错误 | 检查版本或账号状态 |
-
-## 📁 项目结构
+## 项目结构
 
 ```
 splatoon3-assistant/
-├── backend/                 # Python + SQLite 后端
-│   ├── src/                 # 核心代码（NSO、SplatNet3、数据模型等）
-│   ├── database/            # 连接封装与迁移脚本
-│   ├── scripts/             # 数据导入/生成脚本
-│   ├── tests/               # 功能/集成测试
-│   └── requirements.txt     # 后端依赖
-├── data/                    # 静态 JSON、图片、语言包与资料
-│   ├── json/
-│   ├── images/
-│   ├── langs/
-│   └── docs/
-├── frontend/                # 预留给 Vue/React 的界面工程
-│   └── README.md
-├── docs/                    # 额外的技术文档
-│   └── MODELS.md
-├── README.md                # 项目说明（本文件）
-├── CLAUDE.md / GEMINI.md    # AI 协作指南
-└── TECHNICAL_ROADMAP.md     # 技术路线
+├── backend/                    # 后端服务
+│   ├── main.py                 # FastAPI 应用入口
+│   ├── run.py                  # 打包启动入口
+│   ├── build.spec              # PyInstaller 配置
+│   ├── database/
+│   │   └── migrations/         # 数据库迁移文件
+│   └── src/
+│       ├── api/                # SplatNet3 API 封装
+│       ├── auth/               # NSO 认证模块
+│       ├── core/               # 核心模块（配置、异常、迁移）
+│       ├── dao/                # 数据访问层
+│       ├── models/             # 业务模型
+│       ├── services/           # 业务服务层
+│       └── utils/              # 工具函数
+├── frontend/                   # 前端应用 (Vue 3)
+│   ├── src/
+│   │   ├── api/                # API 调用封装
+│   │   ├── components/         # 通用组件
+│   │   ├── views/              # 页面视图
+│   │   └── router/             # 路由配置
+│   └── dist/                   # 构建产物
+├── data/                       # 数据文件
+│   ├── json/                   # 游戏数据 JSON
+│   └── langs/                  # 多语言文件
+└── .github/
+    └── workflows/              # GitHub Actions CI/CD
 ```
 
-## 🔧 技术栈
+---
 
-- Python 3.8+
-- httpx (HTTP 客户端)
-- beautifulsoup4 (HTML 解析)
+## 技术栈
 
-## 📝 开发日志
+### 后端
 
-- **2024-12-19**: 数据模型系统完善（对战/打工详情、装备品牌等）
-- **2024-12-13**: Token 自动刷新功能
-- **2024-12-12**: v4 API 加密支持
-- **2024-12-10**: NSO API 集成完成
+| 技术 | 用途 |
+|------|------|
+| Python 3.11 | 运行环境 |
+| FastAPI | Web 框架 |
+| SQLAlchemy 2.0 | ORM (异步) |
+| SQLite + aiosqlite | 数据库 |
+| httpx | HTTP 客户端 |
+| PyInstaller | 打包工具 |
 
-详细技术路线请查看 [TECHNICAL_ROADMAP.md](TECHNICAL_ROADMAP.md)
+### 前端
 
-## 想做的
-### 数据语料
-- [x] 将涂地模式、真格的四个模式（x赛挑战开放算不同的真格）、打工模式的介绍
-- [x] 武器大类的特征
-- [x] 武器大类下各个武器的射程、伤害特征、耗墨/续航、核心定位
-- [x] 副武器的耗墨、伤害特征、定位
-- [x] 大招的定位
-- [x] 装备技能的功能描述
-- [x] 打工模式每一个大鲑鱼的介绍
-- [x] 打工模式的特殊模式（黑夜、涨潮、平潮、低潮）的介绍
+| 技术 | 用途 |
+|------|------|
+| Vue 3 | 前端框架 |
+| Vue Router | 路由管理 |
+| Vite | 构建工具 |
 
-### 数据持久化
-- [x] 武器基础数据
-- [x] 副武器基础数据（水球好像少了直击伤害60）
-- [x] 大招基础数据
-- [x] 技能数据CommonMsg/Gear/GearPowerExp、CommonMsg/Gear/GearPowerName
-- [ ] 武器熟练度数据
-- [ ] 赛季以及武器分
-- [ ] 地图各个模式的胜率
-- [ ] 图片存储表
-- [ ] pvp对战数据
-- [ ] pve对战数据 熊武器不解析了、普通武器按照pvp数据来
+---
 
-### 图片存储列表
-- [x] 武器、副武器、特殊武器
-- [x] 地图
-- [x] 技能
-- [ ] 模式
-- [x] award的金牌、银牌图片
-- [x] 打工大鲑鱼
+## 打包发布
 
-## 📄 许可证
+### 手动打包
+
+```bash
+# 1. 构建前端
+cd frontend
+npm install
+npm run build
+
+# 2. 安装后端依赖
+cd ../backend
+pip install -r requirements.txt
+pip install pyinstaller
+
+# 3. 打包
+pyinstaller build.spec --noconfirm
+
+# 4. 产物位于 backend/dist/S3Assistant/
+```
+
+### GitHub Actions 自动打包
+
+推送版本标签触发自动构建：
+
+```bash
+# 创建并推送标签
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+构建完成后，Release 页面将自动发布以下产物：
+- `S3Assistant-Windows.zip` - Windows 版本
+- `S3Assistant-macOS-Intel.zip` - macOS Intel 版本
+- `S3Assistant-macOS-ARM.zip` - macOS Apple Silicon 版本
+
+手动触发构建（无 Release）：GitHub Actions → Build and Release → Run workflow
+
+---
+
+## 数据安全
+
+- **本地存储** - 所有数据存储在本地 SQLite 数据库
+- **Token 安全** - Session Token 加密存储，不上传任何服务器
+- **备份加密** - 导出文件不包含敏感 Token 信息
+
+---
+
+## 开发路线
+
+- [x] NSO 认证流程
+- [x] 对战记录查询
+- [x] 打工记录查询
+- [x] 日程查询
+- [x] 数据备份/恢复
+- [x] 多平台打包
+- [ ] AI 助手接入
+
+---
+
+## 许可证
 
 本项目仅供学习和个人使用。
 
-## 🙏 致谢
+---
+
+## 致谢
 
 本项目的实现参考了以下开源项目：
 
-- [splatoon3-nso](https://github.com/Cypas/splatoon3-nso) - NSO 认证流程和 GraphQL API 封装的主要参考
-- [splatoon3-schedule](https://github.com/Cypas/splatoon3-schedule) - 数据处理和项目架构参考和武器别称数据维护
+- [splatoon3-nso](https://github.com/Cypas/splatoon3-nso) - NSO 认证流程和 GraphQL API 封装
+- [splatoon3-schedule](https://github.com/Cypas/splatoon3-schedule) - 数据处理和项目架构参考
 - [nxapi](https://github.com/samuelthomas2774/nxapi) - NSO API v4 加密支持
-- [sendou.ink](https://github.com/sendou-ink/sendou.ink) - 武器数据解析和翻译
-- [splat3](https://github.com/Leanny/splat3) - 数据源
+- [sendou.ink](https://github.com/sendou-ink/sendou.ink) - 武器数据解析
+- [splat3](https://github.com/Leanny/splat3) - 游戏数据源
 
 感谢 Splatoon3 开源社区的贡献！
