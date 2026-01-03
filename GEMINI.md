@@ -135,17 +135,17 @@ splatoon3-assistant/
 
 ## 静态资源服务
 
-后端通过 FastAPI StaticFiles 提供图片服务:
+静态图片位于 `frontend/public/static/`，由 Vite 直接提供服务：
 
 | 路径 | 目录 | 用途 |
 |------|------|------|
-| `/static/stage` | `data/images/stage` | 地图缩略图 |
-| `/static/stage_l` | `data/images/stage_l` | 地图大图 |
-| `/static/weapon` | `data/images/main_weapon` | 主武器图片 |
-| `/static/sub_weapon` | `data/images/sub_weapon` | 副武器图片 |
-| `/static/special_weapon` | `data/images/special_weapon` | 大招图片 |
-| `/static/skill` | `data/images/skill` | 技能图片 |
-| `/static/vs_rule` | `data/images/vs_rule` | 规则图标 |
-| `/static/medal` | `data/images/medal` | 奖章图标 |
-
-前端通过 Vite 代理访问: `vite.config.js` 中 `/static` 代理到后端
+| `/static/stage` | `public/static/stage` | 地图缩略图 |
+| `/static/stage_l` | `public/static/stage_l` | 地图大图 |
+| `/static/weapon` | `public/static/main_weapon` | 主武器图片 |
+| `/static/sub_weapon` | `public/static/sub_weapon` | 副武器图片 |
+| `/static/special_weapon` | `public/static/special_weapon` | 大招图片 |
+| `/static/skill` | `public/static/skill` | 技能图片 |
+| `/static/vs_rule` | `public/static/vs_rule` | 规则图标 |
+| `/static/medal` | `public/static/medal` | 奖章图标 |
+| `/static/coop_enemy` | `public/static/coop_enemy` | 打工敌人图片 |
+| `/static/coop` | `public/static/coop` | 打工通用图片 |
