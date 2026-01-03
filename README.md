@@ -57,7 +57,7 @@
 
 ### 下载运行
 
-从 [Releases](https://github.com/your-repo/splatoon3-assistant/releases) 下载对应平台的压缩包，解压后直接运行。
+从 [Releases](https://github.com/KyanSAMA/splatoon3-assistant/releases) 下载对应平台的压缩包，解压后直接运行。
 
 ### 从源码运行
 

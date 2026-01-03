@@ -26,8 +26,10 @@ datas = [
 
 # 隐式导入（动态导入的模块）
 hiddenimports = [
+    # SQLAlchemy & aiosqlite
     'aiosqlite',
     'sqlalchemy.ext.asyncio',
+    # Uvicorn
     'uvicorn.logging',
     'uvicorn.loops',
     'uvicorn.loops.auto',
@@ -38,6 +40,30 @@ hiddenimports = [
     'uvicorn.protocols.websockets.auto',
     'uvicorn.lifespan',
     'uvicorn.lifespan.on',
+    # FastAPI & Starlette
+    'fastapi',
+    'starlette',
+    'starlette.responses',
+    'starlette.routing',
+    'starlette.middleware',
+    'starlette.middleware.cors',
+    'starlette.staticfiles',
+    # Pydantic
+    'pydantic',
+    'pydantic_core',
+    'pydantic.deprecated.decorator',
+    # httpx (HTTP/2 support)
+    'httpx',
+    'httpx._transports',
+    'httpx._transports.default',
+    'httpcore',
+    'h2',
+    'hpack',
+    # Async support
+    'anyio',
+    'anyio._backends',
+    'anyio._backends._asyncio',
+    'sniffio',
 ]
 
 a = Analysis(
