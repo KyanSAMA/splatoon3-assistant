@@ -172,6 +172,9 @@ const refreshData = async () => {
     refreshStatus.value = '同步对战记录...'
     await splatoonService.refreshBattleDetails()
 
+    refreshStatus.value = '同步武器数据...'
+    await splatoonService.refreshWeaponRecords()
+
     refreshStatus.value = '加载数据...'
     await loadData()
 

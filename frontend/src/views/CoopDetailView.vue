@@ -589,14 +589,14 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
 .wave-container {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .wave-column {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90px;
+  width: 110px;
 }
 
 .wave-card {
@@ -604,8 +604,8 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 8px;
-  padding: 6px 4px 8px;
+  border-radius: 10px;
+  padding: 10px 6px 12px;
   position: relative;
   overflow: visible;
   isolation: isolate;
@@ -622,7 +622,7 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -643,7 +643,7 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
   background: rgba(80, 80, 80, 0.45);
   z-index: 1;
   pointer-events: none;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 /* EX 波次样式 */
@@ -660,14 +660,14 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
 /* GJ/NG 徽章（波次卡片） */
 .wave-badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
-  font-size: 9px;
+  top: -6px;
+  right: -6px;
+  font-size: 11px;
   font-weight: 900;
-  padding: 2px 5px;
+  padding: 3px 8px;
   border-radius: 4px;
   transform: rotate(6deg);
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
   z-index: 10;
 }
 
@@ -684,11 +684,11 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
 /* 波次标签 */
 .wave-label {
   font-weight: 800;
-  font-size: 11px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: -0.5px;
   color: #1a1a1a;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .wave-label.is-ex-label {
@@ -701,33 +701,33 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
   align-items: baseline;
   justify-content: center;
   gap: 2px;
-  width: calc(100% + 8px);
-  margin: 0 -4px;
-  padding: 4px 0;
+  width: calc(100% + 12px);
+  margin: 0 -6px;
+  padding: 6px 0;
   background: #1a1a1a;
-  border: 2px solid #000;
+  border: 3px solid #000;
   color: #fff;
 }
 
 .deliver-num {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 900;
 }
 
 .divider {
-  font-size: 12px;
+  font-size: 14px;
   opacity: 0.6;
   font-weight: 900;
 }
 
 .quota-num {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   opacity: 0.8;
 }
 
 .boss-name {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 900;
   color: #fff;
 }
@@ -775,16 +775,17 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
 
 /* 水位 */
 .water-level-text {
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 900;
   color: #1a1a1a;
   z-index: 2;
   position: relative;
+  margin-top: 4px;
 }
 
 /* 事件名称 */
 .event-text {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   color: #1a1a1a;
   margin-top: 2px;
@@ -797,7 +798,7 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 10px;
   z-index: 2;
   position: relative;
 }
@@ -806,43 +807,43 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
 }
 
 .pop-icon {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
 }
 
 .pop-count {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   color: #000;
 }
 
 .pop-label {
-  font-size: 9px;
+  font-size: 10px;
   color: #000000;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 /* Zone C: 特殊武器（数据框外） */
 .wave-specials {
   display: flex;
   justify-content: center;
-  gap: 2px;
+  gap: 4px;
   flex-wrap: wrap;
-  min-height: 24px;
-  margin-top: 4px;
+  min-height: 32px;
+  margin-top: 8px;
   width: 100%;
 }
 
 .wave-specials .special-icon {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   background: #e0e0e0;
   border-radius: 50%;
-  padding: 2px;
+  padding: 3px;
 }
 
 /* Player List */
@@ -894,9 +895,6 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
 .weapon-icon {
   width: 32px;
   height: 32px;
-  background: #222;
-  border-radius: 50%;
-  padding: 3px;
 }
 .weapons-list .special-icon {
   width: 28px;

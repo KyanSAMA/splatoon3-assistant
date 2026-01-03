@@ -348,6 +348,22 @@ export const splatoonService = {
     const res = await apiFetch(`${API_BASE}/data/refresh/coop_details`, { method: 'POST' })
     if (!res.ok) throw new Error('打工数据刷新失败')
     return await res.json()
+  },
+
+  async refreshWeaponRecords() {
+    const res = await apiFetch(`${API_BASE}/data/refresh/weapon_records`, { method: 'POST' })
+    if (!res.ok) throw new Error('武器数据刷新失败')
+    return await res.json()
+  },
+
+  async refreshAllData() {
+    const tasks = [
+      this.refreshStageRecords(),
+      this.refreshWeaponRecords(),
+      this.refreshBattleDetails(),
+      this.refreshCoopDetails(),
+    ]
+    return Promise.allSettled(tasks)
   }
 }
 

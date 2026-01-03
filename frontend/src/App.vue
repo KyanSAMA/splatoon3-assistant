@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { authService } from './api/auth'
+import { splatoonService } from './api/splatoon'
 import { onSessionExpired } from './api/session'
 
 const router = useRouter()
@@ -100,6 +101,8 @@ const submitCallback = async () => {
     await authService.handleCallback(callbackInput.value.trim(), loginState.value)
     resetLogin()
     await loadUsers()
+    // 后台刷新所有数据（不阻塞UI）
+    splatoonService.refreshAllData().catch(e => console.error('后台刷新失败:', e))
   } catch (e) {
     errorMsg.value = e.message || '登录失败'
   } finally {
