@@ -4,6 +4,7 @@ defineOptions({ name: 'CoopListView' })
 import { ref, computed, onMounted, onUnmounted, onActivated, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { splatoonService } from '../api/splatoon'
+import { isGlobalSyncing } from '../api/syncState'
 import { formatDateTime } from '../utils/timezone'
 import {
   parseCoopStageId,
@@ -120,10 +121,13 @@ const refreshData = async () => {
   refreshing.value = true
   refreshStatus.value = ''
   try {
-    refreshStatus.value = '刷新 Token...'
-    await splatoonService.refreshToken()
-    refreshStatus.value = '同步打工记录...'
-    await splatoonService.refreshCoopDetails()
+    // 全局刷新进行中时跳过 API 同步，直接加载本地数据
+    if (!isGlobalSyncing.value) {
+      refreshStatus.value = '刷新 Token...'
+      await splatoonService.refreshToken()
+      refreshStatus.value = '同步打工记录...'
+      await splatoonService.refreshCoopDetails()
+    }
     refreshStatus.value = '加载数据...'
     await loadData()
     refreshStatus.value = '刷新完成'

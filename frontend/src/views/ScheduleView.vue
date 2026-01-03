@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { format } from 'date-fns'
 import { zhCN } from 'date-fns/locale'
 import { splatoonService, RULE_NAMES, MODE_NAMES } from '../api/splatoon'
+import { isGlobalSyncing } from '../api/syncState'
 import StageCard from '../components/StageCard.vue'
 
 const router = useRouter()
@@ -140,15 +141,16 @@ const refreshData = async () => {
   refreshStatus.value = ''
 
   try {
-    // 1. 刷新 Token
-    refreshStatus.value = '刷新 Token...'
-    await splatoonService.refreshToken()
+    // 全局刷新进行中时跳过 API 同步
+    if (!isGlobalSyncing.value) {
+      refreshStatus.value = '刷新 Token...'
+      await splatoonService.refreshToken()
 
-    // 2. 刷新地图胜率
-    refreshStatus.value = '同步地图数据...'
-    await splatoonService.refreshStageRecords()
+      refreshStatus.value = '同步地图数据...'
+      await splatoonService.refreshStageRecords()
+    }
 
-    // 3. 重新加载胜率和武器数据
+    // 加载统计数据
     refreshStatus.value = '加载统计数据...'
     const [stats, weapons] = await Promise.all([
       splatoonService.getMyAllStageStats(),
@@ -160,7 +162,7 @@ const refreshData = async () => {
     }
     bestWeapons.value = weapons
 
-    // 4. 清除日程缓存并重新加载
+    // 清除日程缓存并重新加载
     refreshStatus.value = '刷新日程表...'
     splatoonService.clearScheduleCache()
     const sched = await splatoonService.getSchedules()

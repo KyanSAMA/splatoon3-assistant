@@ -4,6 +4,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { authService } from './api/auth'
 import { splatoonService } from './api/splatoon'
 import { onSessionExpired } from './api/session'
+import { setGlobalSyncing } from './api/syncState'
 import AppHeader from './components/AppHeader.vue'
 import SyncProgress from './components/SyncProgress.vue'
 
@@ -141,6 +142,7 @@ const submitCallback = async () => {
 
     // 显示同步进度
     isSyncing.value = true
+    setGlobalSyncing(true)
     syncStep.value = 0
     syncMessage.value = '准备同步...'
     try {
@@ -151,7 +153,10 @@ const submitCallback = async () => {
     } catch (e) {
       console.error('数据同步失败:', e)
     } finally {
-      setTimeout(() => { isSyncing.value = false }, 800)
+      setTimeout(() => {
+        isSyncing.value = false
+        setGlobalSyncing(false)
+      }, 800)
     }
   } catch (e) {
     errorMsg.value = e.message || '登录失败'
@@ -561,7 +566,7 @@ onUnmounted(() => {
     </Teleport>
 
     <!-- 数据同步进度 -->
-    <SyncProgress v-if="isSyncing" :step="syncStep" :message="syncMessage" />
+    <SyncProgress v-model="isSyncing" :step="syncStep" :message="syncMessage" />
   </div>
 </template>
 

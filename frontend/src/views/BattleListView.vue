@@ -5,6 +5,7 @@ import { ref, computed, onMounted, onUnmounted, onActivated, watch, nextTick } f
 import { useRouter } from 'vue-router'
 import { rgbaToCSS } from '../mocks/battles.js'
 import { splatoonService } from '../api/splatoon'
+import { isGlobalSyncing } from '../api/syncState'
 import { formatDateTime } from '../utils/timezone'
 
 const router = useRouter()
@@ -166,14 +167,17 @@ const refreshData = async () => {
   refreshStatus.value = ''
 
   try {
-    refreshStatus.value = '刷新 Token...'
-    await splatoonService.refreshToken()
+    // 全局刷新进行中时跳过 API 同步，直接加载本地数据
+    if (!isGlobalSyncing.value) {
+      refreshStatus.value = '刷新 Token...'
+      await splatoonService.refreshToken()
 
-    refreshStatus.value = '同步对战记录...'
-    await splatoonService.refreshBattleDetails()
+      refreshStatus.value = '同步对战记录...'
+      await splatoonService.refreshBattleDetails()
 
-    refreshStatus.value = '同步武器数据...'
-    await splatoonService.refreshWeaponRecords()
+      refreshStatus.value = '同步武器数据...'
+      await splatoonService.refreshWeaponRecords()
+    }
 
     refreshStatus.value = '加载数据...'
     await loadData()
