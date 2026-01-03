@@ -1,7 +1,7 @@
 <script setup>
 defineOptions({ name: 'BattleListView' })
 
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, onActivated, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { rgbaToCSS } from '../mocks/battles.js'
 import { splatoonService } from '../api/splatoon'
@@ -267,11 +267,28 @@ onUnmounted(() => {
 
 // 滚动加载
 const battleListRef = ref(null)
+const savedScrollTop = ref(0)
+
 const handleScroll = (e) => {
   const el = e.target
+  savedScrollTop.value = el.scrollTop
   if (el.scrollTop + el.clientHeight >= el.scrollHeight - 100) {
     loadMore()
   }
+}
+
+onActivated(() => {
+  nextTick(() => {
+    requestAnimationFrame(() => {
+      if (battleListRef.value && savedScrollTop.value > 0) {
+        battleListRef.value.scrollTop = savedScrollTop.value
+      }
+    })
+  })
+})
+
+const goToDetail = (id) => {
+  router.push({ name: 'battle-detail', params: { id } })
 }
 
 const getMyPlayer = (battle) => {
@@ -439,10 +456,6 @@ const getScoreDisplay = (team) => {
   return '-'
 }
 
-const goToDetail = (id) => {
-  router.push({ name: 'battle-detail', params: { id } })
-}
-
 const isLose = (judgement) => ['LOSE', 'DEEMED_LOSE', 'EXEMPTED_LOSE'].includes(judgement)
 const getResultClass = (judgement) => judgement === 'WIN' ? 'WIN' : isLose(judgement) ? 'LOSE' : 'DRAW'
 const getResultText = (judgement) => {
@@ -458,7 +471,7 @@ const getResultText = (judgement) => {
   <div class="battle-page">
     <!-- LEFT PANEL: Battle List -->
     <div class="left-panel">
-      <div class="battle-list" @scroll="handleScroll">
+      <div ref="battleListRef" class="battle-list" @scroll="handleScroll">
         <div
           v-for="battle in battles"
           :key="battle.id"

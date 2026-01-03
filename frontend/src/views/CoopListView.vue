@@ -1,7 +1,7 @@
 <script setup>
 defineOptions({ name: 'CoopListView' })
 
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, onActivated, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { splatoonService } from '../api/splatoon'
 import { formatDateTime } from '../utils/timezone'
@@ -137,8 +137,11 @@ const refreshData = async () => {
   }
 }
 
-watch([startTimeLocal, endTimeLocal], () => {
-  loadData()
+// 监听时间筛选变化 - 仅在关闭下拉框时触发
+watch(showTimeDropdown, (newVal, oldVal) => {
+  if (oldVal === true && newVal === false) {
+    loadData()
+  }
 })
 
 const handleClickOutside = (e) => {
@@ -157,12 +160,25 @@ onUnmounted(() => {
 })
 
 const coopListRef = ref(null)
+const savedScrollTop = ref(0)
+
 const handleScroll = (e) => {
   const el = e.target
+  savedScrollTop.value = el.scrollTop
   if (el.scrollTop + el.clientHeight >= el.scrollHeight - 100) {
     loadMore()
   }
 }
+
+onActivated(() => {
+  nextTick(() => {
+    requestAnimationFrame(() => {
+      if (coopListRef.value && savedScrollTop.value > 0) {
+        coopListRef.value.scrollTop = savedScrollTop.value
+      }
+    })
+  })
+})
 
 const goToDetail = (id) => {
   router.push(`/coop/${id}`)
@@ -191,9 +207,29 @@ const hasScales = (c) => c.scale_gold > 0 || c.scale_silver > 0 || c.scale_bronz
 const clearTimeFilter = () => {
   startTimeLocal.value = ''
   endTimeLocal.value = ''
+  loadData()
 }
 
 const hasTimeFilter = computed(() => startTimeLocal.value || endTimeLocal.value)
+
+// 时间筛选显示文本
+const timeFilterLabel = computed(() => {
+  if (!startTimeLocal.value && !endTimeLocal.value) return '时间筛选'
+  const formatLocal = (dt) => {
+    if (!dt) return ''
+    const d = new Date(dt)
+    const m = (d.getMonth() + 1).toString().padStart(2, '0')
+    const day = d.getDate().toString().padStart(2, '0')
+    const h = d.getHours().toString().padStart(2, '0')
+    const min = d.getMinutes().toString().padStart(2, '0')
+    return `${m}/${day} ${h}:${min}`
+  }
+  const s = formatLocal(startTimeLocal.value)
+  const e = formatLocal(endTimeLocal.value)
+  if (s && e) return `${s} ~ ${e}`
+  if (s) return `${s} ~`
+  return `~ ${e}`
+})
 
 // 敌人分组 ID
 const regularEnemyIds = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] // 普通敌人
@@ -370,7 +406,7 @@ const specialSpacerCount = computed(() => {
       <div class="time-filter" ref="timeFilterRef">
         <div class="filter-trigger" @click.stop="showTimeDropdown = !showTimeDropdown">
           <span class="filter-time-icon">TIME</span>
-          <span class="filter-label">{{ hasTimeFilter ? '已筛选' : '时间筛选' }}</span>
+          <span class="filter-label">{{ timeFilterLabel }}</span>
           <button v-if="hasTimeFilter" class="clear-time-btn" @click.stop="clearTimeFilter">×</button>
           <span v-else class="filter-arrow">{{ showTimeDropdown ? '▲' : '▼' }}</span>
         </div>
