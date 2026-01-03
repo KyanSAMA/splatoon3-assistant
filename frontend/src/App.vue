@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { authService } from './api/auth'
 import { splatoonService } from './api/splatoon'
 import { onSessionExpired } from './api/session'
+import AppHeader from './components/AppHeader.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -16,12 +17,42 @@ const users = ref([])
 const isLoading = ref(false)
 const errorMsg = ref('')
 
+// 连接状态
+const connectivityWarning = ref('')
+const showSettings = ref(false)
+const proxyConfig = ref({ address: '', enabled: false })
+const isSavingSettings = ref(false)
+const isLoadingSettings = ref(false)
+const settingsMsg = ref({ text: '', type: '' })
+
+// 备份状态
+const showBackup = ref(false)
+const isExporting = ref(false)
+const isImporting = ref(false)
+const backupMsg = ref({ text: '', type: '' })
+const importResult = ref(null)
+
 // 登录流程状态
 const STEP = { IDLE: 0, SHOW_LINK: 1, INPUT_CALLBACK: 2 }
 const loginStep = ref(STEP.IDLE)
 const loginUrl = ref('')
 const loginState = ref('')
 const callbackInput = ref('')
+
+// 检查连通性
+const checkConnectivity = async () => {
+  try {
+    const res = await fetch('/api/config/check-connectivity')
+    const data = await res.json()
+    if (!data.reachable) {
+      connectivityWarning.value = data.message
+    } else {
+      connectivityWarning.value = ''
+    }
+  } catch (e) {
+    connectivityWarning.value = '无法连接后端服务'
+  }
+}
 
 const loadUsers = async () => {
   try {
@@ -132,6 +163,173 @@ const logout = async () => {
   }
 }
 
+// 打开设置
+const openSettings = async () => {
+  showSettings.value = true
+  settingsMsg.value = { text: '', type: '' }
+  isLoadingSettings.value = true
+  try {
+    const res = await fetch('/api/config')
+    if (!res.ok) throw new Error('load-failed')
+    const data = await res.json()
+    proxyConfig.value = {
+      address: data['proxy.address'] || '',
+      enabled: data['proxy.enabled'] === true || data['proxy.enabled'] === 'true'
+    }
+  } catch (e) {
+    settingsMsg.value = { text: '读取配置失败，请稍后重试', type: 'error' }
+  } finally {
+    isLoadingSettings.value = false
+  }
+}
+
+const closeSettings = () => {
+  showSettings.value = false
+}
+
+// 点击外部关闭：需要按下和释放都在 overlay 上
+const overlayMouseDownTarget = ref(null)
+const onOverlayMouseDown = (e) => {
+  overlayMouseDownTarget.value = e.target
+}
+const onOverlayMouseUp = (e) => {
+  // 只有按下和释放都在 overlay 本身时才关闭
+  if (overlayMouseDownTarget.value === e.currentTarget && e.target === e.currentTarget) {
+    closeSettings()
+  }
+  overlayMouseDownTarget.value = null
+}
+
+const saveProxySettings = async () => {
+  const trimmedAddress = proxyConfig.value.address.trim()
+  proxyConfig.value.address = trimmedAddress
+
+  // 验证：启用时必须填写有效地址
+  if (proxyConfig.value.enabled && !trimmedAddress) {
+    settingsMsg.value = { text: '启用时需填写代理地址', type: 'error' }
+    return
+  }
+
+  // 格式验证 host:port（端口必填）
+  if (trimmedAddress && !/^[\w.-]+:\d{1,5}$/.test(trimmedAddress)) {
+    settingsMsg.value = { text: '格式无效，请输入 主机:端口', type: 'error' }
+    return
+  }
+
+  isSavingSettings.value = true
+  settingsMsg.value = { text: '', type: '' }
+  try {
+    // 顺序调用避免部分成功
+    const addressRes = await fetch('/api/config/proxy.address', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ value: trimmedAddress })
+    })
+    if (!addressRes.ok) throw new Error('update-address-failed')
+
+    const enabledRes = await fetch('/api/config/proxy.enabled', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ value: proxyConfig.value.enabled })
+    })
+    if (!enabledRes.ok) throw new Error('update-enabled-failed')
+
+    // 保存成功，短暂显示后关闭弹窗
+    settingsMsg.value = { text: '配置已保存', type: 'success' }
+    setTimeout(() => {
+      showSettings.value = false
+    }, 800)
+  } catch (e) {
+    settingsMsg.value = { text: '保存失败，请检查网络', type: 'error' }
+  } finally {
+    isSavingSettings.value = false
+  }
+}
+
+// 备份弹窗
+const openBackup = () => {
+  showBackup.value = true
+  backupMsg.value = { text: '', type: '' }
+  importResult.value = null
+}
+
+const closeBackup = () => {
+  showBackup.value = false
+}
+
+const backupOverlayMouseDownTarget = ref(null)
+const onBackupOverlayMouseDown = (e) => {
+  backupOverlayMouseDownTarget.value = e.target
+}
+const onBackupOverlayMouseUp = (e) => {
+  if (backupOverlayMouseDownTarget.value === e.currentTarget && e.target === e.currentTarget) {
+    closeBackup()
+  }
+  backupOverlayMouseDownTarget.value = null
+}
+
+const exportData = async () => {
+  isExporting.value = true
+  backupMsg.value = { text: '', type: '' }
+  try {
+    const res = await fetch('/api/data/export')
+    if (!res.ok) throw new Error('export-failed')
+    const data = await res.json()
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `splatoon3_backup_${data.user?.user_nickname || 'unknown'}_${new Date().toISOString().slice(0, 10)}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+    backupMsg.value = { text: '导出成功', type: 'success' }
+  } catch (e) {
+    backupMsg.value = { text: '导出失败，请稍后重试', type: 'error' }
+  } finally {
+    isExporting.value = false
+  }
+}
+
+const importData = async (e) => {
+  const file = e.target.files?.[0]
+  if (!file) return
+
+  isImporting.value = true
+  backupMsg.value = { text: '', type: '' }
+  importResult.value = null
+
+  try {
+    const formData = new FormData()
+    formData.append('file', file)
+    const res = await fetch('/api/data/import', {
+      method: 'POST',
+      body: formData
+    })
+    const result = await res.json()
+    if (!res.ok) {
+      throw new Error(result.detail || 'import-failed')
+    }
+    importResult.value = result
+    if (result.success) {
+      backupMsg.value = { text: '导入成功', type: 'success' }
+    } else {
+      backupMsg.value = { text: result.errors?.join(', ') || '导入失败', type: 'error' }
+    }
+  } catch (e) {
+    backupMsg.value = { text: e.message || '导入失败', type: 'error' }
+  } finally {
+    isImporting.value = false
+    e.target.value = ''
+  }
+}
+
+// 监听视图变化，进入登录页时检查连通性
+watch(view, (val) => {
+  if (val === 'login' || val === 'select') {
+    checkConnectivity()
+  }
+})
+
 onMounted(() => {
   loadUsers()
   // 监听 session 过期事件，跳转登录
@@ -152,6 +350,16 @@ onUnmounted(() => {
     <div class="splatter splatter-1"></div>
     <div class="splatter splatter-2"></div>
 
+    <!-- Header (登录/选择页使用简化模式) -->
+    <AppHeader
+      v-if="view !== 'loading'"
+      :mode="view === 'home' ? 'full' : 'simple'"
+      :user="currentUser"
+      @logout="logout"
+      @open-settings="openSettings"
+      @open-backup="openBackup"
+    />
+
     <!-- Loading -->
     <div v-if="view === 'loading'" class="loading-view">
       <div class="spinner"></div>
@@ -160,8 +368,12 @@ onUnmounted(() => {
 
     <!-- 用户选择页面 -->
     <div v-else-if="view === 'select'" class="card">
+      <!-- 连通性警告 -->
+      <div v-if="connectivityWarning" class="warning-banner">
+        ⚠️ {{ connectivityWarning }}
+      </div>
+
       <div class="header">
-        <h1>Splatoon3 Assistant</h1>
         <p class="subtitle">选择账号</p>
       </div>
 
@@ -186,8 +398,12 @@ onUnmounted(() => {
 
     <!-- 登录流程页面 -->
     <div v-else-if="view === 'login'" class="card">
+      <!-- 连通性警告 -->
+      <div v-if="connectivityWarning" class="warning-banner">
+        ⚠️ {{ connectivityWarning }}
+      </div>
+
       <div class="header">
-        <h1>Splatoon3 Assistant</h1>
         <p class="subtitle">账号登录</p>
       </div>
 
@@ -234,32 +450,11 @@ onUnmounted(() => {
       <div v-if="errorMsg" class="error-msg">{{ errorMsg }}</div>
     </div>
 
-    <!-- 业务主页（空页面） -->
+    <!-- 业务主页 -->
     <div v-else-if="view === 'home'" class="home-view">
-      <header class="top-bar">
-        <div class="app-brand">
-          <div class="brand-icon">🦑</div>
-          <span class="brand-name">S3<span class="highlight">Assistant</span></span>
-        </div>
-        <nav class="nav-links">
-          <a @click="router.push('/schedule')" class="nav-link" :class="{ active: route.path === '/schedule' }">日程</a>
-          <a @click="router.push('/battles')" class="nav-link" :class="{ active: route.path.startsWith('/battles') }">对战</a>
-          <a @click="router.push('/coop')" class="nav-link" :class="{ active: route.path.startsWith('/coop') }">打工</a>
-        </nav>
-        <div class="user-section">
-          <div class="user-info">
-            <div class="avatar small">{{ (currentUser?.user_nickname || '?')[0] }}</div>
-            <span class="user-name">{{ currentUser?.user_nickname || '未知用户' }}</span>
-          </div>
-          <button @click="logout" class="btn btn-logout" :disabled="isLoading">
-            登出
-          </button>
-        </div>
-      </header>
-
       <main class="main-content">
         <router-view v-slot="{ Component }">
-          <keep-alive include="BattleListView">
+          <keep-alive :include="['BattleListView', 'CoopListView']">
             <component :is="Component" />
           </keep-alive>
         </router-view>
@@ -267,6 +462,83 @@ onUnmounted(() => {
 
       <div v-if="errorMsg" class="error-toast">{{ errorMsg }}</div>
     </div>
+
+    <!-- 设置弹窗 -->
+    <Teleport to="body">
+      <div v-if="showSettings" class="settings-overlay" @mousedown="onOverlayMouseDown" @mouseup="onOverlayMouseUp">
+        <div class="settings-modal">
+          <div class="settings-header">
+            <h3>代理配置</h3>
+            <button class="close-btn" @click="closeSettings" aria-label="关闭设置">✕</button>
+          </div>
+          <div class="settings-body">
+            <div class="form-group">
+              <label class="form-label">代理地址</label>
+              <input
+                v-model="proxyConfig.address"
+                type="text"
+                class="ink-input"
+                placeholder="127.0.0.1:7890"
+              />
+            </div>
+            <div class="form-group row">
+              <label class="form-label">是否启用代理</label>
+              <label class="toggle-switch">
+                <input type="checkbox" v-model="proxyConfig.enabled">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="settings-footer">
+              <div v-if="settingsMsg.text" :class="['msg', settingsMsg.type]">{{ settingsMsg.text }}</div>
+              <button class="btn-save" @click="saveProxySettings" :disabled="isSavingSettings || isLoadingSettings">
+                {{ isSavingSettings ? '保存中...' : (isLoadingSettings ? '加载中...' : '保存配置') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
+
+    <!-- 备份弹窗 -->
+    <Teleport to="body">
+      <div v-if="showBackup" class="settings-overlay" @mousedown="onBackupOverlayMouseDown" @mouseup="onBackupOverlayMouseUp">
+        <div class="settings-modal backup-modal">
+          <div class="settings-header">
+            <h3>数据备份</h3>
+            <button class="close-btn" @click="closeBackup" aria-label="关闭">✕</button>
+          </div>
+          <div class="settings-body">
+            <div class="backup-section">
+              <div class="backup-title">导出数据</div>
+              <p class="backup-desc">将所有对战、打工记录导出为 JSON 文件</p>
+              <button class="btn-backup" @click="exportData" :disabled="isExporting">
+                {{ isExporting ? '导出中...' : '导出数据' }}
+              </button>
+            </div>
+
+            <div class="backup-divider"></div>
+
+            <div class="backup-section">
+              <div class="backup-title">导入数据</div>
+              <p class="backup-desc">从备份文件恢复数据，已存在的记录会跳过</p>
+              <label class="btn-backup btn-import" :class="{ disabled: isImporting }">
+                {{ isImporting ? '导入中...' : '选择文件' }}
+                <input type="file" accept=".json" @change="importData" :disabled="isImporting" hidden>
+              </label>
+            </div>
+
+            <div v-if="importResult" class="import-result">
+              <div class="result-row"><span>对战</span><span>导入 {{ importResult.battles_imported }}，跳过 {{ importResult.battles_skipped }}</span></div>
+              <div class="result-row"><span>打工</span><span>导入 {{ importResult.coops_imported }}，跳过 {{ importResult.coops_skipped }}</span></div>
+              <div class="result-row"><span>地图记录</span><span>导入 {{ importResult.stage_records_imported }}，跳过 {{ importResult.stage_records_skipped }}</span></div>
+              <div class="result-row"><span>武器记录</span><span>导入 {{ importResult.weapon_records_imported }}，跳过 {{ importResult.weapon_records_skipped }}</span></div>
+            </div>
+
+            <div v-if="backupMsg.text" :class="['msg', backupMsg.type]" style="margin-top: 16px;">{{ backupMsg.text }}</div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -346,7 +618,7 @@ body {
   background: #fff;
   width: 90%;
   max-width: 400px;
-  margin: 80px auto;
+  margin: 80px auto 40px;
   border-radius: 24px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.1);
   padding: 40px 30px;
@@ -367,6 +639,18 @@ body {
 .subtitle {
   color: #888;
   font-size: 14px;
+}
+
+/* Warning Banner */
+.warning-banner {
+  background: #fff3cd;
+  color: #856404;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  border: 1px solid #ffeeba;
+  text-align: left;
 }
 
 /* User List */
@@ -512,89 +796,12 @@ body {
   color: #E60012;
 }
 
-.btn-logout {
-  background: transparent;
-  color: #E60012;
-  padding: 8px 16px;
-  font-size: 14px;
-  border: 1px solid #E60012;
-  border-radius: 20px;
-}
-
-.btn-logout:hover {
-  background: #E60012;
-  color: #fff;
-}
-
 /* Home View */
 .home-view {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-.top-bar {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 24px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-.app-brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.brand-icon { font-size: 24px; filter: drop-shadow(0 2px 4px rgba(230,0,18,0.3)); }
-.brand-name { font-weight: 800; font-size: 18px; color: #2d2d2d; letter-spacing: -0.5px; }
-.brand-name .highlight { color: #E60012; }
-
-.nav-links {
-  display: flex;
-  gap: 6px;
-  background: #f0f0f0;
-  padding: 4px;
-  border-radius: 30px;
-}
-
-.nav-link {
-  padding: 8px 24px;
-  border-radius: 24px;
-  color: #666;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 2px solid transparent;
-}
-
-.nav-link:hover {
-  color: #E60012;
-  background: rgba(255,255,255,0.5);
-}
-
-.nav-link.active {
-  background: #fff;
-  color: #E60012;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.user-section {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  padding-top: 56px;
 }
 
 .main-content {
@@ -604,26 +811,6 @@ body {
   justify-content: center;
   position: relative;
   z-index: 10;
-}
-
-.empty-state {
-  text-align: center;
-  color: #666;
-}
-
-.empty-icon {
-  font-size: 64px;
-  margin-bottom: 20px;
-}
-
-.empty-state h2 {
-  font-size: 1.5rem;
-  color: #2d2d2d;
-  margin-bottom: 8px;
-}
-
-.empty-state p {
-  font-size: 14px;
 }
 
 /* Error */
@@ -648,4 +835,156 @@ body {
   font-size: 14px;
   z-index: 100;
 }
+
+/* Settings Modal */
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.settings-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.settings-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.close-btn:hover {
+  color: #E60012;
+}
+.close-btn:focus-visible {
+  outline: 2px solid #603BFF;
+  outline-offset: 2px;
+}
+
+.settings-body {
+  padding: 24px;
+}
+
+.form-group { margin-bottom: 20px; }
+.form-group.row { display: flex; justify-content: space-between; align-items: center; }
+
+.form-label { display: block; font-weight: 700; font-size: 14px; color: #333; margin-bottom: 8px; }
+.form-group.row .form-label { margin-bottom: 0; }
+
+.ink-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.2s;
+}
+.ink-input:focus { outline: none; border-color: #603BFF; background: #fff; }
+
+/* Toggle Switch */
+.toggle-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; cursor: pointer; inset: 0;
+  background-color: #ccc; border-radius: 34px; transition: .3s;
+}
+.slider:before {
+  position: absolute; content: ""; height: 20px; width: 20px;
+  left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: .3s;
+}
+input:checked + .slider { background-color: #603BFF; }
+input:checked + .slider:before { transform: translateX(24px); }
+.toggle-switch input:focus-visible + .slider {
+  outline: 2px solid #603BFF;
+  outline-offset: 2px;
+}
+
+.settings-footer { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+
+.btn-save {
+  background: #603BFF;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 20px;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-save:hover { background: #5029ff; transform: translateY(-1px); }
+.btn-save:disabled { opacity: 0.7; cursor: default; transform: none; }
+.btn-save:focus-visible { outline: 2px solid #EAFF3D; outline-offset: 2px; }
+
+.msg { font-size: 13px; font-weight: 600; }
+.msg.success { color: #2eb82e; }
+.msg.error { color: #E60012; }
+
+/* Backup Modal */
+.backup-section { margin-bottom: 8px; }
+.backup-title { font-weight: 700; font-size: 15px; color: #333; margin-bottom: 6px; }
+.backup-desc { font-size: 13px; color: #888; margin-bottom: 12px; }
+.backup-divider { height: 1px; background: #eee; margin: 20px 0; }
+
+.btn-backup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #603BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-backup:hover { background: #5029ff; transform: translateY(-1px); }
+.btn-backup:disabled, .btn-backup.disabled { opacity: 0.7; cursor: default; transform: none; }
+.btn-import { background: #E60012; }
+.btn-import:hover { background: #cc0010; }
+
+.import-result {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 16px;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #555;
+  padding: 4px 0;
+}
+.result-row span:first-child { font-weight: 600; color: #333; }
 </style>

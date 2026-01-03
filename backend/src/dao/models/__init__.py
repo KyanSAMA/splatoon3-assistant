@@ -5,6 +5,7 @@ from .weapon import MainWeapon, SubWeapon, SpecialWeapon, Skill
 from .stage import Stage
 from .battle import BattleDetail, BattleTeam, BattlePlayer, BattleAward
 from .coop import CoopDetail, CoopPlayer, CoopWave, CoopEnemy, CoopBoss
+from .config import ConfigEntry
 
 __all__ = [
     "User",
@@ -24,4 +25,5 @@ __all__ = [
     "CoopWave",
     "CoopEnemy",
     "CoopBoss",
+    "ConfigEntry",
 ]

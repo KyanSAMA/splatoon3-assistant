@@ -13,6 +13,8 @@ from .battle_service import router as battle_query_router
 from .coop_detail_refresh_service import router as coop_router
 from .coop_service import router as coop_query_router
 from .stage_service import router as stage_router
+from .config_service import router as config_router
+from .data_service import router as backup_router
 
 __all__ = [
     "auth_router",
@@ -22,6 +24,8 @@ __all__ = [
     "coop_router",
     "coop_query_router",
     "stage_router",
+    "config_router",
+    "backup_router",
     "require_current_user",
     "require_splatnet_api",
     "close_user_api_session",
