@@ -19,12 +19,9 @@ jobs:
           - os: windows-latest
             artifact_name: S3Assistant-Windows
             asset_name: S3Assistant-Windows.zip
-          - os: macos-13  # Intel Mac
-            artifact_name: S3Assistant-macOS-Intel
-            asset_name: S3Assistant-macOS-Intel.zip
-          - os: macos-14  # ARM Mac (M1/M2)
-            artifact_name: S3Assistant-macOS-ARM
-            asset_name: S3Assistant-macOS-ARM.zip
+          - os: macos-latest  # ARM Mac (M1/M2/M3)
+            artifact_name: S3Assistant-macOS
+            asset_name: S3Assistant-macOS.zip
 
     runs-on: ${{ matrix.os }}
 
