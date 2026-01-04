@@ -47,9 +47,12 @@ def _request_lock(func):
     请求去重装饰器
 
     如果相同请求正在进行中，等待其完成并复用结果，避免重复执行。
+    支持 skip_dedup=True 参数跳过去重。
     """
     @functools.wraps(func)
-    async def wrapper(self, *args, **kwargs):
+    async def wrapper(self, *args, skip_dedup=False, **kwargs):
+        if skip_dedup:
+            return await func(self, *args, **kwargs)
         key = (func.__name__, args, tuple(sorted(kwargs.items())))
         # 生成可读的请求标识
         if func.__name__ == "request" and args:
@@ -559,7 +562,7 @@ class SplatNet3API:
     async def get_battle_detail(self, battle_id: str) -> Optional[Dict[str, Any]]:
         """对战详情查询"""
         data = gen_graphql_body("VsHistoryDetailQuery", "vsResultId", battle_id)
-        return await self.request(data)
+        return await self.request(data, skip_dedup=True)
 
     async def get_last_one_battle(self) -> Optional[Dict[str, Any]]:
         """最新一局对战id查询"""
@@ -578,7 +581,7 @@ class SplatNet3API:
     async def get_coop_detail(self, coop_id: str) -> Optional[Dict[str, Any]]:
         """打工详情查询"""
         data = gen_graphql_body("CoopHistoryDetailQuery", "coopHistoryDetailId", coop_id)
-        return await self.request(data)
+        return await self.request(data, skip_dedup=True)
 
     # ============================================================
     # 排名和其他查询

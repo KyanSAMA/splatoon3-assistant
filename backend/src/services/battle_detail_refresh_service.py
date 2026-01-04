@@ -1,5 +1,6 @@
 """对战详情数据刷新服务"""
 
+import asyncio
 import logging
 from enum import Enum
 from typing import Optional, List, Dict, Any, Tuple
@@ -10,17 +11,19 @@ from ..api.splatnet3_api import SplatNet3API
 from ..models import User
 from ..utils.id_parser import (
     decode_splatnet_id, extract_vs_stage_id, extract_weapon_id,
-    extract_splatoon_id_from_battle,
+    extract_splatoon_id_from_battle, extract_played_time_from_battle_id,
 )
 from ..dao.battle_detail_dao import (
     BattleDetailData, BattleTeamData, BattlePlayerData, BattleAwardData,
     upsert_battle_detail, upsert_battle_team, batch_upsert_battle_players,
-    batch_upsert_battle_awards, get_battle_detail_by_played_time,
+    batch_upsert_battle_awards, get_synced_battle_times,
 )
 from .auth_service import require_current_user, require_splatnet_api
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/data/refresh", tags=["data"])
+
+MAX_CONCURRENCY = 8
 
 
 class VsMode(str, Enum):
@@ -379,61 +382,6 @@ async def _parse_and_save_battle_detail(
 # 列表获取与处理
 # ===========================================
 
-async def _get_battle_list_with_info(
-    api: SplatNet3API,
-    mode: VsMode,
-) -> List[Tuple[str, Dict]]:
-    """
-    获取对战列表，返回 (battle_id, list_info) 列表
-    list_info 包含从列表接口获取的额外信息（如 udemae, x_power）
-    """
-    result: List[Tuple[str, Dict]] = []
-
-    if mode == VsMode.REGULAR:
-        data = await api.get_regular_battles()
-        nodes = _extract_history_nodes(data, "regularBattleHistories")
-        for node in nodes:
-            result.append((node.get("id", ""), {}))
-
-    elif mode == VsMode.BANKARA:
-        data = await api.get_bankara_battles()
-        nodes = _extract_history_nodes(data, "bankaraBattleHistories")
-        for node in nodes:
-            # 真格模式从列表获取 udemae
-            list_info = {"udemae": node.get("udemae")}
-            result.append((node.get("id", ""), list_info))
-
-    elif mode == VsMode.X_MATCH:
-        data = await api.get_x_battles()
-        # X赛需要从 historyGroups 获取 xPowerAfter
-        groups = _extract_history_groups(data, "xBattleHistories")
-        for group in groups:
-            x_measurement = group.get("xMatchMeasurement") or {}
-            x_power = x_measurement.get("xPowerAfter")
-            nodes = (group.get("historyDetails") or {}).get("nodes") or []
-            for node in nodes:
-                list_info = {"x_power": x_power}
-                result.append((node.get("id", ""), list_info))
-
-    elif mode == VsMode.LEAGUE:
-        data = await api.get_event_battles()
-        nodes = _extract_history_nodes(data, "eventBattleHistories")
-        for node in nodes:
-            result.append((node.get("id", ""), {}))
-
-    elif mode == VsMode.PRIVATE:
-        data = await api.get_private_battles()
-        nodes = _extract_history_nodes(data, "privateBattleHistories")
-        for node in nodes:
-            result.append((node.get("id", ""), {}))
-
-    elif mode == VsMode.FEST:
-        # 祭典对战通常在 regular 或 bankara 接口中
-        pass
-
-    return result
-
-
 def _extract_history_nodes(data: Optional[Dict], key: str) -> List[Dict]:
     """从响应中提取 historyDetails.nodes"""
     if not data:
@@ -459,6 +407,60 @@ def _extract_history_groups(data: Optional[Dict], key: str) -> List[Dict]:
     return (histories.get("historyGroups") or {}).get("nodes") or []
 
 
+async def _collect_battle_ids_for_mode(
+    api: SplatNet3API,
+    mode: VsMode,
+) -> Dict[str, str]:
+    """收集指定模式的对战 ID -> played_time 映射"""
+    id_time_map: Dict[str, str] = {}
+
+    if mode == VsMode.REGULAR:
+        data = await api.get_regular_battles()
+        nodes = _extract_history_nodes(data, "regularBattleHistories")
+    elif mode == VsMode.BANKARA:
+        data = await api.get_bankara_battles()
+        nodes = _extract_history_nodes(data, "bankaraBattleHistories")
+    elif mode == VsMode.X_MATCH:
+        data = await api.get_x_battles()
+        groups = _extract_history_groups(data, "xBattleHistories")
+        nodes = []
+        for group in groups:
+            group_nodes = (group.get("historyDetails") or {}).get("nodes") or []
+            nodes.extend(group_nodes)
+    elif mode == VsMode.LEAGUE:
+        data = await api.get_event_battles()
+        nodes = _extract_history_nodes(data, "eventBattleHistories")
+    elif mode == VsMode.PRIVATE:
+        data = await api.get_private_battles()
+        nodes = _extract_history_nodes(data, "privateBattleHistories")
+    else:
+        nodes = []
+
+    for node in nodes:
+        if not isinstance(node, dict):
+            continue
+        raw_id = node.get("id", "")
+        if not raw_id:
+            continue
+        played_time = extract_played_time_from_battle_id(raw_id)
+        if played_time:
+            id_time_map[raw_id] = played_time
+
+    return id_time_map
+
+
+async def process_battle_by_raw_id(
+    api: SplatNet3API,
+    user_id: int,
+    raw_id: str,
+) -> Optional[int]:
+    """获取并保存单条对战详情"""
+    detail = await api.get_battle_detail(raw_id)
+    if not detail:
+        return None
+    return await _parse_and_save_battle_detail(user_id, detail, {})
+
+
 # ===========================================
 # API 路由
 # ===========================================
@@ -469,13 +471,7 @@ async def refresh_battle_details(
     user: User = Depends(require_current_user),
     api: SplatNet3API = Depends(require_splatnet_api),
 ):
-    """
-    刷新对战详情数据
-
-    - 不传 mode：不刷新
-    - mode=ALL：刷新所有模式
-    - mode=BANKARA/X_MATCH/等：只刷新指定模式
-    """
+    """刷新对战详情数据（预判重 + 并发8）"""
     if mode is None:
         return {"success": True, "message": "No mode specified, skipping refresh", "count": 0}
 
@@ -485,61 +481,79 @@ async def refresh_battle_details(
     else:
         modes_to_refresh = [mode]
 
-    total_count = 0
-    errors = []
+    errors: List[str] = []
 
-    for vs_mode in modes_to_refresh:
-        try:
-            # 获取列表
-            battle_list = await _get_battle_list_with_info(api, vs_mode)
-            logger.info(f"Found {len(battle_list)} battles for mode {vs_mode.value}")
+    try:
+        # 1. 收集所有模式的对战 ID
+        all_id_time_map: Dict[str, str] = {}
+        for vs_mode in modes_to_refresh:
+            try:
+                mode_map = await _collect_battle_ids_for_mode(api, vs_mode)
+                all_id_time_map.update(mode_map)
+                logger.info(f"[Battle:{vs_mode.value}] Found {len(mode_map)} battles")
+            except Exception as e:
+                logger.error(f"[Battle] Failed to get list for {vs_mode.value}: {e}")
+                errors.append(f"{vs_mode.value}: {str(e)}")
 
-            # 逐条获取详情并保存
-            for raw_battle_id, list_info in battle_list:
+        logger.info(f"[Battle] Total found: {len(all_id_time_map)} battles")
+
+        if not all_id_time_map:
+            return {"success": True, "message": "No battles found", "count": 0}
+
+        # 2. 预判重：查询已同步的 played_time
+        all_times = list(all_id_time_map.values())
+        synced_times = await get_synced_battle_times(user.id, all_times)
+
+        # 3. 过滤出需要同步的 ID
+        ids_to_sync = [raw_id for raw_id, pt in all_id_time_map.items() if pt not in synced_times]
+        logger.info(f"[Battle] Already synced: {len(synced_times)}, need sync: {len(ids_to_sync)}")
+
+        if not ids_to_sync:
+            return {"success": True, "message": "All battles already synced", "count": 0}
+
+        # 4. 并发处理（Semaphore 控制并发量为 8）
+        semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
+        total_saved = 0
+        total_failed = 0
+
+        async def fetch_and_save(raw_id: str) -> bool:
+            async with semaphore:
                 try:
-                    # 获取详情
-                    detail = await api.get_battle_detail(raw_battle_id)
-                    if not detail:
-                        continue
-
-                    # 提取去重所需字段
-                    vs_detail = (detail.get("data") or {}).get("vsHistoryDetail")
-                    if not vs_detail:
-                        continue
-
-                    splatoon_id = extract_splatoon_id_from_battle(vs_detail.get("id", "")) or ""
-                    played_time = vs_detail.get("playedTime", "")
-
-                    # 检查是否已存在，API 按时间倒序返回，遇到已存在说明之后都是旧数据
-                    existing = await get_battle_detail_by_played_time(user.id, splatoon_id, played_time)
-                    if existing:
-                        logger.info(f"Found existing battle at {played_time}, stopping {vs_mode.value}")
-                        break
-
-                    # 解析并保存
-                    saved_id = await _parse_and_save_battle_detail(user.id, detail, list_info)
-                    if saved_id:
-                        total_count += 1
-                    else:
-                        errors.append(f"{vs_mode.value}:{splatoon_id[:20]}... parse failed")
+                    saved_id = await process_battle_by_raw_id(api, user.id, raw_id)
+                    return saved_id is not None
                 except Exception as e:
-                    logger.error(f"Failed to process battle {raw_battle_id}: {e}")
-                    errors.append(f"{vs_mode.value}: {str(e)}")
+                    logger.error(f"[Battle] Failed to process {raw_id}: {e}")
+                    errors.append(str(e)[:200])
+                    return False
 
-        except Exception as e:
-            logger.error(f"Failed to get battle list for {vs_mode.value}: {e}")
-            errors.append(f"{vs_mode.value}: {str(e)}")
+        results = await asyncio.gather(*[fetch_and_save(rid) for rid in ids_to_sync])
+
+        for success in results:
+            if success:
+                total_saved += 1
+            else:
+                total_failed += 1
+
+    except Exception as e:
+        logger.error(f"[Battle] Failed to refresh battle details: {e}")
+        errors.append(str(e))
+        return {
+            "success": False,
+            "message": f"Failed to refresh: {str(e)}",
+            "count": 0,
+            "errors": errors,
+        }
 
     if errors:
         return {
             "success": False,
-            "message": f"Refreshed {total_count} battles with errors",
-            "count": total_count,
-            "errors": errors,
+            "message": f"Refreshed {total_saved} battles with {total_failed} errors",
+            "count": total_saved,
+            "errors": errors[:10],
         }
 
-    logger.info(f"Refreshed {total_count} battle details for user {user.id}")
-    return {"success": True, "message": f"Refreshed {total_count} battle details", "count": total_count}
+    logger.info(f"[Battle] Refreshed {total_saved} battle details for user {user.id}")
+    return {"success": True, "message": f"Refreshed {total_saved} battle details", "count": total_saved}
 
 
 @router.get("/latest_battle_raw")
@@ -576,3 +590,16 @@ async def get_latest_battle_raw(
         return {"error": "Failed to get battle detail", "battle_id": battle_id}
 
     return detail
+
+
+@router.get("/recent_battles_raw")
+async def get_recent_battles_raw(
+        api: SplatNet3API = Depends(require_splatnet_api),
+):
+    """
+    获取最新一场对战的原始数据（测试用）
+    直接返回 SplatNet API 的原始响应
+    """
+    # 获取最新对战 ID
+    recent_battles = await api.get_recent_battles()
+    return recent_battles

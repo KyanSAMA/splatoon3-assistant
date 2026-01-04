@@ -223,3 +223,62 @@ def extract_coop_player_id(b64_id: str) -> Optional[str]:
     if len(parts) >= 3:
         return parts[-1]
     return None
+
+
+# ===========================================
+# 从 ID 提取 played_time (用于预判重)
+# ===========================================
+
+def _format_raw_time(raw_time: str) -> Optional[str]:
+    """
+    将原始时间格式转换为 ISO8601 格式
+
+    示例:
+        20260101T142530 -> 2026-01-01T14:25:30Z
+    """
+    if len(raw_time) != 15 or raw_time[8] != 'T':
+        return None
+    try:
+        return f"{raw_time[:4]}-{raw_time[4:6]}-{raw_time[6:8]}T{raw_time[9:11]}:{raw_time[11:13]}:{raw_time[13:15]}Z"
+    except Exception:
+        return None
+
+
+def extract_played_time_from_battle_id(b64_id: str) -> Optional[str]:
+    """
+    从对战 ID 中提取 played_time (无需调用详情 API)
+
+    解码后格式: VsHistoryDetail-{splatoon_id}:{mode}:{timestamp}_{uuid}
+    示例:
+        VsHistoryDetail-u-xxx:RECENT:20260101T142530_uuid
+        -> 2026-01-01T14:25:30Z
+    """
+    decoded = decode_splatnet_id(b64_id)
+    if not decoded.startswith("VsHistoryDetail-"):
+        return None
+
+    # 匹配时间戳: :20260101T142530_
+    match = re.search(r':(\d{8}T\d{6})_', decoded)
+    if match:
+        return _format_raw_time(match.group(1))
+    return None
+
+
+def extract_played_time_from_coop_id(b64_id: str) -> Optional[str]:
+    """
+    从打工 ID 中提取 played_time (无需调用详情 API)
+
+    解码后格式: CoopHistoryDetail-{splatoon_id}:{timestamp}_{uuid}
+    示例:
+        CoopHistoryDetail-u-xxx:20251213T055224_uuid
+        -> 2025-12-13T05:52:24Z
+    """
+    decoded = decode_splatnet_id(b64_id)
+    if not decoded.startswith("CoopHistoryDetail-"):
+        return None
+
+    # 匹配时间戳: :20251213T055224_
+    match = re.search(r':(\d{8}T\d{6})_', decoded)
+    if match:
+        return _format_raw_time(match.group(1))
+    return None

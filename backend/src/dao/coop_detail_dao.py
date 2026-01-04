@@ -3,7 +3,7 @@
 import json
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Set
 
 from sqlalchemy import select, delete, func
 from sqlalchemy.dialects.sqlite import insert
@@ -633,3 +633,20 @@ async def delete_coop_detail(coop_id: int) -> None:
         await session.execute(delete(CoopEnemy).where(CoopEnemy.coop_id == coop_id))
         await session.execute(delete(CoopBoss).where(CoopBoss.coop_id == coop_id))
         await session.execute(delete(CoopDetail).where(CoopDetail.id == coop_id))
+
+
+async def get_synced_coop_times(user_id: int, played_times: List[str]) -> Set[str]:
+    """查询已同步的打工时间（用于预判重）"""
+    if not played_times:
+        return set()
+
+    async with get_session() as session:
+        stmt = (
+            select(CoopDetail.played_time)
+            .where(
+                CoopDetail.user_id == user_id,
+                CoopDetail.played_time.in_(played_times),
+            )
+        )
+        result = await session.execute(stmt)
+        return {row[0] for row in result.fetchall()}

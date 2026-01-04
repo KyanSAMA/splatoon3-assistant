@@ -3,7 +3,7 @@
 import json
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Set
 
 from sqlalchemy import select, delete, func, case, desc, and_, distinct
 from sqlalchemy.dialects.sqlite import insert
@@ -442,6 +442,23 @@ async def delete_battle_detail(battle_id: int) -> None:
         await session.execute(delete(BattleTeam).where(BattleTeam.battle_id == battle_id))
         await session.execute(delete(BattleAward).where(BattleAward.battle_id == battle_id))
         await session.execute(delete(BattleDetail).where(BattleDetail.id == battle_id))
+
+
+async def get_synced_battle_times(user_id: int, played_times: List[str]) -> Set[str]:
+    """查询已同步的对战时间（用于预判重）"""
+    if not played_times:
+        return set()
+
+    async with get_session() as session:
+        stmt = (
+            select(BattleDetail.played_time)
+            .where(
+                BattleDetail.user_id == user_id,
+                BattleDetail.played_time.in_(played_times),
+            )
+        )
+        result = await session.execute(stmt)
+        return {row[0] for row in result.fetchall()}
 
 
 # ===========================================

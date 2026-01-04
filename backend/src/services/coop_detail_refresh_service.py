@@ -1,7 +1,8 @@
 """打工详情数据刷新服务"""
 
+import asyncio
 import logging
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict
 
 from fastapi import APIRouter, Depends
 
@@ -16,17 +17,20 @@ from ..utils.id_parser import (
     extract_coop_event_id,
     extract_coop_uniform_id,
     extract_coop_player_id,
+    extract_played_time_from_coop_id,
 )
 from ..dao.coop_detail_dao import (
     CoopDetailData, CoopPlayerData, CoopWaveData, CoopEnemyData, CoopBossData,
     upsert_coop_detail, batch_upsert_coop_players, batch_upsert_coop_waves,
     batch_upsert_coop_enemies, batch_upsert_coop_bosses,
-    get_coop_detail_by_played_time,
+    get_synced_coop_times,
 )
 from .auth_service import require_current_user, require_splatnet_api
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/data/refresh", tags=["data"])
+
+MAX_CONCURRENCY = 8
 
 
 # ===========================================
@@ -61,17 +65,14 @@ def _parse_player(
     """解析玩家数据"""
     player = player_data.get("player") or {}
 
-    # 工作服
     uniform = player.get("uniform") or {}
     uniform_id = extract_coop_uniform_id(uniform.get("id", "")) if uniform.get("id") else None
     uniform_name = uniform.get("name")
 
-    # 大招
     special = player_data.get("specialWeapon") or {}
     special_weapon_id = special.get("weaponId")
     special_weapon_name = special.get("name")
 
-    # 武器列表（打工API只返回name和image，无ID）
     weapons_raw = player_data.get("weapons") or []
     weapon_names = []
     weapon_images = []
@@ -81,7 +82,6 @@ def _parse_player(
         weapon_names.append(w.get("name"))
         weapon_images.append((w.get("name"), _extract_image_url(w)))
 
-    # 图片合集
     images_items = weapon_images.copy()
     if special_weapon_name:
         images_items.append((special_weapon_name, _extract_image_url(special)))
@@ -101,7 +101,7 @@ def _parse_player(
         uniform_name=uniform_name,
         special_weapon_id=special_weapon_id,
         special_weapon_name=special_weapon_name,
-        weapons=None,  # 打工API不返回武器ID
+        weapons=None,
         weapon_names=[n for n in weapon_names if n] if weapon_names else None,
         defeat_enemy_count=int(player_data.get("defeatEnemyCount") or 0),
         deliver_count=int(player_data.get("deliverCount") or 0),
@@ -119,7 +119,6 @@ def _parse_wave(wave_data: Dict, coop_id: int) -> CoopWaveData:
     event_id = extract_coop_event_id(event.get("id", "")) if event.get("id") else None
     event_name = event.get("name")
 
-    # 大招列表
     specials_raw = wave_data.get("specialWeapons") or []
     special_ids = []
     special_names = []
@@ -134,7 +133,6 @@ def _parse_wave(wave_data: Dict, coop_id: int) -> CoopWaveData:
                 special_names.append(s_name)
             special_images.append((s_name, _extract_image_url(s)))
 
-    # 图片
     images_items = special_images.copy()
     if event_name:
         images_items.append((event_name, _extract_image_url(event)))
@@ -208,34 +206,28 @@ async def _parse_and_save_coop_detail(
         splatoon_id = extract_splatoon_id_from_coop(raw_id) or ""
         played_time = coop_detail.get("playedTime", "")
 
-        # 场地
         stage = coop_detail.get("coopStage") or {}
         stage_id = extract_coop_stage_id(stage.get("id", "")) if stage.get("id") else None
         stage_name = stage.get("name")
 
-        # 段位
         after_grade = coop_detail.get("afterGrade") or {}
         after_grade_id = extract_coop_grade_id(after_grade.get("id", "")) if after_grade.get("id") else None
         after_grade_name = after_grade.get("name")
 
-        # Boss (Extra Wave)
         boss_result = coop_detail.get("bossResult") or {}
         boss = boss_result.get("boss") or {}
         boss_id = extract_coop_enemy_id(boss.get("id", "")) if boss.get("id") else None
         boss_name = boss.get("name")
         boss_defeated = 1 if boss_result.get("hasDefeatBoss") else 0
 
-        # 鳞片
         scale = coop_detail.get("scale") or {}
 
-        # 图片
         images_items = []
         if stage_name:
             images_items.append((stage_name, _extract_image_url(stage)))
         if boss_name:
             images_items.append((boss_name, _extract_image_url(boss)))
 
-        # 保存主表
         coop_data = CoopDetailData(
             user_id=user_id,
             splatoon_id=splatoon_id,
@@ -265,15 +257,11 @@ async def _parse_and_save_coop_detail(
         if not coop_id:
             return None
 
-        # 玩家数据
         players: List[CoopPlayerData] = []
-
-        # 自己
         my_result = coop_detail.get("myResult")
         if isinstance(my_result, dict):
             players.append(_parse_player(my_result, coop_id, 0, is_myself=True))
 
-        # 队友
         member_results = coop_detail.get("memberResults") or []
         for idx, member in enumerate(member_results):
             if not isinstance(member, dict):
@@ -283,7 +271,6 @@ async def _parse_and_save_coop_detail(
         if players:
             await batch_upsert_coop_players(players)
 
-        # 波次数据
         waves: List[CoopWaveData] = []
         wave_results = coop_detail.get("waveResults") or []
         for wave_data in wave_results:
@@ -294,7 +281,6 @@ async def _parse_and_save_coop_detail(
         if waves:
             await batch_upsert_coop_waves(waves)
 
-        # 敌人统计
         enemies: List[CoopEnemyData] = []
         enemy_results = coop_detail.get("enemyResults") or []
         for enemy_data in enemy_results:
@@ -305,7 +291,6 @@ async def _parse_and_save_coop_detail(
         if enemies:
             await batch_upsert_coop_enemies(enemies)
 
-        # Boss 结果 (bossResults 数组)
         bosses: List[CoopBossData] = []
         boss_results = coop_detail.get("bossResults") or []
         for boss_data in boss_results:
@@ -332,73 +317,93 @@ async def refresh_coop_details(
     user: User = Depends(require_current_user),
     api: SplatNet3API = Depends(require_splatnet_api),
 ):
-    """刷新打工详情数据"""
-    total_count = 0
-    errors = []
+    """刷新打工详情数据（预判重 + 并发8）"""
+    errors: List[str] = []
 
     try:
-        # 获取打工列表
+        # 1. 获取打工列表
         coop_list = await api.get_coops()
         groups = ((coop_list or {}).get("data") or {}).get("coopResult", {}).get("historyGroups", {}).get("nodes") or []
 
-        all_nodes = []
+        # 2. 提取所有 raw_id 和 played_time
+        id_time_map: Dict[str, str] = {}
         for group in groups:
             if not isinstance(group, dict):
                 continue
             nodes = (group.get("historyDetails") or {}).get("nodes") or []
             for node in nodes:
-                if isinstance(node, dict):
-                    all_nodes.append(node)
-
-        logger.info(f"Found {len(all_nodes)} coop battles for user {user.id}")
-
-        for node in all_nodes:
-            try:
+                if not isinstance(node, dict):
+                    continue
                 raw_id = node.get("id", "")
                 if not raw_id:
                     continue
+                played_time = extract_played_time_from_coop_id(raw_id)
+                if played_time:
+                    id_time_map[raw_id] = played_time
 
-                # 获取详情
-                detail = await api.get_coop_detail(raw_id)
-                if not detail:
-                    continue
+        logger.info(f"[Coop] Found {len(id_time_map)} coop battles for user {user.id}")
 
-                # 从详情中提取去重字段
-                coop_detail = (detail.get("data") or {}).get("coopHistoryDetail")
-                if not coop_detail:
-                    continue
+        if not id_time_map:
+            return {"success": True, "message": "No coop battles found", "count": 0}
 
-                splatoon_id = extract_splatoon_id_from_coop(coop_detail.get("id", "")) or ""
-                played_time = coop_detail.get("playedTime", "")
+        # 3. 预判重
+        all_times = list(id_time_map.values())
+        synced_times = await get_synced_coop_times(user.id, all_times)
 
-                # 检查是否已存在，API 按时间倒序返回，遇到已存在说明之后都是旧数据
-                existing = await get_coop_detail_by_played_time(user.id, splatoon_id, played_time)
-                if existing:
-                    logger.info(f"Found existing coop at {played_time}, stopping")
-                    break
+        # 4. 过滤出需要同步的 ID
+        ids_to_sync = [raw_id for raw_id, pt in id_time_map.items() if pt not in synced_times]
+        logger.info(f"[Coop] Already synced: {len(synced_times)}, need sync: {len(ids_to_sync)}")
 
-                # 解析并保存
-                saved_id = await _parse_and_save_coop_detail(user.id, detail)
-                if saved_id:
-                    total_count += 1
-                else:
-                    errors.append(f"coop:{splatoon_id[:20]}... parse failed")
+        if not ids_to_sync:
+            return {"success": True, "message": "All coop battles already synced", "count": 0}
 
-            except Exception as e:
-                logger.error(f"Failed to process coop {raw_id}: {e}")
-                errors.append(str(e))
+        # 5. 并发处理（Semaphore 控制并发量为 8）
+        semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
+        total_saved = 0
+        total_failed = 0
+
+        async def fetch_and_save(raw_id: str) -> bool:
+            async with semaphore:
+                try:
+                    detail = await api.get_coop_detail(raw_id)
+                    if not detail:
+                        return False
+                    saved_id = await _parse_and_save_coop_detail(user.id, detail)
+                    return saved_id is not None
+                except Exception as e:
+                    logger.error(f"[Coop] Failed to process {raw_id}: {e}")
+                    errors.append(str(e)[:200])
+                    return False
+
+        results = await asyncio.gather(*[fetch_and_save(rid) for rid in ids_to_sync])
+
+        for success in results:
+            if success:
+                total_saved += 1
+            else:
+                total_failed += 1
 
     except Exception as e:
-        logger.error(f"Failed to get coop list: {e}")
+        logger.error(f"[Coop] Failed to refresh: {e}")
         errors.append(str(e))
+        return {"success": False, "message": f"Failed: {str(e)}", "count": 0, "errors": errors}
 
     if errors:
         return {
             "success": False,
-            "message": f"Refreshed {total_count} coop details with errors",
-            "count": total_count,
-            "errors": errors,
+            "message": f"Refreshed {total_saved} coop details with {total_failed} errors",
+            "count": total_saved,
+            "errors": errors[:10],
         }
 
-    logger.info(f"Refreshed {total_count} coop details for user {user.id}")
-    return {"success": True, "message": f"Refreshed {total_count} coop details", "count": total_count}
+    logger.info(f"[Coop] Refreshed {total_saved} coop details for user {user.id}")
+    return {"success": True, "message": f"Refreshed {total_saved} coop details", "count": total_saved}
+
+
+@router.get("/coops_raw")
+async def get_coops_raw(
+        api: SplatNet3API = Depends(require_splatnet_api),
+):
+    """获取打工列表原始数据（测试用）"""
+    coops = await api.get_coops()
+    return coops
