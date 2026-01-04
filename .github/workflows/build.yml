@@ -64,6 +64,10 @@ jobs:
         working-directory: backend
         run: pyinstaller build.spec --noconfirm
 
+      - name: Ad-hoc sign (macOS)
+        if: runner.os == 'macOS'
+        run: codesign --force --deep --sign - backend/dist/S3Assistant/S3Assistant
+
       - name: Verify PyInstaller build
         run: test -d backend/dist/S3Assistant || (echo "PyInstaller build failed" && exit 1)
 
