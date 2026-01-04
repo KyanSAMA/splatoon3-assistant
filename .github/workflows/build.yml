@@ -19,9 +19,12 @@ jobs:
           - os: windows-latest
             artifact_name: S3Assistant-Windows
             asset_name: S3Assistant-Windows.zip
-          - os: macos-latest  # ARM Mac (M1/M2/M3)
-            artifact_name: S3Assistant-macOS
-            asset_name: S3Assistant-macOS.zip
+          - os: macos-14  # Apple Silicon (M1/M2/M3)
+            artifact_name: S3Assistant-macOS-ARM64
+            asset_name: S3Assistant-macOS-ARM64.zip
+          - os: macos-13  # Intel Mac
+            artifact_name: S3Assistant-macOS-Intel
+            asset_name: S3Assistant-macOS-Intel.zip
 
     runs-on: ${{ matrix.os }}
 
@@ -67,6 +70,20 @@ jobs:
       - name: Ad-hoc sign (macOS)
         if: runner.os == 'macOS'
         run: codesign --force --deep --sign - backend/dist/S3Assistant/S3Assistant
+
+      - name: Create Fix Script (macOS)
+        if: runner.os == 'macOS'
+        working-directory: backend/dist/S3Assistant
+        run: |
+          cat > 双击我修复损坏报错或无法验证开发者.command << 'EOF'
+          #!/bin/bash
+          DIR=$(cd "$(dirname "$0")"; pwd)
+          echo "正在修复权限..."
+          xattr -cr "$DIR"
+          echo "✅ 修复完成！现在可以正常打开 S3Assistant 了。"
+          read -p "按任意键退出..."
+          EOF
+          chmod +x 双击我修复损坏报错或无法验证开发者.command
 
       - name: Verify PyInstaller build
         run: test -d backend/dist/S3Assistant || (echo "PyInstaller build failed" && exit 1)
