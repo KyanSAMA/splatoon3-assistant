@@ -80,6 +80,7 @@ const handleBackdropMouseUp = (e) => {
                   </div>
                 </div>
                 <div class="progress-text">{{ progress }}%</div>
+                <p class="minimize-hint">点击空白处可最小化</p>
               </div>
             </div>
           </div>
@@ -256,6 +257,12 @@ const handleBackdropMouseUp = (e) => {
   font-size: 15px;
 }
 
+.minimize-hint {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #999;
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
@@ -283,9 +290,10 @@ const handleBackdropMouseUp = (e) => {
 
 .scale-enter-active, .scale-leave-active {
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: top right;
 }
 .scale-enter-from, .scale-leave-to {
   opacity: 0;
-  transform: scale(0);
+  transform: translate(12px, -12px) scale(0);
 }
 </style>

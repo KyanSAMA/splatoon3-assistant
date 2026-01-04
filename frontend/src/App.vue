@@ -46,6 +46,19 @@ const loginUrl = ref('')
 const loginState = ref('')
 const callbackInput = ref('')
 
+// 顶部 Toast
+const toast = ref({ text: '', type: '' })
+let toastTimer = null
+
+const showToast = (text, type = 'error', duration = 3200) => {
+  toast.value = { text, type }
+  if (toastTimer) clearTimeout(toastTimer)
+  toastTimer = setTimeout(() => {
+    toast.value = { text: '', type: '' }
+    toastTimer = null
+  }, duration)
+}
+
 // 检查连通性
 const checkConnectivity = async () => {
   try {
@@ -159,7 +172,9 @@ const submitCallback = async () => {
       }, 800)
     }
   } catch (e) {
-    errorMsg.value = e.message || '登录失败'
+    const msg = e.message || '登录失败'
+    resetLogin()
+    showToast(msg, 'error')
   } finally {
     isLoading.value = false
   }
@@ -367,6 +382,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (unsubscribeSession) unsubscribeSession()
+  if (toastTimer) clearTimeout(toastTimer)
 })
 </script>
 
@@ -374,6 +390,11 @@ onUnmounted(() => {
   <div class="app-wrapper">
     <div class="splatter splatter-1"></div>
     <div class="splatter splatter-2"></div>
+
+    <!-- 顶部 Toast -->
+    <Transition name="toast-fade">
+      <div v-if="toast.text" class="top-toast" :class="toast.type">{{ toast.text }}</div>
+    </Transition>
 
     <!-- Header (登录/选择页使用简化模式) -->
     <AppHeader
@@ -462,7 +483,8 @@ onUnmounted(() => {
             @keyup.enter="submitCallback"
           />
           <button @click="submitCallback" class="btn btn-primary" :disabled="isLoading">
-            {{ isLoading ? '验证中...' : '完成登录' }}
+            <span v-if="isLoading" class="btn-spinner"></span>
+            {{ isLoading ? '验证中（约40秒）' : '完成登录' }}
           </button>
           <button @click="resetLogin" class="btn btn-text">取消</button>
         </div>
@@ -633,6 +655,18 @@ body {
   border-radius: 50%;
   margin-bottom: 15px;
   animation: spin 0.8s linear infinite;
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 @keyframes spin {
@@ -862,6 +896,33 @@ body {
   border-radius: 8px;
   font-size: 14px;
   z-index: 100;
+}
+
+/* Top Toast */
+.top-toast {
+  position: fixed;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #E60012;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 1200;
+}
+
+.top-toast.success { background: #2eb82e; }
+.top-toast.info { background: #2563eb; }
+
+.toast-fade-enter-active, .toast-fade-leave-active {
+  transition: all 0.25s ease;
+}
+.toast-fade-enter-from, .toast-fade-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -10px);
 }
 
 /* Settings Modal */

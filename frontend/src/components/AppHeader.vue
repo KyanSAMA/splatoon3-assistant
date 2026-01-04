@@ -83,19 +83,21 @@ onUnmounted(() => document.removeEventListener('click', closeMenu))
                 </div>
                 <span>代理配置</span>
               </a>
-              <a class="ink-item" @click="handleBackup">
-                <div class="ink-icon">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
-                </div>
-                <span>数据备份</span>
-              </a>
-              <div class="ink-divider"></div>
-              <a class="ink-item logout" @click="handleLogout">
-                <div class="ink-icon">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
-                </div>
-                <span>退出登录</span>
-              </a>
+              <template v-if="mode === 'full'">
+                <a class="ink-item" @click="handleBackup">
+                  <div class="ink-icon">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+                  </div>
+                  <span>数据备份</span>
+                </a>
+                <div class="ink-divider"></div>
+                <a class="ink-item logout" @click="handleLogout">
+                  <div class="ink-icon">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                  </div>
+                  <span>退出登录</span>
+                </a>
+              </template>
             </div>
           </Transition>
         </div>
