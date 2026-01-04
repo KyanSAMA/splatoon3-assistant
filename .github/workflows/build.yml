@@ -19,10 +19,10 @@ jobs:
           - os: windows-latest
             artifact_name: S3Assistant-Windows
             asset_name: S3Assistant-Windows.zip
-          - os: macos-14  # Apple Silicon (M1/M2/M3)
+          - os: macos-latest  # Apple Silicon (M1/M2/M3)
             artifact_name: S3Assistant-macOS-ARM64
             asset_name: S3Assistant-macOS-ARM64.zip
-          - os: macos-13  # Intel Mac
+          - os: macos-15-intel  # Intel Mac
             artifact_name: S3Assistant-macOS-Intel
             asset_name: S3Assistant-macOS-Intel.zip
 
